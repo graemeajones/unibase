@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import Model from '../models/Model.js';
-import modelConfig from '../models/years-model.js';
+import modelConfig from '../models/groups-model.js';
 import database from '../database.js';
 import Accessor from '../accessor/Accessor.js';
 import Controller from '../controller/Controller.js';
@@ -23,6 +23,7 @@ const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null));
+router.get('/project/:id', (req, res) => controller.get(req, res, 'project'));
 router.post('/', controller.post);
 router.put('/:id', controller.put);
 router.delete('/:id', controller.delete);
