@@ -19,7 +19,8 @@ class Model {
   };
 
   buildUpdateQuery = (record, id) => {
-    const sql = `UPDATE ${this.table} ` + this.buildSetFields(this.mutableFields) + ` WHERE ${this.idField}=:${this.idField}`;
+    const allowedRecordFields = this.mutableFields.filter((field) => record.hasOwnProperty(field));
+    const sql = `UPDATE ${this.table} ` + this.buildSetFields(allowedRecordFields) + ` WHERE ${this.idField}=:${this.idField}`;
     return { sql, data: { ...record, [this.idField]: id } };
   };
 
