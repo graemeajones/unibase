@@ -1,22 +1,7 @@
-import joi from 'joi';
-
-const reportErrors = (error) => error.details.map((detail) => detail.message);
-const idSchema = joi.number().integer().min(1);
-const mutableFields = ['ModuleName', 'ModuleCode', 'ModuleLevel', 'ModuleYearID', 'ModuleLeaderID', 'ModuleImageURL'];
-const recordSchema = joi.object({
-  ModuleID: joi.number().integer(), 
-  ModuleName: joi.string().min(8), 
-  ModuleCode: joi.string().regex(/^\D{2}\d{4}$/, 'module code'),
-  ModuleLevel: joi.number().integer().min(3).max(7), 
-  ModuleYearID: joi.number().integer(),
-  ModuleLeaderID: joi.number().integer(),
-  ModuleImageURL: joi.string().uri()
-}).required().unknown(true);
-
-
 class Controller {
 
-  constructor(accessor) {
+  constructor(validator, accessor) {
+    this.validator = validator;
     this.accessor = accessor;
   }
 
@@ -26,8 +11,8 @@ class Controller {
     const id = req.params.id;
 
     // Validate request
-    const { error } = idSchema.validate(id);
-    if (error) return res.status(404).json({ message: reportErrors(error) });
+    const { isValid, message: validatorMessage } = this.validator.get(id);
+    if (!isValid) return res.status(404).json({ message: validatorMessage });
 
     // Access data
     const { isSuccess, result, message: accessorMessage } = await this.accessor.read(id, variant);
@@ -41,9 +26,8 @@ class Controller {
     const record = req.body;
     
     // Validate request
-    const postSchema = recordSchema.and(...mutableFields);
-    const { error } = postSchema.validate(record, {abortEarly: false});
-    if (error) return res.status(404).json({ message: reportErrors(error) });
+    const { isValid, message: validatorMessage } = this.validator.post(record);
+    if (!isValid) return res.status(404).json({ message: validatorMessage });
 
     // Access data
     const { isSuccess, result, message: accessorMessage } = await this.accessor.create(record);
@@ -58,12 +42,8 @@ class Controller {
     const record = req.body;
 
     // Validate request
-    const putSchema = joi.object({
-      id: idSchema.required(),
-      record: recordSchema.or(...mutableFields)
-    });
-    const { error } = putSchema.validate({ id, record }, {abortEarly: false});
-    if (error) return res.status(404).json({ message: reportErrors(error) });
+    const { isValid, message: validatorMessage } = this.validator.put({ id, record });
+    if (!isValid) return res.status(404).json({ message: validatorMessage });
 
     // Access data
     const { isSuccess, result, message: accessorMessage } = await this.accessor.update(record, id);
@@ -77,9 +57,8 @@ class Controller {
     const id = req.params.id;
 
     // Validate request
-    const deleteSchema = idSchema.required();
-    const { error } = deleteSchema.validate(id, {abortEarly: false});
-    if (error) return res.status(404).json({ message: reportErrors(error) });
+    const { isValid, message: validatorMessage } = this.validator.delete(id);
+    if (!isValid) return res.status(404).json({ message: validatorMessage });
 
     // Access data
     const { isSuccess, result, message: accessorMessage } = await this.accessor.delete(id);
