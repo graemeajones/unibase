@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import Validator from '../validator/Validator.js';
-import schema from '../validator/groups-schema.js';
+import schema from '../validator/groupmembers-schema.js';
 import Model from '../models/Model.js';
-import modelConfig from '../models/groups-model.js';
+import modelConfig from '../models/groupmembers-model.js';
 import database from '../database.js';
 import Accessor from '../accessor/Accessor.js';
 import Controller from '../controller/Controller.js';
@@ -29,8 +29,8 @@ const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null));
-router.get('/project/:id', (req, res) => controller.get(req, res, 'project'));
-router.get('/users/:id', (req, res) => controller.get(req, res, 'groups'));
+router.get('/group/:id(\\d+)', (req, res) => controller.get(req, res, "group"));
+router.get('/user/:id(\\d+)', (req, res) => controller.get(req, res, "group"));
 router.post('/', controller.post);
 router.put('/:id', controller.put);
 router.delete('/:id', controller.delete);

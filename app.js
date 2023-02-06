@@ -2,11 +2,13 @@
 import express from 'express';
 import cors from 'cors';
 import groupsRouter from './routers/groups-router.js';
+import groupmembersRouter from './routers/groupmembers-router.js';
 import modulemembersRouter from './routers/modulemembers-router.js';
 import modulesRouter from './routers/modules-router.js';
 import projectsRouter from './routers/projects-router.js';
 import projectstatusRouter from './routers/projectstatus-router.js';
 import usersRouter from './routers/users-router.js';
+import usertypesRouter from './routers/usertypes-router.js';
 import yearsRouter from './routers/years-router.js';
 
 // Configure express app -------------------------
@@ -25,11 +27,13 @@ app.use(express.urlencoded({ extended: true }));
 
 // Endpoints -------------------------------------
 app.use('/api/groups', groupsRouter);
+app.use('/api/groupmembers', groupmembersRouter);
 app.use('/api/modulemembers', modulemembersRouter);
 app.use('/api/modules', modulesRouter);
 app.use('/api/projects', projectsRouter);
 app.use('/api/projectstatus', projectstatusRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/usertypes', usertypesRouter);
 app.use('/api/years', yearsRouter);
 
 // Start server ----------------------------------

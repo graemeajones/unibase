@@ -19,6 +19,9 @@ model.buildReadQuery = (id, variant) => {
     case 'staff':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE UserUsertypeID=${STAFF}`;
       break;
+    case 'usertype':
+      sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE UserUsertypeID=:ID`;
+      break;
     case 'groups':
       const extendedTable = `Groupmembers INNER JOIN ${resolvedTable} ON Groupmembers.GroupmemberUserID=Users.UserID`;
       sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE GroupmemberGroupID=:ID`;

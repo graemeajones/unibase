@@ -28,7 +28,8 @@ const controller = new Controller(validator, accessor);
 const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null));
-router.get('/:id', (req, res) => controller.get(req, res, null));
+router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null));
+router.get('/module/:id(\\d+)', (req, res) => controller.get(req, res, "module"));
 router.post('/', controller.post);
 router.put('/:id', controller.put);
 router.delete('/:id', controller.delete);
