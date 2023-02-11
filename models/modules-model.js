@@ -6,7 +6,7 @@ model.idField = 'ModuleID';
 
 model.buildReadQuery = (id, variant) => {
   const resolvedTable = '((Modules LEFT JOIN Users ON ModuleLeaderID=UserID) LEFT JOIN Years ON ModuleYearID=YearID )';
-  const resolvedFields = [model.idField, ...model.mutableFields, 'CONCAT(UserFirstname," ",UserLastname) AS ModuleLeaderName', 'YearName AS ModuleYearName'];
+  const resolvedFields = [ model.idField, ...model.mutableFields, 'CONCAT(UserFirstname," ",UserLastname) AS ModuleLeaderName', 'YearName AS ModuleYearName'];
 
   let sql = '';
   switch (variant) {
