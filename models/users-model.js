@@ -1,7 +1,7 @@
 const model = {};
 
 model.table = 'Users';
-model.mutableFields = ['UserFirstname', 'UserLastname', 'UserEmail', 'UserLevel', 'UserYearID', 'UserUsertypeID', 'UserImageURL'];
+model.mutableFields = ['UserFirstname', 'UserLastname', 'UserEmail', 'UserRegistered', 'UserLevel', 'UserYearID', 'UserUsertypeID', 'UserImageURL'];
 model.idField = 'UserID';
 
 model.buildReadQuery = (id, variant) => {
@@ -22,9 +22,15 @@ model.buildReadQuery = (id, variant) => {
     case 'usertype':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE UserUsertypeID=:ID`;
       break;
-    case 'groups':
-      const extendedTable = `Groupmembers INNER JOIN ${resolvedTable} ON Groupmembers.GroupmemberUserID=Users.UserID`;
-      sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE GroupmemberGroupID=:ID`;
+    case 'groups': {
+        const extendedTable = `Groupmembers INNER JOIN ${resolvedTable} ON Groupmembers.GroupmemberUserID=Users.UserID`;
+        sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE GroupmemberGroupID=:ID`;
+      }
+      break;
+    case 'modules': {
+        const extendedTable = `Modulemembers INNER JOIN ${resolvedTable} ON Modulemembers.ModulememberUserID=Users.UserID`;
+        sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE ModulememberModuleID=:ID`;
+      }
       break;
     default:
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;

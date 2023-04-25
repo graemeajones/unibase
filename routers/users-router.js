@@ -33,6 +33,7 @@ router.get('/student', (req, res) => controller.get(req, res, 'student'));
 router.get('/staff', (req, res) => controller.get(req, res, 'staff'));
 router.get('/usertype/:id', (req, res) => controller.get(req, res, 'usertype'));
 router.get('/groups/:id', (req, res) => controller.get(req, res, 'groups'));
+router.get('/modules/:id', (req, res) => controller.get(req, res, 'modules'));
 router.post('/', controller.post);
 router.put('/:id', controller.put);
 router.delete('/:id', controller.delete);

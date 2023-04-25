@@ -1,7 +1,7 @@
 const model = {};
 
 model.table = 'Projects';
-model.mutableFields = ['ProjectName', 'ProjectGroupsize', 'ProjectStartdate', 'ProjectProjectstatusID', 'ProjectModuleID'];
+model.mutableFields = ['ProjectName', 'ProjectGroupsize', 'ProjectStartdate', 'ProjectMandatory', 'ProjectProjectstatusID', 'ProjectModuleID'];
 model.idField = 'ProjectID';
 
 model.buildReadQuery = (id, variant) => {
