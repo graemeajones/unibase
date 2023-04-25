@@ -1,7 +1,7 @@
 const model = {};
 
 model.table = 'Users';
-model.mutableFields = ['UserFirstname', 'UserLastname', 'UserEmail', 'UserLevel', 'UserYearID', 'UserUsertypeID', 'UserImageURL'];
+model.mutableFields = ['UserFirstname', 'UserLastname', 'UserEmail', 'UserRegistered', 'UserLevel', 'UserYearID', 'UserUsertypeID', 'UserImageURL'];
 model.idField = 'UserID';
 
 model.buildReadQuery = (id, variant) => {
