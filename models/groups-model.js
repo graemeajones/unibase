@@ -1,31 +1,34 @@
 const model = {};
 
-model.table = 'Groups';
-model.mutableFields = ['GroupName', 'GroupProjectID'];
-model.idField = 'GroupID';
+model.table = "Groups";
+model.mutableFields = ["GroupName", "GroupProjectID"];
+model.idField = "GroupID";
 
 model.buildReadQuery = (id, variant) => {
-  const resolvedTable = `((Groups LEFT JOIN Projects ON GroupProjectID=ProjectID) LEFT JOIN Modules ON ProjectModuleID=ModuleID)`;
-  const resolvedFields = [ model.idField, ...model.mutableFields,
-    'ProjectName AS GroupProjectName',
-    'ModuleID AS GroupProjectModuleID',
-    'ModuleName AS GroupProjectModuleName'
+  const resolvedTable =
+    "((Groups LEFT JOIN Projects ON GroupProjectID=ProjectID) LEFT JOIN Modules ON ProjectModuleID=ModuleID)";
+  const resolvedFields = [
+    model.idField,
+    ...model.mutableFields,
+    "ProjectName AS GroupProjectName",
+    "ModuleID AS GroupProjectModuleID",
+    "ModuleName AS GroupProjectModuleName",
   ];
 
-  let sql = '';
+  let sql = "";
   switch (variant) {
-    case 'project':
+    case "project":
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE ProjectID=:ID`;
       break;
-    case 'users':
+    case "users":
       const extendedTable = `Groupmembers INNER JOIN ${resolvedTable} ON Groupmembers.GroupmemberGroupID=Groups.GroupID`;
       sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE GroupmemberUserID=:ID`;
-      break; 
+      break;
     default:
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
       if (id) sql += ` WHERE GroupID=:ID`;
   }
-  sql += ' ORDER BY GroupName';
+  sql += " ORDER BY GroupName";
 
   return { sql, data: { ID: id } };
 };
