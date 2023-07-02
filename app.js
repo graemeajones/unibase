@@ -11,6 +11,7 @@ import projectstatusRouter from "./routers/projectstatus-router.js";
 import usersRouter from "./routers/users-router.js";
 import usertypesRouter from "./routers/usertypes-router.js";
 import yearsRouter from "./routers/years-router.js";
+import { domainRouter, defaultRouter } from "./routers/default-router.js";
 
 // Configure express app -------------------------
 const app = new express();
@@ -40,6 +41,8 @@ app.use("/api/projectstatus", projectstatusRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/usertypes", usertypesRouter);
 app.use("/api/years", yearsRouter);
+app.use("/api/", domainRouter);
+app.use("/api/*", defaultRouter);
 
 // Start server ----------------------------------
 const PORT = process.env.PORT || 5000;
