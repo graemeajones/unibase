@@ -18,6 +18,15 @@ const listOfEndpoints = [
       "Returns the set of assessments associated with the module identified by the id provided.",
   },
   {
+    endpoint: "/api/assessmenttypes",
+    description: "Returns all assessmenttypes.",
+  },
+  {
+    endpoint: "/api/assessmenttypes/{id}",
+    description:
+      "Returns the specific assessment type identified by the id provided.",
+  },
+  {
     endpoint: "/api/groups",
     description: "Returns all groups.",
   },
