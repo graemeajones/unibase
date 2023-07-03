@@ -2,6 +2,7 @@
 import express from "express";
 import cors from "cors";
 import assessmentsRouter from "./routers/assessments-router.js";
+import assessmenttypesRouter from "./routers/assessmenttypes-router.js";
 import groupsRouter from "./routers/groups-router.js";
 import groupmembersRouter from "./routers/groupmembers-router.js";
 import modulemembersRouter from "./routers/modulemembers-router.js";
@@ -32,6 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Endpoints -------------------------------------
 app.use("/api/assessments", assessmentsRouter);
+app.use("/api/assessmenttypes", assessmenttypesRouter);
 app.use("/api/groups", groupsRouter);
 app.use("/api/groupmembers", groupmembersRouter);
 app.use("/api/modulemembers", modulemembersRouter);

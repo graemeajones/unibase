@@ -3,20 +3,22 @@ const model = {};
 model.table = "Assessments";
 model.mutableFields = [
   "AssessmentName",
-  "AssessmentModuleID",
   "AssessmentPublishdate",
   "AssessmentSubmissiondate",
   "AssessmentFeedbackdate",
   "AssessmentBriefURL",
+  "AssessmentModuleID",
+  "AssessmentAssessmentTypeID",
 ];
 model.idField = "AssessmentID";
 
 model.buildReadQuery = (id, variant) => {
-  const resolvedTable = `(Assessments LEFT JOIN Modules ON AssessmentModuleID=ModuleID)`;
+  const resolvedTable = `((Assessments LEFT JOIN Assessmenttypes ON AssessmentAssessmenttypeID=AssessmenttypeID) LEFT JOIN Modules ON AssessmentModuleID=ModuleID)`;
   const resolvedFields = [
     model.idField,
     ...model.mutableFields,
     'CONCAT(ModuleCode, " ", ModuleName) AS AssessmentModuleName',
+    "AssessmenttypeDescription",
   ];
 
   let sql = "";
