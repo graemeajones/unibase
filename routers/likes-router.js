@@ -1,8 +1,8 @@
 import { Router } from "express";
 import Validator from "../validator/Validator.js";
-import schema from "../validator/users-schema.js";
+import schema from "../validator/likes-schema.js";
 import Model from "../models/Model.js";
-import modelConfig from "../models/users-model.js";
+import modelConfig from "../models/likes-model.js";
 import database from "../database.js";
 import Accessor from "../accessor/Accessor.js";
 import Controller from "../controller/Controller.js";
@@ -29,15 +29,8 @@ const router = new Router();
 
 router.get("/", (req, res) => controller.get(req, res, null));
 router.get("/:id(\\d+)", (req, res) => controller.get(req, res, null));
-router.get("/student", (req, res) => controller.get(req, res, "student"));
-router.get("/staff", (req, res) => controller.get(req, res, "staff"));
-router.get("/usertype/:id(\\d+)", (req, res) => controller.get(req, res, "usertype"));
-router.get("/groups/:id(\\d+)", (req, res) => controller.get(req, res, "groups"));
-router.get("/modules/:id(\\d+)", (req, res) => controller.get(req, res, "modules"));
-router.get("/modules/:mid(\\d+)/likedby/:uid(\\d+)", (req, res) => controller.get(req, res, "modulelikes"));
-router.get("/likedby/:id(\\d+)", (req, res) => controller.get(req, res, "likedby"));
-router.get("/wholike/:id(\\d+)", (req, res) => controller.get(req, res, "wholike"));
-
+router.get("/liker/:id(\\d+)", (req, res) => controller.get(req, res, "liker"));
+router.get("/likee/:id(\\d+)", (req, res) => controller.get(req, res, "likee"));
 router.post("/", controller.post);
 router.put("/:id", controller.put);
 router.delete("/:id", controller.delete);
