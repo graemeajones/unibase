@@ -16,7 +16,7 @@ jobs:
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.5.0
         with:
-          ssh-private-key: ${{ secrets.UNIBASE_CONTINUOUS_DEPLOYMENT }}
+          ssh-private-key: ${{ secrets.Unibase }}
 
       - name: Deploy code
         run: |
