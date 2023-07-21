@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Endpoints -------------------------------------
-app.get("/api/test-route", (req,res)=>{res.send("Test success!")})
+
 app.use("/api/assessments", assessmentsRouter);
 app.use("/api/assessmenttypes", assessmenttypesRouter);
 app.use("/api/groups", groupsRouter);
