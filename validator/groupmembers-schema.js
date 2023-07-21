@@ -4,10 +4,13 @@ const schema = {};
 
 schema.mutableFields = ['GroupmemberGroupID', 'GroupmemberUserID'];
 schema.id = joi.number().integer().min(1);
-schema.record = joi.object({
-  GroupmemberID: joi.number().integer(), 
-  GroupmemberGroupID: joi.number().integer(),
-  GroupmemberUserID: joi.number().integer()
-}).required().unknown(true);
+schema.record = joi
+  .object({
+    GroupmemberID: joi.number().integer().min(1).allow(null),
+    GroupmemberGroupID: joi.number().integer().min(1),
+    GroupmemberUserID: joi.number().integer().min(1),
+  })
+  .required()
+  .unknown(true);
 
 export default schema;
