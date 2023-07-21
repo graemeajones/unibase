@@ -18,8 +18,8 @@ jobs:
         key: ${{ secrets.UNIBASE_CONTINUOUS_DEPLOYMENT }}
         port: 22
         script: |
-          cd /var/www/softwarehub.uk/html/apps/unibase
-          git pull
+          cd /var/www/softwarehub.uk/html/apps/unibase/
+          git pull origin master
           git status
           npm install
           pm2 reload app.js
