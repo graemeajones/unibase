@@ -1,58 +1,115 @@
 import { Router } from 'express';
 
-const API_URL = 'http://softwarehub.uk/unibase/api';
-//const API_URL = "http://localhost:5000/api";
+//const API_URL = 'http://softwarehub.uk/unibase/api';
+const API_URL = 'http://localhost:5000/api';
 
 // Endpoints -------------------------------------
 
 const listOfEndpoints = [
   {
-    endpoint: '/api/assessments',
-    description: 'Returns all assessments.',
-    example: `${API_URL}/assessments`,
+    entity: 'Assessments',
+    sap: '/api/assessments',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all assessments',
+          example: `${API_URL}/assessments`,
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific assessment identified by the id provided',
+          example: `${API_URL}/assessments/1`,
+        },
+        {
+          endpoint: '/module/{id}',
+          description: 'Returns the set of assessments associated with the module identified by the id provided',
+          example: `${API_URL}/assessments/module/1`,
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new assessment',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific assessment identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific assessment identified by the id provided',
+      },
+    },
   },
   {
-    endpoint: '/api/assessments/{id}',
-    description: 'Returns the specific assessment identified by the id provided.',
-    example: `${API_URL}/assessments/1`,
+    entity: 'Assessment Types',
+    sap: '/api/assessmenttypes',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all assessment types',
+          example: `${API_URL}/assessmenttypes`,
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific assessment type identified by the id provided',
+          example: `${API_URL}/assessmenttypes/1`,
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new assessment type',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific assessment type identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific assessment type identified by the id provided',
+      },
+    },
   },
   {
-    endpoint: '/api/assessments/module/{id}',
-    description:
-      'Returns the set of assessments associated with the module identified by the id provided.',
-    example: `${API_URL}/assessments/module/1`,
-  },
-  {
-    endpoint: '/api/assessmenttypes',
-    description: 'Returns all assessmenttypes.',
-    example: `${API_URL}/assessmenttypes`,
-  },
-  {
-    endpoint: '/api/assessmenttypes/{id}',
-    description: 'Returns the specific assessment type identified by the id provided.',
-    example: `${API_URL}/assessmenttypes/1`,
-  },
-  {
-    endpoint: '/api/groups',
-    description: 'Returns all groups.',
-    example: `${API_URL}/groups`,
-  },
-  {
-    endpoint: '/api/groups/{id}',
-    description: 'Returns the specific group identified by the id provided.',
-    example: `${API_URL}/groups/1`,
-  },
-  {
-    endpoint: '/api/groups/project/{id}',
-    description:
-      'Returns the set of groups associated with the project identified by the id provided.',
-    example: `${API_URL}/groups/project/1`,
-  },
-  {
-    endpoint: '/api/groups/users/{id}',
-    description:
-      'Returns the set of groups associated with the user identified by the id provided.',
-    example: `${API_URL}/groups/users/276`,
+    entity: 'Groups',
+    sap: '/api/groups',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all groups',
+          example: `${API_URL}/groups`,
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific group identified by the id provided',
+          example: `${API_URL}/groups/1`,
+        },
+        {
+          endpoint: '/project/{id}',
+          description: 'Returns the set of groups associated with the project identified by the id provided.',
+          example: `${API_URL}/groups/project/1`,
+        },
+        {
+          endpoint: '/users/{id}',
+          description: 'Returns the set of groups associated with the user identified by the id provided.',
+          example: `${API_URL}/groups/users/276`,
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new group',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific group identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific group identified by the id provided',
+      },
+    },
   },
   {
     endpoint: '/api/likes',
@@ -81,14 +138,12 @@ const listOfEndpoints = [
   },
   {
     endpoint: '/api/modules/leader/{id}',
-    description:
-      'Returns the set of modules associated with the module leader (user) identified by the id provided.',
+    description: 'Returns the set of modules associated with the module leader (user) identified by the id provided.',
     example: `${API_URL}/modules/leader/824`,
   },
   {
     endpoint: '/api/modules/users/{id}',
-    description:
-      'Returns the set of modules associated with the student (user) identified by the id provided.',
+    description: 'Returns the set of modules associated with the student (user) identified by the id provided.',
     example: `${API_URL}/modules/users/276`,
   },
   {
@@ -103,14 +158,12 @@ const listOfEndpoints = [
   },
   {
     endpoint: '/api/projects/module/{id}',
-    description:
-      'Returns the set of projects associated with the module identified by the id provided.',
+    description: 'Returns the set of projects associated with the module identified by the id provided.',
     example: `${API_URL}/projects/module/4`,
   },
   {
     endpoint: '/api/projects/users/{id}',
-    description:
-      'Returns the set of projects associated with the student (user) identified by the id provided.',
+    description: 'Returns the set of projects associated with the student (user) identified by the id provided.',
     example: `${API_URL}/projects/users/276`,
   },
   {
@@ -140,33 +193,39 @@ const listOfEndpoints = [
   },
   {
     endpoint: '/api/users/usertype/{id}',
-    description:
-      'Returns the set of users associated with the usertype identified by the id provided.',
+    description: 'Returns the set of users associated with the usertype identified by the id provided.',
     example: `${API_URL}/users/usertype/1`,
   },
   {
     endpoint: '/api/users/groups/{id}',
-    description:
-      'Returns the set of users associated with the group identified by the id provided.',
+    description: 'Returns the set of users associated with the group identified by the id provided.',
     example: `${API_URL}/users/groups/1`,
   },
   {
     endpoint: '/api/users/modules/{id}',
-    description:
-      'Returns the set of users associated with the module identified by the id provided.',
+    description: 'Returns the set of users associated with the module identified by the id provided.',
     example: `${API_URL}/users/modules/4`,
   },
   {
     endpoint: '/api/users/likedby/{id}',
-    description:
-      'Returns the set of users either liked or disliked by the user identified by the id provided.',
+    description: 'Returns the set of users liked by the user identified by the id provided.',
     example: `${API_URL}/users/likedby/276`,
   },
   {
+    endpoint: '/api/users/dislikedby/{id}',
+    description: 'Returns the set of users disliked by the user identified by the id provided.',
+    example: `${API_URL}/users/dislikedby/276`,
+  },
+  {
     endpoint: '/api/users/wholike/{id}',
-    description:
-      'Returns the set of users who have liked or disliked the user identified by the id provided.',
+    description: 'Returns the set of users who have liked the user identified by the id provided.',
     example: `${API_URL}/users/wholike/276`,
+  },
+
+  {
+    endpoint: '/api/users/whodislike/{id}',
+    description: 'Returns the set of users who have disliked the user identified by the id provided.',
+    example: `${API_URL}/users/whodislike/276`,
   },
   {
     endpoint: '/api/usertypes',
