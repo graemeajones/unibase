@@ -403,11 +403,6 @@ const listOfEndpoints = [
     },
   },
   {
-    endpoint: '/api/usertypes',
-    description: 'Returns the possible set of user type values.',
-    example: `${API_URL}/usertypes`,
-  },
-  {
     entity: 'User Types',
     sap: '/api/assessmenttypes',
     services: {
@@ -436,16 +431,6 @@ const listOfEndpoints = [
         description: 'Delete the specific user type identified by the id provided',
       },
     },
-  },
-  {
-    endpoint: '/api/years',
-    description: 'Returns the possible set of year cohort values.',
-    example: `${API_URL}/years`,
-  },
-  {
-    endpoint: '/api/usertypes',
-    description: 'Returns the possible set of user type values.',
-    example: `${API_URL}/usertypes`,
   },
   {
     entity: 'Years',
