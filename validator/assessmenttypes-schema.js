@@ -4,8 +4,6 @@ const schema = {};
 
 schema.mutableFields = ['AssessmenttypeCode', 'AssessmenttypeDescription'];
 
-schema.id = joi.number().integer().min(1);
-
 schema.record = joi
   .object({
     AssessmenttypeID: joi.number().integer().min(1).allow(null),

@@ -11,8 +11,6 @@ schema.mutableFields = [
   'AssessmentBriefURL',
 ];
 
-schema.id = joi.number().integer().min(1);
-
 schema.record = joi
   .object({
     AssessmentID: joi.number().integer().min(1).allow(null),

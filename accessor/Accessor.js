@@ -1,5 +1,4 @@
 class Accessor {
-
   constructor(model, database) {
     this.model = model;
     this.database = database;
@@ -9,28 +8,26 @@ class Accessor {
 
   create = async (record) => {
     try {
-      const { sql, data } = this.model.buildCreateQuery(record); 
+      const { sql, data } = this.model.buildCreateQuery(record);
       const status = await this.database.query(sql, data);
 
-      const { isSuccess, result, message } = await this.read(status[0].insertId, null);
+      const { isSuccess, result, message } = await this.read(null, status[0].insertId);
       return isSuccess
         ? { isSuccess: true, result: result, message: 'Record successfully recovered' }
         : { isSuccess: false, result: null, message: `Failed to recover the inserted record: ${message}` };
-    }
-    catch (error) {
+    } catch (error) {
       return { isSuccess: false, result: null, message: `Failed to execute query: ${error.message}` };
     }
   };
 
-  read = async (id, variant) => {
+  read = async (variant, ids) => {
     try {
-      const { sql, data } = this.model.buildReadQuery(id, variant);
+      const { sql, data } = this.model.buildReadQuery(variant, ids);
       const [result] = await this.database.query(sql, data);
-      return (result.length === 0)
+      return result.length === 0
         ? { isSuccess: false, result: null, message: 'No record(s) found' }
         : { isSuccess: true, result: result, message: 'Record(s) successfully recovered' };
-    }
-    catch (error) {
+    } catch (error) {
       return { isSuccess: false, result: null, message: `Failed to execute query: ${error.message}` };
     }
   };
@@ -42,12 +39,11 @@ class Accessor {
       if (status[0].affectedRows === 0)
         return { isSuccess: false, result: null, message: 'Failed to update record: no rows affected' };
 
-      const { isSuccess, result, message } = await this.read(id, null);      
+      const { isSuccess, result, message } = await this.read(null, id);
       return isSuccess
         ? { isSuccess: true, result: result, message: 'Record successfully recovered' }
         : { isSuccess: false, result: null, message: `Failed to recover the updated record: ${message}` };
-    }
-    catch (error) {
+    } catch (error) {
       return { isSuccess: false, result: null, message: `Failed to execute query: ${error.message}` };
     }
   };
@@ -59,12 +55,10 @@ class Accessor {
       return status[0].affectedRows === 0
         ? { isSuccess: false, result: null, message: `Failed to delete record ${id}` }
         : { isSuccess: true, result: null, message: 'Record successfully deleted' };
-    }
-    catch (error) {
+    } catch (error) {
       return { isSuccess: false, result: null, message: `Failed to execute query: ${error.message}` };
     }
   };
-
 }
 
 export default Accessor;

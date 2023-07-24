@@ -3,7 +3,7 @@ import joi from 'joi';
 const schema = {};
 
 schema.mutableFields = ['GroupName', 'GroupProjectID'];
-schema.id = joi.number().integer().min(1);
+
 schema.record = joi
   .object({
     GroupID: joi.number().integer().min(1).allow(null),
