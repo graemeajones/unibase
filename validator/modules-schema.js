@@ -2,15 +2,8 @@ import joi from 'joi';
 
 const schema = {};
 
-schema.mutableFields = [
-  'ModuleName',
-  'ModuleCode',
-  'ModuleLevel',
-  'ModuleYearID',
-  'ModuleLeaderID',
-  'ModuleImageURL',
-];
-schema.id = joi.number().integer().min(1);
+schema.mutableFields = ['ModuleName', 'ModuleCode', 'ModuleLevel', 'ModuleYearID', 'ModuleLeaderID', 'ModuleImageURL'];
+
 schema.record = joi
   .object({
     ModuleID: joi.number().integer().min(1).allow(null),

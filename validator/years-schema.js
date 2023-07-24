@@ -3,7 +3,7 @@ import joi from 'joi';
 const schema = {};
 
 schema.mutableFields = ['YearName'];
-schema.id = joi.number().integer().min(1);
+
 schema.record = joi
   .object({
     YearID: joi.number().integer().min(1).allow(null),

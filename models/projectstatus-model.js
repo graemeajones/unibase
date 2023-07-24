@@ -1,12 +1,12 @@
 const model = {};
 
 model.table = 'Projectstatus';
-model.mutableFields = ['ProjectstatusName'];
 model.idField = 'ProjectstatusID';
+model.mutableFields = ['ProjectstatusName'];
 
 model.buildReadQuery = (id, variant) => {
   const fields = [model.idField, ...model.mutableFields];
-  
+
   let sql = '';
   switch (variant) {
     default:

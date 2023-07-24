@@ -1,33 +1,35 @@
 const model = {};
 
-model.table = "Likes";
-model.mutableFields = ["LikerID", "LikeeID", "LikeAffinityID"];
-model.idField = "LikeID";
+model.table = 'Likes';
+model.idField = 'LikeID';
+model.mutableFields = ['LikerID', 'LikeeID', 'LikeAffinityID'];
 
-model.buildReadQuery = (id, variant) => {
-  const resolvedTable =
-    "(Likes INNER JOIN Affinities ON LikeAffinityID=AffinityID)";
-  const resolvedFields = [
-    model.idField,
-    ...model.mutableFields,
-    "AffinityName AS LikeAffinityName",
-  ];
+model.buildReadQuery = (variant, ids) => {
+  const resolvedTable = '(Likes INNER JOIN Affinities ON LikeAffinityID=AffinityID)';
+  const resolvedFields = [model.idField, ...model.mutableFields, 'AffinityName AS LikeAffinityName'];
 
-  let sql = "";
+  let sql = '';
+  let data = {};
+
   switch (variant) {
-    case "liker":
+    case 'likedby':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE LikerID=:ID`;
+      data = { ID: ids['liker'] };
       break;
-    case "likee":
+    case 'wholike':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE LikeeID=:ID`;
+      data = { ID: ids['likee'] };
       break;
     default:
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (id) sql += ` WHERE LikeID=:ID`;
+      if (ids) {
+        sql += ` WHERE LikeID=:ID`;
+        data = { ID: ids['likes'] };
+      }
   }
-  sql += " ORDER BY AffinityID";
+  sql += ' ORDER BY AffinityID';
 
-  return { sql, data: { ID: id } };
+  return { sql, data };
 };
 
 export default model;

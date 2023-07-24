@@ -27,9 +27,11 @@ const controller = new Controller(validator, accessor);
 
 const router = new Router();
 
-router.get('/', (req, res) => controller.get(req, res, null));
-router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null));
-router.get('/module/:id(\\d+)', (req, res) => controller.get(req, res, "module"));
+router.get('/', (req, res) => controller.get(req, res, null, null));
+router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null, { modulemembers: req.params.id }));
+router.get('/module/:id(\\d+)', (req, res) => controller.get(req, res, 'module', { module: req.params.id }));
+router.get('/user/:id(\\d+)', (req, res) => controller.get(req, res, 'user', { user: req.params.id }));
+
 router.post('/', controller.post);
 router.put('/:id', controller.put);
 router.delete('/:id', controller.delete);

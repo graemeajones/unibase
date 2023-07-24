@@ -1,19 +1,23 @@
 const model = {};
 
-model.table = "Assessmenttypes";
-model.mutableFields = ["AssessmenttypeCode", "AssessmenttypeDescription"];
-model.idField = "AssessmenttypeID";
+model.table = 'Assessmenttypes';
+model.idField = 'AssessmenttypeID';
+model.mutableFields = ['AssessmenttypeCode', 'AssessmenttypeDescription'];
 
-model.buildReadQuery = (id, variant) => {
-  let sql = "";
+model.buildReadQuery = (variant, ids) => {
+  let sql = '';
+  let data = {};
 
   switch (variant) {
     default:
       sql = `SELECT ${model.idField}, ${model.mutableFields} FROM ${model.table}`;
-      if (id) sql += ` WHERE AssessmenttypeID=:ID`;
+      if (ids) {
+        sql += ` WHERE AssessmenttypeID=:ID`;
+        data = { ID: ids['assessmenttypes'] };
+      }
   }
 
-  return { sql, data: { ID: id } };
+  return { sql, data };
 };
 
 export default model;

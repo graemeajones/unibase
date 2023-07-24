@@ -1,21 +1,26 @@
 const model = {};
 
 model.table = 'Usertypes';
-model.mutableFields = ['UsertypeName'];
 model.idField = 'UsertypeID';
+model.mutableFields = ['UsertypeName'];
 
-model.buildReadQuery = (id, variant) => {
+model.buildReadQuery = (variant, ids) => {
   const table = model.table;
   const fields = [model.idField, ...model.mutableFields];
 
   let sql = '';
+  let data = {};
+
   switch (variant) {
     default:
       sql = `SELECT ${fields} FROM ${table}`;
-      if (id) sql += ` WHERE UsertypeID=:ID`;
+      if (ids) {
+        sql += ` WHERE UsertypeID=:ID`;
+        data = { ID: ids['usertypes'] };
+      }
   }
 
-  return { sql, data: { ID: id } };
+  return { sql, data };
 };
 
 export default model;
