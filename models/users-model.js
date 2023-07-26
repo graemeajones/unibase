@@ -58,7 +58,7 @@ model.buildReadQuery = (variant, ids) => {
       break;
     case 'likedby':
       extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
-      extendedTable = `Likes RIGHT JOIN ${resolvedTable} ON Likes.LikeeID=Users.UserID`;
+      extendedTable = `Likes INNER JOIN ${resolvedTable} ON Likes.LikeeID=Users.UserID`;
       sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikerID=:ID AND LikeAffinityID=${LIKE}`;
       data = { ID: ids['liker'] };
       break;
