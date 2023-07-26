@@ -22,6 +22,7 @@ model.buildReadQuery = (variant, ids) => {
     'UsertypeName AS UserUsertypeName',
     'YearName AS UserYearName',
   ];
+  const orderField = 'ORDER BY UserLastname,UserFirstname,UserEmail';
 
   let sql = '';
   let data = {};
@@ -48,6 +49,37 @@ model.buildReadQuery = (variant, ids) => {
       sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE GroupmemberGroupID=:ID`;
       data = { ID: ids['groups'] };
       break;
+    case 'likes':
+      extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
+      const LikerLikes = `( SELECT * FROM Likes WHERE Likes.LikerID=:ID) AS LikerLikes`;
+      extendedTable = `${resolvedTable} LEFT JOIN ${LikerLikes} ON Users.UserID = LikerLikes.LikeeID`;
+      sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE UserUsertypeID=${STUDENT} ${orderField}`;
+      data = { ID: ids['likes'] };
+      break;
+    case 'likedby':
+      extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
+      extendedTable = `Likes RIGHT JOIN ${resolvedTable} ON Likes.LikeeID=Users.UserID`;
+      sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikerID=:ID AND LikeAffinityID=${LIKE}`;
+      data = { ID: ids['liker'] };
+      break;
+    case 'dislikedby':
+      extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
+      extendedTable = `Likes INNER JOIN ${resolvedTable} ON Likes.LikeeID=Users.UserID`;
+      sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikerID=:ID  AND LikeAffinityID=${DISLIKE}`;
+      data = { ID: ids['liker'] };
+      break;
+    case 'wholikes':
+      extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
+      extendedTable = `Likes INNER JOIN ${resolvedTable} ON Likes.LikerID=Users.UserID`;
+      sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikeeID=:ID AND LikeAffinityID=${LIKE}`;
+      data = { ID: ids['likee'] };
+      break;
+    case 'whodislikes':
+      extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
+      extendedTable = `Likes INNER JOIN ${resolvedTable} ON Likes.LikerID=Users.UserID`;
+      sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikeeID=:ID AND LikeAffinityID=${DISLIKE}`;
+      data = { ID: ids['likee'] };
+      break;
     case 'modules':
       extendedTable = `Modulemembers INNER JOIN ${resolvedTable} ON Modulemembers.ModulememberUserID=Users.UserID`;
       sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE ModulememberModuleID=:ID`;
@@ -55,33 +87,9 @@ model.buildReadQuery = (variant, ids) => {
       break;
     case 'moduleslikedby':
       extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
-      extendedTable = `Likes INNER JOIN ( Modulemembers INNER JOIN ${resolvedTable} ON Modulemembers.ModulememberUserID=Users.UserID ) ON Likes.LikeeID=Users.UserID`;
+      extendedTable = `( Modulemembers INNER JOIN ${resolvedTable} ON Modulemembers.ModulememberUserID=Users.UserID ) LEFT JOIN Likes ON Users.UserID=Likes.LikeeID`;
       sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE ModulememberModuleID=:MID AND Likes.LikerID=:UID AND LikeAffinityID=${LIKE}`;
       data = { MID: ids['modules'], UID: ids['users'] };
-      break;
-    case 'likedby':
-      extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
-      extendedTable = `Likes INNER JOIN ${resolvedTable} ON Likes.LikeeID=Users.UserID`;
-      sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikerID=:ID AND LikeAffinityID=${LIKE}`;
-      data = { ID: ids['likes'] };
-      break;
-    case 'dislikedby':
-      extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
-      extendedTable = `Likes INNER JOIN ${resolvedTable} ON Likes.LikeeID=Users.UserID`;
-      sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikerID=:ID  AND LikeAffinityID=${DISLIKE}`;
-      data = { ID: ids['likes'] };
-      break;
-    case 'wholikes':
-      extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
-      extendedTable = `Likes INNER JOIN ${resolvedTable} ON Likes.LikerID=Users.UserID`;
-      sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikeeID=:ID AND LikeAffinityID=${LIKE}`;
-      data = { ID: ids['likes'] };
-      break;
-    case 'whodislikes':
-      extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
-      extendedTable = `Likes INNER JOIN ${resolvedTable} ON Likes.LikerID=Users.UserID`;
-      sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikeeID=:ID AND LikeAffinityID=${DISLIKE}`;
-      data = { ID: ids['likes'] };
       break;
     default:
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
