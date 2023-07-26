@@ -11,7 +11,9 @@ class Accessor {
       const { sql, data } = this.model.buildCreateQuery(record);
       const status = await this.database.query(sql, data);
 
-      const { isSuccess, result, message } = await this.read(null, status[0].insertId);
+      const { isSuccess, result, message } = await this.read(null, {
+        [this.model.table.toLowerCase()]: status[0].insertId,
+      });
       return isSuccess
         ? { isSuccess: true, result: result, message: 'Record successfully recovered' }
         : { isSuccess: false, result: null, message: `Failed to recover the inserted record: ${message}` };
@@ -39,7 +41,7 @@ class Accessor {
       if (status[0].affectedRows === 0)
         return { isSuccess: false, result: null, message: 'Failed to update record: no rows affected' };
 
-      const { isSuccess, result, message } = await this.read(null, id);
+      const { isSuccess, result, message } = await this.read(null, { [this.model.table.toLowerCase()]: id });
       return isSuccess
         ? { isSuccess: true, result: result, message: 'Record successfully recovered' }
         : { isSuccess: false, result: null, message: `Failed to recover the updated record: ${message}` };

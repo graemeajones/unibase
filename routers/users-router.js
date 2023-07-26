@@ -37,13 +37,14 @@ router.get('/modules/:mid(\\d+)', (req, res) => controller.get(req, res, 'module
 router.get('/modules/:mid(\\d+)/likes/:uid(\\d+)', (req, res) =>
   controller.get(req, res, 'moduleslikedby', { modules: req.params.mid, users: req.params.uid })
 );
-router.get('/likes/:id(\\d+)/', (req, res) => controller.get(req, res, 'likedby', { likes: req.params.id }));
+router.get('/likes/:id(\\d+)/', (req, res) => controller.get(req, res, 'likes', { likes: req.params.id }));
+router.get('/likes/:id(\\d+)/likedby', (req, res) => controller.get(req, res, 'likedby', { liker: req.params.id }));
 router.get('/likes/:id(\\d+)/dislikedby', (req, res) =>
-  controller.get(req, res, 'dislikedby', { likes: req.params.id })
+  controller.get(req, res, 'dislikedby', { liker: req.params.id })
 );
-router.get('/likes/:id(\\d+)/wholikes', (req, res) => controller.get(req, res, 'wholikes', { likes: req.params.id }));
+router.get('/likes/:id(\\d+)/wholikes', (req, res) => controller.get(req, res, 'wholikes', { likee: req.params.id }));
 router.get('/likes/:id(\\d+)/whodislikes', (req, res) =>
-  controller.get(req, res, 'whodislikes', { likes: req.params.id })
+  controller.get(req, res, 'whodislikes', { likee: req.params.id })
 );
 
 router.post('/', controller.post);

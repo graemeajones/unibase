@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-const API_URL = 'http://softwarehub.uk/unibase/api';
-// const API_URL = 'http://localhost:5000/api';
+// const API_URL = 'http://softwarehub.uk/unibase/api';
+const API_URL = 'http://localhost:5000/api';
 
 // Endpoints -------------------------------------
 
@@ -369,8 +369,14 @@ const listOfEndpoints = [
         },
         {
           endpoint: '/likes/{id}',
-          description: 'Returns the set of users liked by the user identified by the id provided',
+          description:
+            'Returns all student users augmented with like information relative to the user identified by the id provided',
           example: `${API_URL}/users/likes/277`,
+        },
+        {
+          endpoint: '/likes/{id}/likedby',
+          description: 'Returns the set of users liked by the user identified by the id provided',
+          example: `${API_URL}/users/likes/277/likedby`,
         },
         {
           endpoint: '/likes/{id}/dislikedby',
