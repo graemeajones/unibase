@@ -4,7 +4,7 @@ model.table = 'Groupmembers';
 model.idField = 'GroupmemberID';
 model.mutableFields = ['GroupmemberGroupID', 'GroupmemberUserID'];
 
-model.buildReadQuery = (variant, ids) => {
+model.buildReadQuery = (req, variant) => {
   const resolvedTable =
     '(((Groupmembers LEFT JOIN Groups ON GroupmemberGroupID=GroupID ) LEFT JOIN Users ON GroupmemberUserID=UserID ) LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID )';
   const resolvedFields = [
@@ -20,17 +20,17 @@ model.buildReadQuery = (variant, ids) => {
   switch (variant) {
     case 'group':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE GroupmemberGroupID=:ID`;
-      data = { ID: ids['group'] };
+      data = { ID: req.params.id };
       break;
     case 'user':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE GroupmemberUserID=:ID`;
-      data = { ID: ids['user'] };
+      data = { ID: req.params.id };
       break;
     default:
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (ids) {
+      if (req.params.id) {
         sql += ` WHERE GroupmemberID=:ID`;
-        data = { ID: ids['groupmembers'] };
+        data = { ID: req.params.id };
       }
   }
   sql += ' ORDER BY GroupmemberGroupName, GroupmemberUserName';

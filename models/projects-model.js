@@ -11,7 +11,7 @@ model.mutableFields = [
   'ProjectModuleID',
 ];
 
-model.buildReadQuery = (variant, ids) => {
+model.buildReadQuery = (req, variant) => {
   const resolvedTable = `((Projects LEFT JOIN Projectstatus ON ProjectProjectstatusID=ProjectstatusID) LEFT JOIN Modules ON ProjectModuleID=ModuleID)`;
   const resolvedFields = [
     model.idField,
@@ -26,18 +26,18 @@ model.buildReadQuery = (variant, ids) => {
   switch (variant) {
     case 'module':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE ProjectModuleID=:ID`;
-      data = { ID: ids['module'] };
+      data = { ID: req.params.id };
       break;
     case 'users':
       const extendedTable = `Modulemembers INNER JOIN ${resolvedTable} ON Modulemembers.ModulememberModuleID=Modules.ModuleID`;
       sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE ModulememberUserID=:ID`;
-      data = { ID: ids['users'] };
+      data = { ID: req.params.id };
       break;
     default:
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (ids) {
+      if (req.params.id) {
         sql += ` WHERE ProjectID=:ID`;
-        data = { ID: ids['projects'] };
+        data = { ID: req.params.id };
       }
   }
 

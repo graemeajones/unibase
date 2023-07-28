@@ -4,7 +4,7 @@ model.table = 'Modules';
 model.idField = 'ModuleID';
 model.mutableFields = ['ModuleName', 'ModuleCode', 'ModuleLevel', 'ModuleYearID', 'ModuleLeaderID', 'ModuleImageURL'];
 
-model.buildReadQuery = (variant, ids) => {
+model.buildReadQuery = (req, variant) => {
   const resolvedTable = '((Modules LEFT JOIN Users ON ModuleLeaderID=UserID) LEFT JOIN Years ON ModuleYearID=YearID )';
   const resolvedFields = [
     model.idField,
@@ -19,18 +19,18 @@ model.buildReadQuery = (variant, ids) => {
   switch (variant) {
     case 'leader':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE ModuleLeaderID=:ID`;
-      data = { ID: ids['leader'] };
+      data = { ID: req.params.id };
       break;
     case 'users':
       const extendedTable = `Modulemembers INNER JOIN ${resolvedTable} ON Modulemembers.ModulememberModuleID=Modules.ModuleID`;
       sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE ModulememberUserID=:ID`;
-      data = { ID: ids['users'] };
+      data = { ID: req.params.id };
       break;
     default:
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (ids) {
+      if (req.params.id) {
         sql += ` WHERE ModuleID=:ID`;
-        data = { ID: ids['modules'] };
+        data = { ID: req.params.id };
       }
   }
 

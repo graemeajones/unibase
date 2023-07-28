@@ -4,16 +4,16 @@ model.table = 'Assessmenttypes';
 model.idField = 'AssessmenttypeID';
 model.mutableFields = ['AssessmenttypeCode', 'AssessmenttypeDescription'];
 
-model.buildReadQuery = (variant, ids) => {
+model.buildReadQuery = (req, variant) => {
   let sql = '';
   let data = {};
 
   switch (variant) {
     default:
       sql = `SELECT ${model.idField}, ${model.mutableFields} FROM ${model.table}`;
-      if (ids) {
+      if (req.params.id) {
         sql += ` WHERE AssessmenttypeID=:ID`;
-        data = { ID: ids['assessmenttypes'] };
+        data = { ID: req.params.id };
       }
   }
 

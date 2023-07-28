@@ -4,7 +4,7 @@ model.table = 'Years';
 model.idField = 'YearID';
 model.mutableFields = ['YearName'];
 
-model.buildReadQuery = (variant, ids) => {
+model.buildReadQuery = (req, variant) => {
   let table = 'Years';
   let fields = ['YearID', 'YearName'];
 
@@ -14,9 +14,9 @@ model.buildReadQuery = (variant, ids) => {
   switch (variant) {
     default:
       sql = `SELECT ${fields} FROM ${table}`;
-      if (ids) {
+      if (req.params.id) {
         sql += ` WHERE YearID=:ID`;
-        data = { ID: ids['years'] };
+        data = { ID: req.params.id };
       }
   }
 

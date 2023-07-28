@@ -13,7 +13,7 @@ model.mutableFields = [
   'UserImageURL',
 ];
 
-model.buildReadQuery = (variant, ids) => {
+model.buildReadQuery = (req, variant) => {
   const resolvedTable =
     '((Users LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID) LEFT JOIN Years ON UserYearID=YearID )';
   const resolvedFields = [
@@ -42,60 +42,60 @@ model.buildReadQuery = (variant, ids) => {
       break;
     case 'usertype':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE UserUsertypeID=:ID`;
-      data = { ID: ids['usertype'] };
+      data = { ID: req.params.id };
       break;
     case 'groups':
       extendedTable = `Groupmembers INNER JOIN ${resolvedTable} ON Groupmembers.GroupmemberUserID=Users.UserID`;
       sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE GroupmemberGroupID=:ID`;
-      data = { ID: ids['groups'] };
+      data = { ID: req.params.id };
       break;
     case 'likes':
       extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
       const LikerLikes = `( SELECT * FROM Likes WHERE Likes.LikerID=:ID) AS LikerLikes`;
       extendedTable = `${resolvedTable} LEFT JOIN ${LikerLikes} ON Users.UserID = LikerLikes.LikeeID`;
       sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE UserUsertypeID=${STUDENT} ${orderField}`;
-      data = { ID: ids['likes'] };
+      data = { ID: req.params.id };
       break;
     case 'likedby':
       extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
       extendedTable = `Likes INNER JOIN ${resolvedTable} ON Likes.LikeeID=Users.UserID`;
       sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikerID=:ID AND LikeAffinityID=${LIKE}`;
-      data = { ID: ids['liker'] };
+      data = { ID: req.params.id };
       break;
     case 'dislikedby':
       extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
       extendedTable = `Likes INNER JOIN ${resolvedTable} ON Likes.LikeeID=Users.UserID`;
       sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikerID=:ID  AND LikeAffinityID=${DISLIKE}`;
-      data = { ID: ids['liker'] };
+      data = { ID: req.params.id };
       break;
     case 'wholikes':
       extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
       extendedTable = `Likes INNER JOIN ${resolvedTable} ON Likes.LikerID=Users.UserID`;
       sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikeeID=:ID AND LikeAffinityID=${LIKE}`;
-      data = { ID: ids['likee'] };
+      data = { ID: req.params.id };
       break;
     case 'whodislikes':
       extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
       extendedTable = `Likes INNER JOIN ${resolvedTable} ON Likes.LikerID=Users.UserID`;
       sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE Likes.LikeeID=:ID AND LikeAffinityID=${DISLIKE}`;
-      data = { ID: ids['likee'] };
+      data = { ID: req.params.id };
       break;
     case 'modules':
       extendedTable = `Modulemembers INNER JOIN ${resolvedTable} ON Modulemembers.ModulememberUserID=Users.UserID`;
       sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE ModulememberModuleID=:ID`;
-      data = { ID: ids['modules'] };
+      data = { ID: req.params.id };
       break;
     case 'moduleslikedby':
       extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
       extendedTable = `( Modulemembers INNER JOIN ${resolvedTable} ON Modulemembers.ModulememberUserID=Users.UserID ) LEFT JOIN Likes ON Users.UserID=Likes.LikeeID`;
       sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE ModulememberModuleID=:MID AND Likes.LikerID=:UID AND LikeAffinityID=${LIKE}`;
-      data = { MID: ids['modules'], UID: ids['users'] };
+      data = { MID: req.params.mid, UID: req.params.uid };
       break;
     default:
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (ids) {
+      if (req.params.id) {
         sql += ` WHERE UserID=:ID`;
-        data = { ID: ids['users'] };
+        data = { ID: req.params.id };
       }
   }
 

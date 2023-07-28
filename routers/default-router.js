@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 const API_URL = 'http://softwarehub.uk/unibase/api';
-// const API_URL = 'http://localhost:5000/api';
+//const API_URL = 'http://localhost:5000/api';
 
 // Endpoints -------------------------------------
 
@@ -316,16 +316,6 @@ const listOfEndpoints = [
         description: 'Delete the specific project record identified by the id provided',
       },
     },
-  },
-  {
-    endpoint: '/api/projects/users/{id}',
-    description: 'Returns the set of projects associated with the student (user) identified by the id provided.',
-    example: `${API_URL}/projects/users/276`,
-  },
-  {
-    endpoint: '/api/projectstatus',
-    description: 'Returns the possible set of project status values.',
-    example: `${API_URL}/projectstatus`,
   },
   {
     entity: 'Users',
