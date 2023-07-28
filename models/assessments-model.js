@@ -12,7 +12,7 @@ model.mutableFields = [
   'AssessmentAssessmentTypeID',
 ];
 
-model.buildReadQuery = (variant, ids) => {
+model.buildReadQuery = (req, variant) => {
   const resolvedTable = `((Assessments LEFT JOIN Assessmenttypes ON AssessmentAssessmenttypeID=AssessmenttypeID) LEFT JOIN Modules ON AssessmentModuleID=ModuleID)`;
   const resolvedFields = [
     model.idField,
@@ -27,13 +27,13 @@ model.buildReadQuery = (variant, ids) => {
   switch (variant) {
     case 'module':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE AssessmentModuleID=:ID`;
-      data = { ID: ids['module'] };
+      data = { ID: req.params.id };
       break;
     default:
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (ids) {
+      if (req.params.id) {
         sql += ` WHERE AssessmentID=:ID`;
-        data = { ID: ids['assessments'] };
+        data = { ID: req.params.id };
       }
   }
 

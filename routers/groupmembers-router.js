@@ -27,10 +27,10 @@ const controller = new Controller(validator, accessor);
 
 const router = new Router();
 
-router.get('/', (req, res) => controller.get(req, res, null, null));
-router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null, { groupmembers: req.params.id }));
-router.get('/group/:id(\\d+)', (req, res) => controller.get(req, res, 'group', { group: req.params.id }));
-router.get('/user/:id(\\d+)', (req, res) => controller.get(req, res, 'user', { user: req.params.id }));
+router.get('/', (req, res) => controller.get(req, res, null));
+router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null));
+router.get('/group/:id(\\d+)', (req, res) => controller.get(req, res, 'group'));
+router.get('/user/:id(\\d+)', (req, res) => controller.get(req, res, 'user'));
 
 router.post('/', controller.post);
 router.put('/:id', controller.put);

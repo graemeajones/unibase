@@ -28,9 +28,9 @@ const controller = new Controller(validator, accessor);
 const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null, null));
-router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null, { groups: req.params.id }));
-router.get('/assessment/:id', (req, res) => controller.get(req, res, 'assessment', { assessment: req.params.id }));
-router.get('/users/:id(\\d+)', (req, res) => controller.get(req, res, 'users', { users: req.params.id }));
+router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null));
+router.get('/assessment/:id(\\d+)', (req, res) => controller.get(req, res, 'assessment'));
+router.get('/users/:id(\\d+)', (req, res) => controller.get(req, res, 'users'));
 
 router.post('/', controller.post);
 router.put('/:id', controller.put);

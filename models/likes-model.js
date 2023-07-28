@@ -4,7 +4,7 @@ model.table = 'Likes';
 model.idField = 'LikeID';
 model.mutableFields = ['LikerID', 'LikeeID', 'LikeAffinityID'];
 
-model.buildReadQuery = (variant, ids) => {
+model.buildReadQuery = (req, variant) => {
   const resolvedTable = '(Likes INNER JOIN Affinities ON LikeAffinityID=AffinityID)';
   const resolvedFields = [model.idField, ...model.mutableFields, 'AffinityName AS LikeAffinityName'];
 
@@ -14,17 +14,17 @@ model.buildReadQuery = (variant, ids) => {
   switch (variant) {
     case 'likedby':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE LikerID=:ID`;
-      data = { ID: ids['liker'] };
+      data = { ID: req.params.id };
       break;
     case 'wholike':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE LikeeID=:ID`;
-      data = { ID: ids['likee'] };
+      data = { ID: req.params.id };
       break;
     default:
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (ids) {
+      if (req.params.id) {
         sql += ` WHERE LikeID=:ID`;
-        data = { ID: ids['likes'] };
+        data = { ID: req.params.id };
       }
   }
   sql += ' ORDER BY AffinityID';

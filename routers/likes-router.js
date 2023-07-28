@@ -28,9 +28,9 @@ const controller = new Controller(validator, accessor);
 const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null, null));
-router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null, { likes: req.params.id }));
-router.get('/likedby/:id(\\d+)', (req, res) => controller.get(req, res, 'likedby', { liker: req.params.id }));
-router.get('/wholike/:id(\\d+)', (req, res) => controller.get(req, res, 'wholike', { likee: req.params.id }));
+router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null));
+router.get('/likedby/:id(\\d+)', (req, res) => controller.get(req, res, 'likedby'));
+router.get('/wholike/:id(\\d+)', (req, res) => controller.get(req, res, 'wholike'));
 
 router.post('/', controller.post);
 router.put('/:id', controller.put);

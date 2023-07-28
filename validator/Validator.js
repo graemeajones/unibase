@@ -1,15 +1,7 @@
-import joi from 'joi';
-import idSchema from './id-schema.js';
-
 class Validator {
   constructor(schema) {
-    this.getSchema = joi.object().pattern(/^/, idSchema).allow(null);
-    this.postSchema = schema.record.and(...schema.mutableFields);
-    this.putSchema = joi.object({
-      id: idSchema.required(),
-      record: schema.record.or(...schema.mutableFields),
-    });
-    this.deleteSchema = idSchema.required();
+    this.postBodySchema = schema.record.and(...schema.mutableFields);
+    this.putBodySchema = schema.record.or(...schema.mutableFields);
   }
 
   // Helpers -------------------------------------
@@ -20,10 +12,8 @@ class Validator {
   };
 
   // Methods -------------------------------------
-  get = (value) => this.validate(this.getSchema, value);
-  post = (value) => this.validate(this.postSchema, value);
-  put = (value) => this.validate(this.putSchema, value);
-  delete = (value) => this.validate(this.deleteSchema, value);
+  post = (value) => this.validate(this.postBodySchema, value);
+  put = (value) => this.validate(this.putBodySchema, value);
 }
 
 export default Validator;

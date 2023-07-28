@@ -6,13 +6,9 @@ class Controller {
 
   // Methods
 
-  get = async (req, res, variant, ids) => {
-    // Validate request
-    const { isValid, message: validatorMessage } = this.validator.get(ids);
-    if (!isValid) return res.status(404).json({ message: validatorMessage });
-
+  get = async (req, res, variant) => {
     // Access data
-    const { isSuccess, result, message: accessorMessage } = await this.accessor.read(variant, ids);
+    const { isSuccess, result, message: accessorMessage } = await this.accessor.read(req, variant);
     if (!isSuccess) return res.status(404).json({ message: accessorMessage });
 
     // Response to request
@@ -20,14 +16,12 @@ class Controller {
   };
 
   post = async (req, res) => {
-    const record = req.body;
-
-    // Validate request
-    const { isValid, message: validatorMessage } = this.validator.post(record);
+    // Validate request body
+    const { isValid, message: validatorMessage } = this.validator.post(req.body);
     if (!isValid) return res.status(404).json({ message: validatorMessage });
 
     // Access data
-    const { isSuccess, result, message: accessorMessage } = await this.accessor.create(record);
+    const { isSuccess, result, message: accessorMessage } = await this.accessor.create(req);
     if (!isSuccess) return res.status(400).json({ message: accessorMessage });
 
     // Response to request
@@ -35,15 +29,12 @@ class Controller {
   };
 
   put = async (req, res) => {
-    const id = req.params.id;
-    const record = req.body;
-
     // Validate request
-    const { isValid, message: validatorMessage } = this.validator.put({ id, record });
+    const { isValid, message: validatorMessage } = this.validator.put(req.body);
     if (!isValid) return res.status(404).json({ message: validatorMessage });
 
     // Access data
-    const { isSuccess, result, message: accessorMessage } = await this.accessor.update(record, id);
+    const { isSuccess, result, message: accessorMessage } = await this.accessor.update(req);
     if (!isSuccess) return res.status(400).json({ message: accessorMessage });
 
     // Response to request
@@ -51,14 +42,8 @@ class Controller {
   };
 
   delete = async (req, res) => {
-    const id = req.params.id;
-
-    // Validate request
-    const { isValid, message: validatorMessage } = this.validator.delete(id);
-    if (!isValid) return res.status(404).json({ message: validatorMessage });
-
     // Access data
-    const { isSuccess, result, message: accessorMessage } = await this.accessor.delete(id);
+    const { isSuccess, result, message: accessorMessage } = await this.accessor.delete(req);
     if (!isSuccess) return res.status(400).json({ message: accessorMessage });
 
     // Response to request

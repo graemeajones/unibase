@@ -6,14 +6,13 @@ class Accessor {
 
   // Methods
 
-  create = async (record) => {
+  create = async (req) => {
     try {
-      const { sql, data } = this.model.buildCreateQuery(record);
+      const { sql, data } = this.model.buildCreateQuery(req);
       const status = await this.database.query(sql, data);
 
-      const { isSuccess, result, message } = await this.read(null, {
-        [this.model.table.toLowerCase()]: status[0].insertId,
-      });
+      const { isSuccess, result, message } = await this.read({ params: { id: status[0].insertId } }, null);
+      // { params: { id: status[0].insertId } } simulates the request object, 'req', that the 'read' method expects
       return isSuccess
         ? { isSuccess: true, result: result, message: 'Record successfully recovered' }
         : { isSuccess: false, result: null, message: `Failed to recover the inserted record: ${message}` };
@@ -22,9 +21,9 @@ class Accessor {
     }
   };
 
-  read = async (variant, ids) => {
+  read = async (req, variant) => {
     try {
-      const { sql, data } = this.model.buildReadQuery(variant, ids);
+      const { sql, data } = this.model.buildReadQuery(req, variant);
       const [result] = await this.database.query(sql, data);
       return result.length === 0
         ? { isSuccess: false, result: null, message: 'No record(s) found' }
@@ -34,14 +33,14 @@ class Accessor {
     }
   };
 
-  update = async (record, id) => {
+  update = async (req) => {
     try {
-      const { sql, data } = this.model.buildUpdateQuery(record, id);
+      const { sql, data } = this.model.buildUpdateQuery(req);
       const status = await this.database.query(sql, data);
       if (status[0].affectedRows === 0)
         return { isSuccess: false, result: null, message: 'Failed to update record: no rows affected' };
 
-      const { isSuccess, result, message } = await this.read(null, { [this.model.table.toLowerCase()]: id });
+      const { isSuccess, result, message } = await this.read(req, null);
       return isSuccess
         ? { isSuccess: true, result: result, message: 'Record successfully recovered' }
         : { isSuccess: false, result: null, message: `Failed to recover the updated record: ${message}` };
@@ -50,12 +49,12 @@ class Accessor {
     }
   };
 
-  delete = async (id) => {
+  delete = async (req) => {
     try {
-      const { sql, data } = this.model.buildDeleteQuery(id);
+      const { sql, data } = this.model.buildDeleteQuery(req);
       const status = await this.database.query(sql, data);
       return status[0].affectedRows === 0
-        ? { isSuccess: false, result: null, message: `Failed to delete record ${id}` }
+        ? { isSuccess: false, result: null, message: `Failed to delete record ${req.params.id}` }
         : { isSuccess: true, result: null, message: 'Record successfully deleted' };
     } catch (error) {
       return { isSuccess: false, result: null, message: `Failed to execute query: ${error.message}` };
