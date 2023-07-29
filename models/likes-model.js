@@ -16,7 +16,7 @@ model.buildReadQuery = (req, variant) => {
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE LikerID=:ID`;
       data = { ID: req.params.id };
       break;
-    case 'wholike':
+    case 'wholikes':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE LikeeID=:ID`;
       data = { ID: req.params.id };
       break;
