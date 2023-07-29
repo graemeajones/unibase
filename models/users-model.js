@@ -14,6 +14,13 @@ model.mutableFields = [
 ];
 
 model.buildReadQuery = (req, variant) => {
+  // Initialisations ------------------------
+  const STAFF = 1; // Primary key for staff type in Unibase Usertypes table
+  const STUDENT = 2; // Primary key for student type in Unibase Usertypes table
+  const LIKE = 1; // Primary key for like type in Unibase Affinities table
+  const DISLIKE = 2; // Primary key for dislike type in Unibase Affinities table
+
+  // Resolve Foreign Keys -------------------
   const resolvedTable =
     '((Users LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID) LEFT JOIN Years ON UserYearID=YearID )';
   const resolvedFields = [
@@ -22,17 +29,28 @@ model.buildReadQuery = (req, variant) => {
     'UsertypeName AS UserUsertypeName',
     'YearName AS UserYearName',
   ];
-  const orderField = 'ORDER BY UserLastname,UserFirstname,UserEmail';
 
+  // Process request queries ----------------
+  let whereObject = req.params.id ? { name: 'UserID', value: req.params.id } : null;
+  let orderField = 'ORDER BY UserLastname,UserFirstname,UserEmail';
+  for (const key in req.query)
+    switch (key) {
+      case 'UserEmail':
+      case 'UserLevel':
+        whereObject = {};
+        whereObject.name = key;
+        whereObject.value = req.query[key];
+        break;
+      case 'order':
+        orderField = `ORDER BY ${req.query.order}`;
+        break;
+    }
+
+  // Generate SQL object --------------------
   let sql = '';
   let data = {};
-  const STAFF = 1; // Primary key for staff type in Unibase Usertypes table
-  const STUDENT = 2; // Primary key for student type in Unibase Usertypes table
-  const LIKE = 1; // Primary key for like type in Unibase Affinities table
-  const DISLIKE = 2; // Primary key for dislike type in Unibase Affinities table
   let extendedTable = '';
   let extendedField = '';
-
   switch (variant) {
     case 'student':
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE UserUsertypeID=${STUDENT}`;
@@ -93,11 +111,12 @@ model.buildReadQuery = (req, variant) => {
       break;
     default:
       sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (req.params.id) {
-        sql += ` WHERE UserID=:ID`;
-        data = { ID: req.params.id };
+      if (whereObject) {
+        sql += ` WHERE ${whereObject.name}=:ID`;
+        data = { ID: whereObject.value };
       }
   }
+  sql = `${sql} ${orderField}`;
 
   return { sql, data };
 };
