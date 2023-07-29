@@ -29,8 +29,8 @@ const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null));
-router.get('/likedby/:id(\\d+)', (req, res) => controller.get(req, res, 'likedby'));
-router.get('/wholike/:id(\\d+)', (req, res) => controller.get(req, res, 'wholike'));
+router.get('/:id(\\d+)/likedby', (req, res) => controller.get(req, res, 'likedby'));
+router.get('/:id(\\d+)/wholikes', (req, res) => controller.get(req, res, 'wholikes'));
 
 router.post('/', controller.post);
 router.put('/:id', controller.put);
