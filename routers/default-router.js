@@ -361,7 +361,7 @@ const listOfEndpoints = [
           endpoint: '/likes/{id}',
           description:
             'Returns all student users augmented with like information relative to the user identified by the id provided',
-          example: `${API_URL}/users/likes/277`,
+          examples: [`${API_URL}/users/likes/277`, `${API_URL}/users/likes/277?orderby=UserFirstname`],
         },
         {
           endpoint: '/likes/{id}/likedby',

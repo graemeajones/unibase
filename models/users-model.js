@@ -41,8 +41,12 @@ model.buildReadQuery = (req, variant) => {
         whereObject.name = key;
         whereObject.value = req.query[key];
         break;
-      case 'order':
-        orderField = `ORDER BY ${req.query.order}`;
+      case 'orderby':
+        req.query.orderby.split(/[ ,]+/).every((field) => model.mutableFields.includes(field))
+          ? (orderField = `ORDER BY ${req.query.orderby}`)
+          : console.warn(
+              `[buildReadQuery] The 'orderby' argument "${req.query.orderby}" should only contain fields from the list "${model.mutableFields}"`
+            );
         break;
     }
 
@@ -71,7 +75,7 @@ model.buildReadQuery = (req, variant) => {
       extendedField = [...resolvedFields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
       const LikerLikes = `( SELECT * FROM Likes WHERE Likes.LikerID=:ID) AS LikerLikes`;
       extendedTable = `${resolvedTable} LEFT JOIN ${LikerLikes} ON Users.UserID = LikerLikes.LikeeID`;
-      sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE UserUsertypeID=${STUDENT} ${orderField}`;
+      sql = `SELECT ${extendedField} FROM ${extendedTable} WHERE UserUsertypeID=${STUDENT}`;
       data = { ID: req.params.id };
       break;
     case 'likedby':
