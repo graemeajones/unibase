@@ -14,7 +14,7 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all assessments',
-          example: `${API_URL}/assessments`,
+          examples: [`${API_URL}/assessments`, `${API_URL}/assessments?orderby=AssessmentPublishdate+DESC`],
         },
         {
           endpoint: '/{id}',
@@ -25,6 +25,12 @@ const listOfEndpoints = [
           endpoint: '/module/{id}',
           description: 'Returns the set of assessments associated with the module identified by the id provided',
           example: `${API_URL}/assessments/module/1`,
+        },
+        {
+          endpoint: '/leader/{id}',
+          description:
+            'Returns the set of assessments associated with all the modules led by the staff member identified by the id provided',
+          example: `${API_URL}/assessments/leader/820`,
         },
       ],
       post: {
