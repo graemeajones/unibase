@@ -32,6 +32,7 @@ model.buildReadQuery = (req, variant) => {
 
   // Process request queries ----------------
   let whereObject = req.params.id ? { name: 'UserID', value: req.params.id } : null;
+  const orderableFields = [...model.mutableFields, 'UserYearName'];
   let orderField = 'ORDER BY UserLastname,UserFirstname,UserEmail';
   for (const key in req.query)
     switch (key) {
@@ -42,10 +43,13 @@ model.buildReadQuery = (req, variant) => {
         whereObject.value = req.query[key];
         break;
       case 'orderby':
-        req.query.orderby.split(/[ ,]+/).every((field) => model.mutableFields.includes(field))
+        req.query.orderby
+          .split(/[ ,]+/)
+          .filter((field) => !['asc', 'ASC', 'desc', 'DESC'].includes(field))
+          .every((field) => orderableFields.includes(field))
           ? (orderField = `ORDER BY ${req.query.orderby}`)
           : console.warn(
-              `[buildReadQuery] The 'orderby' argument "${req.query.orderby}" should only contain fields from the list "${model.mutableFields}"`
+              `[buildReadQuery] The 'orderby' argument "${req.query.orderby}" should only contain fields from the list "${orderableFields}"`
             );
         break;
     }
