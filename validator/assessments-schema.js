@@ -17,8 +17,8 @@ schema.record = joi
     AssessmentName: joi.string().min(8),
     AssessmentModuleID: joi.number().integer().min(1).allow(null),
     AssessmentPublishdate: joi.date(),
-    AssessmentSubmissiondate: joi.date(),
-    AssessmentFeedbackdate: joi.date(),
+    AssessmentSubmissiondate: joi.date().allow(null),
+    AssessmentFeedbackdate: joi.date().allow(null),
     AssessmentBriefURL: joi.string().uri(),
   })
   .required()
