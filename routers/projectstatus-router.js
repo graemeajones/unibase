@@ -28,11 +28,6 @@ const controller = new Controller(validator, accessor);
 const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null));
-router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null));
-router.get('/leader/:id', (req, res) => controller.get(req, res, 'leader'));
-router.get('/users/:id', (req, res) => controller.get(req, res, 'users'));
-router.post('/', controller.post);
-router.put('/:id', controller.put);
-router.delete('/:id', controller.delete);
+router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
 
 export default router;

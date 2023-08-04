@@ -8,8 +8,8 @@ class Accessor {
 
   create = async (req) => {
     try {
-      const { sql, data } = this.model.buildCreateQuery(req);
-      const status = await this.database.query(sql, data);
+      const { sql, parameters } = this.model.buildCreateQuery(req);
+      const status = await this.database.query(sql, parameters);
 
       const { isSuccess, result, message } = await this.read({ params: { id: status[0].insertId } }, null);
       // { params: { id: status[0].insertId } } simulates the request object, 'req', that the 'read' method expects
@@ -23,8 +23,8 @@ class Accessor {
 
   read = async (req, variant) => {
     try {
-      const { sql, data } = this.model.buildReadQuery(req, variant);
-      const [result] = await this.database.query(sql, data);
+      const { sql, parameters } = this.model.buildReadQuery(req, variant);
+      const [result] = await this.database.query(sql, parameters);
       return result.length === 0
         ? { isSuccess: false, result: null, message: 'No record(s) found' }
         : { isSuccess: true, result: result, message: 'Record(s) successfully recovered' };
@@ -35,8 +35,8 @@ class Accessor {
 
   update = async (req) => {
     try {
-      const { sql, data } = this.model.buildUpdateQuery(req);
-      const status = await this.database.query(sql, data);
+      const { sql, parameters } = this.model.buildUpdateQuery(req);
+      const status = await this.database.query(sql, parameters);
       if (status[0].affectedRows === 0)
         return { isSuccess: false, result: null, message: 'Failed to update record: no rows affected' };
 
@@ -51,8 +51,8 @@ class Accessor {
 
   delete = async (req) => {
     try {
-      const { sql, data } = this.model.buildDeleteQuery(req);
-      const status = await this.database.query(sql, data);
+      const { sql, parameters } = this.model.buildDeleteQuery(req);
+      const status = await this.database.query(sql, parameters);
       return status[0].affectedRows === 0
         ? { isSuccess: false, result: null, message: `Failed to delete record ${req.params.id}` }
         : { isSuccess: true, result: null, message: 'Record successfully deleted' };

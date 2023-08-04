@@ -1,35 +1,41 @@
-const model = {};
+import { parseRequestQuery, constructPreparedStatement } from './utils.js';
 
-model.table = 'Likes';
-model.idField = 'LikeID';
-model.mutableFields = ['LikerID', 'LikeeID', 'LikeAffinityID'];
+const model = {
+  table: 'Likes',
+  idField: 'LikeID',
+  mutableFields: ['LikerID', 'LikeeID', 'LikeAffinityID'],
 
-model.buildReadQuery = (req, variant) => {
-  const resolvedTable = '(Likes INNER JOIN Affinities ON LikeAffinityID=AffinityID)';
-  const resolvedFields = [model.idField, ...model.mutableFields, 'AffinityName AS LikeAffinityName'];
+  buildReadQuery: (req, variant) => {
+    // Initialisations ------------------------
+    // Resolve foreign keys -------------------
+    let table = '(Likes INNER JOIN Affinities ON LikeAffinityID=AffinityID)';
+    let fields = [model.idField, ...model.mutableFields, 'AffinityName AS LikeAffinityName'];
 
-  let sql = '';
-  let data = {};
+    // Process request queries ----------------
+    const allowedQueryFields = [...model.mutableFields, 'LikeAffinityID', 'LikeAffinityName'];
+    const defaultOrdering = ['LikerID', 'LikeAffinityName DESC', 'LikeeID'];
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields, defaultOrdering);
 
-  switch (variant) {
-    case 'likedby':
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE LikerID=:ID`;
-      data = { ID: req.params.id };
-      break;
-    case 'wholikes':
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE LikeeID=:ID`;
-      data = { ID: req.params.id };
-      break;
-    default:
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (req.params.id) {
-        sql += ` WHERE LikeID=:ID`;
-        data = { ID: req.params.id };
-      }
-  }
-  sql += ' ORDER BY AffinityID';
+    // Construct prepared statement -----------
+    let where = null;
+    let parameters = {};
+    switch (variant) {
+      case 'likedby':
+        where = 'LikerID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'wholikes':
+        where = 'LikeeID =:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'primary':
+        where = 'LikeID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+    }
 
-  return { sql, data };
+    return constructPreparedStatement(fields, table, where, parameters, filter, orderby);
+  },
 };
 
 export default model;

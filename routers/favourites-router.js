@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import Validator from '../validator/Validator.js';
-import schema from '../validator/groups-schema.js';
+import schema from '../validator/favourites-schema.js';
 import Model from '../models/Model.js';
-import modelConfig from '../models/groups-model.js';
+import modelConfig from '../models/favourites-model.js';
 import database from '../database.js';
 import Accessor from '../accessor/Accessor.js';
 import Controller from '../controller/Controller.js';
@@ -29,7 +29,6 @@ const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
-router.get('/assessment/:id(\\d+)', (req, res) => controller.get(req, res, 'assessment'));
 router.get('/users/:id(\\d+)', (req, res) => controller.get(req, res, 'users'));
 
 router.post('/', controller.post);

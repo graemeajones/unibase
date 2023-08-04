@@ -1,43 +1,49 @@
-const model = {};
+import { parseRequestQuery, constructPreparedStatement } from './utils.js';
 
-model.table = 'Groups';
-model.idField = 'GroupID';
-model.mutableFields = ['GroupName', 'GroupAssessmentID'];
+const model = {
+  table: 'Groups',
+  idField: 'GroupID',
+  mutableFields: ['GroupName', 'GroupAssessmentID'],
 
-model.buildReadQuery = (req, variant) => {
-  const resolvedTable =
-    '((Groups LEFT JOIN Assessments ON GroupAssessmentID=AssessmentID) LEFT JOIN Modules ON AssessmentModuleID=ModuleID)';
-  const resolvedFields = [
-    model.idField,
-    ...model.mutableFields,
-    'AssessmentName AS GroupAssessmentName',
-    'ModuleID AS GroupModuleID',
-    'ModuleName AS GroupModuleName',
-  ];
+  buildReadQuery: (req, variant) => {
+    // Initialisations ------------------------
+    // Resolve foreign keys -------------------
+    let table =
+      '((Groups LEFT JOIN Assessments ON GroupAssessmentID=AssessmentID) LEFT JOIN Modules ON AssessmentModuleID=ModuleID)';
+    let fields = [
+      model.idField,
+      ...model.mutableFields,
+      'AssessmentName AS GroupAssessmentName',
+      'ModuleID AS GroupModuleID',
+      'ModuleName AS GroupModuleName',
+    ];
 
-  let sql = '';
-  let data = {};
+    // Process request queries ----------------
+    const allowedQueryFields = [...model.mutableFields, 'GroupAssessmentName', 'GroupModuleName'];
+    const defaultOrdering = ['GroupModuleName', 'GroupAssessmentName', 'GroupName'];
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields, defaultOrdering);
 
-  switch (variant) {
-    case 'assessment':
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE AssessmentID=:ID`;
-      data = { ID: req.params.id };
-      break;
-    case 'users':
-      const extendedTable = `Groupmembers INNER JOIN ${resolvedTable} ON Groupmembers.GroupmemberGroupID=Groups.GroupID`;
-      sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE GroupmemberUserID=:ID`;
-      data = { ID: req.params.id };
-      break;
-    default:
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (req.params.id) {
-        sql += ` WHERE GroupID=:ID`;
-        data = { ID: req.params.id };
-      }
-  }
-  sql += ' ORDER BY GroupName';
+    // Construct prepared statement -----------
+    let where = null;
+    let parameters = {};
+    switch (variant) {
+      case 'assessment':
+        where = 'AssessmentID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'users':
+        table = `Groupmembers INNER JOIN ${table} ON Groupmembers.GroupmemberGroupID=Groups.GroupID`;
+        where = 'GroupmemberUserID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'primary':
+        where = 'GroupID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+    }
 
-  return { sql, data };
+    return constructPreparedStatement(fields, table, where, parameters, filter, orderby);
+  },
 };
 
 export default model;
