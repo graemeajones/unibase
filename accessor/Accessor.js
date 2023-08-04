@@ -11,7 +11,7 @@ class Accessor {
       const { sql, parameters } = this.model.buildCreateQuery(req);
       const status = await this.database.query(sql, parameters);
 
-      const { isSuccess, result, message } = await this.read({ params: { id: status[0].insertId } }, null);
+      const { isSuccess, result, message } = await this.read({ params: { id: status[0].insertId } }, 'primary');
       // { params: { id: status[0].insertId } } simulates the request object, 'req', that the 'read' method expects
       return isSuccess
         ? { isSuccess: true, result: result, message: 'Record successfully recovered' }
@@ -40,7 +40,7 @@ class Accessor {
       if (status[0].affectedRows === 0)
         return { isSuccess: false, result: null, message: 'Failed to update record: no rows affected' };
 
-      const { isSuccess, result, message } = await this.read(req, null);
+      const { isSuccess, result, message } = await this.read(req, 'primary');
       return isSuccess
         ? { isSuccess: true, result: result, message: 'Record successfully recovered' }
         : { isSuccess: false, result: null, message: `Failed to recover the updated record: ${message}` };
