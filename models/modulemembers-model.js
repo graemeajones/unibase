@@ -1,41 +1,47 @@
-const model = {};
+import { parseRequestQuery, constructPreparedStatement } from './utils.js';
 
-model.table = 'Modulemembers';
-model.idField = 'ModulememberID';
-model.mutableFields = ['ModulememberModuleID', 'ModulememberUserID'];
+const model = {
+  table: 'Modulemembers',
+  idField: 'ModulememberID',
+  mutableFields: ['ModulememberModuleID', 'ModulememberUserID'],
 
-model.buildReadQuery = (req, variant) => {
-  const resolvedTable =
-    '(((Modulemembers LEFT JOIN Users ON ModulememberUserID=UserID) LEFT JOIN Modules ON ModulememberModuleID=ModuleID ) LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID )';
-  const resolvedFields = [
-    model.idField,
-    ...model.mutableFields,
-    'CONCAT(ModuleCode," ",ModuleName) AS ModulememberModuleName',
-    'CONCAT(UserFirstname," ",UserLastname, " (", UsertypeName, ")") AS ModulememberUserName',
-  ];
+  buildReadQuery: (req, variant) => {
+    // Initialisations ------------------------
+    // Resolve Foreign Keys -------------------
+    let table =
+      '(((Modulemembers LEFT JOIN Users ON ModulememberUserID=UserID) LEFT JOIN Modules ON ModulememberModuleID=ModuleID ) LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID )';
+    let fields = [
+      model.idField,
+      ...model.mutableFields,
+      'CONCAT(ModuleCode," ",ModuleName) AS ModulememberModuleName',
+      'CONCAT(UserFirstname," ",UserLastname, " (", UsertypeName, ")") AS ModulememberUserName',
+    ];
 
-  let sql = '';
-  let data = {};
+    // Process request queries ----------------
+    const allowedQueryFields = [...model.mutableFields, 'ModulememberModuleName', 'ModulememberUserName'];
+    const defaultOrdering = ['ModulememberModuleName', 'ModulememberUserName'];
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields, defaultOrdering);
 
-  switch (variant) {
-    case 'module':
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE ModulememberModuleID=:ID`;
-      data = { ID: req.params.id };
-      break;
-    case 'user':
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE ModulememberUserID=:ID`;
-      data = { ID: req.params.id };
-      break;
-    default:
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (req.params.id) {
-        sql += ` WHERE ModulememberID=:ID`;
-        data = { ID: req.params.id };
-      }
-  }
-  sql += ' ORDER BY ModulememberModuleName, UserLastname, UserFirstname';
+    // Construct prepared statement -----------
+    let where = null;
+    let parameters = {};
+    switch (variant) {
+      case 'module':
+        where = 'ModulememberModuleID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'user':
+        where = 'ModulememberUserID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'primary':
+        where = 'ModulememberID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+    }
 
-  return { sql, data };
+    return constructPreparedStatement(fields, table, where, parameters, filter, orderby);
+  },
 };
 
 export default model;

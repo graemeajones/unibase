@@ -1,41 +1,46 @@
-const model = {};
+import { parseRequestQuery, constructPreparedStatement } from './utils.js';
 
-model.table = 'Groupmembers';
-model.idField = 'GroupmemberID';
-model.mutableFields = ['GroupmemberGroupID', 'GroupmemberUserID'];
+const model = {
+  table: 'Groupmembers',
+  idField: 'GroupmemberID',
+  mutableFields: ['GroupmemberGroupID', 'GroupmemberUserID'],
 
-model.buildReadQuery = (req, variant) => {
-  const resolvedTable =
-    '(((Groupmembers LEFT JOIN Groups ON GroupmemberGroupID=GroupID ) LEFT JOIN Users ON GroupmemberUserID=UserID ) LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID )';
-  const resolvedFields = [
-    model.idField,
-    ...model.mutableFields,
-    'GroupName AS GroupmemberGroupName',
-    'CONCAT(UserLastname,", ",UserFirstname, " (", UsertypeName, ")") AS GroupmemberUserName',
-  ];
+  buildReadQuery: (req, variant) => {
+    // Initialisations ------------------------
+    // Resolve foreign keys -------------------
+    let table =
+      '(((Groupmembers LEFT JOIN Groups ON GroupmemberGroupID=GroupID ) LEFT JOIN Users ON GroupmemberUserID=UserID ) LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID )';
+    let fields = [
+      model.idField,
+      ...model.mutableFields,
+      'GroupName AS GroupmemberGroupName',
+      'CONCAT(UserLastname,", ",UserFirstname, " (", UsertypeName, ")") AS GroupmemberUserName',
+    ];
 
-  let sql = '';
-  let data = {};
+    // Process request queries ----------------
+    const allowedQueryFields = [...model.mutableFields, 'GroupmemberGroupName', 'GroupmemberUserName'];
+    const defaultOrdering = ['GroupmemberGroupName', 'GroupmemberUserName'];
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields, defaultOrdering);
 
-  switch (variant) {
-    case 'group':
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE GroupmemberGroupID=:ID`;
-      data = { ID: req.params.id };
-      break;
-    case 'user':
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE GroupmemberUserID=:ID`;
-      data = { ID: req.params.id };
-      break;
-    default:
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (req.params.id) {
-        sql += ` WHERE GroupmemberID=:ID`;
-        data = { ID: req.params.id };
-      }
-  }
-  sql += ' ORDER BY GroupmemberGroupName, GroupmemberUserName';
+    // Construct prepared statement -----------
+    let where = null;
+    let parameters = {};
+    switch (variant) {
+      case 'group':
+        where = 'GroupmemberGroupID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'user':
+        where = 'GroupmemberUserID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'primary':
+        where = 'GroupmemberID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+    }
 
-  return { sql, data };
+    return constructPreparedStatement(fields, table, where, parameters, filter, orderby);
+  },
 };
 
 export default model;

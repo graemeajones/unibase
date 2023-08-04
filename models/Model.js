@@ -16,19 +16,19 @@ class Model {
 
   buildCreateQuery = (req) => {
     const sql = `INSERT INTO ${this.table} ` + this.buildSetFields(this.mutableFields);
-    return { sql, data: req.body };
+    return { sql, parameters: req.body };
   };
 
   buildUpdateQuery = (req) => {
     const allowedRecordFields = this.mutableFields.filter((field) => req.body.hasOwnProperty(field));
     const sql =
       `UPDATE ${this.table} ` + this.buildSetFields(allowedRecordFields) + ` WHERE ${this.idField}=:${this.idField}`;
-    return { sql, data: { ...req.body, [this.idField]: req.params.id } };
+    return { sql, parameters: { ...req.body, [this.idField]: req.params.id } };
   };
 
   buildDeleteQuery = (req) => {
     const sql = `DELETE FROM ${this.table} WHERE ${this.idField}=:${this.idField}`;
-    return { sql, data: { [this.idField]: req.params.id } };
+    return { sql, parameters: { [this.idField]: req.params.id } };
   };
 }
 

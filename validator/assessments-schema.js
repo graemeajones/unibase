@@ -4,22 +4,26 @@ const schema = {};
 
 schema.mutableFields = [
   'AssessmentName',
-  'AssessmentModuleID',
+  'AssessmentPercentage',
   'AssessmentPublishdate',
   'AssessmentSubmissiondate',
   'AssessmentFeedbackdate',
   'AssessmentBriefURL',
+  'AssessmentModuleID',
+  'AssessmentAssessmenttypeID',
 ];
 
 schema.record = joi
   .object({
     AssessmentID: joi.number().integer().min(1).allow(null),
     AssessmentName: joi.string().min(8),
-    AssessmentModuleID: joi.number().integer().min(1).allow(null),
+    AssessmentPercentage: joi.number().integer().min(1).max(100),
     AssessmentPublishdate: joi.date(),
-    AssessmentSubmissiondate: joi.date(),
-    AssessmentFeedbackdate: joi.date(),
+    AssessmentSubmissiondate: joi.date().allow(null),
+    AssessmentFeedbackdate: joi.date().allow(null),
     AssessmentBriefURL: joi.string().uri(),
+    AssessmentModuleID: joi.number().integer().min(1).allow(null),
+    AssessmentAssessmenttypeID: joi.number().integer().min(1).allow(null),
   })
   .required()
   .unknown(true);

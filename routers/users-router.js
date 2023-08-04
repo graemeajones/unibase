@@ -28,7 +28,7 @@ const controller = new Controller(validator, accessor);
 const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null));
-router.get('/:id(\\d+)', (req, res) => controller.get(req, res, null));
+router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
 router.get('/student', (req, res) => controller.get(req, res, 'student'));
 router.get('/staff', (req, res) => controller.get(req, res, 'staff'));
 router.get('/usertype/:id(\\d+)', (req, res) => controller.get(req, res, 'usertype'));
@@ -36,10 +36,8 @@ router.get('/groups/:id(\\d+)', (req, res) => controller.get(req, res, 'groups')
 router.get('/modules/:id(\\d+)', (req, res) => controller.get(req, res, 'modules'));
 router.get('/modules/:mid(\\d+)/likes/:uid(\\d+)', (req, res) => controller.get(req, res, 'moduleslikedby'));
 router.get('/likes/:id(\\d+)/', (req, res) => controller.get(req, res, 'likes'));
-router.get('/likes/:id(\\d+)/likedby', (req, res) => controller.get(req, res, 'likedby'));
-router.get('/likes/:id(\\d+)/dislikedby', (req, res) => controller.get(req, res, 'dislikedby'));
-router.get('/likes/:id(\\d+)/wholikes', (req, res) => controller.get(req, res, 'wholikes'));
-router.get('/likes/:id(\\d+)/whodislikes', (req, res) => controller.get(req, res, 'whodislikes'));
+router.get('/likedby/:id(\\d+)', (req, res) => controller.get(req, res, 'likedby'));
+router.get('/wholike/:id(\\d+)', (req, res) => controller.get(req, res, 'wholike'));
 
 router.post('/', controller.post);
 router.put('/:id', controller.put);

@@ -1,40 +1,47 @@
-const model = {};
+import { parseRequestQuery, constructPreparedStatement } from './utils.js';
 
-model.table = 'Modules';
-model.idField = 'ModuleID';
-model.mutableFields = ['ModuleName', 'ModuleCode', 'ModuleLevel', 'ModuleYearID', 'ModuleLeaderID', 'ModuleImageURL'];
+const model = {
+  table: 'Modules',
+  idField: 'ModuleID',
+  mutableFields: ['ModuleName', 'ModuleCode', 'ModuleLevel', 'ModuleYearID', 'ModuleLeaderID', 'ModuleImageURL'],
 
-model.buildReadQuery = (req, variant) => {
-  const resolvedTable = '((Modules LEFT JOIN Users ON ModuleLeaderID=UserID) LEFT JOIN Years ON ModuleYearID=YearID )';
-  const resolvedFields = [
-    model.idField,
-    ...model.mutableFields,
-    'CONCAT(UserFirstname," ",UserLastname) AS ModuleLeaderName',
-    'YearName AS ModuleYearName',
-  ];
+  buildReadQuery: (req, variant) => {
+    // Initialisations ------------------------
+    // Resolve Foreign Keys -------------------
+    let table = '((Modules LEFT JOIN Users ON ModuleLeaderID=UserID) LEFT JOIN Years ON ModuleYearID=YearID )';
+    let fields = [
+      model.idField,
+      ...model.mutableFields,
+      'CONCAT(UserFirstname," ",UserLastname) AS ModuleLeaderName',
+      'YearName AS ModuleYearName',
+    ];
 
-  let sql = '';
-  let data = {};
+    // Process request queries ----------------
+    const allowedQueryFields = [...model.mutableFields, 'ModuleLeaderName', 'ModuleYearName'];
+    const defaultOrdering = ['ModuleLevel', 'ModuleCode'];
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields, defaultOrdering);
 
-  switch (variant) {
-    case 'leader':
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable} WHERE ModuleLeaderID=:ID`;
-      data = { ID: req.params.id };
-      break;
-    case 'users':
-      const extendedTable = `Modulemembers INNER JOIN ${resolvedTable} ON Modulemembers.ModulememberModuleID=Modules.ModuleID`;
-      sql = `SELECT ${resolvedFields} FROM ${extendedTable} WHERE ModulememberUserID=:ID`;
-      data = { ID: req.params.id };
-      break;
-    default:
-      sql = `SELECT ${resolvedFields} FROM ${resolvedTable}`;
-      if (req.params.id) {
-        sql += ` WHERE ModuleID=:ID`;
-        data = { ID: req.params.id };
-      }
-  }
+    // Construct prepared statement -----------
+    let where = null;
+    let parameters = {};
+    switch (variant) {
+      case 'leader':
+        where = 'ModuleLeaderID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'users':
+        table = `Modulemembers INNER JOIN ${table} ON Modulemembers.ModulememberModuleID=Modules.ModuleID`;
+        where = 'ModulememberUserID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'primary':
+        where = 'ModuleID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+    }
 
-  return { sql, data };
+    return constructPreparedStatement(fields, table, where, parameters, filter, orderby);
+  },
 };
 
 export default model;

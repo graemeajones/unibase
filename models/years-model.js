@@ -1,26 +1,33 @@
-const model = {};
+import { parseRequestQuery, constructPreparedStatement } from './utils.js';
 
-model.table = 'Years';
-model.idField = 'YearID';
-model.mutableFields = ['YearName'];
+const model = {
+  table: 'Years',
+  idField: 'YearID',
+  mutableFields: ['YearName'],
 
-model.buildReadQuery = (req, variant) => {
-  let table = 'Years';
-  let fields = ['YearID', 'YearName'];
+  buildReadQuery: (req, variant) => {
+    // Initialisations ------------------------
+    const table = model.table;
+    const fields = [model.idField, ...model.mutableFields];
 
-  let sql = '';
-  let data = {};
+    // Resolve Foreign Keys -------------------
+    // Process request queries ----------------
+    const allowedQueryFields = [...model.mutableFields];
+    const defaultOrdering = ['YearName'];
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields, defaultOrdering);
 
-  switch (variant) {
-    default:
-      sql = `SELECT ${fields} FROM ${table}`;
-      if (req.params.id) {
-        sql += ` WHERE YearID=:ID`;
-        data = { ID: req.params.id };
-      }
-  }
+    // Construct prepared statement -----------
+    let where = null;
+    let parameters = {};
+    switch (variant) {
+      case 'primary':
+        where = 'YearID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+    }
 
-  return { sql, data };
+    return constructPreparedStatement(fields, table, where, parameters, filter, orderby);
+  },
 };
 
 export default model;
