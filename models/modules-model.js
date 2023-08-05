@@ -18,8 +18,7 @@ const model = {
 
     // Process request queries ----------------
     const allowedQueryFields = [...model.mutableFields, 'ModuleLeaderName', 'ModuleYearName'];
-    const defaultOrdering = ['ModuleLevel', 'ModuleCode'];
-    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields, defaultOrdering);
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
