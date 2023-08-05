@@ -1,5 +1,5 @@
-export const parseRequestQuery = (req, allowedFields, defaultOrdering = null) => {
-  let ordering = defaultOrdering;
+export const parseRequestQuery = (req, allowedFields) => {
+  let ordering = null;
   let filter = { sql: '', parameters: {} };
   for (const key in req.query)
     switch (true) {
@@ -18,11 +18,12 @@ export const parseRequestQuery = (req, allowedFields, defaultOrdering = null) =>
             );
         break;
     }
-  return [filter.sql.length === 0 ? null : filter, ordering ? `ORDER BY ${ordering}` : ''];
+  return [filter.sql.length === 0 ? null : filter, ordering];
 };
 
 export const constructPreparedStatement = (fields, table, where, parameters, filter, orderby) => {
   where = `${where ? `WHERE ${where}` : ''}`;
+  orderby = `${orderby ? `ORDER BY ${orderby}` : ''}`;
   let sql = `SELECT ${fields} FROM ${table} ${where} ${orderby}`;
   if (filter) {
     // Filter fields are sometimes aliases which are not accesssible to the above SELECT where clause

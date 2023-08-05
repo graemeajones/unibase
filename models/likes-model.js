@@ -13,8 +13,7 @@ const model = {
 
     // Process request queries ----------------
     const allowedQueryFields = [...model.mutableFields, 'LikeAffinityID', 'LikeAffinityName'];
-    const defaultOrdering = ['LikerID', 'LikeAffinityName DESC', 'LikeeID'];
-    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields, defaultOrdering);
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
