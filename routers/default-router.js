@@ -91,6 +91,84 @@ const listOfEndpoints = [
     },
   },
   {
+    entity: "Attendance",
+    sap: "/api/attendance",
+    services: {
+      get: [
+        {
+          endpoint: "/",
+          description: "Returns all attendance types",
+          example: `${API_URL}/attendance`,
+        },
+        {
+          endpoint: "/{id}",
+          description: "Returns the specific attendance type identified by the id provided",
+          example: `${API_URL}/attendance/1`,
+        },
+      ],
+    },
+  },
+  {
+    entity: "Completion",
+    sap: "/api/completion",
+    services: {
+      get: [
+        {
+          endpoint: "/",
+          description: "Returns all completion types",
+          example: `${API_URL}/completion`,
+        },
+        {
+          endpoint: "/{id}",
+          description: "Returns the specific completion type identified by the id provided",
+          example: `${API_URL}/completion/1`,
+        },
+      ],
+    },
+  },
+  {
+    entity: "Contributions",
+    sap: "/api/contributions",
+    services: {
+      get: [
+        {
+          endpoint: "/",
+          description: "Returns all contributions",
+          example: `${API_URL}/contributions`,
+        },
+        {
+          endpoint: "/{id}",
+          description: "Returns the specific contribution identified by the id provided",
+          example: `${API_URL}/contributions/1`,
+        },
+        {
+          endpoint: "/log/{id}",
+          description:
+            "Returns the set of contributions associated with the log identified by the id provided",
+          example: `${API_URL}/contributions/log/1`,
+        },
+        {
+          endpoint: "/group/{id}",
+          description:
+            "Returns the set of contributions associated with the group identified by the id provided",
+          example: `${API_URL}/contributions/group/1`,
+        },
+      ],
+      post: {
+        endpoint: "/",
+        description: "Insert a new contribution record",
+      },
+      put: {
+        endpoint: "/{id}",
+        description: "Update the specific contribution identified by the id provided",
+      },
+      delete: {
+        endpoint: "/{id}",
+        description: "Delete the specific contribution record identified by the id provided",
+      },
+    },
+  },
+  {
     entity: "Favourites",
     sap: "/api/favourites",
     services: {
@@ -475,6 +553,12 @@ const listOfEndpoints = [
           description:
             "Returns the set of users associated with the module identified by the id provided",
           example: `${API_URL}/users/modules/4`,
+        },
+        {
+          endpoint: "/groups/{id}",
+          description:
+            "Returns the set of users associated with the group identified by the id provided",
+          example: `${API_URL}/users/groups/1`,
         },
         {
           endpoint: "/modules/{mid}/likes/{uid}",
