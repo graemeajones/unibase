@@ -20,7 +20,8 @@ const model = {
     const STUDENT = 2; // Primary key for student type in Unibase Usertypes table
 
     // Resolve Foreign Keys -------------------
-    let table = '((Users LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID) LEFT JOIN Years ON UserYearID=YearID )';
+    let table =
+      '((Users LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID) LEFT JOIN Years ON UserYearID=YearID )';
     let fields = [
       model.idField,
       ...model.mutableFields,
@@ -28,13 +29,25 @@ const model = {
       'YearName AS UserYearName',
     ];
 
-    const allowedQueryFields = [...model.mutableFields, 'UserYearName', 'UserLikeAffinityID', 'UserLikeAffinityName'];
+    const allowedQueryFields = [
+      ...model.mutableFields,
+      'UserYearName',
+      'UserLikeAffinityID',
+      'UserLikeAffinityName',
+      'UserProposalID',
+      'UserProposalConfirmationID',
+      'UserProposalConfirmationName',
+    ];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
     let parameters = {};
     switch (variant) {
+      case 'primary':
+        where = 'UserID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
       case 'student':
         where = `UserUsertypeID=${STUDENT}`;
         break;
@@ -95,9 +108,27 @@ const model = {
         where = `ModulememberModuleID=:MID AND Likes.LikerID=:UID`;
         parameters = { MID: parseInt(req.params.mid), UID: parseInt(req.params.uid) };
         break;
-      case 'primary':
-        where = 'UserID=:ID';
-        parameters = { ID: parseInt(req.params.id) };
+      case 'proposedby':
+        fields = [
+          ...fields,
+          'ProposalID AS UserProposalID',
+          'ProposalConfirmationID AS UserProposalConfirmationID',
+          'ConfirmationName AS UserProposalConfirmationName',
+        ];
+        table = `((${table} INNER JOIN Proposals ON UserID=ProposeeID) INNER JOIN Assessments ON ProposalAssessmentID=AssessmentID ) INNER JOIN Confirmations ON ProposalConfirmationID=ConfirmationID`;
+        where = `AssessmentID=:AID AND Proposals.ProposerID=:UID`;
+        parameters = { AID: parseInt(req.params.aid), UID: parseInt(req.params.uid) };
+        break;
+      case 'whoproposed':
+        fields = [
+          ...fields,
+          'ProposalID AS UserProposalID',
+          'ProposalConfirmationID AS UserProposalConfirmationID',
+          'ConfirmationName AS UserProposalConfirmationName',
+        ];
+        table = `((${table} INNER JOIN Proposals ON UserID=ProposerID) INNER JOIN Assessments ON ProposalAssessmentID=AssessmentID ) INNER JOIN Confirmations ON ProposalConfirmationID=ConfirmationID`;
+        where = `AssessmentID=:AID AND Proposals.ProposeeID=:UID`;
+        parameters = { AID: parseInt(req.params.aid), UID: parseInt(req.params.uid) };
         break;
     }
 

@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import Validator from '../validator/Validator.js';
-import schema from '../validator/users-schema.js';
+import schema from '../validator/proposals-schema.js';
 import Model from '../models/Model.js';
-import modelConfig from '../models/users-model.js';
+import modelConfig from '../models/proposals-model.js';
 import database from '../database.js';
 import Accessor from '../accessor/Accessor.js';
 import Controller from '../controller/Controller.js';
@@ -29,17 +29,7 @@ const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
-router.get('/student', (req, res) => controller.get(req, res, 'student'));
-router.get('/staff', (req, res) => controller.get(req, res, 'staff'));
-router.get('/usertype/:id(\\d+)', (req, res) => controller.get(req, res, 'usertype'));
-router.get('/groups/:id(\\d+)', (req, res) => controller.get(req, res, 'groups'));
-router.get('/modules/:id(\\d+)', (req, res) => controller.get(req, res, 'modules'));
-router.get('/modules/:mid(\\d+)/likes/:uid(\\d+)', (req, res) =>
-  controller.get(req, res, 'moduleslikedby')
-);
-router.get('/likes/:id(\\d+)/', (req, res) => controller.get(req, res, 'likes'));
-router.get('/likedby/:id(\\d+)', (req, res) => controller.get(req, res, 'likedby'));
-router.get('/wholike/:id(\\d+)', (req, res) => controller.get(req, res, 'wholike'));
+router.get('/assessments/:id(\\d+)', (req, res) => controller.get(req, res, 'assessments'));
 router.get('/assessments/:aid(\\d+)/proposedby/:uid(\\d+)', (req, res) =>
   controller.get(req, res, 'proposedby')
 );
