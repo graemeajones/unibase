@@ -30,10 +30,10 @@ const router = new Router();
 router.get('/', (req, res) => controller.get(req, res, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
 router.get('/assessments/:id(\\d+)', (req, res) => controller.get(req, res, 'assessments'));
-router.get('/assessments/:aid(\\d+)/users/:uid(\\d+)/proposedby', (req, res) =>
+router.get('/assessments/:aid(\\d+)/proposedby/:uid(\\d+)', (req, res) =>
   controller.get(req, res, 'proposedby')
 );
-router.get('/assessments/:aid(\\d+)/users/:uid(\\d+)/whoproposed', (req, res) =>
+router.get('/assessments/:aid(\\d+)/whoproposed/:uid(\\d+)', (req, res) =>
   controller.get(req, res, 'whoproposed')
 );
 

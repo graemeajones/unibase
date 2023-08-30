@@ -34,6 +34,9 @@ const model = {
       'UserYearName',
       'UserLikeAffinityID',
       'UserLikeAffinityName',
+      'UserProposalID',
+      'UserProposalConfirmationID',
+      'UserProposalConfirmationName',
     ];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
@@ -123,7 +126,7 @@ const model = {
           'ProposalConfirmationID AS UserProposalConfirmationID',
           'ConfirmationName AS UserProposalConfirmationName',
         ];
-        table = `(${table} INNER JOIN Proposals ON UserID=ProposerID) INNER JOIN Assessments ON ProposalAssessmentID=AssessmentID ) INNER JOIN Confirmations ON ProposalConfirmationID=ConfirmationID`;
+        table = `((${table} INNER JOIN Proposals ON UserID=ProposerID) INNER JOIN Assessments ON ProposalAssessmentID=AssessmentID ) INNER JOIN Confirmations ON ProposalConfirmationID=ConfirmationID`;
         where = `AssessmentID=:AID AND Proposals.ProposeeID=:UID`;
         parameters = { AID: parseInt(req.params.aid), UID: parseInt(req.params.uid) };
         break;
