@@ -15,6 +15,8 @@ schema.record = joi
   .required()
   .unknown(true);
 
-schema.conformor = {};
+schema.conformor = {
+  LogSubmissiondate: (value) => (value === null ? null : new Date(value)),
+};
 
 export default schema;
