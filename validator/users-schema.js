@@ -18,7 +18,9 @@ schema.record = joi
     UserFirstname: joi.string().min(1),
     UserLastname: joi.string().min(1),
     UserEmail: joi.string().email(),
-    UserPassword: joi.string().regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/),
+    UserPassword: joi
+      .string()
+      .regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/),
     UserRegistered: joi.boolean(),
     UserUsertypeID: joi.number().integer().min(1).allow(null),
     UserYearID: joi.number().integer().min(1).allow(null),
@@ -32,5 +34,7 @@ schema.record = joi
   })
   .required()
   .unknown(true);
+
+schema.conformor = {};
 
 export default schema;

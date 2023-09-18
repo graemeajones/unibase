@@ -20,4 +20,6 @@ schema.record = joi
   .required()
   .unknown(true);
 
+schema.conformor = {};
+
 export default schema;

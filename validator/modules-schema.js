@@ -2,7 +2,14 @@ import joi from 'joi';
 
 const schema = {};
 
-schema.mutableFields = ['ModuleName', 'ModuleCode', 'ModuleLevel', 'ModuleYearID', 'ModuleLeaderID', 'ModuleImageURL'];
+schema.mutableFields = [
+  'ModuleName',
+  'ModuleCode',
+  'ModuleLevel',
+  'ModuleYearID',
+  'ModuleLeaderID',
+  'ModuleImageURL',
+];
 
 schema.record = joi
   .object({
@@ -16,5 +23,7 @@ schema.record = joi
   })
   .required()
   .unknown(true);
+
+schema.conformor = {};
 
 export default schema;
