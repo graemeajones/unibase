@@ -18,10 +18,9 @@ class Validator {
   post = (value) => this.validate(this.postBodySchema, value);
   put = (value) => this.validate(this.putBodySchema, value);
   conform = (value) => {
-    // For each valid key in conformer object
-    Object.keys(value).forEach((key) => {
-      if (this.conformer.hasOwnProperty(key)) value[key] = this.conformer[key](value[key]);
-    });
+    for (const key in value) {
+      if (this.conformor.hasOwnProperty(key)) value[key] = this.conformor[key](value[key]);
+    }
     return value;
   };
 }
