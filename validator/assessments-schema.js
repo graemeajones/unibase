@@ -30,9 +30,9 @@ schema.record = joi
   .unknown(true);
 
 schema.conformor = {
-  AssessmentPublishdate: (value) => (value === null ? null : newDate(value)),
-  AssessmentSubmissiondate: (value) => (value === null ? null : newDate(value)),
-  AssessmentFeedbackdate: (value) => (value === null ? null : newDate(value)),
+  AssessmentPublishdate: (value) => (value === null ? null : new Date(value)),
+  AssessmentSubmissiondate: (value) => (value === null ? null : new Date(value)),
+  AssessmentFeedbackdate: (value) => (value === null ? null : new Date(value)),
 };
 
 export default schema;
