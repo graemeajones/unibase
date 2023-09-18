@@ -1,9 +1,9 @@
-import joi from "joi";
-import { joiValidDateString } from "./utils.js";
+import joi from 'joi';
+import { joiValidDateString } from './utils.js';
 
 const schema = {};
 
-schema.mutableFields = ["LogName", "LogGroupID", "LogSubmissiondate"];
+schema.mutableFields = ['LogName', 'LogGroupID', 'LogSubmissiondate'];
 
 schema.record = joi
   .object({
@@ -14,5 +14,7 @@ schema.record = joi
   })
   .required()
   .unknown(true);
+
+schema.conformor = {};
 
 export default schema;

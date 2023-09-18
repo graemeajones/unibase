@@ -1,13 +1,13 @@
-import joi from "joi";
+import joi from 'joi';
 
 const schema = {};
 
 schema.mutableFields = [
-  "ContributionLogID",
-  "ContributionUserID",
-  "ContributionAttendanceID",
-  "ContributionCompletionID",
-  "ContributionFuturetasks",
+  'ContributionLogID',
+  'ContributionUserID',
+  'ContributionAttendanceID',
+  'ContributionCompletionID',
+  'ContributionFuturetasks',
 ];
 
 schema.record = joi
@@ -21,5 +21,7 @@ schema.record = joi
   })
   .required()
   .unknown(true);
+
+schema.conformor = {};
 
 export default schema;

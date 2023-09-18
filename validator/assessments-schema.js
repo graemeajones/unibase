@@ -1,17 +1,17 @@
-import joi from "joi";
-import { joiValidDateString } from "./utils.js";
+import joi from 'joi';
+import { joiValidDateString } from './utils.js';
 
 const schema = {};
 
 schema.mutableFields = [
-  "AssessmentName",
-  "AssessmentPercentage",
-  "AssessmentPublishdate",
-  "AssessmentSubmissiondate",
-  "AssessmentFeedbackdate",
-  "AssessmentBriefURL",
-  "AssessmentModuleID",
-  "AssessmentAssessmenttypeID",
+  'AssessmentName',
+  'AssessmentPercentage',
+  'AssessmentPublishdate',
+  'AssessmentSubmissiondate',
+  'AssessmentFeedbackdate',
+  'AssessmentBriefURL',
+  'AssessmentModuleID',
+  'AssessmentAssessmenttypeID',
 ];
 
 schema.record = joi
@@ -28,5 +28,11 @@ schema.record = joi
   })
   .required()
   .unknown(true);
+
+schema.conformor = {
+  AssessmentPublishdate: (value) => (value === null ? null : newDate(value)),
+  AssessmentSubmissiondate: (value) => (value === null ? null : newDate(value)),
+  AssessmentFeedbackdate: (value) => (value === null ? null : newDate(value)),
+};
 
 export default schema;

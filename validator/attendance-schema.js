@@ -1,8 +1,8 @@
-import joi from "joi";
+import joi from 'joi';
 
 const schema = {};
 
-schema.mutableFields = ["AttendanceName"];
+schema.mutableFields = ['AttendanceName'];
 
 schema.record = joi
   .object({
@@ -11,5 +11,7 @@ schema.record = joi
   })
   .required()
   .unknown(true);
+
+schema.conformor = {};
 
 export default schema;
