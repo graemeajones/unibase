@@ -36,6 +36,9 @@ class Controller {
     const { isValid, message: validatorMessage } = this.validator.put(req.body);
     if (!isValid) return res.status(404).json({ message: validatorMessage });
 
+    // Conform request body
+    req.body = this.validator.conform(req.body);
+
     // Access data
     const { isSuccess, result, message: accessorMessage } = await this.accessor.update(req);
     if (!isSuccess) return res.status(400).json({ message: accessorMessage });
