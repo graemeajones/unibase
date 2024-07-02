@@ -202,7 +202,7 @@ const listOfEndpoints = [
           example: `${API_URL}/favourites/1`,
         },
         {
-          endpoint: '/user/{id}',
+          endpoint: '/users/{id}',
           description:
             'Returns the set of favourites associated with the user identified by the id provided',
           examples: [
@@ -371,7 +371,7 @@ const listOfEndpoints = [
           example: `${API_URL}/logs/1`,
         },
         {
-          endpoint: '/leader/{id}',
+          endpoint: '/group/{id}',
           description:
             'Returns the set of logs associated with the group identified by the id provided',
           example: `${API_URL}/logs/group/1`,
