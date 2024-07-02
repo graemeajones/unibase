@@ -1,14 +1,14 @@
-import { parseRequestQuery, constructPreparedStatement } from "./utils.js";
+import { parseRequestQuery, constructPreparedStatement } from './utils.js';
 
 const model = {
-  table: "Contributions",
-  idField: "ContributionID",
+  table: 'Contributions',
+  idField: 'ContributionID',
   mutableFields: [
-    "ContributionLogID",
-    "ContributionUserID",
-    "ContributionAttendanceID",
-    "ContributionCompletionID",
-    "ContributionFuturetasks",
+    'ContributionLogID',
+    'ContributionUserID',
+    'ContributionAttendanceID',
+    'ContributionCompletionID',
+    'ContributionFuturetasks',
   ],
 
   buildReadQuery: (req, variant) => {
@@ -22,18 +22,18 @@ const model = {
     let fields = [
       model.idField,
       ...model.mutableFields,
-      "AttendanceName AS ContributionAttendanceName",
-      "CompletionName AS ContributionCompletionName",
-      "LogName AS ContributionLogName",
-      "LogGroupID AS ContributionLogGroupID",
-      "GroupName AS ContributionLogGroupName",
+      'AttendanceName AS ContributionAttendanceName',
+      'CompletionName AS ContributionCompletionName',
+      'LogName AS ContributionLogName',
+      'LogGroupID AS ContributionLogGroupID',
+      'GroupName AS ContributionLogGroupName',
       "CONCAT(UserLastname,', ',UserFirstname,' (',SUBSTRING(UserEmail,1,8),')') AS ContributionLogUserName",
     ];
 
     // Process request queries ----------------
     const allowedQueryFields = [
       ...model.mutableFields,
-      "ContributionLogName,ContributionGroupName",
+      'ContributionLogName,ContributionLogGroupName',
     ];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
@@ -41,16 +41,16 @@ const model = {
     let where = null;
     let parameters = {};
     switch (variant) {
-      case "primary":
-        where = "ContributionID=:ID";
+      case 'primary':
+        where = 'ContributionID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
-      case "log":
-        where = "ContributionLogID =:ID";
+      case 'log':
+        where = 'ContributionLogID =:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
-      case "group":
-        where = "ContributionLogGroupID =:ID";
+      case 'group':
+        where = 'LogGroupID =:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }
