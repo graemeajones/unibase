@@ -130,6 +130,10 @@ const model = {
         where = `AssessmentID=:AID AND Proposals.ProposeeID=:UID`;
         parameters = { AID: parseInt(req.params.aid), UID: parseInt(req.params.uid) };
         break;
+      case 'notinagroup':
+        table = `Modulemembers INNER JOIN ${table} ON Modulemembers.ModulememberUserID = Users.UserID`;
+        where = `Modulemembers.ModulememberModuleID IN (SELECT Assessments.AssessmentModuleID AS ModuleID FROM Assessments WHERE Assessments.AssessmentID=:AID) AND Users.UserID NOT IN (SELECT Groupmembers.GroupmemberUserID FROM (Groupmembers INNER JOIN Groups ON Groupmembers.GroupmemberGroupID=Groups.GroupID) WHERE Groups.GroupAssessmentID=:AID)`;
+        parameters = { AID: parseInt(req.params.aid) };
     }
 
     return constructPreparedStatement(fields, table, where, parameters, filter, orderby);

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-const API_URL = 'http://softwarehub.uk/unibase/api';
-//const API_URL = 'http://localhost:5000/api';
+//const API_URL = 'http://softwarehub.uk/unibase/api';
+const API_URL = 'http://localhost:5000/api';
 
 // Endpoints -------------------------------------
 
@@ -675,6 +675,12 @@ const listOfEndpoints = [
             `${API_URL}/users/assessments/13/whoproposed/527`,
             `${API_URL}/users/assessments/13/whoproposed/527?UserProposalConfirmationID=0`,
           ],
+        },
+        {
+          endpoint: '/assessments/{aid}/notinagroup',
+          description:
+            'Returns the set of students not assigned to group for a specific assessment',
+          examples: [`${API_URL}/users/assessments/10/notinagroup`],
         },
       ],
       post: {
