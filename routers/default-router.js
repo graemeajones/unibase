@@ -693,7 +693,7 @@ const listOfEndpoints = [
   },
   {
     entity: 'User Types',
-    sap: '/api/assessmenttypes',
+    sap: '/api/usertypes',
     services: {
       get: [
         {
