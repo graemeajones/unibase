@@ -46,6 +46,9 @@ router.get('/assessments/:aid(\\d+)/proposedby/:uid(\\d+)', (req, res) =>
 router.get('/assessments/:aid(\\d+)/whoproposed/:uid(\\d+)', (req, res) =>
   controller.get(req, res, 'whoproposed')
 );
+router.get('/assessments/:aid(\\d+)/notinagroup', (req, res) =>
+  controller.get(req, res, 'notinagroup')
+);
 
 router.post('/', controller.post);
 router.put('/:id', controller.put);
