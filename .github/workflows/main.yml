@@ -12,13 +12,7 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Debugging information
-      run: |
-        echo "Host: ${{ secrets.REMOTE_HOST }}"
-        echo "User: ${{ secrets.REMOTE_USER }}"
-        echo "Port: ${{ secrets.REMOTE_PORT }}"
-        
+      
     - name: Execute remote SSH commands
       uses: appleboy/ssh-action@v0.1.5
       with:
@@ -27,7 +21,7 @@ jobs:
         key: ${{ secrets.REMOTE_SSH_KEY }}
         port: ${{ secrets.REMOTE_PORT }}
         script: |
-          cd /var/www/softwarehub.uk/html/apps/unibase/
+          cd /usr/src/unibase
           git pull origin master
           git status
           npm install
