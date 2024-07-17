@@ -1,22 +1,25 @@
-name: Deploy
+name: Deploy to Remote Server
 
-# Controls when the action will run. 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
-    steps:       
-    - name: Deploy using ssh
-      uses: appleboy/ssh-action@master
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Execute remote SSH commands
+      uses: appleboy/ssh-action@v0.1.5
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.UNIBASE_CONTINUOUS_DEPLOYMENT }}
-        port: 22
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.REMOTE_SSH_KEY }}
+        port: ${{ secrets.REMOTE_PORT }}
         script: |
           cd /var/www/softwarehub.uk/html/apps/unibase/
           git pull origin master
