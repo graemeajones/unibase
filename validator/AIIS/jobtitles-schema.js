@@ -2,12 +2,12 @@ import joi from 'joi';
 
 const schema = {};
 
-schema.mutableFields = ['ExperienceName'];
+schema.mutableFields = ['JobtitleName'];
 
 schema.record = joi
   .object({
-    ExperienceID: joi.number().integer().min(1).allow(null),
-    ExperienceName: joi.string().max(128),
+    JobtitleID: joi.number().integer().min(1).allow(null),
+    JobtitleName: joi.string().max(128),
   })
   .required()
   .unknown(true);
