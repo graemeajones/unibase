@@ -1,6 +1,7 @@
 // Imports ---------------------------------------
 import express from 'express';
 import cors from 'cors';
+import AIISRouter from './routers/AIIS-router.js';
 import assessmentsRouter from './routers/assessments-router.js';
 import assessmenttypesRouter from './routers/assessmenttypes-router.js';
 import attendanceRouter from './routers/attendance-router.js';
@@ -38,6 +39,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Endpoints -------------------------------------
 
+app.use('/api/AIIS', AIISRouter);
+
 app.use('/api/assessments', assessmentsRouter);
 app.use('/api/assessmenttypes', assessmenttypesRouter);
 app.use('/api/attendance', attendanceRouter);
@@ -63,5 +66,3 @@ app.use('/api/*', defaultRouter);
 // Start server ----------------------------------
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-
-// Small change!
