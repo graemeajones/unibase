@@ -247,6 +247,12 @@ const listOfEndpoints = [
           example: `${API_URL}/groups/assessment/10`,
         },
         {
+          endpoint: '/module/{id}',
+          description:
+            'Returns the set of groups associated with the module identified by the id provided.',
+          example: `${API_URL}/groups/module/4`,
+        },
+        {
           endpoint: '/users/{id}',
           description:
             'Returns the set of groups associated with the user identified by the id provided.',

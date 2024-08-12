@@ -30,6 +30,10 @@ const model = {
         where = 'AssessmentID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
+      case 'module':
+        where = 'ModuleID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
       case 'users':
         table = `Groupmembers INNER JOIN ${table} ON Groupmembers.GroupmemberGroupID=Groups.GroupID`;
         where = 'GroupmemberUserID=:ID';
