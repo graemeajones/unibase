@@ -21,7 +21,7 @@ schema.record = joi
     UserPassword: joi
       .string()
       .regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/),
-    UserRegistered: joi.boolean().allow(null),
+    UserRegistered: joi.number().integer().min(0).max(1),
     UserUsertypeID: joi.number().integer().min(1).allow(null),
     UserYearID: joi.number().integer().min(1).allow(null),
     UserLevel: joi
