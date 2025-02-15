@@ -9,6 +9,9 @@ const dbConfig = {
   namedPlaceholders: true,
 };
 
+//Add logging for the dbConfig
+console.log("Database configuration:", dbConfig);
+
 const createDbConnection = async () => {
   try {
     return await mysql.createConnection(dbConfig);
