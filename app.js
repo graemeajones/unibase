@@ -1,7 +1,10 @@
 // Imports ---------------------------------------
 import express from 'express';
 import cors from 'cors';
-import AIISRouter from './routers/AIIS-router.js';
+
+import AIISRouter from './projects/eventbooking/routers/events-router.js';
+import eventsRouter from './projects/eventbooking/routers/events-router.js';
+
 import assessmentsRouter from './routers/assessments-router.js';
 import assessmenttypesRouter from './routers/assessmenttypes-router.js';
 import attendanceRouter from './routers/attendance-router.js';
@@ -40,6 +43,7 @@ app.use(express.urlencoded({ extended: true }));
 // Endpoints -------------------------------------
 
 app.use('/api/AIIS', AIISRouter);
+app.use('/events/api', eventsRouter);
 
 app.use('/api/assessments', assessmentsRouter);
 app.use('/api/assessmenttypes', assessmenttypesRouter);

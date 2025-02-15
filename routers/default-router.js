@@ -779,7 +779,7 @@ domainRouter.get('/', (req, res) =>
 export const defaultRouter = new Router();
 
 defaultRouter.get('/', (req, res) =>
-  res.status(200).json({
+  res.status(404).json({
     message: 'Specified endpoint not found',
     listOfEndpoints,
   })
