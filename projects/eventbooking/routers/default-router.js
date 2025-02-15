@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-// const API_URL = 'http://softwarehub.uk/unibase/events/api';
-const API_URL = 'http://localhost:5000/events/api';
+const API_URL = 'http://softwarehub.uk/unibase/events/api';
+// const API_URL = 'http://localhost:5000/events/api';
 
 // Endpoints -------------------------------------
 
