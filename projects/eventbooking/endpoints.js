@@ -1,11 +1,69 @@
+// Imports ---------------------------------------
 import { Router } from 'express';
+import bookingstatusRouter from './routers/bookingstatus-router.js';
+import bookingsRouter from './routers/bookings-router.js';
+import classesRouter from './routers/classes-router.js';
+import coursesRouter from './routers/courses-router.js';
+import gendersRouter from './routers/genders-router.js';
+import locationsRouter from './routers/locations-router.js';
+import providersRouter from './routers/providers-router.js';
+import usersRouter from './routers/users-router.js';
+import usertypesRouter from './routers/usertypes-router.js';
+
+// Initialisation --------------------------------
 
 const API_URL = 'http://softwarehub.uk/unibase/events/api';
-// const API_URL = 'http://localhost:5000/events/api';
-
-// Endpoints -------------------------------------
+//const API_URL = 'http://localhost:5000/events/api';
 
 const listOfEndpoints = [
+  {
+    entity: 'Bookingstatus',
+    sap: '/api/bookingstatus',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all booking status values',
+          examples: [`${API_URL}/bookingstatus`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific booking status value identified by the id provided',
+          example: `${API_URL}/bookingstatus/1`,
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new booking status value',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific booking status value identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific booking status value identified by the id provided',
+      },
+    },
+  },
+  {
+    entity: 'Bookings',
+    sap: '/api/bookings',
+    services: {
+      post: {
+        endpoint: '/',
+        description: 'Insert a new booking',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific booking identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific booking identified by the id provided',
+      },
+    },
+  },
   {
     entity: 'Classes',
     sap: '/api/classes',
@@ -20,6 +78,12 @@ const listOfEndpoints = [
           endpoint: '/{id}',
           description: 'Returns the specific class identified by the id provided',
           example: `${API_URL}/classes/1`,
+        },
+        {
+          endpoint: '/courses/{id}',
+          description:
+            'Returns those classes associated with a specific course identified by the id provided',
+          example: `${API_URL}/classes/courses/1`,
         },
       ],
       post: {
@@ -187,6 +251,15 @@ const listOfEndpoints = [
           description: 'Returns all clients',
           example: `${API_URL}/users/clients`,
         },
+        {
+          endpoint: '/classes/{id}',
+          description:
+            'Returns the set of users associated with the class identified by the id provided',
+          example: [
+            `${API_URL}/users/classes/1`,
+            `${API_URL}/users/classes/1?UserBookingstatusName=Absent`,
+          ],
+        },
       ],
       post: {
         endpoint: '/',
@@ -234,22 +307,31 @@ const listOfEndpoints = [
   },
 ];
 
-// Routers ---------------------------------------
+// Endpoints -------------------------------------
 
-export const domainRouter = new Router();
+const router = new Router({ mergeParams: true });
 
-domainRouter.get('/', (req, res) =>
+router.use('/bookingstatus', bookingstatusRouter);
+router.use('/bookings', bookingsRouter);
+router.use('/classes', classesRouter);
+router.use('/courses', coursesRouter);
+router.use('/genders', gendersRouter);
+router.use('/locations', locationsRouter);
+router.use('/providers', providersRouter);
+router.use('/users', usersRouter);
+router.use('/usertypes', usertypesRouter);
+
+router.get('/', (req, res) =>
   res.status(200).json({
     message: 'List of available endpoints',
     listOfEndpoints,
   })
 );
-
-export const defaultRouter = new Router();
-
-defaultRouter.get('/', (req, res) =>
+router.get('/*', (req, res) =>
   res.status(404).json({
     message: 'Specified endpoint not found',
     listOfEndpoints,
   })
 );
+
+export default router;

@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import Validator from '../../../validator/Validator.js';
-import schema from '../schemas/classes-schema.js';
+import schema from '../schemas/bookingstatus-schema.js';
 import Model from '../../../models/Model.js';
-import modelConfig from '../models/classes-model.js';
+import modelConfig from '../models/bookingstatus-model.js';
 import database from '../database.js';
 import Accessor from '../../../accessor/Accessor.js';
 import Controller from '../../../controller/Controller.js';
@@ -29,7 +29,6 @@ const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
-router.get('/courses/:id(\\d+)', (req, res) => controller.get(req, res, 'course'));
 
 router.post('/', controller.post);
 router.put('/:id', controller.put);
