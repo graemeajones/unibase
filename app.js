@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import AIISRouter from './projects/eventbooking/routers/events-router.js';
 import eventsRouter from './projects/eventbooking/routers/events-router.js';
+import staysafeRouter from './projects/staysafev1/endpoints.js';
 
 import assessmentsRouter from './routers/assessments-router.js';
 import assessmenttypesRouter from './routers/assessmenttypes-router.js';
@@ -44,6 +45,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/AIIS', AIISRouter);
 app.use('/events/api', eventsRouter);
+app.use('/staysafe/v1/api', staysafeRouter);
 
 app.use('/api/assessments', assessmentsRouter);
 app.use('/api/assessmenttypes', assessmenttypesRouter);
