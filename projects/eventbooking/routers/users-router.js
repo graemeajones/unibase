@@ -31,6 +31,7 @@ router.get('/', (req, res) => controller.get(req, res, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
 router.get('/instructors', (req, res) => controller.get(req, res, 'instructors'));
 router.get('/clients', (req, res) => controller.get(req, res, 'clients'));
+router.get('/classes/:id(\\d+)', (req, res) => controller.get(req, res, 'class'));
 
 router.post('/', controller.post);
 router.put('/:id', controller.put);
