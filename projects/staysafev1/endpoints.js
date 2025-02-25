@@ -1,7 +1,9 @@
 // Imports ---------------------------------------
 import { Router } from 'express';
-import usersRouter from './routers/users-router.js';
 import contactsRouter from './routers/contacts-router.js';
+import locationsRouter from './routers/locations-router.js';
+import statusRouter from './routers/status-router.js';
+import usersRouter from './routers/users-router.js';
 
 // Initialisation --------------------------------
 
@@ -135,6 +137,7 @@ const listOfEndpoints = [
           example: `${API_URL}/locations/1`,
         },
       ],
+      /*
       post: {
         endpoint: '/',
         description: 'Insert a new location',
@@ -147,6 +150,7 @@ const listOfEndpoints = [
         endpoint: '/{id}',
         description: 'Delete the specific location identified by the id provided',
       },
+      */
     },
   },
   {
@@ -191,8 +195,10 @@ const listOfEndpoints = [
 
 const router = new Router({ mergeParams: true });
 
-router.use('/users', usersRouter);
 router.use('/contacts', contactsRouter);
+router.use('/locations', locationsRouter);
+router.use('/status', statusRouter);
+router.use('/users', usersRouter);
 
 router.get('/', (req, res) =>
   res.status(200).json({

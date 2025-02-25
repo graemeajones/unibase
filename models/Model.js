@@ -6,11 +6,10 @@ class Model {
     this.buildReadQuery = model.buildReadQuery;
   }
 
-  // Methods
-
   buildSetFields = (fields) =>
     fields.reduce(
-      (setSQL, field, index) => setSQL + `${field}=:${field}` + (index === fields.length - 1 ? '' : ', '),
+      (setSQL, field, index) =>
+        setSQL + `${field}=:${field}` + (index === fields.length - 1 ? '' : ', '),
       'SET '
     );
 
@@ -20,9 +19,13 @@ class Model {
   };
 
   buildUpdateQuery = (req) => {
-    const allowedRecordFields = this.mutableFields.filter((field) => req.body.hasOwnProperty(field));
+    const allowedRecordFields = this.mutableFields.filter((field) =>
+      req.body.hasOwnProperty(field)
+    );
     const sql =
-      `UPDATE ${this.table} ` + this.buildSetFields(allowedRecordFields) + ` WHERE ${this.idField}=:${this.idField}`;
+      `UPDATE ${this.table} ` +
+      this.buildSetFields(allowedRecordFields) +
+      ` WHERE ${this.idField}=:${this.idField}`;
     return { sql, parameters: { ...req.body, [this.idField]: req.params.id } };
   };
 

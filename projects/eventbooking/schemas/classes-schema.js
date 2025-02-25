@@ -1,5 +1,5 @@
 import joi from 'joi';
-import { joiValidDateString } from '../../../validator/utils.js';
+import { joiValidDateString } from '#root/validator/utils.js';
 
 const schema = {};
 

@@ -11,10 +11,6 @@ const model = {
     let table = 'Contacts';
     let fields = [model.idField, ...model.mutableFields];
 
-    // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields];
-    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
-
     // Construct prepared statement -----------
     let where = null;
     let parameters = {};
@@ -24,6 +20,10 @@ const model = {
         parameters = { ID: parseInt(req.params.id) };
         break;
     }
+
+    // Process request queries ----------------
+    const allowedQueryFields = [...model.mutableFields];
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     return constructPreparedStatement(fields, table, where, parameters, filter, orderby);
   },
