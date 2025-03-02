@@ -1,13 +1,13 @@
 import { Router } from 'express';
 
 import Validator from '#root/validator/Validator.js';
-import Model from '#root/models/Model.js';
+import Model from '#root/model/Model.js';
 import Accessor from '#root/accessor/Accessor.js';
 import Controller from '#root/controller/Controller.js';
 
 import schema from '../schemas/contacts-schema.js';
 import modelConfig from '../models/contacts-model.js';
-import database from '../database.js';
+import dbConfig from '../dbConfig.js';
 
 // Validator -------------------------------------
 
@@ -19,7 +19,7 @@ const model = new Model(modelConfig);
 
 // Data accessor ---------------------------------
 
-const accessor = new Accessor(model, database);
+const accessor = new Accessor(model, dbConfig);
 
 // Controller ------------------------------------
 
@@ -33,7 +33,7 @@ router.get('/', (req, res) => controller.get(req, res, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
 
 router.post('/', controller.post);
-// router.put('/:id', controller.put);
+router.put('/:id', controller.put);
 router.delete('/:id', controller.delete);
 
 export default router;

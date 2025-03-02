@@ -1,4 +1,4 @@
-import { parseRequestQuery, constructPreparedStatement } from './utils.js';
+import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
   table: 'Projects',
@@ -24,7 +24,11 @@ const model = {
     ];
 
     // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields, 'ProjectProjectstatusName', 'ProjectModuleName'];
+    const allowedQueryFields = [
+      ...model.mutableFields,
+      'ProjectProjectstatusName',
+      'ProjectModuleName',
+    ];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------

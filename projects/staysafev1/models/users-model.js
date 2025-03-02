@@ -1,13 +1,22 @@
-import { parseRequestQuery, constructPreparedStatement } from '#root/models/utils.js';
+import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
   table: 'Users',
   idField: 'UserID',
-  mutableFields: ['UserFirstname', 'UserLastname', 'UserPhone', 'UserUsername'],
+  mutableFields: [
+    'UserFirstname',
+    'UserLastname',
+    'UserPhone',
+    'UserUsername',
+    'UserPassword',
+    'UserLatitude',
+    'UserLongitude',
+    'UserTimestamp',
+    'UserImageURL',
+  ],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    // Resolve Foreign Keys -------------------
     let table = 'Users';
     let fields = [model.idField, ...model.mutableFields];
 

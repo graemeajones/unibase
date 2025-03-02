@@ -1,30 +1,30 @@
-import { parseRequestQuery, constructPreparedStatement } from "./utils.js";
+import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: "Logs",
-  idField: "LogID",
-  mutableFields: ["LogName", "LogGroupID", "LogSubmissiondate"],
+  table: 'Favourites',
+  idField: 'FavouriteID',
+  mutableFields: ['FavouriteLikerID', 'FavouriteLikedID', 'FavouriteCategory'],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    // Resolve foreign keys -------------------
-    let table = "(Logs INNER JOIN Groups ON LogGroupID=GroupID)";
-    let fields = [model.idField, ...model.mutableFields, "GroupName AS LogGroupName"];
+    let table = model.table;
+    let fields = [model.idField, ...model.mutableFields];
 
+    // Resolve foreign keys -------------------
     // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields, "LogGroupName"];
+    const allowedQueryFields = model.mutableFields;
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
     let parameters = {};
     switch (variant) {
-      case "group":
-        where = "LogGroupID =:ID";
+      case 'users':
+        where = 'FavouriteLikerID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
-      case "primary":
-        where = "LogID=:ID";
+      case 'primary':
+        where = 'FavouriteID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }

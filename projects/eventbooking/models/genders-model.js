@@ -1,4 +1,4 @@
-import { parseRequestQuery, constructPreparedStatement } from '../../../models/utils.js';
+import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
   table: 'Genders',

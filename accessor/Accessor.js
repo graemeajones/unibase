@@ -1,7 +1,27 @@
+import mysql from 'mysql2/promise';
+
+const createDbConnectionPool = (databaseConfigFile) => {
+  console.log('Database configuration:', databaseConfigFile);
+
+  try {
+    return mysql.createPool({
+      ...databaseConfigFile,
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
+      enableKeepAlive: true,
+      keepAliveInitialDelay: 0,
+    });
+  } catch (error) {
+    console.log('ERROR creating database connection: ' + error.message);
+    process.exit();
+  }
+};
+
 class Accessor {
-  constructor(model, database) {
+  constructor(model, dbConfig) {
     this.model = model;
-    this.database = database;
+    this.database = createDbConnectionPool(dbConfig);
   }
 
   // Methods
@@ -11,13 +31,24 @@ class Accessor {
       const { sql, parameters } = this.model.buildCreateQuery(req);
       const status = await this.database.query(sql, parameters);
 
-      const { isSuccess, result, message } = await this.read({ params: { id: status[0].insertId } }, 'primary');
+      const { isSuccess, result, message } = await this.read(
+        { params: { id: status[0].insertId } },
+        'primary'
+      );
       // { params: { id: status[0].insertId } } simulates the request object, 'req', that the 'read' method expects
       return isSuccess
         ? { isSuccess: true, result: result, message: 'Record successfully recovered' }
-        : { isSuccess: false, result: null, message: `Failed to recover the inserted record: ${message}` };
+        : {
+            isSuccess: false,
+            result: null,
+            message: `Failed to recover the inserted record: ${message}`,
+          };
     } catch (error) {
-      return { isSuccess: false, result: null, message: `Failed to execute query: ${error.message}` };
+      return {
+        isSuccess: false,
+        result: null,
+        message: `Failed to execute query: ${error.message}`,
+      };
     }
   };
 
@@ -29,7 +60,11 @@ class Accessor {
         ? { isSuccess: false, result: null, message: 'No record(s) found' }
         : { isSuccess: true, result: result, message: 'Record(s) successfully recovered' };
     } catch (error) {
-      return { isSuccess: false, result: null, message: `Failed to execute query: ${error.message}` };
+      return {
+        isSuccess: false,
+        result: null,
+        message: `Failed to execute query: ${error.message}`,
+      };
     }
   };
 
@@ -38,14 +73,26 @@ class Accessor {
       const { sql, parameters } = this.model.buildUpdateQuery(req);
       const status = await this.database.query(sql, parameters);
       if (status[0].affectedRows === 0)
-        return { isSuccess: false, result: null, message: 'Failed to update record: no rows affected' };
+        return {
+          isSuccess: false,
+          result: null,
+          message: 'Failed to update record: no rows affected',
+        };
 
       const { isSuccess, result, message } = await this.read(req, 'primary');
       return isSuccess
         ? { isSuccess: true, result: result, message: 'Record successfully recovered' }
-        : { isSuccess: false, result: null, message: `Failed to recover the updated record: ${message}` };
+        : {
+            isSuccess: false,
+            result: null,
+            message: `Failed to recover the updated record: ${message}`,
+          };
     } catch (error) {
-      return { isSuccess: false, result: null, message: `Failed to execute query: ${error.message}` };
+      return {
+        isSuccess: false,
+        result: null,
+        message: `Failed to execute query: ${error.message}`,
+      };
     }
   };
 
@@ -57,7 +104,11 @@ class Accessor {
         ? { isSuccess: false, result: null, message: `Failed to delete record ${req.params.id}` }
         : { isSuccess: true, result: null, message: 'Record successfully deleted' };
     } catch (error) {
-      return { isSuccess: false, result: null, message: `Failed to execute query: ${error.message}` };
+      return {
+        isSuccess: false,
+        result: null,
+        message: `Failed to execute query: ${error.message}`,
+      };
     }
   };
 }

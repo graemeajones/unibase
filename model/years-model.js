@@ -1,14 +1,14 @@
-import { parseRequestQuery, constructPreparedStatement } from './utils.js';
+import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: 'Confirmations',
-  idField: 'ConfirmationID',
-  mutableFields: ['ConfirmationName'],
+  table: 'Years',
+  idField: 'YearID',
+  mutableFields: ['YearName'],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    let table = model.table;
-    let fields = [model.idField, ...model.mutableFields];
+    const table = model.table;
+    const fields = [model.idField, ...model.mutableFields];
 
     // Resolve Foreign Keys -------------------
     // Process request queries ----------------
@@ -20,7 +20,7 @@ const model = {
     let parameters = {};
     switch (variant) {
       case 'primary':
-        where = 'ConfirmationID=:ID';
+        where = 'YearID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }

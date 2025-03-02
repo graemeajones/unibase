@@ -1,28 +1,30 @@
 import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: 'Locations',
-  idField: 'LocationID',
+  table: 'Positions',
+  idField: 'PositionID',
   mutableFields: [
-    'LocationName',
-    'LocationAddress',
-    'LocationDescription',
-    'LocationPostcode',
-    'LocationLatitude',
-    'LocationLongitude',
+    'PositionActivityID',
+    'PositionLatitude',
+    'PositionLongitude',
+    'PositionTimestamp',
   ],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    let table = 'Locations';
-    let fields = [model.idField, ...model.mutableFields];
+    let table = '(Positions LEFT JOIN Activities ON PositionActivityID=ActivityID)';
+    let fields = [model.idField, ...model.mutableFields, 'ActivityName AS PositionActivityName'];
 
     // Construct prepared statement -----------
     let where = null;
     let parameters = {};
     switch (variant) {
+      case 'activity':
+        where = 'PositionActivityID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
       case 'primary':
-        where = 'LocationID=:ID';
+        where = 'PositionID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }

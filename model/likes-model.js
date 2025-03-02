@@ -1,30 +1,34 @@
-import { parseRequestQuery, constructPreparedStatement } from './utils.js';
+import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: 'Favourites',
-  idField: 'FavouriteID',
-  mutableFields: ['FavouriteLikerID', 'FavouriteLikedID', 'FavouriteCategory'],
+  table: 'Likes',
+  idField: 'LikeID',
+  mutableFields: ['LikerID', 'LikeeID', 'LikeAffinityID'],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    let table = model.table;
-    let fields = [model.idField, ...model.mutableFields];
-
     // Resolve foreign keys -------------------
+    let table = '(Likes INNER JOIN Affinities ON LikeAffinityID=AffinityID)';
+    let fields = [model.idField, ...model.mutableFields, 'AffinityName AS LikeAffinityName'];
+
     // Process request queries ----------------
-    const allowedQueryFields = model.mutableFields;
+    const allowedQueryFields = [...model.mutableFields, 'LikeAffinityName'];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
     let parameters = {};
     switch (variant) {
-      case 'users':
-        where = 'FavouriteLikerID=:ID';
+      case 'likedby':
+        where = 'LikerID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'wholikes':
+        where = 'LikeeID =:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
       case 'primary':
-        where = 'FavouriteID=:ID';
+        where = 'LikeID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }

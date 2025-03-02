@@ -1,11 +1,13 @@
 import { Router } from 'express';
-import Validator from '../validator/Validator.js';
-import schema from '../validator/years-schema.js';
-import Model from '../model/Model.js';
-import modelConfig from '../model/years-model.js';
+
+import Validator from '#root/validator/Validator.js';
+import Model from '#root/model/Model.js';
+import Accessor from '#root/accessor/Accessor.js';
+import Controller from '#root/controller/Controller.js';
+
+import schema from '../schemas/positions-schema.js';
+import modelConfig from '../models/positions-model.js';
 import dbConfig from '../dbConfig.js';
-import Accessor from '../accessor/Accessor.js';
-import Controller from '../controller/Controller.js';
 
 // Validator -------------------------------------
 
@@ -29,6 +31,7 @@ const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
+router.get('/activities/:id(\\d+)', (req, res) => controller.get(req, res, 'activity'));
 
 router.post('/', controller.post);
 router.put('/:id', controller.put);
