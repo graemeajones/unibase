@@ -1,29 +1,13 @@
 import { Router } from 'express';
-
-import Validator from '#root/validator/Validator.js';
-import Model from '#root/model/Model.js';
-import Accessor from '#root/accessor/Accessor.js';
-import Controller from '#root/controller/Controller.js';
+import makeController from '#root/controller/makeController.js';
 
 import schema from '../schemas/classes-schema.js';
 import modelConfig from '../models/classes-model.js';
 import dbConfig from '../dbConfig.js';
 
-// Validator -------------------------------------
-
-const validator = new Validator(schema);
-
-// Model -----------------------------------------
-
-const model = new Model(modelConfig);
-
-// Data accessor ---------------------------------
-
-const accessor = new Accessor(model, dbConfig);
-
 // Controller ------------------------------------
 
-const controller = new Controller(validator, accessor);
+const controller = makeController(schema, modelConfig, dbConfig);
 
 // Endpoints -------------------------------------
 
@@ -32,6 +16,7 @@ const router = new Router();
 router.get('/', (req, res) => controller.get(req, res, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
 router.get('/courses/:id(\\d+)', (req, res) => controller.get(req, res, 'course'));
+router.get('/users/:id(\\d+)', (req, res) => controller.get(req, res, 'user'));
 
 router.post('/', controller.post);
 router.put('/:id', controller.put);
