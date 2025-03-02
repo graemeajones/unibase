@@ -1,4 +1,4 @@
-import { parseRequestQuery, constructPreparedStatement } from '#root/models/utils.js';
+import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
   table: 'Status',
@@ -7,7 +7,6 @@ const model = {
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    // Resolve Foreign Keys -------------------
     let table = 'Status';
     let fields = [model.idField, ...model.mutableFields];
 

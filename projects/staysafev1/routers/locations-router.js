@@ -1,13 +1,13 @@
 import { Router } from 'express';
 
 import Validator from '#root/validator/Validator.js';
-import Model from '#root/models/Model.js';
+import Model from '#root/model/Model.js';
 import Accessor from '#root/accessor/Accessor.js';
 import Controller from '#root/controller/Controller.js';
 
 import schema from '../schemas/locations-schema.js';
 import modelConfig from '../models/locations-model.js';
-import database from '../database.js';
+import dbConfig from '../dbConfig.js';
 
 // Validator -------------------------------------
 
@@ -19,7 +19,7 @@ const model = new Model(modelConfig);
 
 // Data accessor ---------------------------------
 
-const accessor = new Accessor(model, database);
+const accessor = new Accessor(model, dbConfig);
 
 // Controller ------------------------------------
 

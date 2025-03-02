@@ -8,9 +8,11 @@ schema.mutableFields = [
   'UserLastname',
   'UserPhone',
   'UserUsername',
+  'UserPassword',
   'UserLatitude',
   'UserLongitude',
   'UserTimestamp',
+  'UserImageURL',
 ];
 
 schema.record = joi
@@ -20,9 +22,11 @@ schema.record = joi
     UserLastname: joi.string().min(3),
     UserPhone: joi.string().min(12),
     UserUsername: joi.string().min(8),
+    UserPassword: joi.string().min(255),
     UserLatitude: joiValidGPS.latitude,
     UserLongitude: joiValidGPS.longitude,
     UserTimestamp: joiValidGPS.timestamp,
+    UserImageURL: joi.string().uri(),
   })
   .required()
   .unknown(true);

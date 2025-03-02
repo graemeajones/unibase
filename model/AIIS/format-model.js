@@ -1,9 +1,9 @@
-import { parseRequestQuery, constructPreparedStatement } from '../utils.js';
+import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: 'Technologies',
-  idField: 'TechnologyID',
-  mutableFields: ['TechnologyName'],
+  table: 'Formats',
+  idField: 'FormatID',
+  mutableFields: ['FormatName'],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
@@ -20,7 +20,7 @@ const model = {
     let parameters = {};
     switch (variant) {
       case 'primary':
-        where = 'TechnologyID=:ID';
+        where = 'FormatID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }

@@ -1,9 +1,7 @@
 import { Router } from 'express';
+import API_URL from '#root/apiURL.js';
 
-const API_URL = 'http://softwarehub.uk/unibase/api';
-//const API_URL = 'http://localhost:5000/api';
-
-// Endpoints -------------------------------------
+// Available Endpoints ---------------------------
 
 const listOfEndpoints = [
   {

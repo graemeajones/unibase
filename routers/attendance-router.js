@@ -1,11 +1,11 @@
-import { Router } from "express";
-import Validator from "../validator/Validator.js";
-import schema from "../validator/attendance-schema.js";
-import Model from "../models/Model.js";
-import modelConfig from "../models/attendance-model.js";
-import database from "../database.js";
-import Accessor from "../accessor/Accessor.js";
-import Controller from "../controller/Controller.js";
+import { Router } from 'express';
+import Validator from '../validator/Validator.js';
+import schema from '../validator/attendance-schema.js';
+import Model from '../model/Model.js';
+import modelConfig from '../model/attendance-model.js';
+import dbConfig from '../dbConfig.js';
+import Accessor from '../accessor/Accessor.js';
+import Controller from '../controller/Controller.js';
 
 // Validator -------------------------------------
 
@@ -17,7 +17,7 @@ const model = new Model(modelConfig);
 
 // Data accessor ---------------------------------
 
-const accessor = new Accessor(model, database);
+const accessor = new Accessor(model, dbConfig);
 
 // Controller ------------------------------------
 
@@ -27,11 +27,11 @@ const controller = new Controller(validator, accessor);
 
 const router = new Router();
 
-router.get("/", (req, res) => controller.get(req, res, null));
-router.get("/:id(\\d+)", (req, res) => controller.get(req, res, "primary"));
+router.get('/', (req, res) => controller.get(req, res, null));
+router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
 
-router.post("/", controller.post);
-router.put("/:id", controller.put);
-router.delete("/:id", controller.delete);
+router.post('/', controller.post);
+router.put('/:id', controller.put);
+router.delete('/:id', controller.delete);
 
 export default router;

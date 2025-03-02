@@ -1,16 +1,16 @@
-import { parseRequestQuery, constructPreparedStatement } from './utils.js';
+import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: 'Projectstatus',
-  idField: 'ProjectstatusID',
-  mutableFields: ['ProjectstatusName'],
+  table: 'Jobtitles',
+  idField: 'JobtitleID',
+  mutableFields: ['JobtitleName'],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    let table = model.table;
-    let fields = [model.idField, ...model.mutableFields];
+    const table = model.table;
+    const fields = [model.idField, ...model.mutableFields];
 
-    // Resolve Foreign Keys -------------------
+    // Resolve foreign keys -------------------
     // Process request queries ----------------
     const allowedQueryFields = [...model.mutableFields];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
@@ -20,7 +20,7 @@ const model = {
     let parameters = {};
     switch (variant) {
       case 'primary':
-        where = 'ProjectstatusID=:ID';
+        where = 'JobtitleID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }

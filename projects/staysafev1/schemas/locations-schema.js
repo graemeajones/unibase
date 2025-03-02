@@ -5,6 +5,7 @@ const schema = {};
 
 schema.mutableFields = [
   'LocationName',
+  'LocationDescription',
   'LocationAddress',
   'LocationPostcode',
   'LocationLatitude',
@@ -15,6 +16,7 @@ schema.record = joi
   .object({
     LocationID: joi.number().integer().min(1).allow(null),
     LocationName: joi.string().min(4),
+    LocationDescription: joi.string().min(4),
     LocationAddress: joi.string().min(16),
     LocationPostcode: joi.string().min(6),
     LocationLatitude: joiValidGPS.latitude,

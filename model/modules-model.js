@@ -1,40 +1,48 @@
-import { parseRequestQuery, constructPreparedStatement } from './utils.js';
+import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: 'Modulemembers',
-  idField: 'ModulememberID',
-  mutableFields: ['ModulememberModuleID', 'ModulememberUserID'],
+  table: 'Modules',
+  idField: 'ModuleID',
+  mutableFields: [
+    'ModuleName',
+    'ModuleCode',
+    'ModuleLevel',
+    'ModuleYearID',
+    'ModuleLeaderID',
+    'ModuleImageURL',
+  ],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
     // Resolve Foreign Keys -------------------
     let table =
-      '(((Modulemembers LEFT JOIN Users ON ModulememberUserID=UserID) LEFT JOIN Modules ON ModulememberModuleID=ModuleID ) LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID )';
+      '((Modules LEFT JOIN Users ON ModuleLeaderID=UserID) LEFT JOIN Years ON ModuleYearID=YearID )';
     let fields = [
       model.idField,
       ...model.mutableFields,
-      'CONCAT(ModuleCode," ",ModuleName) AS ModulememberModuleName',
-      'CONCAT(UserFirstname," ",UserLastname, " (", UsertypeName, ")") AS ModulememberUserName',
+      'CONCAT(UserFirstname," ",UserLastname) AS ModuleLeaderName',
+      'YearName AS ModuleYearName',
     ];
 
     // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields, 'ModulememberModuleName', 'ModulememberUserName'];
+    const allowedQueryFields = [...model.mutableFields, 'ModuleLeaderName', 'ModuleYearName'];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
     let parameters = {};
     switch (variant) {
-      case 'module':
-        where = 'ModulememberModuleID=:ID';
+      case 'leader':
+        where = 'ModuleLeaderID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
-      case 'user':
+      case 'users':
+        table = `Modulemembers INNER JOIN ${table} ON Modulemembers.ModulememberModuleID=Modules.ModuleID`;
         where = 'ModulememberUserID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
       case 'primary':
-        where = 'ModulememberID=:ID';
+        where = 'ModuleID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }

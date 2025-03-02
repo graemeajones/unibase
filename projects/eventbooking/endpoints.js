@@ -9,11 +9,9 @@ import locationsRouter from './routers/locations-router.js';
 import providersRouter from './routers/providers-router.js';
 import usersRouter from './routers/users-router.js';
 import usertypesRouter from './routers/usertypes-router.js';
+import API_URL from '#root/apiURL.js';
 
-// Initialisation --------------------------------
-
-const API_URL = 'http://softwarehub.uk/unibase/events/api';
-//const API_URL = 'http://localhost:5000/events/api';
+// Available Endpoints ---------------------------
 
 const listOfEndpoints = [
   {

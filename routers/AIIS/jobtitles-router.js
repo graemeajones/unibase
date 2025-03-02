@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import Validator from '../../validator/Validator.js';
 import schema from '../../validator/AIIS/jobtitles-schema.js';
-import Model from '../../models/Model.js';
-import modelConfig from '../../models/AIIS/jobtitles-model.js';
-import database from '../../database.js';
+import Model from '../../model/Model.js';
+import modelConfig from '../../model/AIIS/jobtitles-model.js';
+import dbConfig from '../../dbConfig.js';
 import Accessor from '../../accessor/Accessor.js';
 import Controller from '../../controller/Controller.js';
 
@@ -17,7 +17,7 @@ const model = new Model(modelConfig);
 
 // Data accessor ---------------------------------
 
-const accessor = new Accessor(model, database);
+const accessor = new Accessor(model, dbConfig);
 
 // Controller ------------------------------------
 

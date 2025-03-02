@@ -1,14 +1,14 @@
 // Imports ---------------------------------------
 import { Router } from 'express';
+import activitiesRouter from './routers/activities-router.js';
 import contactsRouter from './routers/contacts-router.js';
 import locationsRouter from './routers/locations-router.js';
+import positionsRouter from './routers/positions-router.js';
 import statusRouter from './routers/status-router.js';
 import usersRouter from './routers/users-router.js';
+import API_URL from '#root/apiURL.js';
 
-// Initialisation --------------------------------
-
-//const API_URL = 'http://softwarehub.uk/unibase/staysafe/api';
-const API_URL = 'http://localhost:5000/staysafe/v1/api';
+// Available Endpoints ---------------------------
 
 const listOfEndpoints = [
   {
@@ -25,6 +25,12 @@ const listOfEndpoints = [
           endpoint: '/{id}',
           description: 'Returns the specific activity identified by the id provided',
           example: `${API_URL}/activities/1`,
+        },
+        {
+          endpoint: '/users/{id}',
+          description:
+            'Returns all the activities associated with a specific user identified by the id provided',
+          example: `${API_URL}/activities/users/1`,
         },
       ],
       post: {
@@ -104,7 +110,7 @@ const listOfEndpoints = [
           endpoint: '/activities/{id}',
           description:
             'Returns all the positions associated with a specific activity identified by the id provided',
-          example: `${API_URL}/positions/activities/1`,
+          example: `${API_URL}/positions/activities/2`,
         },
       ],
       post: {
@@ -195,8 +201,10 @@ const listOfEndpoints = [
 
 const router = new Router({ mergeParams: true });
 
+router.use('/activities', activitiesRouter);
 router.use('/contacts', contactsRouter);
 router.use('/locations', locationsRouter);
+router.use('/positions', positionsRouter);
 router.use('/status', statusRouter);
 router.use('/users', usersRouter);
 
@@ -206,6 +214,7 @@ router.get('/', (req, res) =>
     listOfEndpoints,
   })
 );
+
 router.get('/*', (req, res) =>
   res.status(404).json({
     message: 'Specified endpoint not found',
