@@ -12,7 +12,7 @@ schema.mutableFields = [
   'ActivityLeave',
   'ActivityToID',
   'ActivityArrive',
-  'ActvityStatusID',
+  'ActivityStatusID',
 ];
 
 schema.record = joi
@@ -25,7 +25,7 @@ schema.record = joi
     ActivityLeave: joiValidDateString,
     ActivityToID: joi.number().integer().min(1),
     ActivityArrive: joiValidDateString,
-    ActvityStatusID: joi.number().integer().min(1),
+    ActivityStatusID: joi.number().integer().min(1),
   })
   .required()
   .unknown(true);
