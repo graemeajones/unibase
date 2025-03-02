@@ -1,27 +1,13 @@
 import { Router } from 'express';
-import Validator from '../validator/Validator.js';
-import schema from '../validator/users-schema.js';
-import Model from '../model/Model.js';
-import modelConfig from '../model/users-model.js';
+import makeController from '#root/controller/makeController.js';
+
+import schema from '../schemas/users-schema.js';
+import modelConfig from '../models/users-model.js';
 import dbConfig from '../dbConfig.js';
-import Accessor from '../accessor/Accessor.js';
-import Controller from '../controller/Controller.js';
-
-// Validator -------------------------------------
-
-const validator = new Validator(schema);
-
-// Model -----------------------------------------
-
-const model = new Model(modelConfig);
-
-// Data accessor ---------------------------------
-
-const accessor = new Accessor(model, dbConfig);
 
 // Controller ------------------------------------
 
-const controller = new Controller(validator, accessor);
+const controller = makeController(schema, modelConfig, dbConfig);
 
 // Endpoints -------------------------------------
 

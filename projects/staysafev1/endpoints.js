@@ -1,14 +1,18 @@
 // Imports ---------------------------------------
 import { Router } from 'express';
+
 import activitiesRouter from './routers/activities-router.js';
 import contactsRouter from './routers/contacts-router.js';
 import locationsRouter from './routers/locations-router.js';
 import positionsRouter from './routers/positions-router.js';
 import statusRouter from './routers/status-router.js';
 import usersRouter from './routers/users-router.js';
+
 import API_URL from '#root/apiURL.js';
 
 // Available Endpoints ---------------------------
+
+const API_PATH = `${API_URL}/staysafe/v1/api`;
 
 const listOfEndpoints = [
   {
@@ -19,18 +23,18 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all activities',
-          examples: [`${API_URL}/activities`, `${API_URL}/activities?orderby=ActivityLeave`],
+          examples: [`${API_PATH}/activities`, `${API_PATH}/activities?orderby=ActivityLeave`],
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific activity identified by the id provided',
-          example: `${API_URL}/activities/1`,
+          example: `${API_PATH}/activities/1`,
         },
         {
           endpoint: '/users/{id}',
           description:
             'Returns all the activities associated with a specific user identified by the id provided',
-          example: `${API_URL}/activities/users/1`,
+          example: `${API_PATH}/activities/users/1`,
         },
       ],
       post: {
@@ -55,12 +59,12 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all locations',
-          examples: [`${API_URL}/locations`, `${API_URL}/locations?orderby=LocationName`],
+          examples: [`${API_PATH}/locations`, `${API_PATH}/locations?orderby=LocationName`],
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific location identified by the id provided',
-          example: `${API_URL}/locations/1`,
+          example: `${API_PATH}/locations/1`,
         },
       ],
       post: {
@@ -99,18 +103,18 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all positions',
-          examples: [`${API_URL}/positions`],
+          examples: [`${API_PATH}/positions`],
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific position identified by the id provided',
-          example: `${API_URL}/positions/1`,
+          example: `${API_PATH}/positions/1`,
         },
         {
           endpoint: '/activities/{id}',
           description:
             'Returns all the positions associated with a specific activity identified by the id provided',
-          example: `${API_URL}/positions/activities/2`,
+          example: `${API_PATH}/positions/activities/2`,
         },
       ],
       post: {
@@ -135,12 +139,12 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all status entries',
-          examples: [`${API_URL}/status`, `${API_URL}/status?orderby=StatusName`],
+          examples: [`${API_PATH}/status`, `${API_PATH}/status?orderby=StatusName`],
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific status entry identified by the id provided',
-          example: `${API_URL}/locations/1`,
+          example: `${API_PATH}/locations/1`,
         },
       ],
       /*
@@ -167,18 +171,18 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all users',
-          example: `${API_URL}/users`,
+          example: `${API_PATH}/users`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific user identified by the id provided',
-          example: `${API_URL}/users/1`,
+          example: `${API_PATH}/users/1`,
         },
         {
           endpoint: '/contacts/{id}',
           description:
             'Returns all users who are contacts of the specific user identified by the id provided',
-          example: `${API_URL}/users/contacts/1`,
+          example: `${API_PATH}/users/contacts/1`,
         },
       ],
       post: {

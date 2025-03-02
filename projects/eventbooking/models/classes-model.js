@@ -45,6 +45,19 @@ const model = {
         where = 'ClassCourseID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
+      case 'user':
+        table = `((${table} INNER JOIN Bookings ON ClassID=BookingClassID) 
+                            INNER JOIN Bookingstatus ON BookingBookingstatusID=BookingstatusID)`;
+        fields = [
+          ...fields,
+          'BookingID AS ClassBookingID',
+          'BookingBookingdate AS ClassBookingdate',
+          'BookingBookingstatusID AS ClassBookingstatusID',
+          'BookingstatusName AS ClassBookingstatusName',
+        ];
+        where = 'BookingUserID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
       case 'primary':
         where = 'ClassID=:ID';
         parameters = { ID: parseInt(req.params.id) };
