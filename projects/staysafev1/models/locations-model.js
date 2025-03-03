@@ -5,8 +5,8 @@ const model = {
   idField: 'LocationID',
   mutableFields: [
     'LocationName',
-    'LocationAddress',
     'LocationDescription',
+    'LocationAddress',
     'LocationPostcode',
     'LocationLatitude',
     'LocationLongitude',
