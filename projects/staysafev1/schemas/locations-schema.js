@@ -17,7 +17,7 @@ schema.record = joi
     LocationID: joi.number().integer().min(1).allow(null),
     LocationName: joi.string().min(4),
     LocationDescription: joi.string().allow(''),
-    LocationAddress: joi.string().min(16),
+    LocationAddress: joi.string().min(4),
     LocationPostcode: joi.string().min(6).allow(null),
     LocationLatitude: joiValidGPS.latitude,
     LocationLongitude: joiValidGPS.longitude,
