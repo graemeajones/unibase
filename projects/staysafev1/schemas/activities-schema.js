@@ -31,7 +31,8 @@ schema.record = joi
   .unknown(true);
 
 schema.conformor = {
-  ContactDatecreated: (value) => (value === null ? null : new Date(value)),
+  ActivityLeave: (value) => (value === null ? null : new Date(value)),
+  ActivityArrive: (value) => (value === null ? null : new Date(value)),
 };
 
 export default schema;
