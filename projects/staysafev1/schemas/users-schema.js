@@ -22,7 +22,7 @@ schema.record = joi
     UserLastname: joi.string().min(3),
     UserPhone: joi.string().min(12),
     UserUsername: joi.string().min(8),
-    UserPassword: joi.string().min(255),
+    UserPassword: joi.string().min(8).max(255),
     UserLatitude: joiValidGPS.latitude,
     UserLongitude: joiValidGPS.longitude,
     UserTimestamp: joiValidGPS.timestamp,
