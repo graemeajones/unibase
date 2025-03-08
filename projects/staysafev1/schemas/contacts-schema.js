@@ -11,7 +11,7 @@ schema.record = joi
     ContactUserID: joi.number().integer().min(1).required(),
     ContactContactID: joi.number().integer().min(1).required(),
     ContactLabel: joi.string().min(4).max(32).required(),
-    ContactDatecreated: joiValidDateString,
+    ContactDatecreated: joiValidDateString.optional(),
   })
   .unknown(true);
 
