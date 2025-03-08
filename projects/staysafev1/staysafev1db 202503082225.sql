@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 08, 2025 at 11:17 PM
--- Server version: 10.4.28-MariaDB
+-- Host: 141.94.205.33
+-- Generation Time: Mar 08, 2025 at 11:24 PM
+-- Server version: 10.11.2-MariaDB-1
 -- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -46,8 +46,7 @@ CREATE TABLE `Activities` (
 INSERT INTO `Activities` (`ActivityID`, `ActivityName`, `ActivityUserID`, `ActivityDescription`, `ActivityFromID`, `ActivityLeave`, `ActivityToID`, `ActivityArrive`, `ActivityStatusID`) VALUES
 (1, 'Walk home', 1, 'Walk from university to Surbiton train station', 10, '2025-03-28 18:30:00', 8, '2025-03-28 18:50:00', 1),
 (2, 'Walk home', 1, 'Walk from university to Surbiton train station', 10, '2025-02-14 18:00:00', 8, '2025-02-14 18:20:00', 5),
-(3, 'Visiting Amina', 1, 'Dinner at Amina\'s at 7pm', 1, '2025-01-20 18:30:00', 11, '2025-01-20 18:50:00', 5),
-(4, 'Graeme\'s Test Activity', 1, 'Walk from university to Surbiton train station', 10, '2025-03-28 18:30:00', 8, '2025-03-28 18:50:00', 1);
+(3, 'Visiting Amina', 1, 'Dinner at Amina\'s at 7pm', 1, '2025-01-20 18:30:00', 11, '2025-01-20 18:50:00', 5);
 
 -- --------------------------------------------------------
 
@@ -337,7 +336,7 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Activities`
 --
 ALTER TABLE `Activities`
-  MODIFY `ActivityID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ActivityID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Contacts`
