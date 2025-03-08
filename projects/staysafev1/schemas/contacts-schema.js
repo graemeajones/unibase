@@ -8,12 +8,11 @@ schema.mutableFields = ['ContactUserID', 'ContactContactID', 'ContactLabel', 'Co
 schema.record = joi
   .object({
     ContactID: joi.number().integer().min(1).allow(null),
-    ContactUserID: joi.number().integer().min(1),
-    ContactContactID: joi.number().integer().min(1),
-    ContactLabel: joi.string().min(4).max(32),
-    ContactDatecreated: joiValidDateString.optional(),
+    ContactUserID: joi.number().integer().min(1).required(),
+    ContactContactID: joi.number().integer().min(1).required(),
+    ContactLabel: joi.string().min(4).max(32).required(),
+    ContactDatecreated: joiValidDateString,
   })
-  .required()
   .unknown(true);
 
 schema.conformor = {
