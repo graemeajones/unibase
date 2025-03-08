@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2025 at 11:48 AM
+-- Generation Time: Mar 08, 2025 at 11:17 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,7 +46,8 @@ CREATE TABLE `Activities` (
 INSERT INTO `Activities` (`ActivityID`, `ActivityName`, `ActivityUserID`, `ActivityDescription`, `ActivityFromID`, `ActivityLeave`, `ActivityToID`, `ActivityArrive`, `ActivityStatusID`) VALUES
 (1, 'Walk home', 1, 'Walk from university to Surbiton train station', 10, '2025-03-28 18:30:00', 8, '2025-03-28 18:50:00', 1),
 (2, 'Walk home', 1, 'Walk from university to Surbiton train station', 10, '2025-02-14 18:00:00', 8, '2025-02-14 18:20:00', 5),
-(3, 'Visiting Amina', 1, 'Dinner at Amina\'s at 7pm', 1, '2025-01-20 18:30:00', 11, '2025-01-20 18:50:00', 5);
+(3, 'Visiting Amina', 1, 'Dinner at Amina\'s at 7pm', 1, '2025-01-20 18:30:00', 11, '2025-01-20 18:50:00', 5),
+(4, 'Graeme\'s Test Activity', 1, 'Walk from university to Surbiton train station', 10, '2025-03-28 18:30:00', 8, '2025-03-28 18:50:00', 1);
 
 -- --------------------------------------------------------
 
@@ -264,29 +265,29 @@ CREATE TABLE `Users` (
 --
 
 INSERT INTO `Users` (`UserID`, `UserFirstname`, `UserLastname`, `UserPhone`, `UserUsername`, `UserPassword`, `UserLatitude`, `UserLongitude`, `UserTimestamp`, `UserImageURL`) VALUES
-(1, 'Aisha', 'Ahmed', '+44 7911 567890', 'aishaahmed', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(2, 'John', 'Williams', '+44 7911 123456', 'williams99', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(3, 'Zara', 'Patel', '+44 7911 876543', 'zarap1981', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(4, 'Mia', 'Brown', '+44 7911 234567', 'afternoonbrownies', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(5, 'Sarah', 'Lee', '+44 7911 345678', 'sara5678', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(6, 'David', 'Harris', '+44 7911 567987', 'davidHarris', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(7, 'Olivia', 'Martinez', '+44 7911 678012', 'MartinezOlivia2', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(8, 'Sofia', 'Garcia', '+44 7911 432109', 'sofia.garcia', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(9, 'Kai', 'Tanaka', '+44 7911 654321', 'tanakaK2020', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(10, 'Daniel', 'Thompson', '+44 7911 765432', 'dantheman123', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(1, 'Aisha', 'Ahmed', '+44 7911 567890', 'aishaahmed', '', 51.4275, -0.304458, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(2, 'John', 'Williams', '+44 7911 123456', 'williams99', '', 51.3951, -0.311179, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(3, 'Zara', 'Patel', '+44 7911 876543', 'zarap1981', '', 51.3938, -0.351434, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(4, 'Mia', 'Brown', '+44 7911 234567', 'afternoonbrownies', '', 51.4479, -0.377076, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(5, 'Sarah', 'Lee', '+44 7911 345678', 'sara5678', '', 51.448, -0.433595, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(6, 'David', 'Harris', '+44 7911 567987', 'davidHarris', '', 51.5028, -0.323753, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(7, 'Olivia', 'Martinez', '+44 7911 678012', 'MartinezOlivia2', '', 51.4059, -0.246549, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(8, 'Sofia', 'Garcia', '+44 7911 432109', 'sofia.garcia', '', 51.4194, -0.216422, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(9, 'Kai', 'Tanaka', '+44 7911 654321', 'tanakaK2020', '', 51.594, -0.163937, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(10, 'Daniel', 'Thompson', '+44 7911 765432', 'dantheman123', '', 51.5092, -0.117491, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
 (11, 'Isabella', 'Robinson', '+44 7911 876210', 'isabella.a.robinson', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(12, 'Jamal', 'Ali', '+44 7911 987654', 'AliBama888', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(13, 'Mia', 'Lewis', '+44 7911 246810', 'isleoflewis', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(14, 'Ethan', 'Hall', '+44 7911 135790', 'ethanjeremyhall', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(15, 'Ava', 'Young', '+44 7911 369852', 'youngAtHeart', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(12, 'Jamal', 'Ali', '+44 7911 987654', 'AliBama888', '', 51.5041, -0.231485, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(13, 'Mia', 'Lewis', '+44 7911 246810', 'isleoflewis', '', 51.343, -0.211143, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(14, 'Ethan', 'Hall', '+44 7911 135790', 'ethanjeremyhall', '', 51.3982, -0.28985, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(15, 'Ava', 'Young', '+44 7911 369852', 'youngAtHeart', '', 51.4013, -0.306287, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
 (16, 'Liam', 'Evans', '+44 7911 888444', 'liam9999', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(17, 'Priya', 'Sharma', '+44 7911 777333', 'PriyaSharma', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(18, 'Noah', 'Hughes', '+44 7911 222555', 'NoahAndTheArk', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(19, 'Fatima', 'Khan', '+44 7911 666999', 'FatimaKhan1980', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(20, 'Oliver', 'Wright', '+44 7911 333222', 'TheWrightBrother', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(21, 'Pamela', 'Wilson', '+44 7911 123456', 'pamwilson', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(22, 'James', 'Yuen', '+44 7911 987654', 'LostInSpace', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
-(23, 'Graeme', 'Jones', '0208 417 2669', 'GraemeAJones', '', 0, 0, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg');
+(17, 'Priya', 'Sharma', '+44 7911 777333', 'PriyaSharma', '', 51.5353, -0.224662, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(18, 'Noah', 'Hughes', '+44 7911 222555', 'NoahAndTheArk', '', 51.3934, -0.315396, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(19, 'Fatima', 'Khan', '+44 7911 666999', 'FatimaKhan1980', '', 51.4911, 0.065929, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(20, 'Oliver', 'Wright', '+44 7911 333222', 'TheWrightBrother', '', 51.3148, -0.550604, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(21, 'Pamela', 'Wilson', '+44 7911 123456', 'pamwilson', '', 51.3925, -0.304399, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(22, 'James', 'Yuen', '+44 7911 987654', 'LostInSpace', '', 51.3934, -0.315396, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg'),
+(23, 'Graeme', 'Jones', '0208 417 2669', 'GraemeAJones', '', 51.402, -0.302644, 0, 'https://static.generated.photos/vue-static/face-generator/landing/wall/13.jpg');
 
 --
 -- Indexes for dumped tables
@@ -336,7 +337,7 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Activities`
 --
 ALTER TABLE `Activities`
-  MODIFY `ActivityID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ActivityID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `Contacts`
