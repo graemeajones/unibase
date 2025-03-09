@@ -4,6 +4,7 @@ import { Router } from 'express';
 import activitiesRouter from './routers/activities-router.js';
 import contactsRouter from './routers/contacts-router.js';
 import locationsRouter from './routers/locations-router.js';
+import modesRouter from './routers/modes-router.js';
 import positionsRouter from './routers/positions-router.js';
 import statusRouter from './routers/status-router.js';
 import usersRouter from './routers/users-router.js';
@@ -12,7 +13,7 @@ import API_URL from '#root/apiURL.js';
 
 // Available Endpoints ---------------------------
 
-const API_PATH = `${API_URL}/staysafe/v1/api`;
+const API_PATH = `${API_URL}/staysafe/v2/api`;
 
 const listOfEndpoints = [
   {
@@ -95,7 +96,36 @@ const listOfEndpoints = [
       },
     },
   },
-
+  {
+    entity: 'Modes',
+    sap: '/api/modes',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all travel modes',
+          examples: [`${API_PATH}/modes`, `${API_PATH}/modes?orderby=ModeName`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific travel mode identified by the id provided',
+          example: `${API_PATH}/modes/1`,
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new travel mode',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific travel mode identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific travel mode identified by the id provided',
+      },
+    },
+  },
   {
     entity: 'Positions',
     sap: '/api/positions',
@@ -209,6 +239,7 @@ const router = new Router({ mergeParams: true });
 router.use('/activities', activitiesRouter);
 router.use('/contacts', contactsRouter);
 router.use('/locations', locationsRouter);
+router.use('/modes', modesRouter);
 router.use('/positions', positionsRouter);
 router.use('/status', statusRouter);
 router.use('/users', usersRouter);
