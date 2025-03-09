@@ -4,7 +4,8 @@ import cors from 'cors';
 
 import AIISRouter from './projects/AIIS/endpoints.js';
 import eventsRouter from './projects/eventbooking/endpoints.js';
-import staysafeRouter from './projects/staysafev1/endpoints.js';
+import staysafev1Router from './projects/staysafev1/endpoints.js';
+import staysafev2Router from './projects/staysafev2/endpoints.js';
 import unibaseRouter from './projects/unibase/endpoints.js';
 
 import API_URL from '#root/apiURL.js';
@@ -39,6 +40,10 @@ const listOfAPIs = [
     api: `${API_URL}/staysafe/v1/api`,
   },
   {
+    name: 'StaysafeV2',
+    api: `${API_URL}/staysafe/v2/api`,
+  },
+  {
     name: 'Unibase',
     api: `${API_URL}/api`,
   },
@@ -46,7 +51,8 @@ const listOfAPIs = [
 
 app.use('/aiis/api', AIISRouter);
 app.use('/events/api', eventsRouter);
-app.use('/staysafe/v1/api', staysafeRouter);
+app.use('/staysafe/v1/api', staysafev1Router);
+app.use('/staysafe/v2/api', staysafev2Router);
 app.use('/api', unibaseRouter);
 
 app.get('/', (req, res) =>
