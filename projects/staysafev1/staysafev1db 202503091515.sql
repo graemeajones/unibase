@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 141.94.205.33
--- Generation Time: Mar 08, 2025 at 11:24 PM
--- Server version: 10.11.2-MariaDB-1
+-- Host: 127.0.0.1
+-- Generation Time: Mar 09, 2025 at 04:17 PM
+-- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -36,6 +36,7 @@ CREATE TABLE `Activities` (
   `ActivityLeave` datetime NOT NULL,
   `ActivityToID` int(11) NOT NULL,
   `ActivityArrive` datetime NOT NULL,
+  `ActivityModeID` int(11) DEFAULT NULL,
   `ActivityStatusID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -43,10 +44,10 @@ CREATE TABLE `Activities` (
 -- Dumping data for table `Activities`
 --
 
-INSERT INTO `Activities` (`ActivityID`, `ActivityName`, `ActivityUserID`, `ActivityDescription`, `ActivityFromID`, `ActivityLeave`, `ActivityToID`, `ActivityArrive`, `ActivityStatusID`) VALUES
-(1, 'Walk home', 1, 'Walk from university to Surbiton train station', 10, '2025-03-28 18:30:00', 8, '2025-03-28 18:50:00', 1),
-(2, 'Walk home', 1, 'Walk from university to Surbiton train station', 10, '2025-02-14 18:00:00', 8, '2025-02-14 18:20:00', 5),
-(3, 'Visiting Amina', 1, 'Dinner at Amina\'s at 7pm', 1, '2025-01-20 18:30:00', 11, '2025-01-20 18:50:00', 5);
+INSERT INTO `Activities` (`ActivityID`, `ActivityName`, `ActivityUserID`, `ActivityDescription`, `ActivityFromID`, `ActivityLeave`, `ActivityToID`, `ActivityArrive`, `ActivityModeID`, `ActivityStatusID`) VALUES
+(1, 'Walk home', 1, 'Walk from university to Surbiton train station', 10, '2025-03-28 18:30:00', 8, '2025-03-28 18:50:00', 1, 1),
+(2, 'Walk home', 1, 'Walk from university to Surbiton train station', 10, '2025-02-14 18:00:00', 8, '2025-02-14 18:20:00', 1, 5),
+(3, 'Visiting Amina', 1, 'Dinner at Amina\'s at 7pm', 1, '2025-01-20 18:30:00', 11, '2025-01-20 18:50:00', 6, 5);
 
 -- --------------------------------------------------------
 
@@ -146,6 +147,31 @@ INSERT INTO `Locations` (`LocationID`, `LocationName`, `LocationDescription`, `L
 (9, 'Tolworth Station', 'Tolworth, South Western Railway', 'Kingston Road, Tolworth, Greater London', 'KT5 9NX', 51.3771, -0.2793),
 (10, 'Work', 'Kingston University, Department of Computer Science and Mathematics', '55-59, Penrhyn Road, Kingston upon Thames', 'KT1 2EE', 51.4034, -0.303481),
 (11, 'Amina\'s', 'Amina\'s house', '47 Green Lane\r\nNew Malden', 'KT3 5BX', 51.3979, -0.270778);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Modes`
+--
+
+CREATE TABLE `Modes` (
+  `ModeID` int(11) NOT NULL,
+  `ModeName` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Modes`
+--
+
+INSERT INTO `Modes` (`ModeID`, `ModeName`) VALUES
+(1, 'Walk'),
+(2, 'Run'),
+(3, 'Bicycle'),
+(4, 'Car'),
+(5, 'Taxi'),
+(6, 'Train'),
+(7, 'Underground'),
+(8, 'Bus');
 
 -- --------------------------------------------------------
 
@@ -311,6 +337,12 @@ ALTER TABLE `Locations`
   ADD PRIMARY KEY (`LocationID`);
 
 --
+-- Indexes for table `Modes`
+--
+ALTER TABLE `Modes`
+  ADD PRIMARY KEY (`ModeID`);
+
+--
 -- Indexes for table `Positions`
 --
 ALTER TABLE `Positions`
@@ -349,6 +381,12 @@ ALTER TABLE `Contacts`
 --
 ALTER TABLE `Locations`
   MODIFY `LocationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `Modes`
+--
+ALTER TABLE `Modes`
+  MODIFY `ModeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `Positions`
