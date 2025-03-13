@@ -36,6 +36,11 @@ const model = {
     let where = null;
     let parameters = {};
     switch (variant) {
+      case 'contacts':
+        table = `(${table} INNER JOIN Contacts ON ActivityUserID=ContactContactID)`;
+        where = 'ContactUserID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
       case 'users':
         where = 'ActivityUserID=:ID';
         parameters = { ID: parseInt(req.params.id) };

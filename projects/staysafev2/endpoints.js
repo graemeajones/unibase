@@ -37,6 +37,12 @@ const listOfEndpoints = [
             'Returns all the activities associated with a specific user identified by the id provided',
           example: `${API_PATH}/activities/users/1`,
         },
+        {
+          endpoint: '/contactsof/{id}',
+          description:
+            'Returns all the activities associated with the contacts of a specific user identified by the id provided',
+          example: `${API_PATH}/activities/contactsof/6?orderby=ActivityLeave&ActivityStatusID=1`,
+        },
       ],
       post: {
         endpoint: '/',
