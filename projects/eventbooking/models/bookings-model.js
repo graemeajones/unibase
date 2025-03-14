@@ -37,12 +37,8 @@ const model = {
     let where = null;
     let parameters = {};
     switch (variant) {
-      case 'course':
-        where = 'ClassCourseID=:ID';
-        parameters = { ID: parseInt(req.params.id) };
-        break;
       case 'primary':
-        where = 'ClassID=:ID';
+        where = 'BookingID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }
