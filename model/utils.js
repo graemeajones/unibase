@@ -31,8 +31,8 @@ export const constructPreparedStatement = (fields, table, where, parameters, fil
     parameters = Object.assign(parameters, filter.parameters);
   }
 
-  console.log(`SQL=[${sql}]`);
-  console.log(`Parameters=[${JSON.stringify(parameters)}]`);
+  // console.log(`SQL=[${sql}]`);
+  // console.log(`Parameters=[${JSON.stringify(parameters)}]`);
 
   return { sql, parameters };
 };
