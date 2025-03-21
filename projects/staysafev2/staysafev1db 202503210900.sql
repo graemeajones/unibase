@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2025 at 12:40 AM
+-- Generation Time: Mar 21, 2025 at 09:51 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -61,60 +61,61 @@ CREATE TABLE `Contacts` (
   `ContactUserID` int(11) NOT NULL,
   `ContactContactID` int(11) NOT NULL,
   `ContactLabel` varchar(32) NOT NULL,
-  `ContactDatecreated` date NOT NULL DEFAULT current_timestamp()
+  `ContactDatecreated` date NOT NULL DEFAULT current_timestamp(),
+  `ContactVisibility` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `Contacts`
 --
 
-INSERT INTO `Contacts` (`ContactID`, `ContactUserID`, `ContactContactID`, `ContactLabel`, `ContactDatecreated`) VALUES
-(1, 7, 5, 'Colleague', '2024-09-28'),
-(2, 2, 15, 'Friend', '2024-05-18'),
-(3, 6, 1, 'Partner', '2024-07-27'),
-(4, 4, 10, 'Partner', '2024-06-06'),
-(5, 10, 4, 'Partner', '2024-09-09'),
-(6, 23, 9, 'Friend', '2025-01-20'),
-(7, 10, 21, 'Bro!', '2024-09-22'),
-(8, 11, 3, 'Friend', '2024-08-27'),
-(9, 18, 17, 'Partner', '2024-10-11'),
-(10, 4, 21, 'Friend', '2024-06-19'),
-(11, 5, 7, 'Family', '2024-06-25'),
-(12, 16, 10, 'Friend', '2024-12-07'),
-(13, 20, 1, 'Best mate', '2025-01-01'),
-(14, 20, 6, 'Work colleague', '2025-01-08'),
-(15, 6, 12, 'School mate', '2024-08-02'),
-(16, 21, 4, 'Friend', '2025-01-27'),
-(17, 12, 6, 'Friend', '2024-10-24'),
-(18, 22, 3, 'Colleague', '2024-11-24'),
-(19, 10, 16, 'Bestie!', '2024-09-15'),
-(20, 13, 8, 'Friend', '2024-10-04'),
-(21, 15, 9, 'Soul mate!', '2024-11-12'),
-(22, 21, 10, 'Friend', '2025-02-02'),
-(23, 14, 12, 'Mate', '2024-07-08'),
-(24, 19, 17, 'Friend', '2024-12-20'),
-(25, 9, 2, 'Partner', '2024-08-15'),
-(26, 19, 18, 'Mate', '2024-12-26'),
-(27, 12, 14, 'Band', '2024-11-05'),
-(28, 1, 6, 'Friend', '2024-04-22'),
-(29, 17, 18, 'Partner', '2024-07-14'),
-(30, 17, 19, 'Friend', '2024-07-20'),
-(31, 22, 11, 'Friend', '2024-12-01'),
-(32, 9, 15, 'Partner in crime!', '2024-08-21'),
-(33, 2, 9, 'Partner', '2024-05-11'),
-(34, 11, 22, 'Friend', '2024-09-03'),
-(35, 15, 23, 'Friend', '2024-11-18'),
-(36, 1, 12, 'Partner', '2024-04-29'),
-(37, 18, 19, 'Friend', '2024-10-17'),
-(38, 3, 11, 'Friend', '2024-05-24'),
-(39, 1, 20, 'Bestie!', '2024-05-05'),
-(40, 12, 20, 'Friend', '2024-10-30'),
-(41, 8, 13, 'Friend', '2024-07-01'),
-(42, 23, 2, 'Colleague', '2025-01-14'),
-(43, 16, 21, 'Friend', '2024-12-13'),
-(44, 6, 20, 'Colleague', '2024-08-08'),
-(45, 3, 22, 'Friend', '2024-05-30'),
-(46, 4, 16, 'Colleague', '2024-06-12');
+INSERT INTO `Contacts` (`ContactID`, `ContactUserID`, `ContactContactID`, `ContactLabel`, `ContactDatecreated`, `ContactVisibility`) VALUES
+(1, 7, 5, 'Colleague', '2024-09-28', 1),
+(2, 2, 15, 'Friend', '2024-05-18', 0),
+(3, 6, 1, 'Partner', '2024-07-27', 1),
+(4, 4, 10, 'Partner', '2024-06-06', 1),
+(5, 10, 4, 'Partner', '2024-09-09', 1),
+(6, 23, 9, 'Friend', '2025-01-20', 0),
+(7, 10, 21, 'Bro!', '2024-09-22', 0),
+(8, 11, 3, 'Friend', '2024-08-27', 0),
+(9, 18, 17, 'Partner', '2024-10-11', 1),
+(10, 4, 21, 'Friend', '2024-06-19', 0),
+(11, 5, 7, 'Family', '2024-06-25', 1),
+(12, 16, 10, 'Friend', '2024-12-07', 0),
+(13, 20, 1, 'Best mate', '2025-01-01', 0),
+(14, 20, 6, 'Work colleague', '2025-01-08', 0),
+(15, 6, 12, 'School mate', '2024-08-02', 1),
+(16, 21, 4, 'Friend', '2025-01-27', 0),
+(17, 12, 6, 'Friend', '2024-10-24', 0),
+(18, 22, 3, 'Colleague', '2024-11-24', 1),
+(19, 10, 16, 'Bestie!', '2024-09-15', 0),
+(20, 13, 8, 'Friend', '2024-10-04', 0),
+(21, 15, 9, 'Soul mate!', '2024-11-12', 0),
+(22, 21, 10, 'Friend', '2025-02-02', 0),
+(23, 14, 12, 'Mate', '2024-07-08', 0),
+(24, 19, 17, 'Friend', '2024-12-20', 0),
+(25, 9, 2, 'Partner', '2024-08-15', 1),
+(26, 19, 18, 'Mate', '2024-12-26', 0),
+(27, 12, 14, 'Band', '2024-11-05', 1),
+(28, 1, 6, 'Friend', '2024-04-22', 1),
+(29, 17, 18, 'Partner', '2024-07-14', 1),
+(30, 17, 19, 'Friend', '2024-07-20', 0),
+(31, 22, 11, 'Friend', '2024-12-01', 0),
+(32, 9, 15, 'Partner in crime!', '2024-08-21', 0),
+(33, 2, 9, 'Partner', '2024-05-11', 1),
+(34, 11, 22, 'Friend', '2024-09-03', 0),
+(35, 15, 23, 'Friend', '2024-11-18', 0),
+(36, 1, 12, 'Partner', '2024-04-29', 1),
+(37, 18, 19, 'Friend', '2024-10-17', 0),
+(38, 3, 11, 'Friend', '2024-05-24', 1),
+(39, 1, 20, 'Bestie!', '2024-05-05', 0),
+(40, 12, 20, 'Friend', '2024-10-30', 0),
+(41, 8, 13, 'Friend', '2024-07-01', 0),
+(42, 23, 2, 'Colleague', '2025-01-14', 0),
+(43, 16, 21, 'Friend', '2024-12-13', 0),
+(44, 6, 20, 'Colleague', '2024-08-08', 0),
+(45, 3, 22, 'Friend', '2024-05-30', 1),
+(46, 4, 16, 'Colleague', '2024-06-12', 0);
 
 -- --------------------------------------------------------
 
