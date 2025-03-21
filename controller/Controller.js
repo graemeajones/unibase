@@ -20,7 +20,7 @@ class Controller {
     const { isValid, message: validatorMessage } = this.validator.post(req.body);
     if (!isValid) return res.status(404).json({ message: validatorMessage });
 
-    // Conform request body
+    // Conform request body prior to insertion
     req.body = this.validator.conform(req.body);
 
     // Access data
