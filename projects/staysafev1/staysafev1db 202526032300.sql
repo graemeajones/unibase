@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2025 at 09:51 AM
+-- Generation Time: Mar 26, 2025 at 11:45 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -268,7 +268,8 @@ INSERT INTO `Status` (`StatusID`, `StatusName`, `StatusOrder`) VALUES
 (2, 'Started', 2),
 (3, 'Paused', 3),
 (4, 'Cancelled', 4),
-(5, 'Completed', 5);
+(5, 'Completed', 5),
+(6, 'Panic', 6);
 
 -- --------------------------------------------------------
 
@@ -402,7 +403,7 @@ ALTER TABLE `Positions`
 -- AUTO_INCREMENT for table `Status`
 --
 ALTER TABLE `Status`
-  MODIFY `StatusID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `StatusID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `Users`
