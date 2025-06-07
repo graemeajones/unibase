@@ -1,21 +1,30 @@
 import mysql from 'mysql2/promise';
 
-const createDbConnectionPool = (databaseConfigFile) => {
-  console.log('Database configuration:', databaseConfigFile);
+let lastDatabaseName = '';
+let connectionPool = null;
 
-  try {
-    return mysql.createPool({
-      ...databaseConfigFile,
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0,
-      enableKeepAlive: true,
-      keepAliveInitialDelay: 0,
-    });
-  } catch (error) {
-    console.log('ERROR creating database connection: ' + error.message);
-    process.exit();
+const createDbConnectionPool = (databaseConfigFile) => {
+  // Only create a pool if its a new database
+  if (databaseConfigFile.database !== lastDatabaseName) {
+    lastDatabaseName = databaseConfigFile.database;
+
+    try {
+      console.log(`Create connection pool for ${databaseConfigFile.database} database`);
+      connectionPool = mysql.createPool({
+        ...databaseConfigFile,
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0,
+        enableKeepAlive: true,
+        keepAliveInitialDelay: 0,
+      });
+    } catch (error) {
+      console.log('ERROR creating database connection: ' + error.message);
+      process.exit();
+    }
   }
+
+  return connectionPool;
 };
 
 class Accessor {

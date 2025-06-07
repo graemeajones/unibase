@@ -1,14 +1,14 @@
 // Imports ---------------------------------------
 import { Router } from 'express';
 
-import eventsRouter from './routers/events-router.js';
+//import eventsRouter from './routers/events-router.js';
 import usersRouter from './routers/users-router.js';
 
 import API_URL from '#root/apiURL.js';
 
 // Available Endpoints ---------------------------
 
-const API_PATH = `${API_URL}/events/api`;
+const API_PATH = `${API_URL}/nimbl/api`;
 
 const listOfEndpoints = [
   {
@@ -82,7 +82,7 @@ const listOfEndpoints = [
 
 const router = new Router({ mergeParams: true });
 
-router.use('/events', eventsRouter);
+// router.use('/events', eventsRouter);
 router.use('/users', usersRouter);
 
 router.get('/', (req, res) =>
