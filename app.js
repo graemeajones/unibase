@@ -36,6 +36,10 @@ const listOfAPIs = [
     api: `${API_URL}/events/api`,
   },
   {
+    name: 'Nimbl',
+    api: `${API_URL}/nimbl/api`,
+  },
+  {
     name: 'StaysafeV1',
     api: `${API_URL}/staysafe/v1/api`,
   },
