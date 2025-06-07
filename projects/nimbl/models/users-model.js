@@ -10,7 +10,7 @@ const model = {
     const CLIENT = 1; // Primary key for client type in Usertypes table
 
     // Resolve Foreign Keys -------------------
-    let table = `((Users LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID)`;
+    let table = `(Users LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID)`;
     let fields = [model.idField, ...model.mutableFields, 'UsertypeName AS UserUsertypeName'];
 
     // Construct prepared statement -----------
