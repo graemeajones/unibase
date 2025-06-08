@@ -1,7 +1,8 @@
 // Imports ---------------------------------------
 import { Router } from 'express';
 
-//import eventsRouter from './routers/events-router.js';
+import petsRouter from './routers/pets-router.js';
+import tasksRouter from './routers/tasks-router.js';
 import usersRouter from './routers/users-router.js';
 import usertypesRouter from './routers/usertypes-router.js';
 
@@ -13,32 +14,74 @@ const API_PATH = `${API_URL}/nimbl/api`;
 
 const listOfEndpoints = [
   {
-    entity: 'Events',
-    sap: '/api/events',
+    entity: 'Pets',
+    sap: '/api/pets',
     services: {
       get: [
         {
           endpoint: '/',
-          description: 'Returns all events',
-          examples: [`${API_PATH}/events`],
+          description: 'Returns all pets',
+          examples: [`${API_PATH}/pets`],
         },
         {
           endpoint: '/{id}',
-          description: 'Returns the specific event identified by the id provided',
-          examples: `${API_PATH}/events/1`,
+          description: 'Returns the specific pet identified by the id provided',
+          examples: `${API_PATH}/pets/1`,
+        },
+        {
+          endpoint: '/users/{id}',
+          description:
+            'Returns those pets associated with the specific user identified by the id provided',
+          example: `${API_PATH}/pets/users/1`,
         },
       ],
       post: {
         endpoint: '/',
-        description: 'Insert a new event',
+        description: 'Insert a new pet',
       },
       put: {
         endpoint: '/{id}',
-        description: 'Update the specific event identified by the id provided',
+        description: 'Update the specific pet identified by the id provided',
       },
       delete: {
         endpoint: '/{id}',
-        description: 'Delete the specific event identified by the id provided',
+        description: 'Delete the specific pet identified by the id provided',
+      },
+    },
+  },
+  {
+    entity: 'Tasks',
+    sap: '/api/tasks',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all tasks',
+          examples: [`${API_PATH}/tasks`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific task identified by the id provided',
+          examples: `${API_PATH}/tasks/1`,
+        },
+        {
+          endpoint: '/pets/{id}',
+          description:
+            'Returns those tasks associated with the specific pet identified by the id provided',
+          example: `${API_PATH}/tasks/pets/1`,
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new task',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific task identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific task identified by the id provided',
       },
     },
   },
@@ -113,7 +156,8 @@ const listOfEndpoints = [
 
 const router = new Router({ mergeParams: true });
 
-// router.use('/events', eventsRouter);
+router.use('/pets', petsRouter);
+router.use('/tasks', tasksRouter);
 router.use('/users', usersRouter);
 router.use('/usertypes', usertypesRouter);
 

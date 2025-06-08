@@ -16,6 +16,7 @@ const model = {
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
+    // Resolve Foreign Keys -------------------
     let table = `((((Activities LEFT JOIN Users ON ActivityUserID=UserID) 
                                 LEFT JOIN Locations AS FromLocations ON ActivityFromID=FromLocations.LocationID)
                                 LEFT JOIN Locations AS ToLocations ON ActivityToID=ToLocations.LocationID)
@@ -28,6 +29,10 @@ const model = {
       'ToLocations.LocationName AS ActivityToName',
       'StatusName AS ActivityStatusName',
     ];
+
+    // Process request queries ----------------
+    const allowedQueryFields = [...model.mutableFields];
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
@@ -42,10 +47,6 @@ const model = {
         parameters = { ID: parseInt(req.params.id) };
         break;
     }
-
-    // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields];
-    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     return constructPreparedStatement(fields, table, where, parameters, filter, orderby);
   },

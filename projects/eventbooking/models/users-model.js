@@ -29,6 +29,15 @@ const model = {
       'UsertypeName AS UserUsertypeName',
     ];
 
+    // Process request queries ----------------
+    const allowedQueryFields = [
+      ...model.mutableFields,
+      'UserGenderName',
+      'UserUsertypeName',
+      'UserBookingstatusName',
+    ];
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
+
     // Construct prepared statement -----------
     let where = null;
     let parameters = {};
@@ -55,15 +64,6 @@ const model = {
         parameters = { ID: parseInt(req.params.id) };
         break;
     }
-
-    // Process request queries ----------------
-    const allowedQueryFields = [
-      ...model.mutableFields,
-      'UserGenderName',
-      'UserUsertypeName',
-      'UserBookingstatusName',
-    ];
-    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     return constructPreparedStatement(fields, table, where, parameters, filter, orderby);
   },

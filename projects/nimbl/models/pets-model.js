@@ -1,32 +1,41 @@
 import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: 'Users',
-  idField: 'UserID',
-  mutableFields: ['UserFirstname', 'UserLastname', 'UserImageURL', 'UserUsertypeID'],
+  table: 'Pets',
+  idField: 'PetID',
+  mutableFields: [
+    'PetName',
+    'PetType',
+    'PetBreed',
+    'PetColour',
+    'PetSex',
+    'PetAge',
+    'PetImageURL',
+    'PetOwnerID',
+  ],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    const CLIENT = 1; // Primary key for client type in Usertypes table
     let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
 
     // Resolve Foreign Keys -------------------
-    table = `(${table} LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID)`;
-    fields = [...fields, 'UsertypeName AS UserUsertypeName'];
+    table = `(${table} LEFT JOIN Users ON PetOwnerID=UserID)`;
+    fields = [...fields, 'CONCAT(UserLastname,", ",UserFirstname) AS PetOwnerName'];
 
     // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields, 'UserUsertypeName'];
+    const allowedQueryFields = [...model.mutableFields, 'PetOwnerName'];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
     let parameters = {};
     switch (variant) {
-      case 'clients':
-        where = `UserUsertypeID=${CLIENT}`;
+      case 'users':
+        where = 'PetOwnerID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
         break;
       case 'primary':
-        where = 'UserID=:ID';
+        where = 'PetID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }
