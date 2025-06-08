@@ -217,7 +217,7 @@ const listOfEndpoints = [
         {
           endpoint: '/{id}',
           description: 'Returns the specific provider identified by the id provided',
-          example: `${API_PATH}/providers/1`,
+          examples: `${API_PATH}/providers/1`,
         },
       ],
       post: {
@@ -247,23 +247,23 @@ const listOfEndpoints = [
         {
           endpoint: '/{id}',
           description: 'Returns the specific user identified by the id provided',
-          example: `${API_PATH}/users/1`,
+          examples: `${API_PATH}/users/1`,
         },
         {
           endpoint: '/instructors',
           description: 'Returns all instructors',
-          example: `${API_PATH}/users/instructors`,
+          examples: `${API_PATH}/users/instructors`,
         },
         {
           endpoint: '/clients',
           description: 'Returns all clients',
-          example: `${API_PATH}/users/clients`,
+          examples: `${API_PATH}/users/clients`,
         },
         {
           endpoint: '/classes/{id}',
           description:
             'Returns the set of users associated with the class identified by the id provided',
-          example: [
+          examples: [
             `${API_PATH}/users/classes/1`,
             `${API_PATH}/users/classes/1?UserBookingstatusName=Absent`,
           ],
@@ -296,7 +296,7 @@ const listOfEndpoints = [
         {
           endpoint: '/{id}',
           description: 'Returns the specific user type identified by the id provided',
-          example: `${API_PATH}/usertypes/1`,
+          examples: `${API_PATH}/usertypes/1`,
         },
       ],
       post: {

@@ -18,7 +18,7 @@ router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
 router.get('/providers/:id(\\d+)', (req, res) => controller.get(req, res, 'providers'));
 
 router.post('/', controller.post);
-router.put('/:id', controller.put);
-router.delete('/:id', controller.delete);
+router.put('/:id(\\d+)', controller.put);
+router.delete('/:id(\\d+)', controller.delete);
 
 export default router;

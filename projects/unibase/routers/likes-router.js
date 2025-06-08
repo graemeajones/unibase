@@ -19,7 +19,7 @@ router.get('/users/:id(\\d+)/likedby', (req, res) => controller.get(req, res, 'l
 router.get('/users/:id(\\d+)/wholikes', (req, res) => controller.get(req, res, 'wholikes'));
 
 router.post('/', controller.post);
-router.put('/:id', controller.put);
-router.delete('/:id', controller.delete);
+router.put('/:id(\\d+)', controller.put);
+router.delete('/:id(\\d+)', controller.delete);
 
 export default router;

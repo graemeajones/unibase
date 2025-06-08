@@ -21,7 +21,7 @@ router.get('/log/:id(\\d+)', (req, res) => controller.get(req, res, 'log'));
 router.get('/group/:id(\\d+)', (req, res) => controller.get(req, res, 'group'));
 
 router.post('/', controller.post);
-router.put('/:id', controller.put);
-router.delete('/:id', controller.delete);
+router.put('/:id(\\d+)', controller.put);
+router.delete('/:id(\\d+)', controller.delete);
 
 export default router;

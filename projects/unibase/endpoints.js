@@ -44,19 +44,19 @@ const listOfEndpoints = [
         {
           endpoint: '/{id}',
           description: 'Returns the specific assessment identified by the id provided',
-          example: `${API_PATH}/assessments/1`,
+          examples: `${API_PATH}/assessments/1`,
         },
         {
           endpoint: '/module/{id}',
           description:
             'Returns the set of assessments associated with the module identified by the id provided',
-          example: `${API_PATH}/assessments/module/1`,
+          examples: `${API_PATH}/assessments/module/1`,
         },
         {
           endpoint: '/leader/{id}',
           description:
             'Returns the set of assessments associated with all the modules led by the staff member identified by the id provided',
-          example: `${API_PATH}/assessments/leader/824`,
+          examples: `${API_PATH}/assessments/leader/824`,
         },
         {
           endpoint: '/users/{id}',
@@ -90,12 +90,12 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all assessment types',
-          example: `${API_PATH}/assessmenttypes`,
+          examples: `${API_PATH}/assessmenttypes`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific assessment type identified by the id provided',
-          example: `${API_PATH}/assessmenttypes/1`,
+          examples: `${API_PATH}/assessmenttypes/1`,
         },
       ],
       post: {
@@ -120,12 +120,12 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all attendance types',
-          example: `${API_PATH}/attendance`,
+          examples: `${API_PATH}/attendance`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific attendance type identified by the id provided',
-          example: `${API_PATH}/attendance/1`,
+          examples: `${API_PATH}/attendance/1`,
         },
       ],
     },
@@ -138,12 +138,12 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all completion types',
-          example: `${API_PATH}/completion`,
+          examples: `${API_PATH}/completion`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific completion type identified by the id provided',
-          example: `${API_PATH}/completion/1`,
+          examples: `${API_PATH}/completion/1`,
         },
       ],
     },
@@ -156,12 +156,12 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all confirmation values',
-          example: `${API_PATH}/confirmations`,
+          examples: `${API_PATH}/confirmations`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific confirmation identified by the id provided',
-          example: `${API_PATH}/confirmations/1`,
+          examples: `${API_PATH}/confirmations/1`,
         },
       ],
     },
@@ -174,24 +174,24 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all contributions',
-          example: `${API_PATH}/contributions`,
+          examples: `${API_PATH}/contributions`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific contribution identified by the id provided',
-          example: `${API_PATH}/contributions/1`,
+          examples: `${API_PATH}/contributions/1`,
         },
         {
           endpoint: '/log/{id}',
           description:
             'Returns the set of contributions associated with the log identified by the id provided',
-          example: `${API_PATH}/contributions/log/6`,
+          examples: `${API_PATH}/contributions/log/6`,
         },
         {
           endpoint: '/group/{id}',
           description:
             'Returns the set of contributions associated with the group identified by the id provided',
-          example: `${API_PATH}/contributions/group/1`,
+          examples: `${API_PATH}/contributions/group/1`,
         },
       ],
       post: {
@@ -221,7 +221,7 @@ const listOfEndpoints = [
         {
           endpoint: '/{id}',
           description: 'Returns the specific favourite identified by the id provided',
-          example: `${API_PATH}/favourites/1`,
+          examples: `${API_PATH}/favourites/1`,
         },
         {
           endpoint: '/users/{id}',
@@ -255,30 +255,30 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all groups',
-          example: `${API_PATH}/groups`,
+          examples: `${API_PATH}/groups`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific group identified by the id provided',
-          example: `${API_PATH}/groups/1`,
+          examples: `${API_PATH}/groups/1`,
         },
         {
           endpoint: '/assessment/{id}',
           description:
             'Returns the set of groups associated with the assessment identified by the id provided.',
-          example: `${API_PATH}/groups/assessment/10`,
+          examples: `${API_PATH}/groups/assessment/10`,
         },
         {
           endpoint: '/module/{id}',
           description:
             'Returns the set of groups associated with the module identified by the id provided.',
-          example: `${API_PATH}/groups/module/4`,
+          examples: `${API_PATH}/groups/module/4`,
         },
         {
           endpoint: '/users/{id}',
           description:
             'Returns the set of groups associated with the user identified by the id provided.',
-          example: `${API_PATH}/groups/users/276`,
+          examples: `${API_PATH}/groups/users/276`,
         },
       ],
       post: {
@@ -303,24 +303,24 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all group member records',
-          example: `${API_PATH}/groupmembers`,
+          examples: `${API_PATH}/groupmembers`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific group member record identified by the id provided',
-          example: `${API_PATH}/groupmembers/572`,
+          examples: `${API_PATH}/groupmembers/572`,
         },
         {
           endpoint: '/group/{id}',
           description:
             'Returns the set of group member records associated with the group identified by the id provided.',
-          example: `${API_PATH}/groupmembers/group/12`,
+          examples: `${API_PATH}/groupmembers/group/12`,
         },
         {
           endpoint: '/user/{id}',
           description:
             'Returns the set of group member records associated with the user identified by the id provided.',
-          example: `${API_PATH}/groupmembers/user/276`,
+          examples: `${API_PATH}/groupmembers/user/276`,
         },
       ],
       post: {
@@ -350,7 +350,7 @@ const listOfEndpoints = [
         {
           endpoint: '/{id}',
           description: 'Returns the specific like record identified by the id provided',
-          example: `${API_PATH}/likes/1580`,
+          examples: `${API_PATH}/likes/1580`,
         },
         {
           endpoint: '/users/{id}/likedby',
@@ -366,7 +366,7 @@ const listOfEndpoints = [
           endpoint: '/users/{id}/wholikes',
           description:
             'Returns the set of like records indicating those students who liked/disliked the specific user identified by the id provided',
-          example: `${API_PATH}/likes/users/277/wholikes`,
+          examples: `${API_PATH}/likes/users/277/wholikes`,
         },
       ],
       post: {
@@ -391,18 +391,18 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all logs',
-          example: `${API_PATH}/logs`,
+          examples: `${API_PATH}/logs`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific log identified by the id provided',
-          example: `${API_PATH}/logs/1`,
+          examples: `${API_PATH}/logs/1`,
         },
         {
           endpoint: '/group/{id}',
           description:
             'Returns the set of logs associated with the group identified by the id provided',
-          example: `${API_PATH}/logs/group/1`,
+          examples: `${API_PATH}/logs/group/1`,
         },
       ],
       post: {
@@ -427,24 +427,24 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all modules',
-          example: `${API_PATH}/modules`,
+          examples: `${API_PATH}/modules`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific module identified by the id provided',
-          example: `${API_PATH}/modules/1`,
+          examples: `${API_PATH}/modules/1`,
         },
         {
           endpoint: '/leader/{id}',
           description:
             'Returns the set of modules associated with the module leader (user) identified by the id provided',
-          example: `${API_PATH}/modules/leader/824`,
+          examples: `${API_PATH}/modules/leader/824`,
         },
         {
           endpoint: '/users/{id}',
           description:
             'Returns the set of modules associated with the student (user) identified by the id provided',
-          example: `${API_PATH}/modules/users/277`,
+          examples: `${API_PATH}/modules/users/277`,
         },
       ],
       post: {
@@ -469,24 +469,24 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all module member records',
-          example: `${API_PATH}/modulemembers`,
+          examples: `${API_PATH}/modulemembers`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific module member record identified by the id provided',
-          example: `${API_PATH}/modulemembers/2`,
+          examples: `${API_PATH}/modulemembers/2`,
         },
         {
           endpoint: '/module/{id}',
           description:
             'Returns the set of module member records associated with the module identified by the id provided.',
-          example: `${API_PATH}/modulemembers/module/1`,
+          examples: `${API_PATH}/modulemembers/module/1`,
         },
         {
           endpoint: '/user/{id}',
           description:
             'Returns the set of module member records associated with the user identified by the id provided.',
-          example: `${API_PATH}/modulemembers/user/276`,
+          examples: `${API_PATH}/modulemembers/user/276`,
         },
       ],
       post: {
@@ -511,24 +511,24 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all projects',
-          example: `${API_PATH}/projects`,
+          examples: `${API_PATH}/projects`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific project identified by the id provided',
-          example: `${API_PATH}/projects/1`,
+          examples: `${API_PATH}/projects/1`,
         },
         {
           endpoint: '/module/{id}',
           description:
             'Returns the set of projects associated with the module identified by the id provided',
-          example: `${API_PATH}/projects/module/4`,
+          examples: `${API_PATH}/projects/module/4`,
         },
         {
           endpoint: '/users/{id}',
           description:
             'Returns the set of projects associated with the student (user) identified by the id provided',
-          example: `${API_PATH}/projects/users/277`,
+          examples: `${API_PATH}/projects/users/277`,
         },
       ],
       post: {
@@ -553,12 +553,12 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all project status values',
-          example: `${API_PATH}/projectstatus`,
+          examples: `${API_PATH}/projectstatus`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific project status identified by the id provided',
-          example: `${API_PATH}/projectstatus/1`,
+          examples: `${API_PATH}/projectstatus/1`,
         },
       ],
     },
@@ -571,30 +571,30 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all proposals',
-          example: `${API_PATH}/proposals`,
+          examples: `${API_PATH}/proposals`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific proposal identified by the id provided',
-          example: `${API_PATH}/proposals/2`,
+          examples: `${API_PATH}/proposals/2`,
         },
         {
           endpoint: '/assessments/{id}',
           description:
             'Returns the set of proposals associated with the specific assessment identified by the id provided',
-          example: `${API_PATH}/proposals/assessments/13`,
+          examples: `${API_PATH}/proposals/assessments/13`,
         },
         {
           endpoint: '/assessments/{aid}/users/{uid}/proposedby',
           description:
             'Returns the set of proposals generated by a specific student for a specific assessment',
-          example: `${API_PATH}/proposals/assessments/13/proposedby/277`,
+          examples: `${API_PATH}/proposals/assessments/13/proposedby/277`,
         },
         {
           endpoint: '/assessments/{aid}/users/{id}/whoproposed',
           description:
             'Returns the set of proposals indicating those students who proposed a specific student for a specific assessment',
-          example: `${API_PATH}/proposals/assessments/13/whoproposed/527`,
+          examples: `${API_PATH}/proposals/assessments/13/whoproposed/527`,
         },
       ],
       post: {
@@ -619,45 +619,45 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all users',
-          example: `${API_PATH}/users`,
+          examples: `${API_PATH}/users`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific user identified by the id provided',
-          example: `${API_PATH}/users/276`,
+          examples: `${API_PATH}/users/276`,
         },
         {
           endpoint: '/student',
           description: 'Returns those user records associated with the usertype student',
-          example: `${API_PATH}/users/student`,
+          examples: `${API_PATH}/users/student`,
         },
         {
           endpoint: '/staff',
           description: 'Returns those user records associated with the usertype staff',
-          example: `${API_PATH}/users/staff`,
+          examples: `${API_PATH}/users/staff`,
         },
         {
           endpoint: '/usertype/{id}',
           description:
             'Returns the set of users associated with the usertype identified by the id provided',
-          example: `${API_PATH}/users/usertype/1`,
+          examples: `${API_PATH}/users/usertype/1`,
         },
         {
           endpoint: '/modules/{id}',
           description:
             'Returns the set of users associated with the module identified by the id provided',
-          example: `${API_PATH}/users/modules/4`,
+          examples: `${API_PATH}/users/modules/4`,
         },
         {
           endpoint: '/groups/{id}',
           description:
             'Returns the set of users associated with the group identified by the id provided',
-          example: `${API_PATH}/users/groups/1`,
+          examples: `${API_PATH}/users/groups/1`,
         },
         {
           endpoint: '/modules/{mid}/likes/{uid}',
           description: 'Returns the set of users in a specific module liked by a specific user',
-          example: `${API_PATH}/users/modules/4/likes/277`,
+          examples: `${API_PATH}/users/modules/4/likes/277`,
         },
         {
           endpoint: '/likes/{id}',
@@ -733,12 +733,12 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns the possible set of user type values',
-          example: `${API_PATH}/usertypes`,
+          examples: `${API_PATH}/usertypes`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific user type identified by the id provided',
-          example: `${API_PATH}/usertypes/1`,
+          examples: `${API_PATH}/usertypes/1`,
         },
       ],
       post: {
@@ -763,12 +763,12 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns the possible set of year records',
-          example: `${API_PATH}/years`,
+          examples: `${API_PATH}/years`,
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific year record identified by the id provided',
-          example: `${API_PATH}/years/1`,
+          examples: `${API_PATH}/years/1`,
         },
       ],
       post: {

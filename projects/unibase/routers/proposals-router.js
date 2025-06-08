@@ -24,7 +24,7 @@ router.get('/assessments/:aid(\\d+)/whoproposed/:uid(\\d+)', (req, res) =>
 );
 
 router.post('/', controller.post);
-router.put('/:id', controller.put);
-router.delete('/:id', controller.delete);
+router.put('/:id(\\d+)', controller.put);
+router.delete('/:id(\\d+)', controller.delete);
 
 export default router;

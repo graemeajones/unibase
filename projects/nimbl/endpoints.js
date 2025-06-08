@@ -25,7 +25,7 @@ const listOfEndpoints = [
         {
           endpoint: '/{id}',
           description: 'Returns the specific event identified by the id provided',
-          example: `${API_PATH}/events/1`,
+          examples: `${API_PATH}/events/1`,
         },
       ],
       post: {
