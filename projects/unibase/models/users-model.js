@@ -29,6 +29,7 @@ const model = {
       'YearName AS UserYearName',
     ];
 
+    // Process request queries ----------------
     const allowedQueryFields = [
       ...model.mutableFields,
       'UserYearName',
