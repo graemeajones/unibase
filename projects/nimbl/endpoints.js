@@ -26,13 +26,13 @@ const listOfEndpoints = [
         {
           endpoint: '/{id}',
           description: 'Returns the specific pet identified by the id provided',
-          examples: `${API_PATH}/pets/1`,
+          examples: [`${API_PATH}/pets/1`],
         },
         {
           endpoint: '/users/{id}',
           description:
             'Returns those pets associated with the specific user identified by the id provided',
-          example: `${API_PATH}/pets/users/1`,
+          examples: [`${API_PATH}/pets/users/1`],
         },
       ],
       post: {
@@ -62,13 +62,13 @@ const listOfEndpoints = [
         {
           endpoint: '/{id}',
           description: 'Returns the specific task identified by the id provided',
-          examples: `${API_PATH}/tasks/1`,
+          examples: [`${API_PATH}/tasks/1`],
         },
         {
           endpoint: '/pets/{id}',
           description:
             'Returns those tasks associated with the specific pet identified by the id provided',
-          example: `${API_PATH}/tasks/pets/1`,
+          examples: [`${API_PATH}/tasks/pets/1`],
         },
       ],
       post: {
@@ -93,17 +93,17 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all users',
-          example: `${API_PATH}/users`,
+          examples: [`${API_PATH}/users`],
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific user identified by the id provided',
-          example: `${API_PATH}/users/1`,
+          examples: [`${API_PATH}/users/1`],
         },
         {
           endpoint: '/clients',
           description: 'Returns all clients',
-          example: `${API_PATH}/users/clients`,
+          examples: [`${API_PATH}/users/clients`],
         },
       ],
       post: {
@@ -133,7 +133,7 @@ const listOfEndpoints = [
         {
           endpoint: '/{id}',
           description: 'Returns the specific user type identified by the id provided',
-          example: `${API_PATH}/usertypes/1`,
+          examples: [`${API_PATH}/usertypes/1`],
         },
       ],
       post: {
