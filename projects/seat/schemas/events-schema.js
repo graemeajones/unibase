@@ -3,13 +3,14 @@ import { joiValidDateString } from '#root/validator/utils.js';
 
 const schema = {};
 
-schema.mutableFields = ['EventName', 'EventDatetime', 'EventLocationID'];
+schema.mutableFields = ['EventName', 'EventDescription', 'EventDatetime', 'EventLocationID'];
 
 schema.record = joi
   .object({
     EventID: joi.number().integer().min(1).allow(null),
     EventName: joi.string().min(2),
-    EventDatetime: joiValidDateString,
+    EventDescription: joi.string().min(2),
+    EventDatetime: joiValidDateString.allow(null),
     EventLocationID: joi.number().integer().min(1).allow(null),
   })
   .required()

@@ -4,7 +4,6 @@ import { joiValidDateString } from '#root/validator/utils.js';
 const schema = {};
 
 schema.mutableFields = [
-  'ActivityID',
   'ActivityName',
   'ActivityUserID',
   'ActivityDescription',
