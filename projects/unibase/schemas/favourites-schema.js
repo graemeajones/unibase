@@ -2,7 +2,7 @@ import joi from 'joi';
 
 const schema = {};
 
-schema.mutableFields = ['FavouriteID', 'FavouriteLikerID', 'FavouriteLikedID', 'FavouriteCategory'];
+schema.mutableFields = ['FavouriteLikerID', 'FavouriteLikedID', 'FavouriteCategory'];
 
 schema.record = joi
   .object({

@@ -2,7 +2,7 @@ import joi from 'joi';
 
 const schema = {};
 
-schema.mutableFields = ['ProviderID', 'ProviderName'];
+schema.mutableFields = ['ProviderName'];
 
 schema.record = joi
   .object({
