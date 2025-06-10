@@ -2,6 +2,8 @@
 import { Router } from 'express';
 
 import eventsRouter from './routers/events-router.js';
+import locationsRouter from './routers/locations-router.js';
+import rolesRouter from './routers/roles-router.js';
 import usersRouter from './routers/users-router.js';
 import usertypesRouter from './routers/usertypes-router.js';
 
@@ -39,6 +41,66 @@ const listOfEndpoints = [
       delete: {
         endpoint: '/{id}',
         description: 'Delete the specific event identified by the id provided',
+      },
+    },
+  },
+  {
+    entity: 'Locations',
+    sap: '/api/locations',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all locations',
+          examples: [`${API_PATH}/locations`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific location identified by the id provided',
+          examples: [`${API_PATH}/locations/1`],
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new location',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific location identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific location identified by the id provided',
+      },
+    },
+  },
+  {
+    entity: 'Roles',
+    sap: '/api/roles',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all roles',
+          examples: [`${API_PATH}/roles`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific role identified by the id provided',
+          examples: [`${API_PATH}/roles/1`],
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new role',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific role identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific role identified by the id provided',
       },
     },
   },
@@ -120,6 +182,8 @@ const listOfEndpoints = [
 const router = new Router({ mergeParams: true });
 
 router.use('/events', eventsRouter);
+router.use('/locations', locationsRouter);
+router.use('/roles', rolesRouter);
 router.use('/users', usersRouter);
 router.use('/usertypes', usertypesRouter);
 
