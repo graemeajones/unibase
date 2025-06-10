@@ -1,32 +1,28 @@
 import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: 'Users',
-  idField: 'UserID',
-  mutableFields: ['UserFirstname', 'UserLastname', 'UserEmail', 'UserImageURL', 'UserUsertypeID'],
+  table: 'Events',
+  idField: 'EventID',
+  mutableFields: ['EventName', 'EventDatetime', 'EventLocationID'],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    const CLIENT = 1; // Primary key for client type in Usertypes table
     let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
 
     // Resolve Foreign Keys -------------------
-    table = `(${table} LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID)`;
-    fields = [...fields, 'UsertypeName AS UserUsertypeName'];
+    table = `(${table} LEFT JOIN Locations ON EventLocationID=LocationID)`;
+    fields = [...fields, 'LocationName AS EventLocationName'];
 
     // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields, 'UserUsertypeName'];
+    const allowedQueryFields = [...model.mutableFields, 'EventLocationName'];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
     let parameters = {};
     switch (variant) {
-      case 'clients':
-        where = `UserUsertypeID=${CLIENT}`;
-        break;
       case 'primary':
-        where = 'UserID=:ID';
+        where = 'EventID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }
