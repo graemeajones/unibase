@@ -8,6 +8,7 @@ schema.mutableFields = [
   'UserEmail',
   'UserImageURL',
   'UserUsertypeID',
+  'UserRoleID',
 ];
 
 schema.record = joi
@@ -18,6 +19,7 @@ schema.record = joi
     UserEmail: joi.string().email(),
     UserImageURL: joi.string().uri(),
     UserUsertypeID: joi.number().integer().min(1).allow(null),
+    UserRoleID: joi.number().integer().min(1).allow(null),
   })
   .required()
   .unknown(true);

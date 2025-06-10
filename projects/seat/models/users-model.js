@@ -3,27 +3,31 @@ import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils
 const model = {
   table: 'Users',
   idField: 'UserID',
-  mutableFields: ['UserFirstname', 'UserLastname', 'UserEmail', 'UserImageURL', 'UserUsertypeID'],
+  mutableFields: ['UserFirstname', 'UserLastname', 'UserImageURL', 'UserUsertypeID', 'UserRoleID'],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    const CLIENT = 1; // Primary key for client type in Usertypes table
+    const EMPLOYEE = 1; // Primary key for client type in Usertypes table
     let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
 
     // Resolve Foreign Keys -------------------
-    table = `(${table} LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID)`;
-    fields = [...fields, 'UsertypeName AS UserUsertypeName'];
+    table = `((${table} LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID) LEFT JOIN Roles ON UserRoleID=RoleID)`;
+    fields = [...fields, 'UsertypeName AS UserUsertypeName', 'RoleName AS UserRoleName'];
 
     // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields, 'UserUsertypeName'];
+    const allowedQueryFields = [...model.mutableFields, 'UserUsertypeName', 'UserRoleName'];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
     let parameters = {};
     switch (variant) {
-      case 'clients':
-        where = `UserUsertypeID=${CLIENT}`;
+      case 'employees':
+        where = `UserUsertypeID=${EMPLOYEE}`;
+        break;
+      case 'roles':
+        where = 'UserRoleID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
         break;
       case 'primary':
         where = 'UserID=:ID';
