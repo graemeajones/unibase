@@ -6,6 +6,7 @@ const model = {
   mutableFields: [
     'UserFirstname',
     'UserLastname',
+    'UserEmail',
     'UserDateofbirth',
     'UserImageURL',
     'UserUsertypeID',
