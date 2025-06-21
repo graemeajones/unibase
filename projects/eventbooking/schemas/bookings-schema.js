@@ -1,5 +1,5 @@
 import joi from 'joi';
-import { joiValidDateString } from '#root/validator/utils.js';
+import { joiValidISOdatetime } from '#root/validator/utils.js';
 
 const schema = {};
 
@@ -15,7 +15,7 @@ schema.record = joi
     BookingID: joi.number().integer().min(1).allow(null),
     BookingUserID: joi.number().integer().min(1).allow(null),
     BookingClassID: joi.number().integer().min(1).allow(null),
-    BookingBookingdate: joiValidDateString,
+    BookingBookingdate: joi.date().iso(),
     BookingBookingstatusID: joi.number().integer().min(1).allow(null),
   })
   .required()

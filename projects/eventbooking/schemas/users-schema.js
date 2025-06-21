@@ -1,5 +1,5 @@
 import joi from 'joi';
-import { joiValidDateString } from '#root/validator/utils.js';
+import { joiValidISOdatetime } from '#root/validator/utils.js';
 
 const schema = {};
 
@@ -21,8 +21,8 @@ schema.record = joi
     UserLastname: joi.string().min(3),
     UserEmail: joi.string().email(),
     UserPhone: joi.string().min(12),
-    UserDatejoined: joiValidDateString,
-    UserDateofbirth: joiValidDateString,
+    UserDatejoined: joiValidISOdatetime,
+    UserDateofbirth: joiValidISOdatetime,
     UserGenderID: joi.number().integer().min(1).allow(null),
     UserUsertypeID: joi.number().integer().min(1).allow(null),
   })

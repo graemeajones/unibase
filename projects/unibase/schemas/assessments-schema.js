@@ -1,5 +1,5 @@
 import joi from 'joi';
-import { joiValidDateString } from '#root/validator/utils.js';
+import { joiValidISOdatetime } from '#root/validator/utils.js';
 
 const schema = {};
 
@@ -19,9 +19,9 @@ schema.record = joi
     AssessmentID: joi.number().integer().min(1).allow(null),
     AssessmentName: joi.string().min(8),
     AssessmentPercentage: joi.number().integer().min(1).max(100),
-    AssessmentPublishdate: joiValidDateString,
-    AssessmentSubmissiondate: joiValidDateString.allow(null),
-    AssessmentFeedbackdate: joiValidDateString.allow(null),
+    AssessmentPublishdate: joiValidISOdatetime,
+    AssessmentSubmissiondate: joiValidISOdatetime.allow(null),
+    AssessmentFeedbackdate: joiValidISOdatetime.allow(null),
     AssessmentBriefURL: joi.string().uri(),
     AssessmentModuleID: joi.number().integer().min(1).allow(null),
     AssessmentAssessmenttypeID: joi.number().integer().min(1).allow(null),
