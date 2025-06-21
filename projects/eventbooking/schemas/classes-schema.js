@@ -20,7 +20,7 @@ schema.record = joi
     ClassCourseID: joi.number().integer().min(1).allow(null),
     ClassTitle: joi.string().min(8),
     ClassDay: joiValidISOdatetime,
-    ClassTime: joi.string().regex(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$$/),
+    ClassTime: joi.string().regex(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/),
     ClassDuration: joi.number().integer().min(1),
     ClassLocationID: joi.number().integer().min(1).allow(null),
     ClassCapacity: joi.number().integer().min(1),

@@ -5,6 +5,10 @@ export const joiValidISOdatetime = joi.string().regex(
   // /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/
 );
 
+export const joiValidHHMMSSwithColonDelimiters = joi
+  .string()
+  .regex(/^([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/);
+
 export const joiValidGPS = {
   latitude: joi.number().min(-90.0).max(90.0),
   longitude: joi.number().min(-180.0).max(180.0),
