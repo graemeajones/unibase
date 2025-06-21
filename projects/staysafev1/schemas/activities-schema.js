@@ -1,5 +1,5 @@
 import joi from 'joi';
-import { joiValidDateString } from '#root/validator/utils.js';
+import { joiValidISOdatetime } from '#root/validator/utils.js';
 
 const schema = {};
 
@@ -22,9 +22,9 @@ schema.record = joi
     ActivityUserID: joi.number().integer().min(1),
     ActivityDescription: joi.string().min(4).max(255),
     ActivityFromID: joi.number().integer().min(1),
-    ActivityLeave: joiValidDateString,
+    ActivityLeave: joiValidISOdatetime,
     ActivityToID: joi.number().integer().min(1),
-    ActivityArrive: joiValidDateString,
+    ActivityArrive: joiValidISOdatetime,
     ActivityStatusID: joi.number().integer().min(1),
   })
   .required()

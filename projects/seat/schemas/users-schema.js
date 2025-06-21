@@ -1,4 +1,5 @@
 import joi from 'joi';
+import { joiValidISOdatetime } from '#root/validator/utils.js';
 
 const schema = {};
 
@@ -17,7 +18,7 @@ schema.record = joi
     UserID: joi.number().integer().min(1).allow(null),
     UserFirstname: joi.string().min(2),
     UserLastname: joi.string().min(3),
-    UserDateofbirth: joi.date().iso(),
+    UserDateofbirth: joi.date().iso().allow(null),
     UserEmail: joi.string().email(),
     UserImageURL: joi.string().uri(),
     UserUsertypeID: joi.number().integer().min(1).allow(null),
@@ -26,6 +27,8 @@ schema.record = joi
   .required()
   .unknown(true);
 
-schema.conformor = {};
+schema.conformor = {
+  UserDateofbirth: (value) => (value === null ? null : new Date(value)),
+};
 
 export default schema;
