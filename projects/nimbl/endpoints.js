@@ -1,6 +1,7 @@
 // Imports ---------------------------------------
 import { Router } from 'express';
 
+import eventsRouter from './routers/events-router.js';
 import petsRouter from './routers/pets-router.js';
 import tasksRouter from './routers/tasks-router.js';
 import usersRouter from './routers/users-router.js';
@@ -13,6 +14,48 @@ import API_URL from '#root/apiURL.js';
 const API_PATH = `${API_URL}/nimbl/api`;
 
 const listOfEndpoints = [
+  {
+    entity: 'Events',
+    sap: '/api/events',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all events',
+          examples: [`${API_PATH}/events`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific event identified by the id provided',
+          examples: [`${API_PATH}/events/1`],
+        },
+        {
+          endpoint: '/pets/{id}',
+          description:
+            'Returns those events associated with the specific pet identified by the id provided',
+          examples: [`${API_PATH}/events/pets/1`],
+        },
+        {
+          endpoint: '/users/{id}',
+          description:
+            'Returns those events associated with the specific owner identified by the id provided',
+          examples: [`${API_PATH}/events/users/1`],
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new event',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific event identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific event identified by the id provided',
+      },
+    },
+  },
   {
     entity: 'Pets',
     sap: '/api/pets',
@@ -31,7 +74,7 @@ const listOfEndpoints = [
         {
           endpoint: '/users/{id}',
           description:
-            'Returns those pets associated with the specific user identified by the id provided',
+            'Returns those pets associated with the specific owner identified by the id provided',
           examples: [`${API_PATH}/pets/users/1`],
         },
       ],
@@ -156,6 +199,7 @@ const listOfEndpoints = [
 
 const router = new Router({ mergeParams: true });
 
+router.use('/events', eventsRouter);
 router.use('/pets', petsRouter);
 router.use('/tasks', tasksRouter);
 router.use('/users', usersRouter);

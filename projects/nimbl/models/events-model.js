@@ -1,29 +1,20 @@
 import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: 'Pets',
-  idField: 'PetID',
-  mutableFields: [
-    'PetName',
-    'PetType',
-    'PetBreed',
-    'PetColour',
-    'PetSex',
-    'PetAge',
-    'PetImageURL',
-    'PetOwnerID',
-  ],
+  table: 'Events',
+  idField: 'EventID',
+  mutableFields: ['EventName', 'EventDescription', 'EventStart', 'EventDuration', 'EventPetID'],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
     let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
 
     // Resolve Foreign Keys -------------------
-    table = `(${table} LEFT JOIN Users ON PetOwnerID=UserID)`;
-    fields = [...fields, 'CONCAT(UserLastname,", ",UserFirstname) AS PetOwnerName'];
+    table = `(${table} LEFT JOIN Pets ON EventPetID=PetID)`;
+    fields = [...fields, 'PetName AS EventPetName'];
 
     // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields, 'PetOwnerName'];
+    const allowedQueryFields = [...model.mutableFields, 'EventOwnerName'];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
@@ -34,8 +25,12 @@ const model = {
         where = 'PetOwnerID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
+      case 'pets':
+        where = 'EventPetID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
       case 'primary':
-        where = 'PetID=:ID';
+        where = 'EventID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }
