@@ -1,5 +1,4 @@
 import joi from 'joi';
-import { joiValidISOdatetime } from '#root/validator/utils.js';
 
 const schema = {};
 
@@ -16,13 +15,15 @@ schema.record = joi
     EventID: joi.number().integer().min(1).allow(null),
     EventName: joi.string().min(8),
     EventDescription: joi.string().min(8),
-    EventStart: joiValidISOdatetime,
+    EventStart: joi.date().iso(),
     EventDuration: joi.number().integer().min(1),
     EventPetID: joi.number().integer().min(1).allow(null),
   })
   .required()
   .unknown(true);
 
-schema.conformor = {};
+schema.conformor = {
+  EventStart: (value) => (value === null ? null : new Date(value)),
+};
 
 export default schema;
