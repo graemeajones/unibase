@@ -1,5 +1,4 @@
 import joi from 'joi';
-import { joiValidISOdatetime } from '#root/validator/utils.js';
 
 const schema = {};
 
@@ -16,7 +15,7 @@ schema.record = joi
     ProjectID: joi.number().integer().min(1).allow(null),
     ProjectName: joi.string().min(8),
     ProjectGroupsize: joi.number().integer().min(2),
-    ProjectStartdate: joiValidISOdatetime,
+    ProjectStartdate: joi.date().iso(),
     ProjectProjectstatusID: joi.number().integer().min(1).allow(null),
     ProjectModuleID: joi.number().integer().min(1).allow(null),
   })

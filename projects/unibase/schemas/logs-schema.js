@@ -1,5 +1,4 @@
 import joi from 'joi';
-import { joiValidISOdatetime } from '#root/validator/utils.js';
 
 const schema = {};
 
@@ -10,7 +9,7 @@ schema.record = joi
     LogID: joi.number().integer().min(1).allow(null),
     LogName: joi.string().min(5).max(128),
     LogGroupID: joi.number().integer().min(1),
-    LogSubmissiondate: joiValidISOdatetime,
+    LogSubmissiondate: joi.date().iso(),
   })
   .required()
   .unknown(true);

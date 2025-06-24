@@ -1,5 +1,4 @@
 import joi from 'joi';
-import { joiValidISOdatetime } from '#root/validator/utils.js';
 
 const schema = {};
 
@@ -17,7 +16,7 @@ schema.record = joi
     ContactUserID: joi.number().integer().min(1).required(),
     ContactContactID: joi.number().integer().min(1).required(),
     ContactLabel: joi.string().min(4).max(32).required(),
-    ContactDatecreated: joiValidISOdatetime.optional(),
+    ContactDatecreated: joi.date().iso().optional(),
     ContactVisibility: joi.boolean().allow(0, 1).optional(),
   })
   .unknown(true);

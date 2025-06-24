@@ -1,5 +1,4 @@
 import joi from 'joi';
-import { joiValidISOdatetime } from '#root/validator/utils.js';
 
 const schema = {};
 
@@ -22,9 +21,9 @@ schema.record = joi
     ActivityUserID: joi.number().integer().min(1),
     ActivityDescription: joi.string().min(4).max(255),
     ActivityFromID: joi.number().integer().min(1),
-    ActivityLeave: joiValidISOdatetime,
+    ActivityLeave: joi.date().iso(),
     ActivityToID: joi.number().integer().min(1),
-    ActivityArrive: joiValidISOdatetime,
+    ActivityArrive: joi.date().iso(),
     ActivityModeID: joi.number().integer().min(1).allow(null),
     ActivityStatusID: joi.number().integer().min(1),
   })

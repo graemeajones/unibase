@@ -1,5 +1,4 @@
 import joi from 'joi';
-import { joiValidISOdatetime } from '#root/validator/utils.js';
 
 const schema = {};
 
@@ -18,8 +17,8 @@ schema.record = joi
     TaskID: joi.number().integer().min(1).allow(null),
     TaskName: joi.string().min(2),
     TaskDescription: joi.string().min(3),
-    TaskStart: joiValidISOdatetime,
-    TaskEnd: joiValidISOdatetime,
+    TaskStart: joi.date().iso(),
+    TaskEnd: joi.date().iso(),
     TaskImportance: joi.number().integer().min(0),
     TaskDifficulty: joi.number().integer().min(0),
     TaskPetID: joi.number().integer().min(1).allow(null),
