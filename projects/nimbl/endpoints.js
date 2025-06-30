@@ -113,6 +113,12 @@ const listOfEndpoints = [
             'Returns those tasks associated with the specific pet identified by the id provided',
           examples: [`${API_PATH}/tasks/pets/1`],
         },
+        {
+          endpoint: '/users/{id}',
+          description:
+            'Returns those tasks associated with the specific owner identified by the id provided',
+          examples: [`${API_PATH}/tasks/users/1`],
+        },
       ],
       post: {
         endpoint: '/',

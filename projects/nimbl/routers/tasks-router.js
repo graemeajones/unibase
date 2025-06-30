@@ -16,6 +16,7 @@ const router = new Router();
 router.get('/', (req, res) => controller.get(req, res, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
 router.get('/pets/:id(\\d+)', (req, res) => controller.get(req, res, 'pets'));
+router.get('/users/:id(\\d+)', (req, res) => controller.get(req, res, 'users'));
 
 router.post('/', controller.post);
 router.put('/:id(\\d+)', controller.put);

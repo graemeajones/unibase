@@ -29,6 +29,10 @@ const model = {
     let where = null;
     let parameters = {};
     switch (variant) {
+      case 'users':
+        where = 'PetOwnerID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
       case 'pets':
         where = 'TaskPetID=:ID';
         parameters = { ID: parseInt(req.params.id) };
