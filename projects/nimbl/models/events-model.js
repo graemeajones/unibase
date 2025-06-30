@@ -14,14 +14,14 @@ const model = {
     fields = [...fields, 'PetName AS EventPetName'];
 
     // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields, 'EventOwnerName'];
+    const allowedQueryFields = [...model.mutableFields, 'EventPetName'];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
     let parameters = {};
     switch (variant) {
-      case 'owners':
+      case 'users':
         where = 'PetOwnerID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
