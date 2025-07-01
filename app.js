@@ -9,6 +9,7 @@ import seatRouter from './projects/seat/endpoints.js';
 import staysafev1Router from './projects/staysafev1/endpoints.js';
 import staysafev2Router from './projects/staysafev2/endpoints.js';
 import unibaseRouter from './projects/unibase/endpoints.js';
+import wasRouter from './projects/was/endpoints.js';
 
 import API_URL from '#root/apiURL.js';
 
@@ -57,6 +58,10 @@ const listOfAPIs = [
     name: 'Unibase',
     api: `${API_URL}/api`,
   },
+  {
+    name: 'WAS',
+    api: `${API_URL}/was/api`,
+  },
 ];
 
 app.use('/aiis/api', AIISRouter);
@@ -65,6 +70,7 @@ app.use('/nimbl/api', nimblRouter);
 app.use('/seat/api', seatRouter);
 app.use('/staysafe/v1/api', staysafev1Router);
 app.use('/staysafe/v2/api', staysafev2Router);
+app.use('/was/api', wasRouter);
 app.use('/api', unibaseRouter);
 
 app.get('/', (req, res) =>
