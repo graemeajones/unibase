@@ -1,7 +1,7 @@
 class Validator {
   constructor(schema) {
-    this.postBodySchema = schema.record.and(...schema.mutableFields);
-    this.putBodySchema = schema.record.or(...schema.mutableFields);
+    this.postBodySchema = schema.record.and(...schema.requiredFields);
+    this.putBodySchema = schema.record;
     this.conformor = schema.conformor;
   }
 

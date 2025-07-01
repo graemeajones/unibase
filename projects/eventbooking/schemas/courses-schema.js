@@ -2,7 +2,7 @@ import joi from 'joi';
 
 const schema = {};
 
-schema.mutableFields = ['CourseName', 'CourseProviderID'];
+schema.requiredFields = ['CourseName', 'CourseProviderID'];
 
 schema.record = joi
   .object({

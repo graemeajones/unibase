@@ -2,7 +2,7 @@ import joi from 'joi';
 
 const schema = {};
 
-schema.mutableFields = [
+schema.requiredFields = [
   'AssessmentName',
   'AssessmentPercentage',
   'AssessmentPublishdate',

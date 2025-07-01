@@ -13,15 +13,17 @@ class Model {
       'SET '
     );
 
+  recoverAllowedFieldsInRecord = (allowedFields, record) =>
+    allowedFields.filter((field) => record.hasOwnProperty(field));
+
   buildCreateQuery = (req) => {
-    const sql = `INSERT INTO ${this.table} ` + this.buildSetFields(this.mutableFields);
+    const allowedRecordFields = this.recoverAllowedFieldsInRecord(this.mutableFields, req.body);
+    const sql = `INSERT INTO ${this.table} ` + this.buildSetFields(allowedRecordFields);
     return { sql, parameters: req.body };
   };
 
   buildUpdateQuery = (req) => {
-    const allowedRecordFields = this.mutableFields.filter((field) =>
-      req.body.hasOwnProperty(field)
-    );
+    const allowedRecordFields = this.recoverAllowedFieldsInRecord(this.mutableFields, req.body);
     const sql =
       `UPDATE ${this.table} ` +
       this.buildSetFields(allowedRecordFields) +

@@ -2,7 +2,7 @@ import joi from 'joi';
 
 const schema = {};
 
-schema.mutableFields = ['TechnologyName'];
+schema.requiredFields = ['TechnologyName'];
 
 schema.record = joi
   .object({
