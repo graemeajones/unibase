@@ -3,7 +3,7 @@ import { joiValidGPS } from '#root/validator/utils.js';
 
 const schema = {};
 
-schema.mutableFields = [
+schema.requiredFields = [
   'LocationName',
   'LocationDescription',
   'LocationAddress',

@@ -2,13 +2,7 @@ import joi from 'joi';
 
 const schema = {};
 
-schema.mutableFields = [
-  'UserFirstname',
-  'UserLastname',
-  'UserEmail',
-  'UserImageURL',
-  'UserUsertypeID',
-];
+schema.requiredFields = ['UserFirstname', 'UserLastname', 'UserEmail', 'UserImageURL'];
 
 schema.record = joi
   .object({
@@ -18,6 +12,8 @@ schema.record = joi
     UserEmail: joi.string().email(),
     UserImageURL: joi.string().uri(),
     UserUsertypeID: joi.number().integer().min(1).allow(null),
+    UserLevel: joi.number().integer().min(0).optional(),
+    UserGems: joi.number().integer().min(0),
   })
   .required()
   .unknown(true);

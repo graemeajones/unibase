@@ -2,7 +2,7 @@ import joi from 'joi';
 
 const schema = {};
 
-schema.mutableFields = ['ModulememberModuleID', 'ModulememberUserID'];
+schema.requiredFields = ['ModulememberModuleID', 'ModulememberUserID'];
 
 schema.record = joi
   .object({

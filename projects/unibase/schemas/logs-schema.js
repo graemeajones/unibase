@@ -2,7 +2,7 @@ import joi from 'joi';
 
 const schema = {};
 
-schema.mutableFields = ['LogName', 'LogGroupID', 'LogSubmissiondate'];
+schema.requiredFields = ['LogName', 'LogGroupID', 'LogSubmissiondate'];
 
 schema.record = joi
   .object({
