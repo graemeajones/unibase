@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 23, 2025 at 01:50 AM
--- Server version: 10.4.28-MariaDB
+-- Host: 141.94.205.33
+-- Generation Time: Jul 02, 2025 at 01:42 PM
+-- Server version: 10.11.2-MariaDB-1
 -- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -41,7 +41,8 @@ CREATE TABLE `Events` (
 --
 
 INSERT INTO `Events` (`EventID`, `EventName`, `EventDescription`, `EventStart`, `EventDuration`, `EventPetID`) VALUES
-(1, 'Vet Appointment', 'Annual check-up and vaccinations', '2025-07-01 10:00:00', 60, 1);
+(1, 'Vet Appointment', 'Annual check-up and vaccinations', '2025-07-01 10:00:00', 60, 1),
+(2, 'Vet Appointment', 'Worming at vet', '2025-08-27 15:30:00', 15, 3);
 
 -- --------------------------------------------------------
 
@@ -122,7 +123,11 @@ INSERT INTO `Tasks` (`TaskID`, `TaskName`, `TaskDescription`, `TaskStart`, `Task
 (10, 'Play Fetch', 'Play fetch in the backyard for exercise.', '2025-06-30 16:00:00', '2025-06-30 16:30:00', 3, 1, 14),
 (11, 'Feed Breakfast', 'Give morning meal and fresh water.', '2025-07-02 08:00:00', '2025-07-02 08:15:00', 5, 1, 16),
 (12, 'Evening Walk', 'Take dog for an evening walk around the park.', '2025-07-05 18:00:00', '2025-07-05 18:45:00', 5, 2, 19),
-(13, 'Playtime', 'Interactive play with toys to keep pet active.', '2025-07-06 12:00:00', '2025-07-06 12:30:00', 3, 1, 20);
+(13, 'Playtime', 'Interactive play with toys to keep pet active.', '2025-07-06 12:00:00', '2025-07-06 12:30:00', 3, 1, 20),
+(14, 'Playtime with Toys', 'Spend 30 minutes playing with favorite toys.', '2025-06-24 14:30:00', '2025-06-26 13:30:00', 5, 1, 1),
+(15, 'Evening Walk', 'Take the rabit for an evening walk around the park.', '2025-06-27 11:30:00', '2025-06-27 19:00:00', 3, 2, 1),
+(16, 'Clipping nails', 'Wimbledon Petticure', '2025-08-02 11:00:00', '2025-08-02 12:00:00', 2, 3, 3),
+(17, 'Clipping nails', 'Wimbledon Petticure', '2025-08-02 11:00:00', '2025-08-02 12:00:00', 2, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -136,30 +141,34 @@ CREATE TABLE `Users` (
   `UserLastname` varchar(64) NOT NULL,
   `UserEmail` varchar(128) NOT NULL,
   `UserImageURL` varchar(256) NOT NULL,
-  `UserUsertypeID` int(11) DEFAULT NULL
+  `UserUsertypeID` int(11) DEFAULT NULL,
+  `UserLevel` int(11) NOT NULL DEFAULT 0,
+  `UserGems` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `Users`
 --
 
-INSERT INTO `Users` (`UserID`, `UserFirstname`, `UserLastname`, `UserEmail`, `UserImageURL`, `UserUsertypeID`) VALUES
-(1, 'Graeme', 'Jones', 'G.Jones@kingston.ac.uk', 'https://avatars.githubusercontent.com/u/48164351?s=400&u=70e6fedaa5b9cd794807b73c5748f72af4efc328&v=4', 1),
-(2, 'Bob', 'Ross', 'bross@kingston.ac.uk', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRoHDdcekKSGl-5gzbOJNeVbtgpqdwhljlrkYDIw9I58UA2r81dnE_Pof4_E5IQhzLpM5PMKsKP5OIR4aAZwz8zpg', 1),
-(3, 'Alice', 'Nguyen', 'alice.nguyen@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMzgwNjkuanBlZw==', 1),
-(4, 'James', 'Taylor', 'james.taylor@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQxMTM2OS5qcGVn', 1),
-(5, 'David', 'Clark', 'david.clark@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMjY3MzUuanBlZw==', 1),
-(6, 'Sophia', 'Martin', 'sophia.martin@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQ0MDYwOC5qcGVn', 1),
-(7, 'Liam', 'Brown', 'liam.brown@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMTQwNzcuanBlZw==', 1),
-(8, 'Emily', 'Kim', 'emily.kim@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQxMjg0NS5qcGVn', 1),
-(9, 'Noah', 'Anderson', 'noah.anderson@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMzkzMzguanBlZw==', 1),
-(10, 'Ava', 'Singh', 'ava.singh@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkOTk5OC5qcGVn', 1),
-(11, 'Benjamin', 'Lee', 'benjamin.lee@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQzMzc0LmpwZWc=', 1),
-(12, 'Chloe', 'White', 'chloe.white@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkNDUzNTMuanBlZw==', 1),
-(13, 'Lucas', 'Walker', 'lucas.walker@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMzE5NjguanBlZw==', 1),
-(14, 'Isabella', 'Baker', 'isabella.baker@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQ0NzI5MS5qcGVn', 1),
-(15, 'Henry', 'Wright', 'henry.wright@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQyNjYzNi5qcGVn', 1),
-(16, 'Ella', 'Carter', 'ella.carter@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkNDEwOTAuanBlZw==', 1);
+INSERT INTO `Users` (`UserID`, `UserFirstname`, `UserLastname`, `UserEmail`, `UserImageURL`, `UserUsertypeID`, `UserLevel`, `UserGems`) VALUES
+(1, 'Graeme', 'Jones', 'G.Jones@kingston.ac.uk', 'https://avatars.githubusercontent.com/u/48164351?s=400&u=70e6fedaa5b9cd794807b73c5748f72af4efc328&v=4', 1, 0, 0),
+(2, 'Bob', 'Ross', 'bross@kingston.ac.uk', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRoHDdcekKSGl-5gzbOJNeVbtgpqdwhljlrkYDIw9I58UA2r81dnE_Pof4_E5IQhzLpM5PMKsKP5OIR4aAZwz8zpg', 1, 0, 0),
+(3, 'Alice', 'Nguyen', 'alice.nguyen@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMzgwNjkuanBlZw==', 1, 0, 0),
+(4, 'James', 'Taylor', 'james.taylor@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQxMTM2OS5qcGVn', 1, 0, 0),
+(5, 'David', 'Clark', 'david.clark@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMjY3MzUuanBlZw==', 1, 0, 0),
+(6, 'Sophia', 'Martin', 'sophia.martin@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQ0MDYwOC5qcGVn', 1, 0, 0),
+(7, 'Liam', 'Brown', 'liam.brown@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMTQwNzcuanBlZw==', 1, 0, 0),
+(8, 'Emily', 'Kim', 'emily.kim@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQxMjg0NS5qcGVn', 1, 0, 0),
+(9, 'Noah', 'Anderson', 'noah.anderson@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMzkzMzguanBlZw==', 1, 0, 0),
+(10, 'Ava', 'Singh', 'ava.singh@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkOTk5OC5qcGVn', 1, 0, 0),
+(11, 'Benjamin', 'Lee', 'benjamin.lee@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQzMzc0LmpwZWc=', 1, 0, 0),
+(12, 'Chloe', 'White', 'chloe.white@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkNDUzNTMuanBlZw==', 1, 0, 0),
+(13, 'Lucas', 'Walker', 'lucas.walker@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkMzE5NjguanBlZw==', 1, 0, 0),
+(14, 'Isabella', 'Baker', 'isabella.baker@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQ0NzI5MS5qcGVn', 1, 0, 0),
+(15, 'Henry', 'Wright', 'henry.wright@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL3dvbWFuL3NlZWQyNjYzNi5qcGVn', 1, 0, 0),
+(16, 'Ella', 'Carter', 'ella.carter@example.com', 'https://thispersonnotexist.org/downloadimage/Ac3RhdGljL21hbi9zZWVkNDEwOTAuanBlZw==', 1, 0, 0),
+(17, 'Aseem', 'Ahmad', 'admin@nimbl.io', 'https://cdn3.emoji.gg/emojis/8125-admin-blue.png', 2, 0, 0),
+(18, 'Callum', 'Findlay', 'callum@findlay-family.com', 'https://images.generated.photos/bQRglh5kj-SvfYQE2D4k0K5H0Od8xSUCrILFtPqAHoM/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MTA0NDA4LmpwZw.jpg', 1, 99, 0);
 
 -- --------------------------------------------------------
 
@@ -177,7 +186,8 @@ CREATE TABLE `Usertypes` (
 --
 
 INSERT INTO `Usertypes` (`UsertypeID`, `UsertypeName`) VALUES
-(1, 'Client');
+(1, 'Client'),
+(2, 'Administrator');
 
 --
 -- Indexes for dumped tables
@@ -225,31 +235,31 @@ ALTER TABLE `Usertypes`
 -- AUTO_INCREMENT for table `Events`
 --
 ALTER TABLE `Events`
-  MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `Pets`
 --
 ALTER TABLE `Pets`
-  MODIFY `PetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `PetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `Tasks`
 --
 ALTER TABLE `Tasks`
-  MODIFY `TaskID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `TaskID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `Usertypes`
 --
 ALTER TABLE `Usertypes`
-  MODIFY `UsertypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `UsertypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
