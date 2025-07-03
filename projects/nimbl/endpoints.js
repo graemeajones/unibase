@@ -1,8 +1,10 @@
 // Imports ---------------------------------------
 import { Router } from 'express';
 
+import categoriesRouter from './routers/categories-router.js';
 import eventsRouter from './routers/events-router.js';
 import petsRouter from './routers/pets-router.js';
+import productsRouter from './routers/products-router.js';
 import tasksRouter from './routers/tasks-router.js';
 import usersRouter from './routers/users-router.js';
 import usertypesRouter from './routers/usertypes-router.js';
@@ -14,6 +16,36 @@ import API_URL from '#root/apiURL.js';
 const API_PATH = `${API_URL}/nimbl/api`;
 
 const listOfEndpoints = [
+  {
+    entity: 'Categories',
+    sap: '/api/categories',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all categories',
+          examples: [`${API_PATH}/categories`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific category identified by the id provided',
+          examples: [`${API_PATH}/categories/1`],
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new category',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific category identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific category identified by the id provided',
+      },
+    },
+  },
   {
     entity: 'Events',
     sap: '/api/events',
@@ -89,6 +121,36 @@ const listOfEndpoints = [
       delete: {
         endpoint: '/{id}',
         description: 'Delete the specific pet identified by the id provided',
+      },
+    },
+  },
+  {
+    entity: 'Products',
+    sap: '/api/products',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all products',
+          examples: [`${API_PATH}/products`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific product identified by the id provided',
+          examples: [`${API_PATH}/products/1`],
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new product',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific product identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific product identified by the id provided',
       },
     },
   },
@@ -205,8 +267,10 @@ const listOfEndpoints = [
 
 const router = new Router({ mergeParams: true });
 
+router.use('/categories', categoriesRouter);
 router.use('/events', eventsRouter);
 router.use('/pets', petsRouter);
+router.use('/products', productsRouter);
 router.use('/tasks', tasksRouter);
 router.use('/users', usersRouter);
 router.use('/usertypes', usertypesRouter);

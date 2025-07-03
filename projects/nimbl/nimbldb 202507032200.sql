@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 141.94.205.33
--- Generation Time: Jul 02, 2025 at 01:42 PM
+-- Generation Time: Jul 03, 2025 at 10:52 PM
 -- Server version: 10.11.2-MariaDB-1
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `nimbldb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Categories`
+--
+
+CREATE TABLE `Categories` (
+  `CategoryID` int(11) NOT NULL,
+  `CategoryName` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Categories`
+--
+
+INSERT INTO `Categories` (`CategoryID`, `CategoryName`) VALUES
+(1, 'Background'),
+(2, 'Gem Pack');
 
 -- --------------------------------------------------------
 
@@ -88,6 +107,31 @@ INSERT INTO `Pets` (`PetID`, `PetName`, `PetType`, `PetBreed`, `PetColour`, `Pet
 (19, 'Rex', 'Dog', 'Labrador Retriever', 'Yellow', 8, 'Male', 'https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277416_640.jpg', 1),
 (20, 'Whiskers', 'Cat', 'Siberian', 'Grey', 4, 'Male', 'https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634_640.png', 2),
 (21, 'Benny', 'Rabbit', 'French Lop', 'White', 5, 'Male', 'https://cdn.pixabay.com/photo/2017/07/23/16/18/rabbit-2531797_640.jpg', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Products`
+--
+
+CREATE TABLE `Products` (
+  `ProductID` int(11) NOT NULL,
+  `ProductName` varchar(64) NOT NULL,
+  `ProductDescription` varchar(512) NOT NULL,
+  `ProductImageURL` varchar(256) NOT NULL,
+  `ProductCategoryID` int(11) NOT NULL,
+  `ProductGems` int(11) NOT NULL,
+  `ProductCost` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Products`
+--
+
+INSERT INTO `Products` (`ProductID`, `ProductName`, `ProductDescription`, `ProductImageURL`, `ProductCategoryID`, `ProductGems`, `ProductCost`) VALUES
+(1, 'Sunset Meadow', 'A warm, calming sunset behind hills', 'https://example.com/backgrounds/sunset-meadow.jpg', 1, 5, 0),
+(2, 'Galaxy Drift', 'A glowing galaxy swirl for space lovers', 'https://example.com/backgrounds/galaxy-drift.jpg', 1, 8, 0),
+(3, 'Minimal Forest', 'A clean, green forest silhouette design', 'https://example.com/backgrounds/minimal-forest.jpg', 1, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -194,6 +238,12 @@ INSERT INTO `Usertypes` (`UsertypeID`, `UsertypeName`) VALUES
 --
 
 --
+-- Indexes for table `Categories`
+--
+ALTER TABLE `Categories`
+  ADD PRIMARY KEY (`CategoryID`);
+
+--
 -- Indexes for table `Events`
 --
 ALTER TABLE `Events`
@@ -206,6 +256,13 @@ ALTER TABLE `Events`
 ALTER TABLE `Pets`
   ADD PRIMARY KEY (`PetID`),
   ADD KEY `Pets_Users_FK` (`PetOwnerID`);
+
+--
+-- Indexes for table `Products`
+--
+ALTER TABLE `Products`
+  ADD PRIMARY KEY (`ProductID`),
+  ADD KEY `Products_Categories_FK` (`ProductCategoryID`);
 
 --
 -- Indexes for table `Tasks`
@@ -232,10 +289,16 @@ ALTER TABLE `Usertypes`
 --
 
 --
+-- AUTO_INCREMENT for table `Categories`
+--
+ALTER TABLE `Categories`
+  MODIFY `CategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `Events`
 --
 ALTER TABLE `Events`
-  MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `Pets`
@@ -244,10 +307,16 @@ ALTER TABLE `Pets`
   MODIFY `PetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
+-- AUTO_INCREMENT for table `Products`
+--
+ALTER TABLE `Products`
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `Tasks`
 --
 ALTER TABLE `Tasks`
-  MODIFY `TaskID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `TaskID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `Users`
@@ -276,6 +345,12 @@ ALTER TABLE `Events`
 --
 ALTER TABLE `Pets`
   ADD CONSTRAINT `Pets_Users_FK` FOREIGN KEY (`PetOwnerID`) REFERENCES `Users` (`UserID`);
+
+--
+-- Constraints for table `Products`
+--
+ALTER TABLE `Products`
+  ADD CONSTRAINT `Products_Categories_FK` FOREIGN KEY (`ProductCategoryID`) REFERENCES `Categories` (`CategoryID`);
 
 --
 -- Constraints for table `Tasks`
