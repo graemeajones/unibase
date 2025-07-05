@@ -7,8 +7,7 @@ const model = {
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    const table = model.table;
-    const fields = [model.idField, ...model.mutableFields];
+    let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
 
     // Resolve foreign keys -------------------
     // Process request queries ----------------

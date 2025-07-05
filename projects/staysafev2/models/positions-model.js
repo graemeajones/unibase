@@ -12,8 +12,15 @@ const model = {
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    let table = '(Positions LEFT JOIN Activities ON PositionActivityID=ActivityID)';
-    let fields = [model.idField, ...model.mutableFields, 'ActivityName AS PositionActivityName'];
+    let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
+
+    // Resolve Foreign Keys -------------------
+    table = `(${table} LEFT JOIN Activities ON PositionActivityID=ActivityID)`;
+    fields = [...fields, 'ActivityName AS PositionActivityName'];
+
+    // Process request queries ----------------
+    const allowedQueryFields = [...model.mutableFields];
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
@@ -28,10 +35,6 @@ const model = {
         parameters = { ID: parseInt(req.params.id) };
         break;
     }
-
-    // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields];
-    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     return constructPreparedStatement(fields, table, where, parameters, filter, orderby);
   },

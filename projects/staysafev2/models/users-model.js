@@ -17,8 +17,12 @@ const model = {
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    let table = 'Users';
-    let fields = [model.idField, ...model.mutableFields];
+    let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
+
+    // Resolve Foreign Keys -------------------
+    // Process request queries ----------------
+    const allowedQueryFields = [...model.mutableFields];
+    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
@@ -40,10 +44,6 @@ const model = {
         parameters = { ID: parseInt(req.params.id) };
         break;
     }
-
-    // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields, 'UserContactLabel'];
-    const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     return constructPreparedStatement(fields, table, where, parameters, filter, orderby);
   },

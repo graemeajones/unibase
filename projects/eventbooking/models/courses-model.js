@@ -7,9 +7,11 @@ const model = {
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
+    let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
+
     // Resolve Foreign Keys -------------------
-    let table = `(Courses LEFT JOIN Providers ON CourseProviderID=ProviderID)`;
-    let fields = [model.idField, ...model.mutableFields, 'ProviderName AS CourseProviderName'];
+    table = `(${table} LEFT JOIN Providers ON CourseProviderID=ProviderID)`;
+    fields = [...fields, 'ProviderName AS CourseProviderName'];
 
     // Process request queries ----------------
     const allowedQueryFields = [...model.mutableFields, 'CourseProviderName'];

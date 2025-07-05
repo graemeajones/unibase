@@ -7,10 +7,9 @@ const model = {
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
-    // Resolve Foreign Keys -------------------
-    let table = `Usertypes`;
-    let fields = [model.idField, ...model.mutableFields];
+    let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
 
+    // Resolve Foreign Keys -------------------
     // Process request queries ----------------
     const allowedQueryFields = [...model.mutableFields];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
