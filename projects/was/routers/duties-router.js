@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import makeController from '#root/controller/makeController.js';
 
-import schema from '../schemas/users-schema.js';
-import modelConfig from '../models/users-model.js';
+import schema from '../schemas/duties-schema.js';
+import modelConfig from '../models/duties-model.js';
 import dbConfig from '../dbConfig.js';
 
 // Controller ------------------------------------

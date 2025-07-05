@@ -18,16 +18,12 @@ const model = {
     // Initialisations ------------------------
     const CLIENT = 1; // Primary key for client type in Usertypes table
     const INSTRUCTOR = 2; // Primary key for instructor type in Usertypes table
+    let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
 
     // Resolve Foreign Keys -------------------
-    let table = `((Users LEFT JOIN Genders ON UserGenderID=GenderID) 
-                         LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID)`;
-    let fields = [
-      model.idField,
-      ...model.mutableFields,
-      'GenderName AS UserGenderName',
-      'UsertypeName AS UserUsertypeName',
-    ];
+    table = `((${table} LEFT JOIN Genders ON UserGenderID=GenderID) 
+                        LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID)`;
+    fields = [...fields, 'GenderName AS UserGenderName', 'UsertypeName AS UserUsertypeName'];
 
     // Process request queries ----------------
     const allowedQueryFields = [

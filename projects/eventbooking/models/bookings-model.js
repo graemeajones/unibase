@@ -12,13 +12,14 @@ const model = {
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
+    let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
+
     // Resolve Foreign Keys -------------------
-    let table = `(((Bookings LEFT JOIN Users ON BookingUserID=UserID) 
-                             LEFT JOIN Classes ON BookingClassID=ClassID) 
-                             LEFT JOIN Bookingstatus ON BookingBookingstatusID=BookingstatusID)`;
-    let fields = [
-      model.idField,
-      ...model.mutableFields,
+    table = `(((${table} LEFT JOIN Users ON BookingUserID=UserID) 
+                         LEFT JOIN Classes ON BookingClassID=ClassID) 
+                         LEFT JOIN Bookingstatus ON BookingBookingstatusID=BookingstatusID)`;
+    fields = [
+      ...fields,
       'CONCAT(UserLastname, ", ", UserFirstname) AS BookingAttendeeName',
       'ClassTitle AS BookingClassTitle',
       'BookingstatusName AS BookingBookingstatusName',
