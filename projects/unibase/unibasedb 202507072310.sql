@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 21, 2025 at 11:23 PM
--- Server version: 10.4.28-MariaDB
+-- Host: 141.94.205.33
+-- Generation Time: Jul 08, 2025 at 12:11 AM
+-- Server version: 10.11.2-MariaDB-1
 -- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `Affinities` (
   `AffinityID` int(11) NOT NULL,
   `AffinityName` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Affinities`
@@ -48,12 +48,12 @@ INSERT INTO `Affinities` (`AffinityID`, `AffinityName`) VALUES
 
 CREATE TABLE `Assessments` (
   `AssessmentID` int(11) NOT NULL,
-  `AssessmentName` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `AssessmentName` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `AssessmentPercentage` int(11) NOT NULL,
   `AssessmentPublishdate` datetime NOT NULL,
   `AssessmentSubmissiondate` datetime DEFAULT NULL,
   `AssessmentFeedbackdate` datetime DEFAULT NULL,
-  `AssessmentBriefURL` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `AssessmentBriefURL` varchar(256) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `AssessmentModuleID` int(11) DEFAULT NULL,
   `AssessmentAssessmenttypeID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -83,7 +83,19 @@ INSERT INTO `Assessments` (`AssessmentID`, `AssessmentName`, `AssessmentPercenta
 (18, 'Coursework 1 (App Design Prototype)', 40, '2022-09-26 09:00:00', '2022-12-15 23:59:59', '2023-01-27 17:00:00', 'https://canvas.kingston.ac.uk/courses/23321/assignments/120557', 3, 3),
 (19, 'In-class Test', 20, '2022-12-12 09:00:00', '2022-12-16 17:00:00', NULL, 'https://canvas.kingston.ac.uk/courses/23321/quizzes/41496', 3, 2),
 (20, 'Coursework 2 (Design and Build a Clickable Prototype)', 40, '2023-01-09 09:00:00', '2023-04-05 23:59:59', '2023-05-12 17:00:00', 'https://canvas.kingston.ac.uk/courses/23321/assignments/116192', 3, 3),
-(27, 'Implement React UI', 100, '2023-01-01 09:00:00', '2023-01-31 23:59:00', NULL, 'https://canvas.kingston.ac.uk/courses/23321/assignments/116192', 13, 3);
+(27, 'Implement React UI', 100, '2023-01-01 09:00:00', '2023-01-31 23:59:00', NULL, 'https://canvas.kingston.ac.uk/courses/23321/assignments/116192', 13, 3),
+(28, 'Coding 101', 100, '2025-06-26 00:00:00', '2025-07-25 00:00:00', '2025-07-31 00:00:00', 'https://canvas.kingston.ac.uk/courses/23327/assignments/113623', 4, 3),
+(29, 'Coursework for Java Programming Language', 60, '2025-06-12 00:00:00', '2025-06-28 00:00:00', '2025-08-16 00:00:00', 'https://canvas.kingston.ac.uk/courses/23321/assignments/116192', 1, 4),
+(30, 'something', 40, '2025-06-27 00:00:00', '2025-06-30 00:00:00', '2025-07-29 00:00:00', 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39047', 1, 3),
+(31, 'ewbwerohewroih', 14, '2025-06-27 00:00:00', '2025-06-28 00:00:00', '2025-06-30 00:00:00', 'https://canvas.kingston.ac.uk/courses/23321/assignments/116192', 1, 4),
+(32, 'New Assessment Test', 15, '2025-07-14 00:00:00', '2025-07-15 00:00:00', '2025-07-16 00:00:00', 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39047', 2, NULL),
+(33, 'human biology 2.0 ', 70, '2025-07-18 00:00:00', '2025-07-20 00:00:00', '2025-07-31 00:00:00', 'https://canvas.kingston.ac.uk/courses/23327/assignments/113614', 4, NULL),
+(34, 'New Assessment test with Module dropdown', 15, '2025-07-01 00:00:00', '2025-07-16 00:00:00', '2025-08-06 00:00:00', 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39047', NULL, NULL),
+(35, 'V1 Assessment', 13, '2025-07-06 00:00:00', '2025-07-21 00:00:00', '2025-07-29 00:00:00', 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39047', 1, 1),
+(36, 'Database Final Assignement', 50, '2025-07-28 00:00:00', '2025-07-29 00:00:00', '2025-07-30 00:00:00', 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39047', 7, 4),
+(37, 'something new', 22, '2025-07-16 00:00:00', '2025-07-18 00:00:00', '2025-07-24 00:00:00', 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39047', NULL, NULL),
+(38, 'New assignment 2', 34, '2025-07-10 00:00:00', '2025-07-23 00:00:00', '2025-07-30 00:00:00', 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39047', 198, 3),
+(39, 'Test Assignment', 15, '2025-07-21 00:00:00', '2025-07-22 00:00:00', '2025-08-06 00:00:00', 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39047', 8, 2);
 
 -- --------------------------------------------------------
 
@@ -95,7 +107,7 @@ CREATE TABLE `Assessmenttypes` (
   `AssessmenttypeID` int(11) NOT NULL,
   `AssessmenttypeCode` varchar(32) NOT NULL,
   `AssessmenttypeDescription` varchar(512) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Assessmenttypes`
@@ -116,7 +128,7 @@ INSERT INTO `Assessmenttypes` (`AssessmenttypeID`, `AssessmenttypeCode`, `Assess
 
 CREATE TABLE `Attendance` (
   `AttendanceID` int(11) NOT NULL,
-  `AttendanceName` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+  `AttendanceName` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -160,7 +172,7 @@ INSERT INTO `Completion` (`CompletionID`, `CompletionName`) VALUES
 CREATE TABLE `Confirmations` (
   `ConfirmationID` int(11) NOT NULL,
   `ConfirmationName` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Confirmations`
@@ -1616,7 +1628,7 @@ CREATE TABLE `Groupmembers` (
   `GroupmemberID` int(11) NOT NULL,
   `GroupmemberUserID` int(11) DEFAULT NULL,
   `GroupmemberGroupID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Groupmembers`
@@ -2030,7 +2042,7 @@ CREATE TABLE `Groups` (
   `GroupID` int(11) NOT NULL,
   `GroupName` varchar(64) NOT NULL,
   `GroupAssessmentID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Groups`
@@ -2155,7 +2167,7 @@ CREATE TABLE `Likes` (
   `LikerID` int(11) DEFAULT NULL,
   `LikeeID` int(11) DEFAULT NULL,
   `LikeAffinityID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Likes`
@@ -4285,11 +4297,11 @@ INSERT INTO `Likes` (`LikeID`, `LikerID`, `LikeeID`, `LikeAffinityID`) VALUES
 
 CREATE TABLE `Links` (
   `LinkID` int(11) NOT NULL,
-  `LinkerID` int(11) DEFAULT NULL,
-  `LinkeeID` int(11) DEFAULT NULL,
-  `LinkProjectID` int(11) DEFAULT NULL,
+  `LinkerID` int(11) NOT NULL,
+  `LinkeeID` int(11) NOT NULL,
+  `LinkAssessmentID` int(11) NOT NULL,
   `LinkConfirmationID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4299,7 +4311,7 @@ CREATE TABLE `Links` (
 
 CREATE TABLE `Logs` (
   `LogID` int(11) NOT NULL,
-  `LogName` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `LogName` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `LogGroupID` int(11) NOT NULL,
   `LogSubmissiondate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -4591,7 +4603,7 @@ CREATE TABLE `Modulemembers` (
   `ModulememberID` int(11) NOT NULL,
   `ModulememberUserID` int(11) DEFAULT NULL,
   `ModulememberModuleID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Modulemembers`
@@ -6793,7 +6805,7 @@ CREATE TABLE `Modules` (
   `ModuleImageURL` varchar(128) NOT NULL,
   `ModuleLeaderID` int(11) DEFAULT NULL,
   `ModuleYearID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Modules`
@@ -6813,7 +6825,23 @@ INSERT INTO `Modules` (`ModuleID`, `ModuleCode`, `ModuleName`, `ModuleLevel`, `M
 (11, 'CI6100', 'Programming 3', 6, 'https://images.freeimages.com/images/small-previews/fa1/cable-5-1243077.jpg', 820, 1),
 (12, 'CI6600', 'Individual Project', 6, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 1),
 (13, 'CI6110', 'React Programming', 6, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 1),
-(14, 'CI6130', 'React Native', 6, 'https://images.freeimages.com/images/small-previews/fa1/cable-5-1243077.jpg', 820, 1);
+(14, 'CI6130', 'React Native', 6, 'https://images.freeimages.com/images/small-previews/fa1/cable-5-1243077.jpg', 820, 1),
+(195, 'JA2343', 'Programming in Java', 3, 'https://images.freeimages.com/images/small-previews/cf5/cellphone-1313194.jpg', 820, 4),
+(196, 'JA2343', 'Programming in Java', 3, 'https://images.freeimages.com/images/small-previews/cf5/cellphone-1313194.jpg', 820, 4),
+(197, 'XY1234', 'Biotechnology', 4, 'https://images.freeimages.com/images/small-previews/cf5/cellphone-1313194.jpg', 824, 2),
+(198, 'CI4252', 'NEW NEW NEW', 4, 'https://images.freeimages.com/images/small-previews/411/light-of-technology-1510575.jpg', 820, 2),
+(199, 'xy1234', 'asasdasd', 3, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 1),
+(200, 'ZY1111', 'HaveOneOnTheHouse', 7, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 824, 8),
+(201, 'XU1111', 'Deletable Module 100', 3, 'https://images.freeimages.com/images/small-previews/411/light-of-technology-1510575.jpg', 820, 2),
+(202, 'XU2111', 'Deletable Module 101', 5, 'https://images.freeimages.com/images/small-previews/411/light-of-technology-1510575.jpg', 820, 1),
+(203, 'IS1234', 'Industrial Safety Practices', 3, 'https://images.freeimages.com/images/small-previews/411/light-of-technology-1510575.jpg', 820, 2),
+(204, 'ZZ1234', 'dasdasdasd', 4, 'https://media.istockphoto.com-Gj_6cD3sqrDi8y7tzDU=', 820, 2),
+(205, 'MK2005', 'Testinggg', 5, 'https://media.i8XmYA7yNC-Gj_6cD3sqrDi8y7tzDU=', 820, 2),
+(206, 'ZZ1234', 'Testinggg', 5, 'https://media.is', 824, 4),
+(207, 'XY1234', 'Module Testing', 6, 'https://media..com/id/1206919144/photo/car-chip-tuning.jpg?s=612x612&w=0&k=20&c=JESv9LZD2y0-ml8XmYA7yNC-Gj_6cD3sqrDi8y7tzDU=', 820, 3),
+(208, 'fd2222', 'sadasdasd', 5, 'https://mediom/id/1206919144/photo/car-chip-tuning.jpg?s=612x612&w=0&k=20&c=JESv9LZD2y0-ml8XmYA7yNC-Gj_6cD3sqrDi8y7tzDU=', 824, 3),
+(209, 'CI4306', 'Programming 3', 3, 'https://images.freeimages.com/images/small-previews/293/cable-4-1243085.jpg', 820, 1),
+(210, 'MD2034', 'Computing Fundamentals', 4, 'https://images.freeimages.com/images/small-previews/293/cable-4-1243085.jpg', 820, 1);
 
 -- --------------------------------------------------------
 
@@ -6829,7 +6857,7 @@ CREATE TABLE `Projects` (
   `ProjectMandatory` tinyint(1) NOT NULL DEFAULT 1,
   `ProjectProjectstatusID` int(11) DEFAULT NULL,
   `ProjectModuleID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Projects`
@@ -6848,7 +6876,7 @@ INSERT INTO `Projects` (`ProjectID`, `ProjectName`, `ProjectGroupsize`, `Project
 CREATE TABLE `Projectstatus` (
   `ProjectstatusID` int(11) NOT NULL,
   `ProjectstatusName` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Projectstatus`
@@ -6873,7 +6901,7 @@ CREATE TABLE `Proposals` (
   `ProposeeID` int(11) NOT NULL,
   `ProposalAssessmentID` int(11) NOT NULL,
   `ProposalConfirmationID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Proposals`
@@ -7420,7 +7448,7 @@ CREATE TABLE `Users` (
   `UserLevel` tinyint(4) DEFAULT NULL,
   `UserYearID` int(11) DEFAULT NULL,
   `UserImageURL` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Users`
@@ -8260,7 +8288,7 @@ INSERT INTO `Users` (`UserID`, `UserFirstname`, `UserLastname`, `UserEmail`, `Us
 CREATE TABLE `Usertypes` (
   `UsertypeID` int(11) NOT NULL,
   `UsertypeName` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Usertypes`
@@ -8279,7 +8307,7 @@ INSERT INTO `Usertypes` (`UsertypeID`, `UsertypeName`) VALUES
 CREATE TABLE `Years` (
   `YearID` int(11) NOT NULL,
   `YearName` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Years`
@@ -8398,7 +8426,7 @@ ALTER TABLE `Links`
   ADD KEY `Links (Linker) FK to Users` (`LinkerID`),
   ADD KEY `Links (Linkee) FK to Users` (`LinkeeID`),
   ADD KEY `Links FY to Confirmations` (`LinkConfirmationID`),
-  ADD KEY `Links FY to Projects` (`LinkProjectID`) USING BTREE;
+  ADD KEY `Links_Assessments_FK` (`LinkAssessmentID`) USING BTREE;
 
 --
 -- Indexes for table `Logs`
@@ -8487,7 +8515,7 @@ ALTER TABLE `Affinities`
 -- AUTO_INCREMENT for table `Assessments`
 --
 ALTER TABLE `Assessments`
-  MODIFY `AssessmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `AssessmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `Assessmenttypes`
@@ -8583,7 +8611,7 @@ ALTER TABLE `Modulemembers`
 -- AUTO_INCREMENT for table `Modules`
 --
 ALTER TABLE `Modules`
-  MODIFY `ModuleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
+  MODIFY `ModuleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 
 --
 -- AUTO_INCREMENT for table `Projects`
@@ -8639,55 +8667,19 @@ ALTER TABLE `Assessments`
   ADD CONSTRAINT `Assessments_Modules_FK` FOREIGN KEY (`AssessmentModuleID`) REFERENCES `Modules` (`ModuleID`);
 
 --
--- Constraints for table `Favourites`
---
-ALTER TABLE `Favourites`
-  ADD CONSTRAINT `FK_FavouriteLikerID_to_UserID` FOREIGN KEY (`FavouriteLikerID`) REFERENCES `unibase`.`Users` (`UserID`);
-
---
--- Constraints for table `Groupmembers`
---
-ALTER TABLE `Groupmembers`
-  ADD CONSTRAINT `GroupmemberGroupFK` FOREIGN KEY (`GroupmemberGroupID`) REFERENCES `unibase`.`Groups` (`GroupID`),
-  ADD CONSTRAINT `GroupmemberUserFK` FOREIGN KEY (`GroupmemberUserID`) REFERENCES `unibase`.`Users` (`UserID`);
-
---
--- Constraints for table `Likes`
---
-ALTER TABLE `Likes`
-  ADD CONSTRAINT `Like FK to Affinities` FOREIGN KEY (`LikeAffinityID`) REFERENCES `unibase`.`Affinities` (`AffinityID`),
-  ADD CONSTRAINT `Like(e) FK to Users` FOREIGN KEY (`LikeeID`) REFERENCES `unibase`.`Users` (`UserID`),
-  ADD CONSTRAINT `Like(r) FK to Users` FOREIGN KEY (`LikerID`) REFERENCES `unibase`.`Users` (`UserID`);
-
---
 -- Constraints for table `Links`
 --
 ALTER TABLE `Links`
-  ADD CONSTRAINT `Links (Linkee) FK to Users` FOREIGN KEY (`LinkeeID`) REFERENCES `unibase`.`Users` (`UserID`),
-  ADD CONSTRAINT `Links (Linker) FK to Users` FOREIGN KEY (`LinkerID`) REFERENCES `unibase`.`Users` (`UserID`),
-  ADD CONSTRAINT `Links FY to Confirmations` FOREIGN KEY (`LinkConfirmationID`) REFERENCES `unibase`.`Confirmations` (`ConfirmationID`),
-  ADD CONSTRAINT `Links FY to Projects` FOREIGN KEY (`LinkProjectID`) REFERENCES `unibase`.`Projects` (`ProjectID`);
+  ADD CONSTRAINT `Links_(Linkee)_Users_FK` FOREIGN KEY (`LinkeeID`) REFERENCES `Users` (`UserID`),
+  ADD CONSTRAINT `Links_(Linker)_Users_FK` FOREIGN KEY (`LinkerID`) REFERENCES `Users` (`UserID`),
+  ADD CONSTRAINT `Links_Assessments_FK` FOREIGN KEY (`LinkAssessmentID`) REFERENCES `Assessments` (`AssessmentID`),
+  ADD CONSTRAINT `Links_Confirmations_FK` FOREIGN KEY (`LinkConfirmationID`) REFERENCES `Confirmations` (`ConfirmationID`);
 
 --
 -- Constraints for table `Modules`
 --
 ALTER TABLE `Modules`
   ADD CONSTRAINT `Modules_Years_FK` FOREIGN KEY (`ModuleYearID`) REFERENCES `Years` (`YearID`);
-
---
--- Constraints for table `Projects`
---
-ALTER TABLE `Projects`
-  ADD CONSTRAINT `ProjectProjectstatus FK` FOREIGN KEY (`ProjectProjectstatusID`) REFERENCES `unibase`.`Projectstatus` (`ProjectstatusID`);
-
---
--- Constraints for table `Proposals`
---
-ALTER TABLE `Proposals`
-  ADD CONSTRAINT `Proposals Assessment FK to Assessments` FOREIGN KEY (`ProposalAssessmentID`) REFERENCES `unibase`.`Assessments` (`AssessmentID`),
-  ADD CONSTRAINT `Proposals Confirmation FK to Confirmations` FOREIGN KEY (`ProposalConfirmationID`) REFERENCES `unibase`.`Confirmations` (`ConfirmationID`),
-  ADD CONSTRAINT `Proposals Proposee FK to Users` FOREIGN KEY (`ProposeeID`) REFERENCES `unibase`.`Users` (`UserID`),
-  ADD CONSTRAINT `Proposals Proposer FK to Users` FOREIGN KEY (`ProposerID`) REFERENCES `unibase`.`Users` (`UserID`);
 
 --
 -- Constraints for table `Users`
