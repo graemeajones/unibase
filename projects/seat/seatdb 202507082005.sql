@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 141.94.205.33
--- Generation Time: Jul 08, 2025 at 02:16 PM
+-- Generation Time: Jul 08, 2025 at 09:05 PM
 -- Server version: 10.11.2-MariaDB-1
 -- PHP Version: 8.2.4
 
@@ -33,6 +33,14 @@ CREATE TABLE `Attendees` (
   `AttendeeEventID` int(11) NOT NULL,
   `AttendeeStatusID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Attendees`
+--
+
+INSERT INTO `Attendees` (`AttendeeID`, `AttendeeUserID`, `AttendeeEventID`, `AttendeeStatusID`) VALUES
+(1, 1, 2, 3),
+(2, 2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -242,7 +250,7 @@ ALTER TABLE `Usertypes`
 -- AUTO_INCREMENT for table `Attendees`
 --
 ALTER TABLE `Attendees`
-  MODIFY `AttendeeID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `AttendeeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `Events`
