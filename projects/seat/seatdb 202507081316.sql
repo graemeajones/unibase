@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 08, 2025 at 02:11 PM
--- Server version: 10.4.28-MariaDB
+-- Host: 141.94.205.33
+-- Generation Time: Jul 08, 2025 at 02:16 PM
+-- Server version: 10.11.2-MariaDB-1
 -- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -44,6 +44,7 @@ CREATE TABLE `Events` (
   `EventID` int(11) NOT NULL,
   `EventName` varchar(128) NOT NULL,
   `EventDescription` varchar(512) NOT NULL,
+  `UserDateofbirth` date NOT NULL DEFAULT current_timestamp(),
   `EventDatetime` datetime NOT NULL,
   `EventLocationID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -52,9 +53,16 @@ CREATE TABLE `Events` (
 -- Dumping data for table `Events`
 --
 
-INSERT INTO `Events` (`EventID`, `EventName`, `EventDescription`, `EventDatetime`, `EventLocationID`) VALUES
-(1, 'Christmas Party 2024', 'This event is a collaboration between the Middle Temple Young Barristers\' Association and the London Young Lawyers Group, promising a fantastic night of networking and fun.\r\n\r\nWhat\'s in store? A delicious standing buffet with a variety of treats, live music to set the mood, and a chocolate fountain for a touch of sweetness. ', '2024-12-13 19:30:00', 1),
-(2, 'Christmas Party 2025', 'This event is a collaboration between the Middle Temple Young Barristers\' Association and the London Young Lawyers Group, promising a fantastic night of networking and fun.\r\n\r\nWhat\'s in store? A delicious standing buffet with a variety of treats, live music to set the mood, and a chocolate fountain for a touch of sweetness. ', '2025-12-12 19:00:00', 1);
+INSERT INTO `Events` (`EventID`, `EventName`, `EventDescription`, `UserDateofbirth`, `EventDatetime`, `EventLocationID`) VALUES
+(1, 'Christmas Party 2024', 'This event is a collaboration between the Middle Temple Young Barristers\' Association and the London Young Lawyers Group, promising a fantastic night of networking and fun.\r\n\r\nWhat\'s in store? A delicious standing buffet with a variety of treats, live music to set the mood, and a chocolate fountain for a touch of sweetness. ', '2025-06-10', '2024-12-13 19:30:00', 1),
+(2, 'Christmas Party 2025', 'This event is a collaboration between the Middle Temple Young Barristers\' Association and the London Young Lawyers Group, promising a fantastic night of networking and fun.\r\n\r\nWhat\'s in store? A delicious standing buffet with a variety of treats, live music to set the mood, and a chocolate fountain for a touch of sweetness. ', '2025-06-10', '2025-12-12 19:00:00', 1),
+(5, 'Test Event', 'Test Desc', '2025-06-18', '2025-06-27 15:56:00', 1),
+(7, 'christmas part 2026', 'christmas', '2025-06-20', '2025-06-20 12:17:00', 1),
+(8, 'Xmas', 'Xmas test desc', '2025-06-22', '2025-07-03 17:42:00', 1),
+(9, 'New Xmas test', 'Test Desc', '2025-06-22', '2025-06-29 18:44:00', 2),
+(10, 'Christmas Party 2027', 'Party 2027', '2025-06-24', '2026-12-21 19:22:00', 1),
+(11, 'christmas part 2026', 'christmas', '2025-07-03', '2025-07-03 12:42:00', 2),
+(12, 'Christmas Party 3015', 'Party time xmas yipeeee', '2025-07-03', '3014-12-23 12:02:00', 1);
 
 -- --------------------------------------------------------
 
@@ -77,7 +85,8 @@ CREATE TABLE `Locations` (
 --
 
 INSERT INTO `Locations` (`LocationID`, `LocationName`, `LocationPostcode`, `LocationAddressline1`, `LocationAddressline2`, `LocationAddressline3`, `LocationAddressline4`) VALUES
-(1, 'Middle Temple Hall', 'EC4Y 9AT', 'Middle Temple Lane', 'London', '', '');
+(1, 'Middle Temple Hall', 'EC4Y 9AT', 'Middle Temple Lane', 'London', '', ''),
+(2, 'Sky Garden', 'EC3M 3AF', '20 Fenchurch Street', 'London', '', '');
 
 -- --------------------------------------------------------
 
@@ -133,7 +142,7 @@ CREATE TABLE `Users` (
   `UserID` int(11) NOT NULL,
   `UserFirstname` varchar(64) NOT NULL,
   `UserLastname` varchar(64) NOT NULL,
-  `UserDateofbirth` date NOT NULL DEFAULT current_timestamp(),
+  `UserDateofbirth` date NOT NULL,
   `UserEmail` varchar(128) NOT NULL,
   `UserImageURL` varchar(256) NOT NULL,
   `UserUsertypeID` int(11) DEFAULT NULL,
@@ -148,7 +157,10 @@ CREATE TABLE `Users` (
 INSERT INTO `Users` (`UserID`, `UserFirstname`, `UserLastname`, `UserDateofbirth`, `UserEmail`, `UserImageURL`, `UserUsertypeID`, `UserRoleID`, `UserGuestofID`) VALUES
 (1, 'Sue', 'Melater', '1970-06-10', 'sue.melater@firm.com', 'http://newsimg.bbc.co.uk/media/images/42191000/jpg/_42191148_briscoe203.jpg', 1, 2, NULL),
 (2, 'Graeme', 'Jones', '1965-01-30', 'G.Jones@kingston.ac.uk', 'https://avatars.githubusercontent.com/u/48164351?s=400&u=70e6fedaa5b9cd794807b73c5748f72af4efc328&v=4', 2, 1, 1),
-(4, 'Jacob', 'Johanssen', '1975-05-13', 'JJ@seat.com', 'https://images.generated.photos/dQx4gYQJk529t5BApv-TSBanTSNYGZo7eMHrySiaCfw/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MDA0MTI3LmpwZw.jpg', 1, 2, NULL);
+(3, 'Boaty', 'MacBoatface', '1970-06-10', 'b.macb@boat.com', 'http://newsimg.bbc.co.uk/media/images/42191000/jpg/_42191148_briscoe203.jpg', 1, 3, NULL),
+(4, 'Steve', 'Steverson', '1985-01-01', 'test@email.com', 'https://images.generated.photos/m8Sph5rhjkIsOiVIp4zbvIuFl43F6BWIwhkkY86z2Ms/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/ODU4MTE5LmpwZw.jpg', 2, 1, 3),
+(7, 'Ammar', 'Khan', '2025-06-20', 'ik@gmail.com', 'https://images.generated.photos/m8Sph5rhjkIsOiVIp4zbvIuFl43F6BWIwhkkY86z2Ms/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/ODU4MTE5LmpwZw.jpg', 1, 4, NULL),
+(8, 'Gerald', 'Geraldson', '1998-06-18', 'Email@emailtest.com', 'https://images.generated.photos/m8Sph5rhjkIsOiVIp4zbvIuFl43F6BWIwhkkY86z2Ms/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/ODU4MTE5LmpwZw.jpg', 2, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -236,13 +248,13 @@ ALTER TABLE `Attendees`
 -- AUTO_INCREMENT for table `Events`
 --
 ALTER TABLE `Events`
-  MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `Locations`
 --
 ALTER TABLE `Locations`
-  MODIFY `LocationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `LocationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `Roles`
@@ -260,7 +272,7 @@ ALTER TABLE `Status`
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `Usertypes`
