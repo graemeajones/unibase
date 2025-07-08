@@ -1,9 +1,11 @@
 // Imports ---------------------------------------
 import { Router } from 'express';
 
+import attendeesRouter from './routers/attendees-router.js';
 import eventsRouter from './routers/events-router.js';
 import locationsRouter from './routers/locations-router.js';
 import rolesRouter from './routers/roles-router.js';
+import statusRouter from './routers/status-router.js';
 import usersRouter from './routers/users-router.js';
 import usertypesRouter from './routers/usertypes-router.js';
 
@@ -14,6 +16,36 @@ import API_URL from '#root/apiURL.js';
 const API_PATH = `${API_URL}/seat/api`;
 
 const listOfEndpoints = [
+  {
+    entity: 'Attendees',
+    sap: '/api/attendees',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all attendees',
+          examples: [`${API_PATH}/attendees`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific attendee identified by the id provided',
+          examples: [`${API_PATH}/attendees/1`],
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new attendee',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific attendee identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific attendee identified by the id provided',
+      },
+    },
+  },
   {
     entity: 'Events',
     sap: '/api/events',
@@ -105,6 +137,36 @@ const listOfEndpoints = [
     },
   },
   {
+    entity: 'Status',
+    sap: '/api/status',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all status values',
+          examples: [`${API_PATH}/status`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific status value identified by the id provided',
+          examples: [`${API_PATH}/status/1`],
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new status value',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific status value identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific status value identified by the id provided',
+      },
+    },
+  },
+  {
     entity: 'Users',
     sap: '/api/users',
     services: {
@@ -181,9 +243,11 @@ const listOfEndpoints = [
 
 const router = new Router({ mergeParams: true });
 
+router.use('/attendees', attendeesRouter);
 router.use('/events', eventsRouter);
 router.use('/locations', locationsRouter);
 router.use('/roles', rolesRouter);
+router.use('/status', statusRouter);
 router.use('/users', usersRouter);
 router.use('/usertypes', usertypesRouter);
 
