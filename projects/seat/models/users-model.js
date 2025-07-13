@@ -30,7 +30,7 @@ const model = {
       ...fields,
       'UsertypeName AS UserUsertypeName',
       'Roles.RoleName AS UserRoleName',
-      'CONCAT(HostLastname,", ",HostFirstname, " (", HostRolename, ")") AS UserHostname',
+      'CONCAT(HostLastname,", ",HostFirstname, " (", HostRolename, ")") AS UserGuestofname',
     ];
 
     // Process request queries ----------------
