@@ -1,7 +1,7 @@
 import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: 'Users',
+  table: 'Users AS Users',
   idField: 'UserID',
   mutableFields: [
     'UserFirstname',
@@ -20,9 +20,18 @@ const model = {
     let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
 
     // Resolve Foreign Keys -------------------
-    table = `((${table} LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID) 
-                        LEFT JOIN Roles ON UserRoleID=RoleID)`;
-    fields = [...fields, 'UsertypeName AS UserUsertypeName', 'Roles.RoleName AS UserRoleName'];
+    table = `(((${table} LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID) 
+                         LEFT JOIN Roles ON UserRoleID=RoleID)
+                         LEFT JOIN (
+                           SELECT UserID AS HostID, UserFirstname AS HostFirstname, UserLastname AS HostLastname, RoleName AS HostRoleName 
+                           FROM (Users LEFT JOIN Roles ON UserRoleID=RoleID)
+                         ) AS Hosts ON UserGuestofID=Hosts.HostID)`;
+    fields = [
+      ...fields,
+      'UsertypeName AS UserUsertypeName',
+      'Roles.RoleName AS UserRoleName',
+      'CONCAT(HostLastname,", ",HostFirstname, " (", HostRolename, ")") AS UserHostname',
+    ];
 
     // Process request queries ----------------
     const allowedQueryFields = [...model.mutableFields, 'UserUsertypeName', 'UserRoleName'];
