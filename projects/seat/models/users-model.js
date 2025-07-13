@@ -30,11 +30,16 @@ const model = {
       ...fields,
       'UsertypeName AS UserUsertypeName',
       'Roles.RoleName AS UserRoleName',
-      'CONCAT(HostLastname,", ",HostFirstname, " (", HostRolename, ")") AS UserGuestofname',
+      'CONCAT(HostLastname,", ",HostFirstname, " (", HostRoleName, ")") AS UserGuestofName',
     ];
 
     // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields, 'UserUsertypeName', 'UserRoleName'];
+    const allowedQueryFields = [
+      ...model.mutableFields,
+      'UserUsertypeName',
+      'UserRoleName',
+      'UserGuestofName',
+    ];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
