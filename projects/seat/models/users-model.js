@@ -1,7 +1,7 @@
 import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: 'Users AS Users',
+  table: 'Users',
   idField: 'UserID',
   mutableFields: [
     'UserFirstname',
