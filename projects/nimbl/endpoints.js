@@ -6,6 +6,7 @@ import eventsRouter from './routers/events-router.js';
 import petsRouter from './routers/pets-router.js';
 import productsRouter from './routers/products-router.js';
 import tasksRouter from './routers/tasks-router.js';
+import taskstatusRouter from './routers/taskstatus-router.js';
 import usersRouter from './routers/users-router.js';
 import usertypesRouter from './routers/usertypes-router.js';
 
@@ -197,6 +198,36 @@ const listOfEndpoints = [
     },
   },
   {
+    entity: 'Taststatus',
+    sap: '/api/taskstatus',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all task status values',
+          examples: [`${API_PATH}/taskstatus`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific task status value identified by the id provided',
+          examples: [`${API_PATH}/taskstatus/1`],
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new task status value',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific task status value identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific task status value identified by the id provided',
+      },
+    },
+  },
+  {
     entity: 'Users',
     sap: '/api/users',
     services: {
@@ -272,6 +303,7 @@ router.use('/events', eventsRouter);
 router.use('/pets', petsRouter);
 router.use('/products', productsRouter);
 router.use('/tasks', tasksRouter);
+router.use('/taskstatus', taskstatusRouter);
 router.use('/users', usersRouter);
 router.use('/usertypes', usertypesRouter);
 
