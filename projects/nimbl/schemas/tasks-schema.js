@@ -10,6 +10,7 @@ schema.requiredFields = [
   'TaskImportance',
   'TaskDifficulty',
   'TaskPetID',
+  'TaskTaskstatusID',
 ];
 
 schema.record = joi
@@ -22,6 +23,7 @@ schema.record = joi
     TaskImportance: joi.number().integer().min(0),
     TaskDifficulty: joi.number().integer().min(0),
     TaskPetID: joi.number().integer().min(1).allow(null),
+    TaskTaskstatusID: joi.number().integer().min(1).allow(null),
   })
   .required()
   .unknown(true);

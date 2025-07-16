@@ -11,6 +11,7 @@ const model = {
     'TaskImportance',
     'TaskDifficulty',
     'TaskPetID',
+    'TaskTaskstatusID',
   ],
 
   buildReadQuery: (req, variant) => {
@@ -18,11 +19,11 @@ const model = {
     let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
 
     // Resolve Foreign Keys -------------------
-    table = `(${table} LEFT JOIN Pets ON TaskPetID=PetID)`;
-    fields = [...fields, 'PetName AS TaskPetName'];
+    table = `((${table} LEFT JOIN Pets ON TaskPetID=PetID) LEFT JOIN Taskstatus ON TaskTaskstatusID=TaskstatusID)`;
+    fields = [...fields, 'PetName AS TaskPetName', 'TaskstatusName AS TaskTaskstatusName'];
 
     // Process request queries ----------------
-    const allowedQueryFields = [...model.mutableFields, 'TaskPetName'];
+    const allowedQueryFields = [...model.mutableFields, 'TaskPetName', 'TaskTaskstatusName'];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
