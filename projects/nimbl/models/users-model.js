@@ -9,7 +9,7 @@ const model = {
     'UserEmail',
     'UserImageURL',
     'UserUsertypeID',
-    'UserLevel',
+    'UserXP',
     'UserGems',
   ],
 

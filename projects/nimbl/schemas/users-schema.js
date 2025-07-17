@@ -12,7 +12,7 @@ schema.record = joi
     UserEmail: joi.string().email(),
     UserImageURL: joi.string().uri(),
     UserUsertypeID: joi.number().integer().min(1).allow(null),
-    UserLevel: joi.number().integer().min(0).optional(),
+    UserXP: joi.number().integer().min(0).optional(),
     UserGems: joi.number().integer().min(0),
   })
   .required()
