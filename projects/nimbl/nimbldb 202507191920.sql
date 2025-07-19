@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 17, 2025 at 01:32 AM
--- Server version: 10.4.28-MariaDB
+-- Host: 141.94.205.33
+-- Generation Time: Jul 19, 2025 at 08:20 PM
+-- Server version: 10.11.2-MariaDB-1
 -- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -1376,7 +1376,8 @@ INSERT INTO `Users` (`UserID`, `UserFirstname`, `UserLastname`, `UserEmail`, `Us
 (47, 'Rebecca', 'Johnson', 'schultzchristopher@example.org', 'https://i.pravatar.cc/256?u=47', 1, 1287, 300),
 (48, 'Kenneth', 'Dixon', 'garrettlisa@example.net', 'https://i.pravatar.cc/256?u=48', 1, 1087, 100),
 (49, 'Kathy', 'Cooper', 'douglasmartinez@example.com', 'https://i.pravatar.cc/256?u=49', 1, 1337, 350),
-(50, 'Andrew', 'Norris', 'wellsrachel@example.net', 'https://i.pravatar.cc/256?u=50', 1, 3011, 50);
+(50, 'Andrew', 'Norris', 'wellsrachel@example.net', 'https://i.pravatar.cc/256?u=50', 1, 3011, 50),
+(51, 'Admin', 'Astrator', 'adminastrator@admin.com', 'https://static.vecteezy.com/system/resources/previews/000/290/610/non_2x/administration-vector-icon.jpg', 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1394,7 +1395,8 @@ CREATE TABLE `Usertypes` (
 --
 
 INSERT INTO `Usertypes` (`UsertypeID`, `UsertypeName`) VALUES
-(1, 'Client');
+(1, 'Client'),
+(2, 'Administrator ');
 
 --
 -- Indexes for dumped tables
@@ -1498,13 +1500,13 @@ ALTER TABLE `Taskstatus`
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `Usertypes`
 --
 ALTER TABLE `Usertypes`
-  MODIFY `UsertypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `UsertypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
