@@ -105,7 +105,9 @@ const model = {
         break;
       case 'moduleslikedby':
         fields = [...fields, 'LikeID AS UserLikeID', 'LikeAffinityID AS UserLikeAffinityID'];
-        table = `( Modulemembers INNER JOIN ${table} ON Modulemembers.ModulememberUserID=Users.UserID ) LEFT JOIN Likes ON Users.UserID=Likes.LikeeID`;
+        table = `((Modulemembers 
+                    INNER JOIN ${table} ON Modulemembers.ModulememberUserID=Users.UserID ) 
+                    LEFT JOIN Likes ON Users.UserID=Likes.LikeeID)`;
         where = `ModulememberModuleID=:MID AND Likes.LikerID=:UID`;
         parameters = { MID: parseInt(req.params.mid), UID: parseInt(req.params.uid) };
         break;
