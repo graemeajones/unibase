@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 20, 2025 at 01:14 AM
--- Server version: 10.4.28-MariaDB
+-- Host: 141.94.205.33
+-- Generation Time: Jul 20, 2025 at 08:33 PM
+-- Server version: 10.11.2-MariaDB-1
 -- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `Affinities` (
   `AffinityID` int(11) NOT NULL,
   `AffinityName` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Affinities`
@@ -48,12 +48,12 @@ INSERT INTO `Affinities` (`AffinityID`, `AffinityName`) VALUES
 
 CREATE TABLE `Assessments` (
   `AssessmentID` int(11) NOT NULL,
-  `AssessmentName` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `AssessmentName` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `AssessmentPercentage` int(11) NOT NULL,
   `AssessmentPublishdate` datetime NOT NULL,
   `AssessmentSubmissiondate` datetime DEFAULT NULL,
   `AssessmentFeedbackdate` datetime DEFAULT NULL,
-  `AssessmentBriefURL` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `AssessmentBriefURL` varchar(256) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `AssessmentModuleID` int(11) DEFAULT NULL,
   `AssessmentAssessmenttypeID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -95,7 +95,7 @@ CREATE TABLE `Assessmenttypes` (
   `AssessmenttypeID` int(11) NOT NULL,
   `AssessmenttypeCode` varchar(32) NOT NULL,
   `AssessmenttypeDescription` varchar(512) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Assessmenttypes`
@@ -116,7 +116,7 @@ INSERT INTO `Assessmenttypes` (`AssessmenttypeID`, `AssessmenttypeCode`, `Assess
 
 CREATE TABLE `Attendance` (
   `AttendanceID` int(11) NOT NULL,
-  `AttendanceName` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+  `AttendanceName` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -160,7 +160,7 @@ INSERT INTO `Completion` (`CompletionID`, `CompletionName`) VALUES
 CREATE TABLE `Confirmations` (
   `ConfirmationID` int(11) NOT NULL,
   `ConfirmationName` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Confirmations`
@@ -1616,7 +1616,7 @@ CREATE TABLE `Groupmembers` (
   `GroupmemberID` int(11) NOT NULL,
   `GroupmemberUserID` int(11) DEFAULT NULL,
   `GroupmemberGroupID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Groupmembers`
@@ -2030,7 +2030,7 @@ CREATE TABLE `Groups` (
   `GroupID` int(11) NOT NULL,
   `GroupName` varchar(64) NOT NULL,
   `GroupAssessmentID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Groups`
@@ -2155,7 +2155,7 @@ CREATE TABLE `Likes` (
   `LikerID` int(11) DEFAULT NULL,
   `LikeeID` int(11) DEFAULT NULL,
   `LikeAffinityID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Likes`
@@ -4289,7 +4289,7 @@ CREATE TABLE `Links` (
   `LinkeeID` int(11) NOT NULL,
   `LinkAssessmentID` int(11) NOT NULL,
   `LinkConfirmationID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4299,7 +4299,7 @@ CREATE TABLE `Links` (
 
 CREATE TABLE `Logs` (
   `LogID` int(11) NOT NULL,
-  `LogName` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `LogName` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `LogGroupID` int(11) NOT NULL,
   `LogSubmissiondate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -4592,7 +4592,7 @@ CREATE TABLE `Modulemembers` (
   `ModulememberUserID` int(11) DEFAULT NULL,
   `ModulememberModuleID` int(11) DEFAULT NULL,
   `ModulememberWorkshopID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Modulemembers`
@@ -6794,7 +6794,7 @@ CREATE TABLE `Modules` (
   `ModuleImageURL` varchar(128) NOT NULL,
   `ModuleLeaderID` int(11) DEFAULT NULL,
   `ModuleYearID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Modules`
@@ -6830,7 +6830,7 @@ CREATE TABLE `Projects` (
   `ProjectMandatory` tinyint(1) NOT NULL DEFAULT 1,
   `ProjectProjectstatusID` int(11) DEFAULT NULL,
   `ProjectModuleID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Projects`
@@ -6849,7 +6849,7 @@ INSERT INTO `Projects` (`ProjectID`, `ProjectName`, `ProjectGroupsize`, `Project
 CREATE TABLE `Projectstatus` (
   `ProjectstatusID` int(11) NOT NULL,
   `ProjectstatusName` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Projectstatus`
@@ -6871,501 +6871,187 @@ INSERT INTO `Projectstatus` (`ProjectstatusID`, `ProjectstatusName`) VALUES
 CREATE TABLE `Proposals` (
   `ProposalID` int(11) NOT NULL,
   `ProposerID` int(11) NOT NULL,
-  `ProposeeID` int(11) NOT NULL,
+  `ProposeeID` int(11) DEFAULT NULL,
   `ProposalAssessmentID` int(11) NOT NULL,
   `ProposalConfirmationID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `Proposals`
 --
 
 INSERT INTO `Proposals` (`ProposalID`, `ProposerID`, `ProposeeID`, `ProposalAssessmentID`, `ProposalConfirmationID`) VALUES
-(1, 275, 275, 13, 1),
-(2, 277, 527, 13, 1),
-(3, 278, 527, 13, 1),
-(4, 278, 438, 13, 1),
-(5, 279, 437, 13, 1),
-(6, 279, 418, 13, 2),
-(7, 279, 388, 13, 1),
-(8, 280, 519, 13, NULL),
-(9, 280, 540, 13, 1),
-(10, 280, 514, 13, 1),
-(11, 280, 482, 13, 1),
-(12, 281, 281, 13, 1),
-(13, 283, 411, 13, 1),
-(14, 284, 464, 13, 1),
-(15, 284, 339, 13, 1),
-(16, 285, 537, 13, 1),
-(17, 285, 478, 13, 1),
-(18, 285, 482, 13, 1),
-(19, 286, 326, 13, 1),
-(20, 286, 468, 13, 1),
-(21, 286, 471, 13, 1),
-(22, 286, 500, 13, 1),
-(23, 287, 287, 13, 1),
-(24, 289, 377, 13, 1),
-(25, 290, 476, 13, 1),
-(26, 290, 541, 13, 2),
-(27, 291, 286, 13, 1),
-(28, 291, 488, 13, 1),
-(29, 291, 392, 13, 1),
-(30, 292, 470, 13, 1),
-(31, 292, 532, 13, 1),
-(32, 292, 476, 13, 1),
-(33, 292, 308, 13, 1),
-(34, 293, 293, 13, 2),
-(35, 295, 364, 13, 2),
-(36, 296, 464, 13, 1),
-(37, 296, 283, 13, 1),
-(38, 297, 374, 13, 1),
-(39, 297, 440, 13, 1),
-(40, 297, 520, 13, 1),
-(41, 298, 498, 13, NULL),
-(42, 298, 543, 13, 1),
-(43, 298, 526, 13, 1),
-(44, 298, 419, 13, 1),
-(45, 299, 299, 13, 1),
-(46, 301, 280, 13, 1),
-(47, 302, 283, 13, 1),
-(48, 302, 446, 13, NULL),
-(49, 303, 527, 13, 1),
-(50, 303, 321, 13, 1),
-(51, 303, 346, 13, 1),
-(52, 304, 440, 13, 1),
-(53, 304, 519, 13, 1),
-(54, 304, 420, 13, 1),
-(55, 304, 492, 13, 1),
-(56, 305, 305, 13, NULL),
-(57, 307, 407, 13, 1),
-(58, 308, 347, 13, 1),
-(59, 308, 291, 13, 1),
-(60, 309, 393, 13, 1),
-(61, 309, 308, 13, NULL),
-(62, 309, 538, 13, 2),
-(63, 310, 479, 13, 1),
-(64, 310, 437, 13, 1),
-(65, 310, 395, 13, 1),
-(66, 310, 389, 13, 1),
-(67, 311, 311, 13, 1),
-(68, 313, 401, 13, 1),
-(69, 314, 335, 13, 1),
-(70, 314, 341, 13, 1),
-(71, 315, 491, 13, 1),
-(72, 315, 497, 13, 1),
-(73, 315, 332, 13, NULL),
-(74, 316, 353, 13, 2),
-(75, 316, 359, 13, NULL),
-(76, 316, 441, 13, 1),
-(77, 316, 479, 13, 1),
-(78, 317, 317, 13, 1),
-(79, 319, 396, 13, 2),
-(80, 320, 534, 13, 1),
-(81, 320, 329, 13, 2),
-(82, 321, 285, 13, 1),
-(83, 321, 501, 13, 2),
-(84, 321, 283, 13, 1),
-(85, 322, 544, 13, 1),
-(86, 322, 448, 13, 1),
-(87, 322, 527, 13, NULL),
-(88, 322, 530, 13, 1),
-(89, 323, 323, 13, 2),
-(90, 325, 417, 13, 1),
-(91, 326, 540, 13, 1),
-(92, 326, 373, 13, 1),
-(93, 327, 391, 13, 1),
-(94, 327, 429, 13, 1),
-(95, 327, 362, 13, 2),
-(96, 328, 486, 13, 1),
-(97, 328, 537, 13, 2),
-(98, 328, 289, 13, 1),
-(99, 328, 432, 13, 1),
-(100, 329, 329, 13, 1),
-(101, 331, 499, 13, 1),
-(102, 332, 379, 13, 1),
-(103, 332, 345, 13, 1),
-(104, 333, 371, 13, 1),
-(105, 333, 507, 13, 1),
-(106, 333, 435, 13, 1),
-(107, 334, 448, 13, 1),
-(108, 334, 359, 13, 1),
-(109, 334, 529, 13, 1),
-(110, 334, 515, 13, 1),
-(111, 335, 335, 13, 1),
-(112, 337, 310, 13, 1),
-(113, 338, 455, 13, NULL),
-(114, 338, 279, 13, 1),
-(115, 339, 355, 13, 1),
-(116, 339, 455, 13, 1),
-(117, 339, 373, 13, 1),
-(118, 340, 449, 13, 1),
-(119, 340, 539, 13, NULL),
-(120, 340, 522, 13, 1),
-(121, 340, 531, 13, 1),
-(122, 341, 341, 13, NULL),
-(123, 343, 341, 13, 1),
-(124, 344, 341, 13, 1),
-(125, 344, 484, 13, 1),
-(126, 345, 287, 13, 1),
-(127, 345, 413, 13, NULL),
-(128, 345, 295, 13, 1),
-(129, 346, 456, 13, 2),
-(130, 346, 424, 13, 1),
-(131, 346, 432, 13, 2),
-(132, 346, 331, 13, 2),
-(133, 347, 347, 13, 2),
-(134, 349, 401, 13, 1),
-(135, 350, 499, 13, 1),
-(136, 350, 298, 13, 1),
-(137, 351, 310, 13, 1),
-(138, 351, 500, 13, 1),
-(139, 351, 313, 13, 2),
-(140, 352, 367, 13, 2),
-(141, 352, 520, 13, NULL),
-(142, 352, 445, 13, 1),
-(143, 352, 385, 13, 1),
-(144, 353, 353, 13, 1),
-(145, 355, 496, 13, 1),
-(146, 356, 465, 13, 1),
-(147, 356, 405, 13, 1),
-(148, 357, 321, 13, 1),
-(149, 357, 389, 13, 1),
-(150, 357, 327, 13, 1),
-(151, 358, 519, 13, 1),
-(152, 358, 297, 13, 1),
-(153, 358, 488, 13, 2),
-(154, 358, 504, 13, 1),
-(155, 359, 359, 13, 1),
-(156, 361, 470, 13, 1),
-(157, 362, 434, 13, 2),
-(158, 362, 398, 13, 1),
-(159, 363, 424, 13, 1),
-(160, 363, 365, 13, 1),
-(161, 363, 461, 13, 1),
-(162, 364, 477, 13, 2),
-(163, 364, 428, 13, 1),
-(164, 364, 290, 13, 2),
-(165, 364, 375, 13, 1),
-(166, 365, 365, 13, 1),
-(167, 367, 298, 13, 1),
-(168, 368, 468, 13, 1),
-(169, 368, 465, 13, 1),
-(170, 369, 517, 13, 1),
-(171, 369, 298, 13, 1),
-(172, 369, 463, 13, 1),
-(173, 370, 421, 13, 1),
-(174, 370, 393, 13, 1),
-(175, 370, 537, 13, 1),
-(176, 370, 459, 13, 1),
-(177, 371, 371, 13, 1),
-(178, 373, 376, 13, 1),
-(179, 374, 334, 13, 2),
-(180, 374, 477, 13, 1),
-(181, 375, 341, 13, NULL),
-(182, 375, 495, 13, 1),
-(183, 375, 369, 13, 1),
-(184, 376, 305, 13, 2),
-(185, 376, 293, 13, 1),
-(186, 376, 474, 13, 1),
-(187, 376, 463, 13, NULL),
-(188, 377, 377, 13, 1),
-(189, 379, 474, 13, 1),
-(190, 380, 324, 13, 2),
-(191, 380, 315, 13, 1),
-(192, 381, 484, 13, 1),
-(193, 381, 405, 13, 1),
-(194, 381, 314, 13, 1),
-(195, 382, 438, 13, NULL),
-(196, 382, 524, 13, 1),
-(197, 382, 392, 13, 1),
-(198, 382, 328, 13, NULL),
-(199, 383, 383, 13, 1),
-(200, 385, 320, 13, NULL),
-(201, 386, 334, 13, 1),
-(202, 386, 530, 13, 1),
-(203, 387, 309, 13, 2),
-(204, 387, 400, 13, 1),
-(205, 387, 314, 13, 1),
-(206, 388, 453, 13, 1),
-(207, 388, 396, 13, NULL),
-(208, 388, 452, 13, 1),
-(209, 388, 509, 13, 1),
-(210, 389, 389, 13, 1),
-(211, 391, 528, 13, 1),
-(212, 392, 543, 13, NULL),
-(213, 392, 522, 13, 1),
-(214, 393, 388, 13, 1),
-(215, 393, 418, 13, 1),
-(216, 393, 439, 13, 1),
-(217, 394, 373, 13, 1),
-(218, 394, 438, 13, NULL),
-(219, 394, 384, 13, 1),
-(220, 394, 416, 13, 1),
-(221, 395, 395, 13, 2),
-(222, 397, 301, 13, 1),
-(223, 398, 392, 13, 1),
-(224, 398, 340, 13, 1),
-(225, 399, 546, 13, 1),
-(226, 399, 414, 13, 1),
-(227, 399, 482, 13, 2),
-(228, 400, 433, 13, NULL),
-(229, 400, 352, 13, NULL),
-(230, 400, 351, 13, 1),
-(231, 400, 331, 13, 1),
-(232, 401, 401, 13, 1),
-(233, 403, 297, 13, NULL),
-(234, 404, 480, 13, 1),
-(235, 404, 394, 13, 1),
-(236, 405, 368, 13, 1),
-(237, 405, 330, 13, 1),
-(238, 405, 343, 13, 1),
-(239, 406, 491, 13, 2),
-(240, 406, 425, 13, 1),
-(241, 406, 457, 13, 1),
-(242, 406, 359, 13, 1),
-(243, 407, 407, 13, 1),
-(244, 409, 327, 13, 1),
-(245, 410, 318, 13, 2),
-(246, 410, 316, 13, 1),
-(247, 411, 289, 13, 2),
-(248, 411, 324, 13, 1),
-(249, 411, 469, 13, 1),
-(250, 412, 481, 13, 1),
-(251, 412, 290, 13, 1),
-(252, 412, 406, 13, 1),
-(253, 412, 489, 13, 1),
-(254, 413, 413, 13, 1),
-(255, 415, 298, 13, 1),
-(256, 416, 369, 13, 1),
-(257, 416, 499, 13, 1),
-(258, 417, 372, 13, NULL),
-(259, 417, 488, 13, 1),
-(260, 417, 326, 13, 1),
-(261, 418, 515, 13, 1),
-(262, 418, 513, 13, 1),
-(263, 418, 470, 13, 1),
-(264, 418, 413, 13, 1),
-(265, 419, 419, 13, 1),
-(266, 421, 539, 13, NULL),
-(267, 422, 516, 13, 1),
-(268, 422, 351, 13, 1),
-(269, 423, 362, 13, 1),
-(270, 423, 300, 13, 1),
-(271, 423, 527, 13, NULL),
-(272, 424, 350, 13, 1),
-(273, 424, 317, 13, 2),
-(274, 424, 337, 13, 2),
-(275, 424, 367, 13, 1),
-(276, 425, 425, 13, 1),
-(277, 427, 413, 13, NULL),
-(278, 428, 517, 13, 1),
-(279, 428, 426, 13, 1),
-(280, 429, 487, 13, NULL),
-(281, 429, 500, 13, 1),
-(282, 429, 307, 13, 1),
-(283, 430, 307, 13, NULL),
-(284, 430, 353, 13, 1),
-(285, 430, 526, 13, 2),
-(286, 430, 447, 13, 1),
-(287, 431, 431, 13, 1),
-(288, 433, 352, 13, 1),
-(289, 434, 426, 13, 1),
-(290, 434, 497, 13, 1),
-(291, 435, 313, 13, 1),
-(292, 435, 397, 13, 1),
-(293, 435, 373, 13, 1),
-(294, 436, 389, 13, 1),
-(295, 436, 479, 13, 1),
-(296, 436, 337, 13, 1),
-(297, 436, 484, 13, 1),
-(298, 437, 437, 13, 1),
-(299, 439, 373, 13, 1),
-(300, 440, 298, 13, 1),
-(301, 440, 436, 13, 1),
-(302, 441, 337, 13, 1),
-(303, 441, 544, 13, 1),
-(304, 441, 453, 13, 1),
-(305, 442, 539, 13, 2),
-(306, 442, 437, 13, 1),
-(307, 442, 282, 13, NULL),
-(308, 442, 385, 13, 1),
-(309, 443, 443, 13, 1),
-(310, 445, 540, 13, 1),
-(311, 446, 427, 13, 1),
-(312, 446, 492, 13, 1),
-(313, 447, 415, 13, 1),
-(314, 447, 526, 13, 2),
-(315, 447, 377, 13, 1),
-(316, 448, 329, 13, 1),
-(317, 448, 289, 13, 1),
-(318, 448, 279, 13, 1),
-(319, 448, 328, 13, 1),
-(320, 449, 449, 13, 1),
-(321, 451, 501, 13, 1),
-(322, 452, 430, 13, 1),
-(323, 452, 341, 13, 1),
-(324, 453, 298, 13, 1),
-(325, 453, 299, 13, 1),
-(326, 453, 485, 13, 1),
-(327, 454, 428, 13, 1),
-(328, 454, 484, 13, 1),
-(329, 454, 477, 13, NULL),
-(330, 454, 542, 13, 1),
-(331, 455, 455, 13, NULL),
-(332, 457, 421, 13, 1),
-(333, 458, 379, 13, 1),
-(334, 458, 362, 13, 1),
-(335, 459, 381, 13, 1),
-(336, 459, 390, 13, 1),
-(337, 459, 441, 13, 1),
-(338, 460, 385, 13, 1),
-(339, 460, 381, 13, 1),
-(340, 460, 517, 13, 1),
-(341, 460, 491, 13, 1),
-(342, 461, 461, 13, 1),
-(343, 463, 410, 13, 1),
-(344, 464, 451, 13, 1),
-(345, 464, 446, 13, 1),
-(346, 465, 396, 13, 1),
-(347, 465, 354, 13, NULL),
-(348, 465, 479, 13, NULL),
-(349, 466, 312, 13, 1),
-(350, 466, 411, 13, NULL),
-(351, 466, 335, 13, 1),
-(352, 466, 359, 13, 1),
-(353, 467, 467, 13, 1),
-(354, 469, 544, 13, 1),
-(355, 470, 277, 13, 2),
-(356, 470, 539, 13, 1),
-(357, 471, 351, 13, 2),
-(358, 471, 338, 13, 1),
-(359, 471, 476, 13, 1),
-(360, 472, 458, 13, 1),
-(361, 472, 413, 13, NULL),
-(362, 472, 445, 13, 1),
-(363, 472, 277, 13, 1),
-(364, 473, 473, 13, 1),
-(365, 475, 490, 13, 1),
-(366, 476, 345, 13, 1),
-(367, 476, 451, 13, 1),
-(368, 477, 542, 13, 1),
-(369, 477, 296, 13, 1),
-(370, 477, 329, 13, 1),
-(371, 478, 322, 13, 2),
-(372, 478, 332, 13, 2),
-(373, 478, 399, 13, 1),
-(374, 478, 431, 13, NULL),
-(375, 479, 479, 13, 1),
-(376, 481, 410, 13, 1),
-(377, 482, 391, 13, 2),
-(378, 482, 318, 13, 1),
-(379, 483, 334, 13, 1),
-(380, 483, 516, 13, 2),
-(381, 483, 289, 13, NULL),
-(382, 484, 382, 13, 1),
-(383, 484, 307, 13, 1),
-(384, 484, 414, 13, 1),
-(385, 484, 442, 13, 1),
-(386, 485, 485, 13, 1),
-(387, 487, 373, 13, 1),
-(388, 488, 288, 13, 1),
-(389, 488, 486, 13, 1),
-(390, 489, 500, 13, 1),
-(391, 489, 275, 13, 1),
-(392, 489, 458, 13, 1),
-(393, 490, 365, 13, 1),
-(394, 490, 452, 13, 2),
-(395, 490, 347, 13, 1),
-(396, 490, 446, 13, 1),
-(397, 491, 491, 13, 1),
-(398, 493, 296, 13, 1),
-(399, 494, 488, 13, 1),
-(400, 494, 523, 13, 1),
-(401, 495, 369, 13, 1),
-(402, 495, 332, 13, 1),
-(403, 495, 525, 13, 1),
-(404, 496, 541, 13, 1),
-(405, 496, 315, 13, 2),
-(406, 496, 430, 13, 1),
-(407, 496, 307, 13, 1),
-(408, 497, 497, 13, 1),
-(409, 499, 477, 13, 1),
-(410, 500, 537, 13, NULL),
-(411, 500, 338, 13, 1),
-(412, 501, 292, 13, 2),
-(413, 501, 335, 13, NULL),
-(414, 501, 528, 13, 1),
-(415, 502, 370, 13, NULL),
-(416, 502, 394, 13, 1),
-(417, 502, 482, 13, NULL),
-(418, 502, 454, 13, 1),
-(419, 503, 503, 13, 1),
-(420, 505, 455, 13, NULL),
-(421, 506, 465, 13, 1),
-(422, 506, 333, 13, 1),
-(423, 507, 419, 13, 2),
-(424, 507, 490, 13, 1),
-(425, 507, 399, 13, 1),
-(426, 508, 292, 13, NULL),
-(427, 508, 519, 13, 1),
-(428, 508, 491, 13, 1),
-(429, 508, 515, 13, 1),
-(430, 509, 509, 13, 1),
-(431, 511, 395, 13, 1),
-(432, 512, 496, 13, 1),
-(433, 512, 447, 13, 2),
-(434, 513, 362, 13, 1),
-(435, 513, 445, 13, 1),
-(436, 513, 522, 13, 1),
-(437, 514, 493, 13, 1),
-(438, 514, 393, 13, 1),
-(439, 514, 402, 13, 1),
-(440, 514, 367, 13, 1),
-(441, 515, 515, 13, 1),
-(442, 517, 485, 13, NULL),
-(443, 518, 373, 13, 1),
-(444, 518, 362, 13, 1),
-(445, 519, 410, 13, 1),
-(446, 519, 292, 13, 1),
-(447, 519, 512, 13, 1),
-(448, 520, 430, 13, 1),
-(449, 520, 297, 13, 1),
-(450, 520, 495, 13, 1),
-(451, 520, 327, 13, 2),
-(452, 521, 521, 13, 1),
-(453, 523, 384, 13, 2),
-(454, 524, 477, 13, 1),
-(455, 524, 508, 13, 1),
-(456, 525, 498, 13, 2),
-(457, 525, 422, 13, 1),
-(458, 525, 360, 13, 1),
-(459, 526, 354, 13, 1),
-(460, 526, 422, 13, 1),
-(461, 526, 536, 13, 1),
-(462, 526, 285, 13, 1),
-(463, 527, 527, 13, 1),
-(464, 529, 298, 13, 1),
-(465, 530, 439, 13, 1),
-(466, 530, 327, 13, 1),
-(467, 531, 529, 13, 1),
-(468, 531, 504, 13, 2),
-(469, 531, 317, 13, 1),
-(470, 532, 423, 13, 1),
-(471, 532, 466, 13, 1),
-(472, 532, 393, 13, 1),
-(473, 532, 493, 13, 1),
-(474, 533, 533, 13, NULL),
-(475, 535, 478, 13, 1),
-(476, 536, 457, 13, NULL),
-(477, 536, 504, 13, 1),
-(478, 537, 512, 13, 1),
-(479, 537, 358, 13, 1),
-(480, 537, 482, 13, 1),
-(481, 538, 376, 13, 1),
-(482, 538, 479, 13, 1),
-(483, 538, 294, 13, 1),
-(484, 538, 437, 13, NULL),
-(485, 539, 539, 13, 1);
+(1, 335, NULL, 13, NULL),
+(2, 303, NULL, 13, NULL),
+(3, 407, NULL, 13, NULL),
+(4, 423, NULL, 13, NULL),
+(5, 503, NULL, 13, NULL),
+(6, 291, NULL, 13, NULL),
+(7, 511, NULL, 13, NULL),
+(8, 364, NULL, 13, NULL),
+(9, 540, NULL, 13, NULL),
+(10, 408, NULL, 13, NULL),
+(11, 496, NULL, 13, NULL),
+(12, 280, NULL, 13, NULL),
+(13, 360, NULL, 13, NULL),
+(14, 484, NULL, 13, NULL),
+(15, 493, NULL, 13, NULL),
+(16, 309, NULL, 13, NULL),
+(17, 301, NULL, 13, NULL),
+(18, 345, NULL, 13, NULL),
+(19, 537, NULL, 13, NULL),
+(20, 305, NULL, 13, NULL),
+(21, 401, NULL, 13, NULL),
+(22, 370, NULL, 13, NULL),
+(23, 458, NULL, 13, NULL),
+(24, 374, NULL, 13, NULL),
+(25, 318, NULL, 13, NULL),
+(26, 310, NULL, 13, NULL),
+(27, 394, NULL, 13, NULL),
+(28, 518, NULL, 13, NULL),
+(29, 427, 379, 13, NULL),
+(30, 295, 287, 13, NULL),
+(31, 284, 448, 13, NULL),
+(32, 344, 440, 13, NULL),
+(33, 325, 353, 13, NULL),
+(34, 349, 337, 13, NULL),
+(35, 402, 474, 13, NULL),
+(36, 542, 422, 13, NULL),
+(37, 343, 415, 13, NULL),
+(38, 343, 287, 13, NULL),
+(39, 403, 463, 13, NULL),
+(40, 403, 491, 13, NULL),
+(41, 340, 464, 13, NULL),
+(42, 340, 512, 13, NULL),
+(43, 504, 516, 13, NULL),
+(44, 504, 464, 13, NULL),
+(45, 521, 389, 13, NULL),
+(46, 521, 329, 13, NULL),
+(47, 321, 429, 13, NULL),
+(48, 321, 513, 13, NULL),
+(49, 470, 390, 13, NULL),
+(50, 470, 526, 13, NULL),
+(51, 358, 346, 13, NULL),
+(52, 358, 430, 13, NULL),
+(53, 323, 347, 13, NULL),
+(54, 323, 391, 13, NULL),
+(55, 323, 391, 13, NULL),
+(56, 543, 515, 13, NULL),
+(57, 543, 399, 13, NULL),
+(58, 543, 399, 13, NULL),
+(59, 508, 452, 13, NULL),
+(60, 508, 384, 13, NULL),
+(61, 508, 384, 13, NULL),
+(62, 316, 396, 13, NULL),
+(63, 316, 528, 13, NULL),
+(64, 316, 528, 13, NULL),
+(65, 397, 333, 13, NULL),
+(66, 397, 393, 13, NULL),
+(67, 397, 393, 13, NULL),
+(68, 341, 409, 13, NULL),
+(69, 341, 333, 13, NULL),
+(70, 341, 333, 13, NULL),
+(71, 350, 534, 13, NULL),
+(72, 350, 530, 13, NULL),
+(73, 350, 530, 13, NULL),
+(74, 278, 534, 13, NULL),
+(75, 278, 398, 13, NULL),
+(76, 278, 398, 13, NULL),
+(77, 307, 431, 13, NULL),
+(78, 307, 531, 13, NULL),
+(79, 307, 531, 13, NULL),
+(80, 307, 531, 13, NULL),
+(81, 451, 275, 13, NULL),
+(82, 451, 355, 13, NULL),
+(83, 451, 355, 13, NULL),
+(84, 451, 355, 13, NULL),
+(85, 523, 531, 13, NULL),
+(86, 523, 431, 13, NULL),
+(87, 523, 431, 13, NULL),
+(88, 523, 431, 13, NULL),
+(89, 507, 479, 13, NULL),
+(90, 507, 411, 13, NULL),
+(91, 507, 411, 13, NULL),
+(92, 507, 411, 13, NULL),
+(93, 471, 467, 13, NULL),
+(94, 471, 383, 13, NULL),
+(95, 471, 383, 13, NULL),
+(96, 471, 383, 13, NULL),
+(97, 519, 279, 13, NULL),
+(98, 519, 275, 13, NULL),
+(99, 519, 275, 13, NULL),
+(100, 519, 275, 13, NULL),
+(101, 524, 376, 13, NULL),
+(102, 524, 456, 13, NULL),
+(103, 524, 456, 13, NULL),
+(104, 524, 456, 13, NULL),
+(105, 352, 464, 13, NULL),
+(106, 352, 452, 13, NULL),
+(107, 352, 452, 13, NULL),
+(108, 352, 452, 13, NULL),
+(109, 420, 464, 13, NULL),
+(110, 420, 396, 13, NULL),
+(111, 420, 396, 13, NULL),
+(112, 420, 396, 13, NULL),
+(113, 436, 324, 13, NULL),
+(114, 436, 440, 13, NULL),
+(115, 436, 440, 13, NULL),
+(116, 436, 440, 13, NULL),
+(117, 400, 444, 13, NULL),
+(118, 400, 516, 13, NULL),
+(119, 400, 516, 13, NULL),
+(120, 400, 516, 13, NULL),
+(121, 380, 444, 13, NULL),
+(122, 380, 520, 13, NULL),
+(123, 380, 520, 13, NULL),
+(124, 380, 520, 13, NULL),
+(125, 453, 337, 13, NULL),
+(126, 453, 293, 13, NULL),
+(127, 453, 293, 13, NULL),
+(128, 453, 293, 13, NULL),
+(129, 485, 313, 13, NULL),
+(130, 485, 429, 13, NULL),
+(131, 485, 429, 13, NULL),
+(132, 485, 429, 13, NULL),
+(133, 433, 389, 13, NULL),
+(134, 433, 365, 13, NULL),
+(135, 433, 365, 13, NULL),
+(136, 433, 365, 13, NULL),
+(137, 461, 541, 13, NULL),
+(138, 461, 497, 13, NULL),
+(139, 461, 497, 13, NULL),
+(140, 461, 497, 13, NULL),
+(141, 441, 413, 13, NULL),
+(142, 441, 525, 13, NULL),
+(143, 441, 525, 13, NULL),
+(144, 441, 525, 13, NULL),
+(145, 377, 285, 13, NULL),
+(146, 377, 445, 13, NULL),
+(147, 377, 445, 13, NULL),
+(148, 377, 445, 13, NULL),
+(149, 362, 314, 13, NULL),
+(150, 362, 386, 13, NULL),
+(151, 362, 386, 13, NULL),
+(152, 362, 386, 13, NULL),
+(153, 334, 290, 13, NULL),
+(154, 334, 450, 13, NULL),
+(155, 334, 450, 13, NULL),
+(156, 334, 450, 13, NULL),
+(157, 410, 510, 13, NULL),
+(158, 410, 446, 13, NULL),
+(159, 410, 446, 13, NULL),
+(160, 410, 446, 13, NULL),
+(161, 366, 390, 13, NULL),
+(162, 366, 490, 13, NULL),
+(163, 366, 490, 13, NULL),
+(164, 366, 490, 13, NULL),
+(165, 538, 486, 13, NULL),
+(166, 538, 454, 13, NULL),
+(167, 538, 454, 13, NULL),
+(168, 538, 454, 13, NULL),
+(169, 434, 450, 13, NULL),
+(170, 434, 426, 13, NULL),
+(171, 434, 426, 13, NULL);
 
 -- --------------------------------------------------------
 
@@ -7421,7 +7107,7 @@ CREATE TABLE `Users` (
   `UserLevel` tinyint(4) DEFAULT NULL,
   `UserYearID` int(11) DEFAULT NULL,
   `UserImageURL` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Users`
@@ -8261,7 +7947,7 @@ INSERT INTO `Users` (`UserID`, `UserFirstname`, `UserLastname`, `UserEmail`, `Us
 CREATE TABLE `Usertypes` (
   `UsertypeID` int(11) NOT NULL,
   `UsertypeName` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Usertypes`
@@ -8303,7 +7989,7 @@ INSERT INTO `Workshops` (`WorkshopID`, `WorkshopName`, `WorkshopDescription`, `W
 CREATE TABLE `Years` (
   `YearID` int(11) NOT NULL,
   `YearName` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Years`
@@ -8467,10 +8153,10 @@ ALTER TABLE `Projectstatus`
 --
 ALTER TABLE `Proposals`
   ADD PRIMARY KEY (`ProposalID`),
-  ADD UNIQUE KEY `UC_ProposerID_ProposeeID_ProposalAssessmentID` (`ProposerID`,`ProposeeID`,`ProposalAssessmentID`) USING BTREE,
-  ADD KEY `Proposals Proposee FK to Users` (`ProposeeID`),
-  ADD KEY `Proposals Assessment FK to Assessments` (`ProposalAssessmentID`),
-  ADD KEY `Proposals Confirmation FK to Confirmations` (`ProposalConfirmationID`);
+  ADD KEY `Proposals (ProposerID)_Users_FK` (`ProposerID`),
+  ADD KEY `Proposals (ProposeeID)_Users_FK` (`ProposeeID`),
+  ADD KEY `Proposals_Assessments_FK` (`ProposalAssessmentID`),
+  ADD KEY `Proposals_Confirmations_FK` (`ProposalConfirmationID`);
 
 --
 -- Indexes for table `Technologies`
@@ -8632,7 +8318,7 @@ ALTER TABLE `Projectstatus`
 -- AUTO_INCREMENT for table `Proposals`
 --
 ALTER TABLE `Proposals`
-  MODIFY `ProposalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=487;
+  MODIFY `ProposalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
 
 --
 -- AUTO_INCREMENT for table `Technologies`
@@ -8676,70 +8362,13 @@ ALTER TABLE `Assessments`
   ADD CONSTRAINT `Assessments_Modules_FK` FOREIGN KEY (`AssessmentModuleID`) REFERENCES `Modules` (`ModuleID`);
 
 --
--- Constraints for table `Favourites`
---
-ALTER TABLE `Favourites`
-  ADD CONSTRAINT `FK_FavouriteLikerID_to_UserID` FOREIGN KEY (`FavouriteLikerID`) REFERENCES `unibase`.`Users` (`UserID`);
-
---
--- Constraints for table `Groupmembers`
---
-ALTER TABLE `Groupmembers`
-  ADD CONSTRAINT `GroupmemberGroupFK` FOREIGN KEY (`GroupmemberGroupID`) REFERENCES `unibase`.`Groups` (`GroupID`),
-  ADD CONSTRAINT `GroupmemberUserFK` FOREIGN KEY (`GroupmemberUserID`) REFERENCES `unibase`.`Users` (`UserID`);
-
---
--- Constraints for table `Likes`
---
-ALTER TABLE `Likes`
-  ADD CONSTRAINT `Like FK to Affinities` FOREIGN KEY (`LikeAffinityID`) REFERENCES `unibase`.`Affinities` (`AffinityID`),
-  ADD CONSTRAINT `Like(e) FK to Users` FOREIGN KEY (`LikeeID`) REFERENCES `unibase`.`Users` (`UserID`),
-  ADD CONSTRAINT `Like(r) FK to Users` FOREIGN KEY (`LikerID`) REFERENCES `unibase`.`Users` (`UserID`);
-
---
--- Constraints for table `Links`
---
-ALTER TABLE `Links`
-  ADD CONSTRAINT `Links_(Linkee)_Users_FK` FOREIGN KEY (`LinkeeID`) REFERENCES `Users` (`UserID`),
-  ADD CONSTRAINT `Links_(Linker)_Users_FK` FOREIGN KEY (`LinkerID`) REFERENCES `Users` (`UserID`),
-  ADD CONSTRAINT `Links_Assessments_FK` FOREIGN KEY (`LinkAssessmentID`) REFERENCES `Assessments` (`AssessmentID`),
-  ADD CONSTRAINT `Links_Confirmations_FK` FOREIGN KEY (`LinkConfirmationID`) REFERENCES `Confirmations` (`ConfirmationID`);
-
---
--- Constraints for table `Modulemembers`
---
-ALTER TABLE `Modulemembers`
-  ADD CONSTRAINT `Modulemembers_Modules_FK` FOREIGN KEY (`ModulememberModuleID`) REFERENCES `Modules` (`ModuleID`),
-  ADD CONSTRAINT `Modulemembers_Users_FK` FOREIGN KEY (`ModulememberUserID`) REFERENCES `Users` (`UserID`),
-  ADD CONSTRAINT `Modulemembers_Workshops_FK` FOREIGN KEY (`ModulememberWorkshopID`) REFERENCES `Workshops` (`WorkshopID`);
-
---
--- Constraints for table `Modules`
---
-ALTER TABLE `Modules`
-  ADD CONSTRAINT `Modules_Years_FK` FOREIGN KEY (`ModuleYearID`) REFERENCES `Years` (`YearID`);
-
---
--- Constraints for table `Projects`
---
-ALTER TABLE `Projects`
-  ADD CONSTRAINT `ProjectProjectstatus FK` FOREIGN KEY (`ProjectProjectstatusID`) REFERENCES `unibase`.`Projectstatus` (`ProjectstatusID`);
-
---
 -- Constraints for table `Proposals`
 --
 ALTER TABLE `Proposals`
-  ADD CONSTRAINT `Proposals Assessment FK to Assessments` FOREIGN KEY (`ProposalAssessmentID`) REFERENCES `unibase`.`Assessments` (`AssessmentID`),
-  ADD CONSTRAINT `Proposals Confirmation FK to Confirmations` FOREIGN KEY (`ProposalConfirmationID`) REFERENCES `unibase`.`Confirmations` (`ConfirmationID`),
-  ADD CONSTRAINT `Proposals Proposee FK to Users` FOREIGN KEY (`ProposeeID`) REFERENCES `unibase`.`Users` (`UserID`),
-  ADD CONSTRAINT `Proposals Proposer FK to Users` FOREIGN KEY (`ProposerID`) REFERENCES `unibase`.`Users` (`UserID`);
-
---
--- Constraints for table `Users`
---
-ALTER TABLE `Users`
-  ADD CONSTRAINT `Users_Usertypes_FK` FOREIGN KEY (`UserUsertypeID`) REFERENCES `Usertypes` (`UsertypeID`),
-  ADD CONSTRAINT `Users_Years_FK` FOREIGN KEY (`UserYearID`) REFERENCES `Years` (`YearID`);
+  ADD CONSTRAINT `Proposals (ProposeeID)_Users_FK` FOREIGN KEY (`ProposeeID`) REFERENCES `Users` (`UserID`),
+  ADD CONSTRAINT `Proposals (ProposerID)_Users_FK` FOREIGN KEY (`ProposerID`) REFERENCES `Users` (`UserID`),
+  ADD CONSTRAINT `Proposals_Assessments_FK` FOREIGN KEY (`ProposalAssessmentID`) REFERENCES `Assessments` (`AssessmentID`),
+  ADD CONSTRAINT `Proposals_Confirmations_FK` FOREIGN KEY (`ProposalConfirmationID`) REFERENCES `Confirmations` (`ConfirmationID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
