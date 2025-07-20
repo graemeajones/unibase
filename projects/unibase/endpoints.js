@@ -722,8 +722,8 @@ const listOfEndpoints = [
           description:
             'Returns the set of proposees who were proposed for a specific assessment by a specific proposer',
           examples: [
-            `${API_PATH}/users/assessments/13/proposedby/277`,
-            `${API_PATH}/users/assessments/13/proposedby/277?UserProposalConfirmationName=Confirmed`,
+            `${API_PATH}/users/assessments/13/proposedby/278`,
+            `${API_PATH}/users/assessments/13/proposedby/278?UserProposalConfirmationName=Confirmed`,
           ],
         },
         {
@@ -731,8 +731,8 @@ const listOfEndpoints = [
           description:
             'Returns the set of proposers who proposed a specific proposee for a specific assessment',
           examples: [
-            `${API_PATH}/users/assessments/13/whoproposed/527`,
-            `${API_PATH}/users/assessments/13/whoproposed/527?UserProposalConfirmationID=0`,
+            `${API_PATH}/users/assessments/13/whoproposed/287`,
+            `${API_PATH}/users/assessments/13/whoproposed/287?UserProposalConfirmationID=0`,
           ],
         },
         {
