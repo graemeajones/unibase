@@ -2,12 +2,9 @@ import joi from 'joi';
 
 const schema = {};
 
-schema.requiredFields = [
-  'ProposerID',
-  'ProposeeID',
-  'ProposalAssessmentID',
-  'ProposalConfirmationID',
-];
+schema.requiredFields = ['ProposerID', 'ProposeeID', 'ProposalAssessmentID'];
+
+// ProposalConfirmationID not required
 
 schema.record = joi
   .object({

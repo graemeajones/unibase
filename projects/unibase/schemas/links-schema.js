@@ -1,8 +1,8 @@
-import joi from "joi";
+import joi from 'joi';
 
 const schema = {};
 
-schema.requiredFields = ["LinkerID ", "LinkeeID", "LinkAssessmentID"];
+schema.requiredFields = ['LinkerID ', 'LinkeeID', 'LinkAssessmentID'];
 
 schema.record = joi
   .object({
