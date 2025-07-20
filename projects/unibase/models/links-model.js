@@ -1,17 +1,9 @@
-import {
-  parseRequestQuery,
-  constructPreparedStatement,
-} from "#root/model/utils.js";
+import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils.js';
 
 const model = {
-  table: "Links",
-  idField: "LinkID",
-  mutableFields: [
-    "LinkerID",
-    "LinkeeID",
-    "LinkAssessmentID",
-    "LinkConfirmationID",
-  ],
+  table: 'Links',
+  idField: 'LinkID',
+  mutableFields: ['LinkerID', 'LinkeeID', 'LinkAssessmentID', 'LinkConfirmationID'],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
@@ -25,17 +17,17 @@ const model = {
       ...model.mutableFields,
       'CONCAT(Linkers.UserLastname, ", ", Linkers.UserFirstname) AS LinkLinkerName',
       'CONCAT(Linkees.UserLastname, ", ", Linkees.UserFirstname) AS LinkLinkeeName',
-      "AssessmentName AS LinkAssessmentName",
-      "ConfirmationName AS LinkConfirmationName",
+      'AssessmentName AS LinkAssessmentName',
+      'ConfirmationName AS LinkConfirmationName',
     ];
 
     // Process request queries ----------------
     const allowedQueryFields = [
       ...model.mutableFields,
-      "LinkLinkerName",
-      "LinkLinkeeName",
-      "LinkAssesmentName",
-      "LinkConfirmationName",
+      'LinkLinkerName',
+      'LinkLinkeeName',
+      'LinkAssesmentName',
+      'LinkConfirmationName',
     ];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
@@ -43,20 +35,13 @@ const model = {
     let where = null;
     let parameters = {};
     switch (variant) {
-      case "primary":
-        where = "LinkID=:ID";
+      case 'primary':
+        where = 'LinkID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
     }
 
-    return constructPreparedStatement(
-      fields,
-      table,
-      where,
-      parameters,
-      filter,
-      orderby
-    );
+    return constructPreparedStatement(fields, table, where, parameters, filter, orderby);
   },
 };
 
