@@ -59,11 +59,6 @@ const model = {
         where = 'UserUsertypeID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
-      case 'groups':
-        table = `Groupmembers INNER JOIN ${table} ON Groupmembers.GroupmemberUserID=Users.UserID`;
-        where = 'GroupmemberGroupID=:ID';
-        parameters = { ID: parseInt(req.params.id) };
-        break;
       case 'likes':
         fields = [
           ...fields,
@@ -101,6 +96,16 @@ const model = {
       case 'modules':
         table = `Modulemembers INNER JOIN ${table} ON Modulemembers.ModulememberUserID=Users.UserID`;
         where = 'ModulememberModuleID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'workshops':
+        table = `${table} LEFT JOIN Modulemembers ON Users.UserID=Modulemembers.ModulememberUserID`;
+        where = 'ModulememberWorkshopID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
+      case 'groups':
+        table = `Groupmembers INNER JOIN ${table} ON Groupmembers.GroupmemberUserID=Users.UserID`;
+        where = 'GroupmemberGroupID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
       case 'moduleslikedby':

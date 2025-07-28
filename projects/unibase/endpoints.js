@@ -509,16 +509,22 @@ const listOfEndpoints = [
           examples: [`${API_PATH}/modulemembers/2`],
         },
         {
+          endpoint: '/user/{id}',
+          description:
+            'Returns the set of module member records associated with the user identified by the id provided.',
+          examples: [`${API_PATH}/modulemembers/user/276`],
+        },
+        {
           endpoint: '/module/{id}',
           description:
             'Returns the set of module member records associated with the module identified by the id provided.',
           examples: [`${API_PATH}/modulemembers/module/1`],
         },
         {
-          endpoint: '/user/{id}',
+          endpoint: '/workshop/{id}',
           description:
-            'Returns the set of module member records associated with the user identified by the id provided.',
-          examples: [`${API_PATH}/modulemembers/user/276`],
+            'Returns the set of module member records associated with the workshop identified by the id provided.',
+          examples: [`${API_PATH}/modulemembers/workshop/1`],
         },
       ],
       post: {
@@ -679,6 +685,12 @@ const listOfEndpoints = [
           description:
             'Returns the set of users associated with the module identified by the id provided',
           examples: [`${API_PATH}/users/modules/4`],
+        },
+        {
+          endpoint: '/workshops/{id}',
+          description:
+            'Returns the set of users associated with the workshop identified by the id provided',
+          examples: [`${API_PATH}/users/workshops/1`],
         },
         {
           endpoint: '/groups/{id}',
