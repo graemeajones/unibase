@@ -3,25 +3,30 @@ import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils
 const model = {
   table: 'Modulemembers',
   idField: 'ModulememberID',
-  mutableFields: ['ModulememberModuleID', 'ModulememberUserID'],
+  mutableFields: ['ModulememberUserID', 'ModulememberModuleID', 'ModulememberWorkshopID'],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
     // Resolve Foreign Keys -------------------
-    let table =
-      '(((Modulemembers LEFT JOIN Users ON ModulememberUserID=UserID) LEFT JOIN Modules ON ModulememberModuleID=ModuleID ) LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID )';
+    let table = `((((Modulemembers 
+           INNER JOIN Users ON ModulememberUserID=UserID) 
+           LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID )
+           INNER JOIN Modules ON ModulememberModuleID=ModuleID ) 
+           LEFT JOIN Workshops ON ModulememberWorkshopID=WorkshopID )`;
     let fields = [
       model.idField,
       ...model.mutableFields,
-      'CONCAT(ModuleCode," ",ModuleName) AS ModulememberModuleName',
       'CONCAT(UserFirstname," ",UserLastname, " (", UsertypeName, ")") AS ModulememberUserName',
+      'CONCAT(ModuleCode," ",ModuleName) AS ModulememberModuleName',
+      'WorkshopName AS ModulememberWorkshopName',
     ];
 
     // Process request queries ----------------
     const allowedQueryFields = [
       ...model.mutableFields,
-      'ModulememberModuleName',
       'ModulememberUserName',
+      'ModulememberModuleName',
+      'ModulememberWorkshopName',
     ];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
@@ -29,12 +34,16 @@ const model = {
     let where = null;
     let parameters = {};
     switch (variant) {
+      case 'user':
+        where = 'ModulememberUserID=:ID';
+        parameters = { ID: parseInt(req.params.id) };
+        break;
       case 'module':
         where = 'ModulememberModuleID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
-      case 'user':
-        where = 'ModulememberUserID=:ID';
+      case 'workshop':
+        where = 'ModulememberWorkshopID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
       case 'primary':

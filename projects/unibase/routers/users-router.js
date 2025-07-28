@@ -20,6 +20,7 @@ router.get('/staff', (req, res) => controller.get(req, res, 'staff'));
 router.get('/usertype/:id(\\d+)', (req, res) => controller.get(req, res, 'usertype'));
 router.get('/groups/:id(\\d+)', (req, res) => controller.get(req, res, 'groups'));
 router.get('/modules/:id(\\d+)', (req, res) => controller.get(req, res, 'modules'));
+router.get('/workshops/:id(\\d+)', (req, res) => controller.get(req, res, 'workshops'));
 router.get('/modules/:mid(\\d+)/likes/:uid(\\d+)', (req, res) =>
   controller.get(req, res, 'moduleslikedby')
 );

@@ -15,8 +15,9 @@ const router = new Router();
 
 router.get('/', (req, res) => controller.get(req, res, null));
 router.get('/:id(\\d+)', (req, res) => controller.get(req, res, 'primary'));
-router.get('/module/:id(\\d+)', (req, res) => controller.get(req, res, 'module'));
 router.get('/user/:id(\\d+)', (req, res) => controller.get(req, res, 'user'));
+router.get('/module/:id(\\d+)', (req, res) => controller.get(req, res, 'module'));
+router.get('/workshop/:id(\\d+)', (req, res) => controller.get(req, res, 'workshop'));
 
 router.post('/', controller.post);
 router.put('/:id(\\d+)', controller.put);
