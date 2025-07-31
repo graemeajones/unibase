@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2025 at 08:00 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Aug 01, 2025 at 12:26 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,8 +39,17 @@ CREATE TABLE `Duties` (
 --
 
 INSERT INTO `Duties` (`DutyID`, `DutyName`, `DutyEffort`, `DutyInstances`) VALUES
-(1, 'Course Leader (Undergraduate)', 320, 5),
-(2, 'Course Leader (Postgraduate)', 160, 4);
+(1, 'Head of School', 700, 1),
+(2, 'Head of Department', 500, 2),
+(3, 'Recruitment (Coordinator)', 150, 1),
+(4, 'MathsAid Coordinator', 60, 1),
+(5, 'Course Leader', 120, 10),
+(6, 'External Liaison', 60, 2),
+(7, 'Personal Tutor Scheme Coordinator', 50, 1),
+(8, 'Recruitment', 50, 42),
+(9, 'Erasmus and Study Abroad Coordinator', 25, 1),
+(10, 'Induction Coordinator', 25, 2),
+(11, 'Placements Tutor', 25, 2);
 
 -- --------------------------------------------------------
 
@@ -78,7 +87,28 @@ INSERT INTO `Modules` (`ModuleID`, `ModuleCode`, `ModuleName`, `ModuleImageURL`,
 (11, 'CI6100', 'Programming 3', 'https://images.freeimages.com/images/small-previews/fa1/cable-5-1243077.jpg', 1, 6, 30, 200, 332),
 (12, 'CI6600', 'Individual Project', 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 34, 6, 30, 250, 426),
 (13, 'CI6110', 'React Programming', 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 45, 6, 30, 150, 282),
-(14, 'CI6130', 'React Native', 'https://images.freeimages.com/images/small-previews/fa1/cable-5-1243077.jpg', 8, 6, 30, 100, 188);
+(14, 'CI6330', 'Mobile Application Development', 'https://images.freeimages.com/images/small-previews/fa1/cable-5-1243077.jpg', 8, 6, 30, 150, 188);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Myduties`
+--
+
+CREATE TABLE `Myduties` (
+  `MydutyID` int(11) NOT NULL,
+  `MydutyName` varchar(128) NOT NULL,
+  `MydutyUserID` int(11) NOT NULL,
+  `MydutyDutyID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Myduties`
+--
+
+INSERT INTO `Myduties` (`MydutyID`, `MydutyName`, `MydutyUserID`, `MydutyDutyID`) VALUES
+(1, 'Computer science and Mathematics', 14, 2),
+(2, 'Networking and Digital Media', 12, 2);
 
 -- --------------------------------------------------------
 
@@ -101,6 +131,40 @@ INSERT INTO `Positions` (`PositionID`, `PositionName`, `PositionOrder`) VALUES
 (2, 'Associate Professor', 2),
 (3, 'Senior Lecturer', 3),
 (4, 'Lecturer', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Teaching`
+--
+
+CREATE TABLE `Teaching` (
+  `TeachingID` int(11) NOT NULL,
+  `TeachingUserID` int(11) NOT NULL,
+  `TeachingModuleID` int(11) NOT NULL,
+  `TeachingLeading` int(11) NOT NULL DEFAULT 0,
+  `TeachingLecturing` int(11) NOT NULL DEFAULT 0,
+  `TeachingWorkshops` int(11) NOT NULL DEFAULT 0,
+  `TeachingAssessing` int(11) NOT NULL DEFAULT 0,
+  `TeachingModeration` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Teaching`
+--
+
+INSERT INTO `Teaching` (`TeachingID`, `TeachingUserID`, `TeachingModuleID`, `TeachingLeading`, `TeachingLecturing`, `TeachingWorkshops`, `TeachingAssessing`, `TeachingModeration`) VALUES
+(1, 45, 2, 0, 50, 50, 50, 0),
+(2, 45, 4, 0, 50, 50, 70, 0),
+(3, 45, 14, 0, 50, 50, 50, 0),
+(4, 45, 7, 100, 50, 50, 50, 0),
+(5, 45, 13, 0, 0, 0, 0, 1),
+(6, 36, 2, 0, 28, 28, 25, 0),
+(7, 4, 2, 0, 14, 14, 13, 0),
+(8, 20, 2, 100, 8, 8, 13, 0),
+(9, 16, 4, 100, 50, 50, 30, 0),
+(10, 8, 14, 100, 50, 50, 50, 0),
+(11, 4, 7, 0, 50, 50, 50, 0);
 
 -- --------------------------------------------------------
 
@@ -210,17 +274,34 @@ ALTER TABLE `Modules`
   ADD KEY `ModuleLeader FK` (`ModuleLeaderID`);
 
 --
+-- Indexes for table `Myduties`
+--
+ALTER TABLE `Myduties`
+  ADD PRIMARY KEY (`MydutyID`),
+  ADD KEY `Myduties_Users_FK` (`MydutyUserID`),
+  ADD KEY `Myduties_Duties_FK` (`MydutyDutyID`);
+
+--
 -- Indexes for table `Positions`
 --
 ALTER TABLE `Positions`
   ADD PRIMARY KEY (`PositionID`);
 
 --
+-- Indexes for table `Teaching`
+--
+ALTER TABLE `Teaching`
+  ADD PRIMARY KEY (`TeachingID`),
+  ADD KEY `Teaching_Users_FK` (`TeachingUserID`),
+  ADD KEY `Teaching_Modules_FK` (`TeachingModuleID`);
+
+--
 -- Indexes for table `Users`
 --
 ALTER TABLE `Users`
   ADD PRIMARY KEY (`UserID`),
-  ADD KEY `Users_Positions_FK` (`UserPositionID`);
+  ADD KEY `Users_Positions_FK` (`UserPositionID`),
+  ADD KEY `Users_Usertypes_FK` (`UserUsertypeID`);
 
 --
 -- Indexes for table `Usertypes`
@@ -236,7 +317,7 @@ ALTER TABLE `Usertypes`
 -- AUTO_INCREMENT for table `Duties`
 --
 ALTER TABLE `Duties`
-  MODIFY `DutyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `DutyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `Modules`
@@ -245,16 +326,28 @@ ALTER TABLE `Modules`
   MODIFY `ModuleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 
 --
+-- AUTO_INCREMENT for table `Myduties`
+--
+ALTER TABLE `Myduties`
+  MODIFY `MydutyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `Positions`
 --
 ALTER TABLE `Positions`
   MODIFY `PositionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `Teaching`
+--
+ALTER TABLE `Teaching`
+  MODIFY `TeachingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `Usertypes`
@@ -273,10 +366,25 @@ ALTER TABLE `Modules`
   ADD CONSTRAINT `Modules_Users_FK` FOREIGN KEY (`ModuleLeaderID`) REFERENCES `Users` (`UserID`);
 
 --
+-- Constraints for table `Myduties`
+--
+ALTER TABLE `Myduties`
+  ADD CONSTRAINT `Myduties_Duties_FK` FOREIGN KEY (`MydutyDutyID`) REFERENCES `Duties` (`DutyID`),
+  ADD CONSTRAINT `Myduties_Users_FK` FOREIGN KEY (`MydutyUserID`) REFERENCES `Users` (`UserID`);
+
+--
+-- Constraints for table `Teaching`
+--
+ALTER TABLE `Teaching`
+  ADD CONSTRAINT `Teaching_Modules_FK` FOREIGN KEY (`TeachingModuleID`) REFERENCES `Modules` (`ModuleID`),
+  ADD CONSTRAINT `Teaching_Users_FK` FOREIGN KEY (`TeachingUserID`) REFERENCES `Users` (`UserID`);
+
+--
 -- Constraints for table `Users`
 --
 ALTER TABLE `Users`
-  ADD CONSTRAINT `Users_Positions_FK` FOREIGN KEY (`UserPositionID`) REFERENCES `Positions` (`PositionID`);
+  ADD CONSTRAINT `Users_Positions_FK` FOREIGN KEY (`UserPositionID`) REFERENCES `Positions` (`PositionID`),
+  ADD CONSTRAINT `Users_Usertypes_FK` FOREIGN KEY (`UserUsertypeID`) REFERENCES `Usertypes` (`UsertypeID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
