@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 141.94.205.33
--- Generation Time: Jul 19, 2025 at 08:20 PM
--- Server version: 10.11.2-MariaDB-1
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Aug 01, 2025 at 01:57 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -460,6 +460,29 @@ INSERT INTO `Events` (`EventID`, `EventName`, `EventDescription`, `EventStart`, 
 (398, 'Grooming', 'Clean, brush, and trim your pet to keep them looking their best.', '2025-07-02 14:35:00', 60, 4),
 (399, 'Grooming', 'Clean, brush, and trim your pet to keep them looking their best.', '2025-06-27 19:51:00', 60, 57),
 (400, 'Vet Appointment', 'Schedule a health check with the veterinarian.', '2025-08-07 23:27:00', 120, 66);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Orders`
+--
+
+CREATE TABLE `Orders` (
+  `OrderID` int(11) NOT NULL,
+  `OrderUserID` int(11) NOT NULL,
+  `OrderProductID` int(11) NOT NULL,
+  `OrderAcquired` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Orders`
+--
+
+INSERT INTO `Orders` (`OrderID`, `OrderUserID`, `OrderProductID`, `OrderAcquired`) VALUES
+(1, 1, 1, '2025-08-01 13:47:33'),
+(2, 1, 2, '2025-08-01 13:47:33'),
+(3, 2, 1, '2025-08-01 10:53:11'),
+(4, 2, 2, '2025-08-01 12:53:11');
 
 -- --------------------------------------------------------
 
@@ -1416,6 +1439,14 @@ ALTER TABLE `Events`
   ADD KEY `Events_Pets_FK` (`EventPetID`);
 
 --
+-- Indexes for table `Orders`
+--
+ALTER TABLE `Orders`
+  ADD PRIMARY KEY (`OrderID`),
+  ADD KEY `Orders_Users_FK` (`OrderUserID`),
+  ADD KEY `Orders_Products_FK` (`OrderProductID`);
+
+--
 -- Indexes for table `Pets`
 --
 ALTER TABLE `Pets`
@@ -1473,6 +1504,12 @@ ALTER TABLE `Events`
   MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=401;
 
 --
+-- AUTO_INCREMENT for table `Orders`
+--
+ALTER TABLE `Orders`
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `Pets`
 --
 ALTER TABLE `Pets`
@@ -1517,6 +1554,13 @@ ALTER TABLE `Usertypes`
 --
 ALTER TABLE `Events`
   ADD CONSTRAINT `Events_Pets_FK` FOREIGN KEY (`EventPetID`) REFERENCES `Pets` (`PetID`);
+
+--
+-- Constraints for table `Orders`
+--
+ALTER TABLE `Orders`
+  ADD CONSTRAINT `Orders_Products_FK` FOREIGN KEY (`OrderProductID`) REFERENCES `Products` (`ProductID`),
+  ADD CONSTRAINT `Orders_Users_FK` FOREIGN KEY (`OrderUserID`) REFERENCES `Users` (`UserID`);
 
 --
 -- Constraints for table `Pets`
