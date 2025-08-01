@@ -90,7 +90,7 @@ const listOfEndpoints = [
       },
     },
   },
-   {
+  {
     entity: 'Orders',
     sap: '/api/orders',
     services: {
@@ -103,13 +103,13 @@ const listOfEndpoints = [
         {
           endpoint: '/{id}',
           description: 'Returns the specific order record identified by the id provided',
-          examples: [`${API_PATH}/orders/572`],
+          examples: [`${API_PATH}/orders/1`],
         },
         {
           endpoint: '/users/{id}',
           description:
             'Returns the set of group member records associated with the user identified by the id provided.',
-          examples: [`${API_PATH}/orders/users/276`],
+          examples: [`${API_PATH}/orders/users/1`],
         },
       ],
       post: {
@@ -162,7 +162,6 @@ const listOfEndpoints = [
       },
     },
   },
-
 
   {
     entity: 'Products',
