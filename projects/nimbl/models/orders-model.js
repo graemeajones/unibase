@@ -12,23 +12,20 @@ const model = {
       '((Orders INNER JOIN Users ON OrderUserID=UserID ) INNER JOIN Products ON OrderProductID=ProductID )';
     let fields = [
       model.idField,
+      ...model.mutableFields,
       'CONCAT(UserLastname,", ",UserFirstname) AS OrderUserName',
       'ProductName AS OrderProductName',
     ];
 
     // Process request queries ----------------
-    const allowedQueryFields = [
-      ...model.mutableFields,
-      'OrderUserName',
-      'OrderProductName',
-    ];
+    const allowedQueryFields = [...model.mutableFields, 'OrderUserName', 'OrderProductName'];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
     // Construct prepared statement -----------
     let where = null;
     let parameters = {};
     switch (variant) {
-      case 'user':
+      case 'users':
         where = 'OrderUserID=:ID';
         parameters = { ID: parseInt(req.params.id) };
         break;
