@@ -3,6 +3,7 @@ import { Router } from 'express';
 
 import categoriesRouter from './routers/categories-router.js';
 import eventsRouter from './routers/events-router.js';
+import ordersRouter from './routers/orders-router.js';
 import petsRouter from './routers/pets-router.js';
 import productsRouter from './routers/products-router.js';
 import tasksRouter from './routers/tasks-router.js';
@@ -89,6 +90,42 @@ const listOfEndpoints = [
       },
     },
   },
+   {
+    entity: 'Orders',
+    sap: '/api/orders',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all order records',
+          examples: [`${API_PATH}/orders`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific order record identified by the id provided',
+          examples: [`${API_PATH}/orders/572`],
+        },
+        {
+          endpoint: '/users/{id}',
+          description:
+            'Returns the set of group member records associated with the user identified by the id provided.',
+          examples: [`${API_PATH}/orders/users/276`],
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new group member record',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific group member record identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific group member record identified by the id provided',
+      },
+    },
+  },
   {
     entity: 'Pets',
     sap: '/api/pets',
@@ -125,6 +162,8 @@ const listOfEndpoints = [
       },
     },
   },
+
+
   {
     entity: 'Products',
     sap: '/api/products',
@@ -300,6 +339,7 @@ const router = new Router({ mergeParams: true });
 
 router.use('/categories', categoriesRouter);
 router.use('/events', eventsRouter);
+router.use('/orders', ordersRouter);
 router.use('/pets', petsRouter);
 router.use('/products', productsRouter);
 router.use('/tasks', tasksRouter);
