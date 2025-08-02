@@ -110,7 +110,9 @@ CREATE TABLE `Myduties` (
 INSERT INTO `Myduties` (`MydutyID`, `MydutyName`, `MydutyUserID`, `MydutyDutyID`) VALUES
 (1, 'Computer science and Mathematics', 14, 2),
 (2, 'Networking and Digital Media', 1, 2),
-(3, '', 45, 14);
+(3, '', 45, 12),
+(4, '', 1, 12),
+(5, '', 14, 12);
 
 -- --------------------------------------------------------
 
