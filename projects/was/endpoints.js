@@ -97,6 +97,18 @@ const listOfEndpoints = [
           description: 'Returns the specific duty assignment identified by the id provided',
           examples: [`${API_PATH}/myduties/1`],
         },
+        {
+          endpoint: '/{id}',
+          description:
+            'Returns all the duty assignments associated with the specific user identified by the id provided',
+          examples: [`${API_PATH}/myduties/users/45`],
+        },
+        {
+          endpoint: '/{id}',
+          description:
+            'Returns all the duty assignments associated withe the specific duty identified by the id provided',
+          examples: [`${API_PATH}/myduties/duties/2`],
+        },
       ],
       post: {
         endpoint: '/',
@@ -156,6 +168,18 @@ const listOfEndpoints = [
           endpoint: '/{id}',
           description: 'Returns the specific teaching contribution identified by the id provided',
           examples: [`${API_PATH}/teaching/1`],
+        },
+        {
+          endpoint: '/users/{id}',
+          description:
+            'Returns all the teaching contributions associated with the user identified by the id provided',
+          examples: [`${API_PATH}/teaching/users/45`],
+        },
+        {
+          endpoint: '/modules/{id}',
+          description:
+            'Returns all the teaching contributions associated with the module identified by the id provided',
+          examples: [`${API_PATH}/teaching/modules/4`],
         },
       ],
       post: {
