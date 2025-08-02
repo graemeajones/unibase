@@ -106,7 +106,7 @@ const listOfEndpoints = [
         {
           endpoint: '/{id}',
           description:
-            'Returns all the duty assignments associated withe the specific duty identified by the id provided',
+            'Returns all the duty assignments associated with the specific duty identified by the id provided',
           examples: [`${API_PATH}/myduties/duties/2`],
         },
       ],
