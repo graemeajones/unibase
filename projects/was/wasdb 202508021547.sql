@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 01, 2025 at 12:26 AM
--- Server version: 10.4.32-MariaDB
+-- Host: 141.94.205.33
+-- Generation Time: Aug 02, 2025 at 04:46 PM
+-- Server version: 10.11.2-MariaDB-1
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -49,7 +49,8 @@ INSERT INTO `Duties` (`DutyID`, `DutyName`, `DutyEffort`, `DutyInstances`) VALUE
 (8, 'Recruitment', 50, 42),
 (9, 'Erasmus and Study Abroad Coordinator', 25, 1),
 (10, 'Induction Coordinator', 25, 2),
-(11, 'Placements Tutor', 25, 2);
+(11, 'Placements Tutor', 25, 2),
+(12, 'Personal Tutor', 8, 20); 
 
 -- --------------------------------------------------------
 
@@ -67,14 +68,14 @@ CREATE TABLE `Modules` (
   `ModuleCredits` int(11) NOT NULL DEFAULT 0,
   `ModuleSize` int(11) NOT NULL DEFAULT 0,
   `ModuleEffort` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Modules`
 --
 
 INSERT INTO `Modules` (`ModuleID`, `ModuleCode`, `ModuleName`, `ModuleImageURL`, `ModuleLeaderID`, `ModuleLevel`, `ModuleCredits`, `ModuleSize`, `ModuleEffort`) VALUES
-(1, 'CI4105', 'Programming 1', 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 34, 4, 30, 400, 620),
+(1, 'CI4105', 'Programming 101', 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 34, 4, 30, 400, 1224),
 (2, 'CI4250', 'Computing Fundamentals', 'https://images.freeimages.com/images/small-previews/411/light-of-technology-1510575.jpg', 20, 4, 30, 400, 620),
 (3, 'CI4305', 'Requirements Analysis and Design', 'https://images.freeimages.com/images/small-previews/64b/vla-1-1315506.jpg', 28, 4, 30, 400, 620),
 (4, 'CI4450', 'Professional Environments 1', 'https://images.freeimages.com/images/small-previews/293/cable-4-1243085.jpg', 16, 4, 30, 400, 620),
@@ -108,7 +109,8 @@ CREATE TABLE `Myduties` (
 
 INSERT INTO `Myduties` (`MydutyID`, `MydutyName`, `MydutyUserID`, `MydutyDutyID`) VALUES
 (1, 'Computer science and Mathematics', 14, 2),
-(2, 'Networking and Digital Media', 12, 2);
+(2, 'Networking and Digital Media', 1, 2),
+(3, '', 45, 14);
 
 -- --------------------------------------------------------
 
@@ -155,7 +157,7 @@ CREATE TABLE `Teaching` (
 
 INSERT INTO `Teaching` (`TeachingID`, `TeachingUserID`, `TeachingModuleID`, `TeachingLeading`, `TeachingLecturing`, `TeachingWorkshops`, `TeachingAssessing`, `TeachingModeration`) VALUES
 (1, 45, 2, 0, 50, 50, 50, 0),
-(2, 45, 4, 0, 50, 50, 70, 0),
+(2, 1, 4, 0, 50, 50, 70, 0),
 (3, 45, 14, 0, 50, 50, 50, 0),
 (4, 45, 7, 100, 50, 50, 50, 0),
 (5, 45, 13, 0, 0, 0, 0, 1),
@@ -188,7 +190,7 @@ CREATE TABLE `Users` (
 --
 
 INSERT INTO `Users` (`UserID`, `UserTitle`, `UserFirstname`, `UserLastname`, `UserEmail`, `UserImageURL`, `UserUsertypeID`, `UserPositionID`) VALUES
-(1, 'Dr', 'Ahmed', 'Shihab', 'a.shihab@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-3e2ab5c0aa6-draishihab.jpg?h=0eda5579&itok=D1_psqrI', 1, 3),
+(1, 'Dr', 'Kamaran', 'Fathulla', 'k.fathulla@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/bynder/webimage-Staff-Profile_Dr-Kamaran-Fathulla.jpg?h=f2907ab6&itok=VrSZLpF0', 1, 2),
 (2, 'Dr', 'Deepak', 'GC', 'd.gc@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-a14aaf5f803-drdeepakgc.jpg?h=a0653b6f&itok=kYqcVLuS', 1, 3),
 (3, 'Dr', 'Darrel', 'Greenhill', 'd.greenhill@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/bynder/webimage-Staff-Profile_Dr-Darrel-Greenhill.png?h=bc6f9788&itok=KzSfb3_j', 1, 2),
 (4, 'Dr', 'Beryl', 'Jones', 'beryl.jones@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-a5420096a9c-drberyljones.jpg?h=75f723da&itok=eAeaN_4K', 1, 2),
@@ -199,7 +201,7 @@ INSERT INTO `Users` (`UserID`, `UserTitle`, `UserFirstname`, `UserLastname`, `Us
 (9, 'Dr', 'Gordon', 'Hunter', 'g.hunter@kingston.ac.uk', '', 1, 2),
 (10, 'Dr', 'Farzana', 'Rahman', 'farzana@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-c548ae4e97f-drfarzanarahman.jpg?h=74b59c52&itok=JL6F8GmT', 1, 3),
 (11, 'Dr', 'Eckhard', 'Pfluegel', 'e.pfluegel@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-60e9e014839-dreckhardpfluegel.jpg?h=71976bb4&itok=K8EtHFdW', 1, 2),
-(12, 'Dr', 'Kamaran', 'Fathulla', 'k.fathulla@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/bynder/webimage-Staff-Profile_Dr-Kamaran-Fathulla.jpg?h=f2907ab6&itok=VrSZLpF0', 1, 2),
+(12, 'Miss', 'Mollie', 'Bentley-Rowe', 'M.Bentley-Rowe@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-f2a165f1ff6-missmolliebentley-rowe.jpg?h=326dff7e&itok=e-7e_pW2', 1, 4),
 (13, 'Dr', 'Jarek', 'Francik', 'jarek@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-6f139a6df13-drjarekfrancik.jpg?h=c673cd1c&itok=-pTXAbZ2', 1, 3),
 (14, 'Dr', 'James', 'Denholm-Price', 'j.denholm-price@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-de7a753-drjamesdenholm-price.png?h=5f0c8d78&itok=cHklReV8', 1, 2),
 (15, 'Dr', 'Jad', 'Abbass', 'j.abbass@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-c6102565f14-drjadabbass.jpg?h=d1cb525d&itok=JpRxNS_F', 1, 3),
@@ -246,7 +248,7 @@ INSERT INTO `Users` (`UserID`, `UserTitle`, `UserFirstname`, `UserLastname`, `Us
 CREATE TABLE `Usertypes` (
   `UsertypeID` int(11) NOT NULL,
   `UsertypeName` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Usertypes`
@@ -323,7 +325,7 @@ ALTER TABLE `Duties`
 -- AUTO_INCREMENT for table `Modules`
 --
 ALTER TABLE `Modules`
-  MODIFY `ModuleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
+  MODIFY `ModuleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
 
 --
 -- AUTO_INCREMENT for table `Myduties`
@@ -347,7 +349,7 @@ ALTER TABLE `Teaching`
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `Usertypes`

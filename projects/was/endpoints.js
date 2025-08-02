@@ -3,7 +3,9 @@ import { Router } from 'express';
 
 import dutiesRouter from './routers/duties-router.js';
 import modulesRouter from './routers/modules-router.js';
+import mydutiesRouter from './routers/myduties-router.js';
 import positionsRouter from './routers/positions-router.js';
+import teachingRouter from './routers/teaching-router.js';
 import usersRouter from './routers/users-router.js';
 import usertypesRouter from './routers/usertypes-router.js';
 
@@ -81,6 +83,36 @@ const listOfEndpoints = [
     },
   },
   {
+    entity: 'Myduties',
+    sap: '/api/myduties',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all duty assignments',
+          examples: [`${API_PATH}/myduties`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific duty assignment identified by the id provided',
+          examples: [`${API_PATH}/myduties/1`],
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new duty assignment',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific duty assignment identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific duty assignment identified by the id provided',
+      },
+    },
+  },
+  {
     entity: 'Positions',
     sap: '/api/positions',
     services: {
@@ -107,6 +139,36 @@ const listOfEndpoints = [
       delete: {
         endpoint: '/{id}',
         description: 'Delete the specific position identified by the id provided',
+      },
+    },
+  },
+  {
+    entity: 'Teaching',
+    sap: '/api/teaching',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all teaching',
+          examples: [`${API_PATH}/teaching`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific teaching contribution identified by the id provided',
+          examples: [`${API_PATH}/teaching/1`],
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new teaching contribution',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific teaching contribution identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific teaching contribution identified by the id provided',
       },
     },
   },
@@ -178,7 +240,9 @@ const router = new Router({ mergeParams: true });
 
 router.use('/duties', dutiesRouter);
 router.use('/modules', modulesRouter);
+router.use('/myduties', mydutiesRouter);
 router.use('/positions', positionsRouter);
+router.use('/teaching', teachingRouter);
 router.use('/users', usersRouter);
 router.use('/usertypes', usertypesRouter);
 
