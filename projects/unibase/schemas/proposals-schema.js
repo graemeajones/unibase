@@ -13,6 +13,7 @@ schema.record = joi
     ProposeeID: joi.number().integer().min(1),
     ProposalAssessmentID: joi.number().integer().min(1),
     ProposalConfirmationID: joi.number().integer().min(1).allow(null),
+    ProposalConfirmationAcknowledgement: joi.number().integer().valid(0, 1).optional()
   })
   .required()
   .unknown(true);

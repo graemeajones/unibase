@@ -3,7 +3,7 @@ import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils
 const model = {
   table: 'Proposals',
   idField: 'ProposalID',
-  mutableFields: ['ProposerID', 'ProposeeID', 'ProposalAssessmentID', 'ProposalConfirmationID'],
+  mutableFields: ['ProposerID', 'ProposeeID', 'ProposalAssessmentID', 'ProposalConfirmationID', 'ProposalConfirmationAcknowledgement'],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
@@ -29,6 +29,7 @@ const model = {
       'ProposalProposeeName',
       'ProposalAssesmentName',
       'ProposalConfirmationName',
+      'ProposalConfirmationAcknowledgement'
     ];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
