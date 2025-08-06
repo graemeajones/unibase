@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 06, 2025 at 01:38 PM
--- Server version: 10.4.32-MariaDB
+-- Host: 141.94.205.33
+-- Generation Time: Aug 06, 2025 at 06:20 PM
+-- Server version: 10.11.2-MariaDB-1
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `Affinities` (
   `AffinityID` int(11) NOT NULL,
   `AffinityName` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Affinities`
@@ -48,12 +48,12 @@ INSERT INTO `Affinities` (`AffinityID`, `AffinityName`) VALUES
 
 CREATE TABLE `Assessments` (
   `AssessmentID` int(11) NOT NULL,
-  `AssessmentName` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `AssessmentName` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `AssessmentPercentage` int(11) NOT NULL,
   `AssessmentPublishdate` datetime NOT NULL,
   `AssessmentSubmissiondate` datetime DEFAULT NULL,
   `AssessmentFeedbackdate` datetime DEFAULT NULL,
-  `AssessmentBriefURL` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `AssessmentBriefURL` varchar(256) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `AssessmentModuleID` int(11) DEFAULT NULL,
   `AssessmentAssessmenttypeID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -63,25 +63,19 @@ CREATE TABLE `Assessments` (
 --
 
 INSERT INTO `Assessments` (`AssessmentID`, `AssessmentName`, `AssessmentPercentage`, `AssessmentPublishdate`, `AssessmentSubmissiondate`, `AssessmentFeedbackdate`, `AssessmentBriefURL`, `AssessmentModuleID`, `AssessmentAssessmenttypeID`) VALUES
-(1, 'Topic 1 Number Systems and Binary Logic', 8, '2022-10-01 10:00:00', '2022-10-02 19:00:00', NULL, 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39047', 2, 1),
+(1, 'Topic 2 Number Systems and Binary Logic', 8, '2022-10-01 10:00:00', '2022-10-02 19:00:00', NULL, 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39047', 2, 1),
 (2, 'Topic 2 Data Representation', 14, '2022-10-24 00:00:00', NULL, NULL, 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39075', 2, 1),
 (3, 'Topic 3 Computer Architecture', 14, '2022-10-02 06:00:00', NULL, NULL, 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39062', 2, 1),
 (4, 'Topic 4 Web Technologies', 14, '2022-12-12 00:00:00', NULL, '2023-01-27 17:00:00', 'https://canvas.kingston.ac.uk/courses/23318/assignments/118295', 2, 2),
 (5, 'Topic 5 Relational Data', 14, '2023-01-23 00:00:00', NULL, NULL, 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39040', 2, 1),
 (6, 'Topic 6 Algorithms and Data Structures', 8, '2023-02-23 00:00:00', NULL, NULL, 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39055', 2, 1),
-(7, 'Topic 7 Computer Systems', 14, '2023-03-06 00:00:00', NULL, NULL, 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39067', 2, 1),
-(8, 'Topic 8 Communications and Networking', 14, '2023-03-27 00:00:00', NULL, NULL, 'https://canvas.kingston.ac.uk/courses/23318/quizzes/39056', 2, 1),
-(9, 'Technical Report 1 (Communication Skills)', 10, '2022-10-03 09:00:00', '2022-10-27 23:59:59', '2022-11-18 17:00:00', 'https://canvas.kingston.ac.uk/courses/23327/assignments/113620', 4, 3),
-(10, 'Technical Report 2 (Communication Skills)', 10, '2022-11-07 09:00:00', '2022-12-01 23:59:59', '2023-01-13 18:00:00', 'https://canvas.kingston.ac.uk/courses/23327/assignments/113622', 4, 4),
-(11, 'Technical Report 3 (Communication Skills)', 10, '2022-12-05 09:00:00', '2023-01-09 23:59:59', '2023-02-10 18:00:00', 'https://canvas.kingston.ac.uk/courses/23327/assignments/113623', 4, 3),
 (12, 'Employability Portfolio', 30, '2023-01-09 09:00:00', '2023-02-10 23:59:59', '2023-03-17 18:00:00', 'https://canvas.kingston.ac.uk/courses/23327/assignments/113617', 4, 3),
-(13, 'Commercial Awareness', 40, '2023-02-20 09:00:00', '2023-03-24 23:59:59', '2023-04-07 17:00:00', 'https://canvas.kingston.ac.uk/courses/23327/assignments/113614', 4, 4),
+(13, 'Commercial Awareness', 40, '2023-02-20 09:00:00', '2023-03-24 23:59:59', '2023-04-13 00:00:00', 'https://canvas.kingston.ac.uk/courses/23327/assignments/113614', 4, 4),
 (14, 'Unit 1: Thinking Like a Programmer', 25, '2022-09-26 09:00:00', '2022-10-31 17:00:00', NULL, '', 1, 5),
 (15, 'Unit 2: Introduction to Javascript', 25, '2022-09-26 09:00:00', '2022-12-12 17:00:00', NULL, '', 1, 5),
 (16, 'Unit 3: Introduction to 0bject-0riented Programming', 25, '2022-09-26 09:00:00', '2023-02-06 17:00:00', NULL, '', 1, 5),
 (17, 'Unit 4: Further 0bject-0riented Programming', 25, '2022-09-26 09:00:00', '2023-03-27 17:00:00', NULL, '', 1, 5),
 (18, 'Coursework 1 (App Design Prototype)', 40, '2022-09-26 09:00:00', '2022-12-15 23:59:59', '2023-01-27 17:00:00', 'https://canvas.kingston.ac.uk/courses/23321/assignments/120557', 3, 3),
-(19, 'In-class Test', 20, '2022-12-12 09:00:00', '2022-12-16 17:00:00', NULL, 'https://canvas.kingston.ac.uk/courses/23321/quizzes/41496', 3, 2),
 (20, 'Coursework 2 (Design and Build a Clickable Prototype)', 40, '2023-01-09 09:00:00', '2023-04-05 23:59:59', '2023-05-12 17:00:00', 'https://canvas.kingston.ac.uk/courses/23321/assignments/116192', 3, 3),
 (27, 'Implement React UI', 100, '2023-01-01 09:00:00', '2023-01-31 23:59:00', NULL, 'https://canvas.kingston.ac.uk/courses/23321/assignments/116192', 13, 3);
 
@@ -95,7 +89,7 @@ CREATE TABLE `Assessmenttypes` (
   `AssessmenttypeID` int(11) NOT NULL,
   `AssessmenttypeCode` varchar(32) NOT NULL,
   `AssessmenttypeDescription` varchar(512) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Assessmenttypes`
@@ -116,7 +110,7 @@ INSERT INTO `Assessmenttypes` (`AssessmenttypeID`, `AssessmenttypeCode`, `Assess
 
 CREATE TABLE `Attendance` (
   `AttendanceID` int(11) NOT NULL,
-  `AttendanceName` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+  `AttendanceName` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -160,7 +154,7 @@ INSERT INTO `Completion` (`CompletionID`, `CompletionName`) VALUES
 CREATE TABLE `Confirmations` (
   `ConfirmationID` int(11) NOT NULL,
   `ConfirmationName` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Confirmations`
@@ -1616,7 +1610,7 @@ CREATE TABLE `Groupmembers` (
   `GroupmemberID` int(11) NOT NULL,
   `GroupmemberUserID` int(11) DEFAULT NULL,
   `GroupmemberGroupID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Groupmembers`
@@ -2030,7 +2024,7 @@ CREATE TABLE `Groups` (
   `GroupID` int(11) NOT NULL,
   `GroupName` varchar(64) NOT NULL,
   `GroupAssessmentID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Groups`
@@ -2155,7 +2149,7 @@ CREATE TABLE `Likes` (
   `LikerID` int(11) DEFAULT NULL,
   `LikeeID` int(11) DEFAULT NULL,
   `LikeAffinityID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Likes`
@@ -4289,7 +4283,7 @@ CREATE TABLE `Links` (
   `LinkeeID` int(11) NOT NULL,
   `LinkAssessmentID` int(11) NOT NULL,
   `LinkConfirmationID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4299,7 +4293,7 @@ CREATE TABLE `Links` (
 
 CREATE TABLE `Logs` (
   `LogID` int(11) NOT NULL,
-  `LogName` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `LogName` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `LogGroupID` int(11) NOT NULL,
   `LogSubmissiondate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -4592,7 +4586,7 @@ CREATE TABLE `Modulemembers` (
   `ModulememberUserID` int(11) DEFAULT NULL,
   `ModulememberModuleID` int(11) DEFAULT NULL,
   `ModulememberWorkshopID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Modulemembers`
@@ -4600,8 +4594,8 @@ CREATE TABLE `Modulemembers` (
 
 INSERT INTO `Modulemembers` (`ModulememberID`, `ModulememberUserID`, `ModulememberModuleID`, `ModulememberWorkshopID`) VALUES
 (1, 275, 1, NULL),
-(2, 276, 1, NULL),
-(3, 277, 1, NULL),
+(2, 276, 1, 2),
+(3, 277, 1, 2),
 (4, 278, 1, NULL),
 (5, 279, 1, NULL),
 (6, 280, 1, NULL),
@@ -4872,8 +4866,8 @@ INSERT INTO `Modulemembers` (`ModulememberID`, `ModulememberUserID`, `Modulememb
 (271, 545, 1, NULL),
 (272, 546, 1, NULL),
 (273, 275, 2, NULL),
-(274, 276, 2, NULL),
-(275, 277, 2, NULL),
+(274, 276, 2, 4),
+(275, 277, 2, 4),
 (276, 278, 2, NULL),
 (277, 279, 2, NULL),
 (278, 280, 2, NULL),
@@ -5144,8 +5138,8 @@ INSERT INTO `Modulemembers` (`ModulememberID`, `ModulememberUserID`, `Modulememb
 (543, 545, 2, NULL),
 (544, 546, 2, NULL),
 (545, 275, 3, NULL),
-(546, 276, 3, NULL),
-(547, 277, 3, NULL),
+(546, 276, 3, 3),
+(547, 277, 3, 3),
 (548, 278, 3, NULL),
 (549, 279, 3, NULL),
 (550, 280, 3, NULL),
@@ -5417,7 +5411,7 @@ INSERT INTO `Modulemembers` (`ModulememberID`, `ModulememberUserID`, `Modulememb
 (816, 546, 3, NULL),
 (817, 275, 4, 1),
 (818, 276, 4, 2),
-(819, 277, 4, 3),
+(819, 277, 4, 2),
 (820, 278, 4, 4),
 (821, 279, 4, 1),
 (822, 280, 4, 2),
@@ -6794,7 +6788,7 @@ CREATE TABLE `Modules` (
   `ModuleImageURL` varchar(128) NOT NULL,
   `ModuleLeaderID` int(11) DEFAULT NULL,
   `ModuleYearID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Modules`
@@ -6814,7 +6808,20 @@ INSERT INTO `Modules` (`ModuleID`, `ModuleCode`, `ModuleName`, `ModuleLevel`, `M
 (11, 'CI6100', 'Programming 3', 6, 'https://images.freeimages.com/images/small-previews/fa1/cable-5-1243077.jpg', 824, 1),
 (12, 'CI6600', 'Individual Project', 6, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 1),
 (13, 'CI6110', 'React Programming', 6, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 1),
-(14, 'CI6130', 'React Native', 6, 'https://images.freeimages.com/images/small-previews/fa1/cable-5-1243077.jpg', 820, 1);
+(14, 'CI6130', 'React Native', 6, 'https://images.freeimages.com/images/small-previews/fa1/cable-5-1243077.jpg', 820, 1),
+(204, 'xy1234', 'asdasdsss', 4, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 824, 2),
+(205, 'ZY1111', 'asdasdas', 3, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 1),
+(206, 'XX2222', 'zzzzzzzzz', 3, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 1),
+(207, 'ZZ1234', 'Deletable Module', 3, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 1),
+(208, 'ZZ1234', 'Deletable Module', 3, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 1),
+(209, 'ZZ1234', 'Deletable Module', 4, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 1),
+(210, 'ZZ1234', 'Deletable Module', 3, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 1),
+(211, 'ZZ1235', 'Deletable Module', 3, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 1),
+(212, 'XY1122', 'Deleteable Module', 3, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', NULL, 3),
+(213, 'XY2222', 'Deleteable Module', 5, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 824, 2),
+(214, 'XY2388', 'AAAAAAAAAAA', 3, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 824, 3),
+(215, 'XY8899', 'TEST MOD ', 3, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', NULL, 1),
+(216, 'XY7755', 'Deleteable Module', 3, 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 820, 4);
 
 -- --------------------------------------------------------
 
@@ -6830,7 +6837,7 @@ CREATE TABLE `Projects` (
   `ProjectMandatory` tinyint(1) NOT NULL DEFAULT 1,
   `ProjectProjectstatusID` int(11) DEFAULT NULL,
   `ProjectModuleID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Projects`
@@ -6849,7 +6856,7 @@ INSERT INTO `Projects` (`ProjectID`, `ProjectName`, `ProjectGroupsize`, `Project
 CREATE TABLE `Projectstatus` (
   `ProjectstatusID` int(11) NOT NULL,
   `ProjectstatusName` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Projectstatus`
@@ -6910,7 +6917,7 @@ INSERT INTO `Proposals` (`ProposalID`, `ProposerID`, `ProposeeID`, `ProposalAsse
 (26, 310, NULL, 13, NULL, 0),
 (27, 394, NULL, 13, NULL, 0),
 (28, 518, NULL, 13, NULL, 0),
-(29, 427, 379, 13, NULL, 1),
+(29, 427, 379, 13, NULL, 0),
 (30, 295, 287, 13, NULL, 0),
 (31, 284, 448, 13, NULL, 0),
 (32, 344, 440, 13, NULL, 0),
@@ -7052,7 +7059,64 @@ INSERT INTO `Proposals` (`ProposalID`, `ProposerID`, `ProposeeID`, `ProposalAsse
 (168, 538, 454, 13, NULL, 0),
 (169, 434, 450, 13, NULL, 0),
 (170, 434, 426, 13, NULL, 0),
-(171, 434, 426, 13, NULL, 0);
+(171, 434, 426, 13, NULL, 0),
+(174, 276, 10, 13, NULL, 0),
+(175, 276, 10, 13, NULL, 0),
+(176, 276, 63, 13, NULL, 0),
+(177, 276, 31, 13, NULL, 0),
+(178, 276, 46, 13, NULL, 0),
+(179, 277, 2, 13, NULL, 0),
+(180, 277, 2, 13, NULL, 0),
+(181, 277, 2, 13, NULL, 0),
+(182, 277, 3, 13, NULL, 0),
+(183, 277, 4, 13, NULL, 0),
+(184, 277, 3, 13, NULL, 0),
+(185, 276, 2, 13, NULL, 0),
+(186, 276, 10, 18, NULL, 0),
+(188, 276, 275, 5, NULL, 0),
+(189, 276, 2, 18, NULL, 0),
+(190, 276, 2, 18, NULL, 0),
+(191, 276, 63, 18, NULL, 0),
+(192, 277, 31, 1, NULL, 0),
+(193, 276, 277, 18, NULL, 0),
+(194, 276, 277, 18, NULL, 0),
+(196, 277, 276, 18, NULL, 0),
+(197, 277, 15, 18, NULL, 0),
+(198, 277, 15, 18, NULL, 0),
+(199, 277, 15, 18, NULL, 0),
+(200, 277, 9, 18, NULL, 0),
+(201, 277, 9, 18, NULL, 0),
+(202, 277, 9, 18, NULL, 0),
+(203, 277, 9, 18, NULL, 0),
+(204, 277, 9, 18, NULL, 0),
+(205, 277, 16, 18, NULL, 0),
+(206, 277, 275, 1, NULL, 0),
+(207, 277, 35, 1, NULL, 0),
+(211, 277, 352, 1, NULL, 0),
+(217, 277, 276, 1, 1, 0),
+(229, 276, 277, 1, 1, 0),
+(230, 276, 277, 1, 1, 0),
+(233, 276, 277, 1, 1, 0),
+(235, 277, 276, 2, 1, 0),
+(237, 276, 277, 2, 1, 0),
+(238, 276, 277, 2, 1, 0),
+(239, 277, 277, 2, 1, 0),
+(240, 277, 277, 2, 1, 0),
+(241, 276, 277, 14, 1, 0),
+(243, 277, 276, 14, 1, 0),
+(254, 276, 9, 1, NULL, 0),
+(260, 276, 3, 1, NULL, 0),
+(264, 276, 277, 1, NULL, 0),
+(266, 276, 277, 14, 1, 0),
+(267, 276, 277, 14, 1, 0),
+(270, 277, 276, 14, 1, 0),
+(271, 276, 277, 14, 1, 0),
+(273, 276, 277, 14, 2, 0),
+(275, 276, 277, 12, 2, 0),
+(277, 277, 276, 12, 1, 0),
+(278, 277, 276, 12, NULL, 0),
+(279, 276, 277, 12, NULL, 0),
+(282, 276, 277, 12, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -7108,7 +7172,7 @@ CREATE TABLE `Users` (
   `UserLevel` tinyint(4) DEFAULT NULL,
   `UserYearID` int(11) DEFAULT NULL,
   `UserImageURL` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Users`
@@ -7948,7 +8012,7 @@ INSERT INTO `Users` (`UserID`, `UserFirstname`, `UserLastname`, `UserEmail`, `Us
 CREATE TABLE `Usertypes` (
   `UsertypeID` int(11) NOT NULL,
   `UsertypeName` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Usertypes`
@@ -7990,7 +8054,7 @@ INSERT INTO `Workshops` (`WorkshopID`, `WorkshopName`, `WorkshopDescription`, `W
 CREATE TABLE `Years` (
   `YearID` int(11) NOT NULL,
   `YearName` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `Years`
@@ -8205,7 +8269,7 @@ ALTER TABLE `Affinities`
 -- AUTO_INCREMENT for table `Assessments`
 --
 ALTER TABLE `Assessments`
-  MODIFY `AssessmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `AssessmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `Assessmenttypes`
@@ -8301,7 +8365,7 @@ ALTER TABLE `Modulemembers`
 -- AUTO_INCREMENT for table `Modules`
 --
 ALTER TABLE `Modules`
-  MODIFY `ModuleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
+  MODIFY `ModuleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT for table `Projects`
@@ -8319,7 +8383,7 @@ ALTER TABLE `Projectstatus`
 -- AUTO_INCREMENT for table `Proposals`
 --
 ALTER TABLE `Proposals`
-  MODIFY `ProposalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
+  MODIFY `ProposalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=295;
 
 --
 -- AUTO_INCREMENT for table `Technologies`
@@ -8343,7 +8407,7 @@ ALTER TABLE `Usertypes`
 -- AUTO_INCREMENT for table `Workshops`
 --
 ALTER TABLE `Workshops`
-  MODIFY `WorkshopID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `WorkshopID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `Years`
