@@ -12,6 +12,7 @@ const model = {
     'UserUsertypeID',
     'UserRoleID',
     'UserGuestofID',
+    'UserActive',
   ],
 
   buildReadQuery: (req, variant) => {

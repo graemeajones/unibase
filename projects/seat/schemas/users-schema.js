@@ -24,12 +24,14 @@ schema.record = joi
     UserUsertypeID: joi.number().integer().min(1).allow(null),
     UserRoleID: joi.number().integer().min(1).allow(null),
     UserGuestofID: joi.number().integer().min(1).allow(null),
+    UserActive: joi.boolean(),
   })
   .required()
   .unknown(true);
 
 schema.conformor = {
   UserDateofbirth: (value) => (value === null ? null : new Date(value)),
+  UserActive: (value) => (value ? true : false),
 };
 
 export default schema;
