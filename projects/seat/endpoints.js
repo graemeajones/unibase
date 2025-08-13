@@ -196,7 +196,10 @@ const listOfEndpoints = [
           endpoint: '/events',
           description:
             'Returns the set of users associated with the event identified by the id provided',
-          examples: [`${API_PATH}/users/events/41`],
+          examples: [
+            `${API_PATH}/users/events/41`,
+            `${API_PATH}/users/events/41?UserAttendeeStatusName=Declined`,
+          ],
         },
       ],
       post: {
