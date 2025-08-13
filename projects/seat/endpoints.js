@@ -192,6 +192,12 @@ const listOfEndpoints = [
             'Returns the set of users associated with the role identified by the id provided',
           examples: [`${API_PATH}/users/roles/2`],
         },
+        {
+          endpoint: '/events',
+          description:
+            'Returns the set of users associated with the event identified by the id provided',
+          examples: [`${API_PATH}/users/events/41`],
+        },
       ],
       post: {
         endpoint: '/',
