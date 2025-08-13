@@ -40,6 +40,7 @@ const model = {
       'UserUsertypeName',
       'UserRoleName',
       'UserGuestofName',
+      'UserAttendeeStatusName',
     ];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
@@ -47,6 +48,18 @@ const model = {
     let where = null;
     let parameters = {};
     switch (variant) {
+      case 'events':
+        fields = [
+          ...fields,
+          'AttendeeSeat AS UserAttendeeSeat',
+          'StatusName AS UserAttendeeStatusName',
+        ];
+        table = `((Attendees 
+          INNER JOIN ${table} ON AttendeeUserID = Users.UserID) 
+          LEFT JOIN Status ON AttendeeStatusID = StatusID)`;
+        where = `AttendeeEventID=:ID`;
+        parameters = { ID: parseInt(req.params.id) };
+        break;
       case 'employees':
         where = `UserUsertypeID=${EMPLOYEE}`;
         break;
