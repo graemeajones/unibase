@@ -10,6 +10,7 @@ schema.requiredFields = [
   'UserImageURL',
   'UserUsertypeID',
   'UserRoleID',
+  'UserIsVIP',
   'UserGuestofID',
 ];
 
@@ -24,6 +25,7 @@ schema.record = joi
     UserUsertypeID: joi.number().integer().min(1).allow(null),
     UserRoleID: joi.number().integer().min(1).allow(null),
     UserGuestofID: joi.number().integer().min(1).allow(null),
+    UserIsVIP: joi.number().integer().valid(0, 1),
     UserActive: joi.number().integer().valid(0, 1),
   })
   .required()
