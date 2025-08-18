@@ -10,7 +10,8 @@ schema.record = joi
     AttendeeUserID: joi.number().integer().min(1),
     AttendeeEventID: joi.number().integer().min(1),
     AttendeeStatusID: joi.number().integer().min(1).allow(null),
-    AttendeeSeat: joi.string().min(1).max(64).allow(null),
+    AttendeeTable: joi.number().integer().min(1),
+    AttendeeSeat: joi.number().integer().min(1),
   })
   .required()
   .unknown(true);

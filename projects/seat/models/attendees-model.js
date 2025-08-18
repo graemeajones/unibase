@@ -3,7 +3,13 @@ import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils
 const model = {
   table: 'Attendees',
   idField: 'AttendeeID',
-  mutableFields: ['AttendeeUserID', 'AttendeeEventID', 'AttendeeStatusID', 'AttendeeSeat'],
+  mutableFields: [
+    'AttendeeUserID',
+    'AttendeeEventID',
+    'AttendeeStatusID',
+    'AttendeeTable',
+    'AttendeeSeat',
+  ],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
