@@ -9,6 +9,7 @@ const model = {
     'AttendeeStatusID',
     'AttendeeTable',
     'AttendeeSeat',
+    'AttendeeIsVIP',
   ],
 
   buildReadQuery: (req, variant) => {
