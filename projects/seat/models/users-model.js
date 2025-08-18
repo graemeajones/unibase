@@ -12,7 +12,7 @@ const model = {
     'UserUsertypeID',
     'UserRoleID',
     'UserGuestofID',
-    'UserIsVIP',
+    'UserIsoffshore',
     'UserActive',
   ],
 
