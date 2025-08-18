@@ -12,6 +12,7 @@ schema.record = joi
     AttendeeStatusID: joi.number().integer().min(1).allow(null),
     AttendeeTable: joi.number().integer().min(1),
     AttendeeSeat: joi.number().integer().min(1),
+    AttendeeIsVIP: joi.number().integer().valid(0, 1),
   })
   .required()
   .unknown(true);
