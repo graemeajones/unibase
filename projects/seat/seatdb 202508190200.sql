@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2025 at 10:41 PM
+-- Generation Time: Aug 19, 2025 at 02:57 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `seatdb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Agegroups`
+--
+
+CREATE TABLE `Agegroups` (
+  `AgegroupID` int(11) NOT NULL,
+  `AgegroupName` varchar(32) NOT NULL,
+  `AgegroupOrder` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Agegroups`
+--
+
+INSERT INTO `Agegroups` (`AgegroupID`, `AgegroupName`, `AgegroupOrder`) VALUES
+(1, 'Minor', 1),
+(2, '18-29', 2),
+(3, '30-44', 3),
+(4, '45-59', 4),
+(5, '60+', 5);
 
 -- --------------------------------------------------------
 
@@ -408,7 +431,7 @@ CREATE TABLE `Users` (
   `UserID` int(11) NOT NULL,
   `UserFirstname` varchar(64) NOT NULL,
   `UserLastname` varchar(64) NOT NULL,
-  `UserDateofbirth` date NOT NULL DEFAULT current_timestamp(),
+  `UserAgegroupID` int(11) NOT NULL,
   `UserEmail` varchar(128) NOT NULL,
   `UserImageURL` varchar(256) NOT NULL,
   `UserUsertypeID` int(11) DEFAULT NULL,
@@ -422,107 +445,107 @@ CREATE TABLE `Users` (
 -- Dumping data for table `Users`
 --
 
-INSERT INTO `Users` (`UserID`, `UserFirstname`, `UserLastname`, `UserDateofbirth`, `UserEmail`, `UserImageURL`, `UserUsertypeID`, `UserRoleID`, `UserGuestofID`, `UserIsoffshore`, `UserActive`) VALUES
-(1, 'Brittany', 'Campos', '0000-00-00', 'brittany.campos@example.com', 'https://example.com/images/1.jpg', 2, 1, 2, 0, 1),
-(2, 'Dillon', 'Duran', '0000-00-00', 'dillon.duran@example.com', 'https://example.com/images/2.jpg', 1, 2, NULL, 0, 1),
-(3, 'Cody', 'Kirk', '0000-00-00', 'cody.kirk@example.com', 'https://example.com/images/3.jpg', 2, 1, 53, 0, 1),
-(4, 'Tanya', 'Harris', '0000-00-00', 'tanya.harris@example.com', 'https://example.com/images/4.jpg', 1, 2, NULL, 0, 1),
-(5, 'Dennis', 'Barron', '0000-00-00', 'dennis.barron@example.com', 'https://example.com/images/5.jpg', 1, 3, NULL, 0, 1),
-(6, 'Steven', 'Rogers', '0000-00-00', 'steven.rogers@example.com', 'https://example.com/images/6.jpg', 1, 3, NULL, 0, 1),
-(7, 'Robert', 'Nelson', '0000-00-00', 'robert.nelson@example.com', 'https://example.com/images/7.jpg', 1, 2, NULL, 0, 1),
-(8, 'James', 'Obrien', '0000-00-00', 'james.obrien@example.com', 'https://example.com/images/8.jpg', 2, 1, 56, 0, 1),
-(9, 'Megan', 'White', '0000-00-00', 'megan.white@example.com', 'https://example.com/images/9.jpg', 2, 1, 58, 0, 1),
-(10, 'Thomas', 'Reed', '0000-00-00', 'thomas.reed@example.com', 'https://example.com/images/10.jpg', 2, 1, 63, 0, 1),
-(11, 'Angela', 'Carson', '0000-00-00', 'angela.carson@example.com', 'https://example.com/images/11.jpg', 2, 1, 64, 0, 1),
-(12, 'Ashley', 'Green', '0000-00-00', 'ashley.green@example.com', 'https://example.com/images/12.jpg', 2, 1, 65, 0, 1),
-(13, 'Victor', 'Martin', '0000-00-00', 'victor.martin@example.com', 'https://example.com/images/13.jpg', 1, 2, NULL, 0, 1),
-(14, 'Madison', 'Perry', '0000-00-00', 'madison.perry@example.com', 'https://example.com/images/14.jpg', 2, 1, 76, 0, 1),
-(15, 'Jessica', 'Kelly', '0000-00-00', 'jessica.kelly@example.com', 'https://example.com/images/15.jpg', 1, 2, NULL, 0, 1),
-(16, 'Tasha', 'Wright', '0000-00-00', 'tasha.wright@example.com', 'https://example.com/images/16.jpg', 1, 2, NULL, 0, 1),
-(17, 'Justin', 'Gutierrez', '0000-00-00', 'justin.gutierrez@example.com', 'https://example.com/images/17.jpg', 2, 1, 78, 0, 1),
-(18, 'Lori', 'Hull', '0000-00-00', 'lori.hull@example.com', 'https://example.com/images/18.jpg', 1, 4, NULL, 0, 1),
-(19, 'David', 'Valencia', '0000-00-00', 'david.valencia@example.com', 'https://example.com/images/19.jpg', 2, 1, 83, 0, 1),
-(20, 'Jessica', 'Bradford', '0000-00-00', 'jessica.bradford@example.com', 'https://example.com/images/20.jpg', 1, 2, NULL, 0, 1),
-(21, 'Jessica', 'Scott', '0000-00-00', 'jessica.scott@example.com', 'https://example.com/images/21.jpg', 1, 3, NULL, 0, 1),
-(22, 'Kevin', 'Evans', '0000-00-00', 'kevin.evans@example.com', 'https://example.com/images/22.jpg', 1, 4, NULL, 0, 1),
-(23, 'Patrick', 'Webb', '0000-00-00', 'patrick.webb@example.com', 'https://example.com/images/23.jpg', 1, 2, NULL, 0, 1),
-(24, 'Meagan', 'Miller', '0000-00-00', 'meagan.miller@example.com', 'https://example.com/images/24.jpg', 2, 1, 86, 0, 1),
-(25, 'Jason', 'King', '0000-00-00', 'jason.king@example.com', 'https://example.com/images/25.jpg', 1, 2, NULL, 0, 1),
-(26, 'Tracy', 'Ramos', '0000-00-00', 'tracy.ramos@example.com', 'https://example.com/images/26.jpg', 1, 3, NULL, 0, 1),
-(27, 'Anthony', 'Moore', '0000-00-00', 'anthony.moore@example.com', 'https://example.com/images/27.jpg', 1, 2, NULL, 0, 1),
-(28, 'Sarah', 'Fernandez', '0000-00-00', 'sarah.fernandez@example.com', 'https://example.com/images/28.jpg', 1, 3, NULL, 0, 1),
-(29, 'Stephen', 'James', '0000-00-00', 'stephen.james@example.com', 'https://example.com/images/29.jpg', 1, 4, NULL, 0, 1),
-(30, 'Tiffany', 'Acosta', '0000-00-00', 'tiffany.acosta@example.com', 'https://example.com/images/30.jpg', 1, 3, NULL, 0, 1),
-(31, 'Kristina', 'Moreno', '0000-00-00', 'kristina.moreno@example.com', 'https://example.com/images/31.jpg', 1, 4, NULL, 0, 1),
-(32, 'Douglas', 'Benton', '0000-00-00', 'douglas.benton@example.com', 'https://example.com/images/32.jpg', 2, 1, 89, 0, 1),
-(33, 'Julie', 'Sanchez', '0000-00-00', 'julie.sanchez@example.com', 'https://example.com/images/33.jpg', 1, 2, NULL, 0, 1),
-(34, 'Holly', 'Newton', '0000-00-00', 'holly.newton@example.com', 'https://example.com/images/34.jpg', 1, 3, NULL, 0, 1),
-(35, 'Thomas', 'Rasmussen', '0000-00-00', 'thomas.rasmussen@example.com', 'https://example.com/images/35.jpg', 2, 1, 91, 0, 1),
-(36, 'Jeremy', 'Bailey', '0000-00-00', 'jeremy.bailey@example.com', 'https://example.com/images/36.jpg', 2, 1, 94, 0, 1),
-(37, 'Tara', 'Mann', '0000-00-00', 'tara.mann@example.com', 'https://example.com/images/37.jpg', 1, 2, NULL, 0, 1),
-(38, 'Karen', 'Weaver', '0000-00-00', 'karen.weaver@example.com', 'https://example.com/images/38.jpg', 1, 2, NULL, 0, 1),
-(39, 'Regina', 'Thomas', '0000-00-00', 'regina.thomas@example.com', 'https://example.com/images/39.jpg', 2, 1, 96, 0, 1),
-(40, 'Jacqueline', 'Coleman', '0000-00-00', 'jacqueline.coleman@example.com', 'https://example.com/images/40.jpg', 1, 3, NULL, 0, 1),
-(41, 'Pamela', 'Cunningham', '0000-00-00', 'pamela.cunningham@example.com', 'https://example.com/images/41.jpg', 1, 2, NULL, 0, 1),
-(42, 'Steven', 'Davis', '0000-00-00', 'steven.davis@example.com', 'https://example.com/images/42.jpg', 1, 2, NULL, 0, 1),
-(43, 'Leslie', 'Garcia', '0000-00-00', 'leslie.garcia@example.com', 'https://example.com/images/43.jpg', 2, 1, 99, 0, 1),
-(44, 'Andrew', 'Williams', '0000-00-00', 'andrew.williams@example.com', 'https://example.com/images/44.jpg', 1, 2, NULL, 0, 1),
-(45, 'Erin', 'Hernandez', '0000-00-00', 'erin.hernandez@example.com', 'https://example.com/images/45.jpg', 1, 4, NULL, 0, 1),
-(46, 'Bryan', 'Scott', '0000-00-00', 'bryan.scott@example.com', 'https://example.com/images/46.jpg', 2, 1, 2, 0, 1),
-(47, 'Olivia', 'Hunt', '0000-00-00', 'olivia.hunt@example.com', 'https://example.com/images/47.jpg', 1, 4, NULL, 0, 1),
-(48, 'Hannah', 'Moore', '0000-00-00', 'hannah.moore@example.com', 'https://example.com/images/48.jpg', 1, 2, NULL, 0, 1),
-(49, 'Paul', 'Wright', '0000-00-00', 'paul.wright@example.com', 'https://example.com/images/49.jpg', 1, 2, NULL, 0, 1),
-(50, 'Logan', 'Wiggins', '0000-00-00', 'logan.wiggins@example.com', 'https://example.com/images/50.jpg', 2, 1, 4, 0, 1),
-(51, 'Monica', 'Larsen', '0000-00-00', 'monica.larsen@example.com', 'https://example.com/images/51.jpg', 2, 1, 5, 0, 1),
-(52, 'Cheryl', 'Obrien', '0000-00-00', 'cheryl.obrien@example.com', 'https://example.com/images/52.jpg', 1, 3, NULL, 0, 1),
-(53, 'Natalie', 'Green', '0000-00-00', 'natalie.green@example.com', 'https://example.com/images/53.jpg', 1, 3, NULL, 0, 1),
-(54, 'Ryan', 'Lewis', '0000-00-00', 'ryan.lewis@example.com', 'https://example.com/images/54.jpg', 1, 2, NULL, 0, 1),
-(55, 'Tina', 'Davis', '0000-00-00', 'tina.davis@example.com', 'https://example.com/images/55.jpg', 2, 1, 13, 0, 1),
-(56, 'Krista', 'Schmitt', '0000-00-00', 'krista.schmitt@example.com', 'https://example.com/images/56.jpg', 1, 2, NULL, 0, 1),
-(57, 'Michael', 'Hess', '0000-00-00', 'michael.hess@example.com', 'https://example.com/images/57.jpg', 2, 1, 2, 0, 1),
-(58, 'Lee', 'Schwartz', '0000-00-00', 'lee.schwartz@example.com', 'https://example.com/images/58.jpg', 1, 3, NULL, 0, 1),
-(59, 'Hunter', 'Rojas', '0000-00-00', 'hunter.rojas@example.com', 'https://example.com/images/59.jpg', 2, 1, 15, 0, 1),
-(60, 'Kenneth', 'Shaw', '0000-00-00', 'kenneth.shaw@example.com', 'https://example.com/images/60.jpg', 2, 1, 6, 0, 1),
-(61, 'Brandon', 'Jones', '0000-00-00', 'brandon.jones@example.com', 'https://example.com/images/61.jpg', 2, 1, 22, 0, 1),
-(62, 'Brenda', 'Smith', '0000-00-00', 'brenda.smith@example.com', 'https://example.com/images/62.jpg', 2, 1, 7, 0, 1),
-(63, 'Lisa', 'Williams', '0000-00-00', 'lisa.williams@example.com', 'https://example.com/images/63.jpg', 1, 4, NULL, 0, 1),
-(64, 'Taylor', 'Bruce', '0000-00-00', 'taylor.bruce@example.com', 'https://example.com/images/64.jpg', 1, 2, NULL, 0, 1),
-(65, 'Jeremy', 'Beard', '0000-00-00', 'jeremy.beard@example.com', 'https://example.com/images/65.jpg', 1, 3, NULL, 0, 1),
-(66, 'Phillip', 'Herrera', '0000-00-00', 'phillip.herrera@example.com', 'https://example.com/images/66.jpg', 2, 1, 25, 0, 1),
-(67, 'Pam', 'Miller', '0000-00-00', 'pam.miller@example.com', 'https://example.com/images/67.jpg', 2, 1, 16, 0, 1),
-(68, 'Jennifer', 'Crosby', '0000-00-00', 'jennifer.crosby@example.com', 'https://example.com/images/68.jpg', 2, 1, 26, 0, 1),
-(69, 'Stacy', 'Guzman', '0000-00-00', 'stacy.guzman@example.com', 'https://example.com/images/69.jpg', 2, 1, 27, 0, 1),
-(70, 'Karen', 'Gray', '0000-00-00', 'karen.gray@example.com', 'https://example.com/images/70.jpg', 2, 1, 18, 0, 1),
-(71, 'Andrew', 'Rodriguez', '0000-00-00', 'andrew.rodriguez@example.com', 'https://example.com/images/71.jpg', 2, 1, 20, 0, 1),
-(72, 'Jason', 'Ward', '0000-00-00', 'jason.ward@example.com', 'https://example.com/images/72.jpg', 2, 1, 28, 0, 1),
-(73, 'Diana', 'Hudson', '0000-00-00', 'diana.hudson@example.com', 'https://example.com/images/73.jpg', 2, 1, 21, 0, 1),
-(74, 'Brandi', 'Neal', '0000-00-00', 'brandi.neal@example.com', 'https://example.com/images/74.jpg', 2, 1, 29, 0, 1),
-(75, 'Ruth', 'Wiggins', '0000-00-00', 'ruth.wiggins@example.com', 'https://example.com/images/75.jpg', 2, 1, 23, 0, 1),
-(76, 'Sarah', 'Higgins', '0000-00-00', 'sarah.higgins@example.com', 'https://example.com/images/76.jpg', 1, 2, NULL, 0, 1),
-(77, 'Douglas', 'Warren', '0000-00-00', 'douglas.warren@example.com', 'https://example.com/images/77.jpg', 2, 1, 30, 0, 1),
-(78, 'Kelly', 'Ferrell', '0000-00-00', 'kelly.ferrell@example.com', 'https://example.com/images/78.jpg', 1, 2, NULL, 0, 1),
-(79, 'Kelly', 'Watts', '0000-00-00', 'kelly.watts@example.com', 'https://example.com/images/79.jpg', 2, 1, 31, 0, 1),
-(80, 'Kristen', 'Anderson', '0000-00-00', 'kristen.anderson@example.com', 'https://example.com/images/80.jpg', 2, 1, 38, 0, 1),
-(81, 'Sherry', 'Fowler', '0000-00-00', 'sherry.fowler@example.com', 'https://example.com/images/81.jpg', 2, 1, 33, 0, 1),
-(82, 'Samuel', 'Smith', '0000-00-00', 'samuel.smith@example.com', 'https://example.com/images/82.jpg', 2, 1, 34, 0, 1),
-(83, 'Miguel', 'Boyd', '0000-00-00', 'miguel.boyd@example.com', 'https://example.com/images/83.jpg', 1, 4, NULL, 0, 1),
-(84, 'Adrian', 'Maxwell', '0000-00-00', 'adrian.maxwell@example.com', 'https://example.com/images/84.jpg', 2, 1, 37, 0, 1),
-(85, 'Barry', 'Nichols', '0000-00-00', 'barry.nichols@example.com', 'https://example.com/images/85.jpg', 2, 1, 40, 0, 1),
-(86, 'Erin', 'Hayes', '0000-00-00', 'erin.hayes@example.com', 'https://example.com/images/86.jpg', 1, 2, NULL, 0, 1),
-(87, 'Travis', 'Chavez', '0000-00-00', 'travis.chavez@example.com', 'https://example.com/images/87.jpg', 2, 1, 44, 0, 1),
-(88, 'Katie', 'Reed', '0000-00-00', 'katie.reed@example.com', 'https://example.com/images/88.jpg', 2, 1, 41, 0, 1),
-(89, 'Karen', 'Figueroa', '0000-00-00', 'karen.figueroa@example.com', 'https://example.com/images/89.jpg', 1, 3, NULL, 0, 1),
-(90, 'Jessica', 'Reyes', '0000-00-00', 'jessica.reyes@example.com', 'https://example.com/images/90.jpg', 2, 1, 42, 0, 1),
-(91, 'Jamie', 'Thornton', '0000-00-00', 'jamie.thornton@example.com', 'https://example.com/images/91.jpg', 1, 2, NULL, 0, 1),
-(92, 'Tara', 'Todd', '0000-00-00', 'tara.todd@example.com', 'https://example.com/images/92.jpg', 2, 1, 47, 0, 1),
-(93, 'Angelica', 'Jones', '0000-00-00', 'angelica.jones@example.com', 'https://example.com/images/93.jpg', 2, 1, 48, 0, 1),
-(94, 'William', 'Graham', '0000-00-00', 'william.graham@example.com', 'https://example.com/images/94.jpg', 1, 3, NULL, 0, 1),
-(95, 'Maria', 'Marks', '0000-00-00', 'maria.marks@example.com', 'https://example.com/images/95.jpg', 2, 1, 52, 0, 1),
-(96, 'Benjamin', 'Barnes', '0000-00-00', 'benjamin.barnes@example.com', 'https://example.com/images/96.jpg', 1, 4, NULL, 0, 1),
-(97, 'Dakota', 'Cervantes', '0000-00-00', 'dakota.cervantes@example.com', 'https://example.com/images/97.jpg', 2, 1, 45, 0, 1),
-(98, 'Jeffrey', 'Thompson', '0000-00-00', 'jeffrey.thompson@example.com', 'https://example.com/images/98.jpg', 2, 1, 54, 0, 1),
-(99, 'Alexandria', 'Martin', '0000-00-00', 'alexandria.martin@example.com', 'https://example.com/images/99.jpg', 1, 4, NULL, 0, 1),
-(100, 'Todd', 'Pearson', '0000-00-00', 'todd.pearson@example.com', 'https://example.com/images/100.jpg', 1, 4, NULL, 0, 1);
+INSERT INTO `Users` (`UserID`, `UserFirstname`, `UserLastname`, `UserAgegroupID`, `UserEmail`, `UserImageURL`, `UserUsertypeID`, `UserRoleID`, `UserGuestofID`, `UserIsoffshore`, `UserActive`) VALUES
+(1, 'Brittany', 'Campos', 5, 'brittany.campos@example.com', 'https://example.com/images/1.jpg', 2, 1, 2, 0, 1),
+(2, 'Dillon', 'Duran', 5, 'dillon.duran@example.com', 'https://example.com/images/2.jpg', 1, 2, NULL, 0, 1),
+(3, 'Cody', 'Kirk', 2, 'cody.kirk@example.com', 'https://example.com/images/3.jpg', 2, 1, 53, 0, 1),
+(4, 'Tanya', 'Harris', 4, 'tanya.harris@example.com', 'https://example.com/images/4.jpg', 1, 2, NULL, 0, 1),
+(5, 'Dennis', 'Barron', 3, 'dennis.barron@example.com', 'https://example.com/images/5.jpg', 1, 3, NULL, 0, 1),
+(6, 'Steven', 'Rogers', 2, 'steven.rogers@example.com', 'https://example.com/images/6.jpg', 1, 3, NULL, 0, 1),
+(7, 'Robert', 'Nelson', 4, 'robert.nelson@example.com', 'https://example.com/images/7.jpg', 1, 2, NULL, 0, 1),
+(8, 'James', 'Obrien', 5, 'james.obrien@example.com', 'https://example.com/images/8.jpg', 2, 1, 56, 0, 1),
+(9, 'Megan', 'White', 4, 'megan.white@example.com', 'https://example.com/images/9.jpg', 2, 1, 58, 0, 1),
+(10, 'Thomas', 'Reed', 2, 'thomas.reed@example.com', 'https://example.com/images/10.jpg', 2, 1, 63, 0, 1),
+(11, 'Angela', 'Carson', 4, 'angela.carson@example.com', 'https://example.com/images/11.jpg', 2, 1, 64, 0, 1),
+(12, 'Ashley', 'Green', 3, 'ashley.green@example.com', 'https://example.com/images/12.jpg', 2, 1, 65, 0, 1),
+(13, 'Victor', 'Martin', 4, 'victor.martin@example.com', 'https://example.com/images/13.jpg', 1, 2, NULL, 0, 1),
+(14, 'Madison', 'Perry', 4, 'madison.perry@example.com', 'https://example.com/images/14.jpg', 2, 1, 76, 0, 1),
+(15, 'Jessica', 'Kelly', 4, 'jessica.kelly@example.com', 'https://example.com/images/15.jpg', 1, 2, NULL, 0, 1),
+(16, 'Tasha', 'Wright', 4, 'tasha.wright@example.com', 'https://example.com/images/16.jpg', 1, 2, NULL, 0, 1),
+(17, 'Justin', 'Gutierrez', 4, 'justin.gutierrez@example.com', 'https://example.com/images/17.jpg', 2, 1, 78, 0, 1),
+(18, 'Lori', 'Hull', 2, 'lori.hull@example.com', 'https://example.com/images/18.jpg', 1, 4, NULL, 0, 1),
+(19, 'David', 'Valencia', 3, 'david.valencia@example.com', 'https://example.com/images/19.jpg', 2, 1, 83, 0, 1),
+(20, 'Jessica', 'Bradford', 4, 'jessica.bradford@example.com', 'https://example.com/images/20.jpg', 1, 2, NULL, 0, 1),
+(21, 'Jessica', 'Scott', 2, 'jessica.scott@example.com', 'https://example.com/images/21.jpg', 1, 3, NULL, 0, 1),
+(22, 'Kevin', 'Evans', 2, 'kevin.evans@example.com', 'https://example.com/images/22.jpg', 1, 4, NULL, 0, 1),
+(23, 'Patrick', 'Webb', 5, 'patrick.webb@example.com', 'https://example.com/images/23.jpg', 1, 2, NULL, 0, 1),
+(24, 'Meagan', 'Miller', 4, 'meagan.miller@example.com', 'https://example.com/images/24.jpg', 2, 1, 86, 0, 1),
+(25, 'Jason', 'King', 4, 'jason.king@example.com', 'https://example.com/images/25.jpg', 1, 2, NULL, 0, 1),
+(26, 'Tracy', 'Ramos', 4, 'tracy.ramos@example.com', 'https://example.com/images/26.jpg', 1, 3, NULL, 0, 1),
+(27, 'Anthony', 'Moore', 4, 'anthony.moore@example.com', 'https://example.com/images/27.jpg', 1, 2, NULL, 0, 1),
+(28, 'Sarah', 'Fernandez', 2, 'sarah.fernandez@example.com', 'https://example.com/images/28.jpg', 1, 3, NULL, 0, 1),
+(29, 'Stephen', 'James', 3, 'stephen.james@example.com', 'https://example.com/images/29.jpg', 1, 4, NULL, 0, 1),
+(30, 'Tiffany', 'Acosta', 4, 'tiffany.acosta@example.com', 'https://example.com/images/30.jpg', 1, 3, NULL, 0, 1),
+(31, 'Kristina', 'Moreno', 2, 'kristina.moreno@example.com', 'https://example.com/images/31.jpg', 1, 4, NULL, 0, 1),
+(32, 'Douglas', 'Benton', 3, 'douglas.benton@example.com', 'https://example.com/images/32.jpg', 2, 1, 89, 0, 1),
+(33, 'Julie', 'Sanchez', 4, 'julie.sanchez@example.com', 'https://example.com/images/33.jpg', 1, 2, NULL, 0, 1),
+(34, 'Holly', 'Newton', 2, 'holly.newton@example.com', 'https://example.com/images/34.jpg', 1, 3, NULL, 0, 1),
+(35, 'Thomas', 'Rasmussen', 4, 'thomas.rasmussen@example.com', 'https://example.com/images/35.jpg', 2, 1, 91, 0, 1),
+(36, 'Jeremy', 'Bailey', 3, 'jeremy.bailey@example.com', 'https://example.com/images/36.jpg', 2, 1, 94, 0, 1),
+(37, 'Tara', 'Mann', 4, 'tara.mann@example.com', 'https://example.com/images/37.jpg', 1, 2, NULL, 0, 1),
+(38, 'Karen', 'Weaver', 4, 'karen.weaver@example.com', 'https://example.com/images/38.jpg', 1, 2, NULL, 0, 1),
+(39, 'Regina', 'Thomas', 2, 'regina.thomas@example.com', 'https://example.com/images/39.jpg', 2, 1, 96, 0, 1),
+(40, 'Jacqueline', 'Coleman', 3, 'jacqueline.coleman@example.com', 'https://example.com/images/40.jpg', 1, 3, NULL, 0, 1),
+(41, 'Pamela', 'Cunningham', 4, 'pamela.cunningham@example.com', 'https://example.com/images/41.jpg', 1, 2, NULL, 0, 1),
+(42, 'Steven', 'Davis', 5, 'steven.davis@example.com', 'https://example.com/images/42.jpg', 1, 2, NULL, 0, 1),
+(43, 'Leslie', 'Garcia', 2, 'leslie.garcia@example.com', 'https://example.com/images/43.jpg', 2, 1, 99, 0, 1),
+(44, 'Andrew', 'Williams', 5, 'andrew.williams@example.com', 'https://example.com/images/44.jpg', 1, 2, NULL, 0, 1),
+(45, 'Erin', 'Hernandez', 2, 'erin.hernandez@example.com', 'https://example.com/images/45.jpg', 1, 4, NULL, 0, 1),
+(46, 'Bryan', 'Scott', 5, 'bryan.scott@example.com', 'https://example.com/images/46.jpg', 2, 1, 2, 0, 1),
+(47, 'Olivia', 'Hunt', 2, 'olivia.hunt@example.com', 'https://example.com/images/47.jpg', 1, 4, NULL, 0, 1),
+(48, 'Hannah', 'Moore', 4, 'hannah.moore@example.com', 'https://example.com/images/48.jpg', 1, 2, NULL, 0, 1),
+(49, 'Paul', 'Wright', 4, 'paul.wright@example.com', 'https://example.com/images/49.jpg', 1, 2, NULL, 0, 1),
+(50, 'Logan', 'Wiggins', 4, 'logan.wiggins@example.com', 'https://example.com/images/50.jpg', 2, 1, 4, 0, 1),
+(51, 'Monica', 'Larsen', 3, 'monica.larsen@example.com', 'https://example.com/images/51.jpg', 2, 1, 5, 0, 1),
+(52, 'Cheryl', 'Obrien', 2, 'cheryl.obrien@example.com', 'https://example.com/images/52.jpg', 1, 3, NULL, 0, 1),
+(53, 'Natalie', 'Green', 2, 'natalie.green@example.com', 'https://example.com/images/53.jpg', 1, 3, NULL, 0, 1),
+(54, 'Ryan', 'Lewis', 4, 'ryan.lewis@example.com', 'https://example.com/images/54.jpg', 1, 2, NULL, 0, 1),
+(55, 'Tina', 'Davis', 4, 'tina.davis@example.com', 'https://example.com/images/55.jpg', 2, 1, 13, 0, 1),
+(56, 'Krista', 'Schmitt', 5, 'krista.schmitt@example.com', 'https://example.com/images/56.jpg', 1, 2, NULL, 0, 1),
+(57, 'Michael', 'Hess', 5, 'michael.hess@example.com', 'https://example.com/images/57.jpg', 2, 1, 2, 0, 1),
+(58, 'Lee', 'Schwartz', 4, 'lee.schwartz@example.com', 'https://example.com/images/58.jpg', 1, 3, NULL, 0, 1),
+(59, 'Hunter', 'Rojas', 4, 'hunter.rojas@example.com', 'https://example.com/images/59.jpg', 2, 1, 15, 0, 1),
+(60, 'Kenneth', 'Shaw', 2, 'kenneth.shaw@example.com', 'https://example.com/images/60.jpg', 2, 1, 6, 0, 1),
+(61, 'Brandon', 'Jones', 2, 'brandon.jones@example.com', 'https://example.com/images/61.jpg', 2, 1, 22, 0, 1),
+(62, 'Brenda', 'Smith', 4, 'brenda.smith@example.com', 'https://example.com/images/62.jpg', 2, 1, 7, 0, 1),
+(63, 'Lisa', 'Williams', 2, 'lisa.williams@example.com', 'https://example.com/images/63.jpg', 1, 4, NULL, 0, 1),
+(64, 'Taylor', 'Bruce', 4, 'taylor.bruce@example.com', 'https://example.com/images/64.jpg', 1, 2, NULL, 0, 1),
+(65, 'Jeremy', 'Beard', 3, 'jeremy.beard@example.com', 'https://example.com/images/65.jpg', 1, 3, NULL, 0, 1),
+(66, 'Phillip', 'Herrera', 4, 'phillip.herrera@example.com', 'https://example.com/images/66.jpg', 2, 1, 25, 0, 1),
+(67, 'Pam', 'Miller', 4, 'pam.miller@example.com', 'https://example.com/images/67.jpg', 2, 1, 16, 0, 1),
+(68, 'Jennifer', 'Crosby', 4, 'jennifer.crosby@example.com', 'https://example.com/images/68.jpg', 2, 1, 26, 0, 1),
+(69, 'Stacy', 'Guzman', 4, 'stacy.guzman@example.com', 'https://example.com/images/69.jpg', 2, 1, 27, 0, 1),
+(70, 'Karen', 'Gray', 2, 'karen.gray@example.com', 'https://example.com/images/70.jpg', 2, 1, 18, 0, 1),
+(71, 'Andrew', 'Rodriguez', 4, 'andrew.rodriguez@example.com', 'https://example.com/images/71.jpg', 2, 1, 20, 0, 1),
+(72, 'Jason', 'Ward', 2, 'jason.ward@example.com', 'https://example.com/images/72.jpg', 2, 1, 28, 0, 1),
+(73, 'Diana', 'Hudson', 2, 'diana.hudson@example.com', 'https://example.com/images/73.jpg', 2, 1, 21, 0, 1),
+(74, 'Brandi', 'Neal', 3, 'brandi.neal@example.com', 'https://example.com/images/74.jpg', 2, 1, 29, 0, 1),
+(75, 'Ruth', 'Wiggins', 5, 'ruth.wiggins@example.com', 'https://example.com/images/75.jpg', 2, 1, 23, 0, 1),
+(76, 'Sarah', 'Higgins', 4, 'sarah.higgins@example.com', 'https://example.com/images/76.jpg', 1, 2, NULL, 0, 1),
+(77, 'Douglas', 'Warren', 4, 'douglas.warren@example.com', 'https://example.com/images/77.jpg', 2, 1, 30, 0, 1),
+(78, 'Kelly', 'Ferrell', 4, 'kelly.ferrell@example.com', 'https://example.com/images/78.jpg', 1, 2, NULL, 0, 1),
+(79, 'Kelly', 'Watts', 2, 'kelly.watts@example.com', 'https://example.com/images/79.jpg', 2, 1, 31, 0, 1),
+(80, 'Kristen', 'Anderson', 4, 'kristen.anderson@example.com', 'https://example.com/images/80.jpg', 2, 1, 38, 0, 1),
+(81, 'Sherry', 'Fowler', 4, 'sherry.fowler@example.com', 'https://example.com/images/81.jpg', 2, 1, 33, 0, 1),
+(82, 'Samuel', 'Smith', 2, 'samuel.smith@example.com', 'https://example.com/images/82.jpg', 2, 1, 34, 0, 1),
+(83, 'Miguel', 'Boyd', 3, 'miguel.boyd@example.com', 'https://example.com/images/83.jpg', 1, 4, NULL, 0, 1),
+(84, 'Adrian', 'Maxwell', 4, 'adrian.maxwell@example.com', 'https://example.com/images/84.jpg', 2, 1, 37, 0, 1),
+(85, 'Barry', 'Nichols', 3, 'barry.nichols@example.com', 'https://example.com/images/85.jpg', 2, 1, 40, 0, 1),
+(86, 'Erin', 'Hayes', 4, 'erin.hayes@example.com', 'https://example.com/images/86.jpg', 1, 2, NULL, 0, 1),
+(87, 'Travis', 'Chavez', 5, 'travis.chavez@example.com', 'https://example.com/images/87.jpg', 2, 1, 44, 0, 1),
+(88, 'Katie', 'Reed', 4, 'katie.reed@example.com', 'https://example.com/images/88.jpg', 2, 1, 41, 0, 1),
+(89, 'Karen', 'Figueroa', 3, 'karen.figueroa@example.com', 'https://example.com/images/89.jpg', 1, 3, NULL, 0, 1),
+(90, 'Jessica', 'Reyes', 5, 'jessica.reyes@example.com', 'https://example.com/images/90.jpg', 2, 1, 42, 0, 1),
+(91, 'Jamie', 'Thornton', 4, 'jamie.thornton@example.com', 'https://example.com/images/91.jpg', 1, 2, NULL, 0, 1),
+(92, 'Tara', 'Todd', 2, 'tara.todd@example.com', 'https://example.com/images/92.jpg', 2, 1, 47, 0, 1),
+(93, 'Angelica', 'Jones', 4, 'angelica.jones@example.com', 'https://example.com/images/93.jpg', 2, 1, 48, 0, 1),
+(94, 'William', 'Graham', 3, 'william.graham@example.com', 'https://example.com/images/94.jpg', 1, 3, NULL, 0, 1),
+(95, 'Maria', 'Marks', 2, 'maria.marks@example.com', 'https://example.com/images/95.jpg', 2, 1, 52, 0, 1),
+(96, 'Benjamin', 'Barnes', 2, 'benjamin.barnes@example.com', 'https://example.com/images/96.jpg', 1, 4, NULL, 0, 1),
+(97, 'Dakota', 'Cervantes', 2, 'dakota.cervantes@example.com', 'https://example.com/images/97.jpg', 2, 1, 45, 0, 1),
+(98, 'Jeffrey', 'Thompson', 4, 'jeffrey.thompson@example.com', 'https://example.com/images/98.jpg', 2, 1, 54, 0, 1),
+(99, 'Alexandria', 'Martin', 2, 'alexandria.martin@example.com', 'https://example.com/images/99.jpg', 1, 4, NULL, 0, 1),
+(100, 'Todd', 'Pearson', 2, 'todd.pearson@example.com', 'https://example.com/images/100.jpg', 1, 4, NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -546,6 +569,12 @@ INSERT INTO `Usertypes` (`UsertypeID`, `UsertypeName`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `Agegroups`
+--
+ALTER TABLE `Agegroups`
+  ADD PRIMARY KEY (`AgegroupID`);
 
 --
 -- Indexes for table `Attendees`
@@ -588,7 +617,8 @@ ALTER TABLE `Users`
   ADD PRIMARY KEY (`UserID`),
   ADD KEY `Users_Roles_FK` (`UserRoleID`),
   ADD KEY `Users_Usertypes_FK` (`UserUsertypeID`),
-  ADD KEY `Users_Users_FK` (`UserGuestofID`);
+  ADD KEY `Users_Users_FK` (`UserGuestofID`),
+  ADD KEY `Users_Agegroups` (`UserAgegroupID`);
 
 --
 -- Indexes for table `Usertypes`
@@ -599,6 +629,12 @@ ALTER TABLE `Usertypes`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `Agegroups`
+--
+ALTER TABLE `Agegroups`
+  MODIFY `AgegroupID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `Attendees`
@@ -664,6 +700,7 @@ ALTER TABLE `Events`
 -- Constraints for table `Users`
 --
 ALTER TABLE `Users`
+  ADD CONSTRAINT `Users_Agegroups` FOREIGN KEY (`UserAgegroupID`) REFERENCES `Agegroups` (`AgegroupID`),
   ADD CONSTRAINT `Users_Roles_FK` FOREIGN KEY (`UserRoleID`) REFERENCES `Roles` (`RoleID`),
   ADD CONSTRAINT `Users_Users_FK` FOREIGN KEY (`UserGuestofID`) REFERENCES `Users` (`UserID`),
   ADD CONSTRAINT `Users_Usertypes_FK` FOREIGN KEY (`UserUsertypeID`) REFERENCES `Usertypes` (`UsertypeID`);

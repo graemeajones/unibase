@@ -19,7 +19,7 @@ schema.record = joi
     UserID: joi.number().integer().min(1).allow(null),
     UserFirstname: joi.string().min(2),
     UserLastname: joi.string().min(3),
-    UserDateofbirth: joi.date().iso().allow(null),
+    UserAgegroupID: joi.number().integer().min(1),
     UserEmail: joi.string().email(),
     UserImageURL: joi.string().uri(),
     UserUsertypeID: joi.number().integer().min(1).allow(null),
@@ -31,8 +31,6 @@ schema.record = joi
   .required()
   .unknown(true);
 
-schema.conformor = {
-  UserDateofbirth: (value) => (value === null ? null : new Date(value)),
-};
+schema.conformor = {};
 
 export default schema;
