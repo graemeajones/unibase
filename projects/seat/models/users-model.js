@@ -7,7 +7,7 @@ const model = {
     'UserFirstname',
     'UserLastname',
     'UserEmail',
-    'UserDateofbirth',
+    'UserAgegroupID',
     'UserImageURL',
     'UserUsertypeID',
     'UserRoleID',
@@ -22,14 +22,16 @@ const model = {
     let [table, fields] = [model.table, [model.idField, ...model.mutableFields]];
 
     // Resolve Foreign Keys -------------------
-    table = `(((${table} LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID) 
-                         LEFT JOIN Roles ON UserRoleID=RoleID)
-                         LEFT JOIN (
-                           SELECT UserID AS HostID, UserFirstname AS HostFirstname, UserLastname AS HostLastname, RoleName AS HostRoleName 
-                           FROM (Users LEFT JOIN Roles ON UserRoleID=RoleID)
-                         ) AS Hosts ON UserGuestofID=Hosts.HostID)`;
+    table = `((((${table} INNER JOIN Agegroups ON UserAgegroupID=AgegroupID)
+                          LEFT JOIN Usertypes ON UserUsertypeID=UsertypeID) 
+                          LEFT JOIN Roles ON UserRoleID=RoleID)
+                          LEFT JOIN (
+                            SELECT UserID AS HostID, UserFirstname AS HostFirstname, UserLastname AS HostLastname, RoleName AS HostRoleName 
+                            FROM (Users LEFT JOIN Roles ON UserRoleID=RoleID)
+                          ) AS Hosts ON UserGuestofID=Hosts.HostID)`;
     fields = [
       ...fields,
+      'AgegroupName AS UserAgegroupName',
       'UsertypeName AS UserUsertypeName',
       'Roles.RoleName AS UserRoleName',
       'CONCAT(HostLastname,", ",HostFirstname, " (", HostRoleName, ")") AS UserGuestofName',
@@ -38,6 +40,7 @@ const model = {
     // Process request queries ----------------
     const allowedQueryFields = [
       ...model.mutableFields,
+      'AgegroupName',
       'UserUsertypeName',
       'UserRoleName',
       'UserGuestofName',
