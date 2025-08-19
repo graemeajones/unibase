@@ -25,12 +25,12 @@ const listOfEndpoints = [
         {
           endpoint: '/',
           description: 'Returns all agegroup values',
-          examples: [`${API_PATH}/status`],
+          examples: [`${API_PATH}/agegroups`],
         },
         {
           endpoint: '/{id}',
           description: 'Returns the specific agegroup value identified by the id provided',
-          examples: [`${API_PATH}/status/1`],
+          examples: [`${API_PATH}/agegroups/1`],
         },
       ],
       post: {
