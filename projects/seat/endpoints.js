@@ -1,6 +1,7 @@
 // Imports ---------------------------------------
 import { Router } from 'express';
 
+import agegroupsRouter from './routers/agegroups-router.js';
 import attendeesRouter from './routers/attendees-router.js';
 import eventsRouter from './routers/events-router.js';
 import locationsRouter from './routers/locations-router.js';
@@ -16,6 +17,36 @@ import API_URL from '#root/apiURL.js';
 const API_PATH = `${API_URL}/seat/api`;
 
 const listOfEndpoints = [
+  {
+    entity: 'Agegroups',
+    sap: '/api/agegroups',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns all agegroup values',
+          examples: [`${API_PATH}/status`],
+        },
+        {
+          endpoint: '/{id}',
+          description: 'Returns the specific agegroup value identified by the id provided',
+          examples: [`${API_PATH}/status/1`],
+        },
+      ],
+      post: {
+        endpoint: '/',
+        description: 'Insert a new agegroup value',
+      },
+      put: {
+        endpoint: '/{id}',
+        description: 'Update the specific agegroup value identified by the id provided',
+      },
+      delete: {
+        endpoint: '/{id}',
+        description: 'Delete the specific agegroup value identified by the id provided',
+      },
+    },
+  },
   {
     entity: 'Attendees',
     sap: '/api/attendees',
@@ -252,6 +283,7 @@ const listOfEndpoints = [
 
 const router = new Router({ mergeParams: true });
 
+router.use('/agegroups', agegroupsRouter);
 router.use('/attendees', attendeesRouter);
 router.use('/events', eventsRouter);
 router.use('/locations', locationsRouter);
