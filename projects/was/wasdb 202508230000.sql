@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 141.94.205.33
--- Generation Time: Aug 02, 2025 at 04:46 PM
--- Server version: 10.11.2-MariaDB-1
+-- Host: 127.0.0.1
+-- Generation Time: Aug 23, 2025 at 01:00 AM
+-- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `Duties` (
   `DutyID` int(11) NOT NULL,
-  `DutyName` varchar(64) NOT NULL,
+  `DutyName` varchar(64) NOT NULL DEFAULT '''''',
   `DutyEffort` int(11) NOT NULL DEFAULT 0,
   `DutyInstances` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -50,7 +50,7 @@ INSERT INTO `Duties` (`DutyID`, `DutyName`, `DutyEffort`, `DutyInstances`) VALUE
 (9, 'Erasmus and Study Abroad Coordinator', 25, 1),
 (10, 'Induction Coordinator', 25, 2),
 (11, 'Placements Tutor', 25, 2),
-(12, 'Personal Tutor', 8, 20); 
+(12, 'Personal Tutor', 8, 20);
 
 -- --------------------------------------------------------
 
@@ -68,14 +68,14 @@ CREATE TABLE `Modules` (
   `ModuleCredits` int(11) NOT NULL DEFAULT 0,
   `ModuleSize` int(11) NOT NULL DEFAULT 0,
   `ModuleEffort` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `Modules`
 --
 
 INSERT INTO `Modules` (`ModuleID`, `ModuleCode`, `ModuleName`, `ModuleImageURL`, `ModuleLeaderID`, `ModuleLevel`, `ModuleCredits`, `ModuleSize`, `ModuleEffort`) VALUES
-(1, 'CI4105', 'Programming 101', 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 34, 4, 30, 400, 1224),
+(1, 'CI4105', 'Programming 1', 'https://images.freeimages.com/images/small-previews/9b8/electronic-components-2-1242738.jpg', 34, 4, 30, 400, 620),
 (2, 'CI4250', 'Computing Fundamentals', 'https://images.freeimages.com/images/small-previews/411/light-of-technology-1510575.jpg', 20, 4, 30, 400, 620),
 (3, 'CI4305', 'Requirements Analysis and Design', 'https://images.freeimages.com/images/small-previews/64b/vla-1-1315506.jpg', 28, 4, 30, 400, 620),
 (4, 'CI4450', 'Professional Environments 1', 'https://images.freeimages.com/images/small-previews/293/cable-4-1243085.jpg', 16, 4, 30, 400, 620),
@@ -113,6 +113,33 @@ INSERT INTO `Myduties` (`MydutyID`, `MydutyName`, `MydutyUserID`, `MydutyDutyID`
 (3, '', 45, 12),
 (4, '', 1, 12),
 (5, '', 14, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Parameters`
+--
+
+CREATE TABLE `Parameters` (
+  `ParameterID` int(11) NOT NULL,
+  `LeadingMinimum` float NOT NULL,
+  `LeadingMultiplier` float NOT NULL,
+  `LecturingMultiplier` float NOT NULL,
+  `WorkshopMultiplier` float NOT NULL,
+  `WorkshopSize` int(11) NOT NULL,
+  `MarkingTimePerStudent` float NOT NULL,
+  `WeeksPer15Credits` float NOT NULL,
+  `WeeksPer30Credits` float NOT NULL,
+  `LectureHoursPerWeek` float NOT NULL,
+  `WorkshopHoursPerWeek` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Parameters`
+--
+
+INSERT INTO `Parameters` (`ParameterID`, `LeadingMinimum`, `LeadingMultiplier`, `LecturingMultiplier`, `WorkshopMultiplier`, `WorkshopSize`, `MarkingTimePerStudent`, `WeeksPer15Credits`, `WeeksPer30Credits`, `LectureHoursPerWeek`, `WorkshopHoursPerWeek`) VALUES
+(1, 50, 0.3, 2, 1.5, 100, 1, 22, 44, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -203,7 +230,7 @@ INSERT INTO `Users` (`UserID`, `UserTitle`, `UserFirstname`, `UserLastname`, `Us
 (9, 'Dr', 'Gordon', 'Hunter', 'g.hunter@kingston.ac.uk', '', 1, 2),
 (10, 'Dr', 'Farzana', 'Rahman', 'farzana@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-c548ae4e97f-drfarzanarahman.jpg?h=74b59c52&itok=JL6F8GmT', 1, 3),
 (11, 'Dr', 'Eckhard', 'Pfluegel', 'e.pfluegel@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-60e9e014839-dreckhardpfluegel.jpg?h=71976bb4&itok=K8EtHFdW', 1, 2),
-(12, 'Miss', 'Mollie', 'Bentley-Rowe', 'M.Bentley-Rowe@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-f2a165f1ff6-missmolliebentley-rowe.jpg?h=326dff7e&itok=e-7e_pW2', 1, 4),
+(12, '', 'Mollie', 'Bentley-Rowe', 'M.Bentley-Rowe@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-f2a165f1ff6-missmolliebentley-rowe.jpg?h=326dff7e&itok=e-7e_pW2', 1, 4),
 (13, 'Dr', 'Jarek', 'Francik', 'jarek@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-6f139a6df13-drjarekfrancik.jpg?h=c673cd1c&itok=-pTXAbZ2', 1, 3),
 (14, 'Dr', 'James', 'Denholm-Price', 'j.denholm-price@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-de7a753-drjamesdenholm-price.png?h=5f0c8d78&itok=cHklReV8', 1, 2),
 (15, 'Dr', 'Jad', 'Abbass', 'j.abbass@kingston.ac.uk', 'https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_sm/public/migrated-images/kingston-university-c6102565f14-drjadabbass.jpg?h=d1cb525d&itok=JpRxNS_F', 1, 3),
@@ -250,7 +277,7 @@ INSERT INTO `Users` (`UserID`, `UserTitle`, `UserFirstname`, `UserLastname`, `Us
 CREATE TABLE `Usertypes` (
   `UsertypeID` int(11) NOT NULL,
   `UsertypeName` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `Usertypes`
@@ -284,6 +311,12 @@ ALTER TABLE `Myduties`
   ADD PRIMARY KEY (`MydutyID`),
   ADD KEY `Myduties_Users_FK` (`MydutyUserID`),
   ADD KEY `Myduties_Duties_FK` (`MydutyDutyID`);
+
+--
+-- Indexes for table `Parameters`
+--
+ALTER TABLE `Parameters`
+  ADD PRIMARY KEY (`ParameterID`);
 
 --
 -- Indexes for table `Positions`
@@ -321,19 +354,25 @@ ALTER TABLE `Usertypes`
 -- AUTO_INCREMENT for table `Duties`
 --
 ALTER TABLE `Duties`
-  MODIFY `DutyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `DutyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `Modules`
 --
 ALTER TABLE `Modules`
-  MODIFY `ModuleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
+  MODIFY `ModuleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 
 --
 -- AUTO_INCREMENT for table `Myduties`
 --
 ALTER TABLE `Myduties`
-  MODIFY `MydutyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MydutyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `Parameters`
+--
+ALTER TABLE `Parameters`
+  MODIFY `ParameterID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `Positions`
@@ -351,7 +390,7 @@ ALTER TABLE `Teaching`
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `Usertypes`
