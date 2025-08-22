@@ -4,6 +4,7 @@ import { Router } from 'express';
 import dutiesRouter from './routers/duties-router.js';
 import modulesRouter from './routers/modules-router.js';
 import mydutiesRouter from './routers/myduties-router.js';
+import parametersRouter from './routers/parameters-router.js';
 import positionsRouter from './routers/positions-router.js';
 import teachingRouter from './routers/teaching-router.js';
 import usersRouter from './routers/users-router.js';
@@ -121,6 +122,23 @@ const listOfEndpoints = [
       delete: {
         endpoint: '/{id}',
         description: 'Delete the specific duty assignment identified by the id provided',
+      },
+    },
+  },
+  {
+    entity: 'Parameters',
+    sap: '/api/parameters',
+    services: {
+      get: [
+        {
+          endpoint: '/',
+          description: 'Returns the single parameters row',
+          examples: [`${API_PATH}/parameters`],
+        },
+      ],
+      put: {
+        endpoint: '/',
+        description: 'Update the single paramters row',
       },
     },
   },
@@ -265,6 +283,7 @@ const router = new Router({ mergeParams: true });
 router.use('/duties', dutiesRouter);
 router.use('/modules', modulesRouter);
 router.use('/myduties', mydutiesRouter);
+router.use('/parameters', parametersRouter);
 router.use('/positions', positionsRouter);
 router.use('/teaching', teachingRouter);
 router.use('/users', usersRouter);
