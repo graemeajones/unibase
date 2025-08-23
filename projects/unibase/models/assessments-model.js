@@ -7,6 +7,7 @@ const model = {
     'AssessmentName',
     'AssessmentPercentage',
     'AssessmentPublishdate',
+    'AssessmentProposaldeadline',
     'AssessmentSubmissiondate',
     'AssessmentFeedbackdate',
     'AssessmentBriefURL',
