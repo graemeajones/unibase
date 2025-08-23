@@ -11,7 +11,6 @@ import favouritesRouter from './routers/favourites-router.js';
 import groupsRouter from './routers/groups-router.js';
 import groupmembersRouter from './routers/groupmembers-router.js';
 import likesRouter from './routers/likes-router.js';
-import linksRouter from './routers/links-router.js';
 import logsRouter from './routers/logs-router.js';
 import modulemembersRouter from './routers/modulemembers-router.js';
 import modulesRouter from './routers/modules-router.js';
@@ -382,36 +381,6 @@ const listOfEndpoints = [
       delete: {
         endpoint: '/{id}',
         description: 'Delete the specific like record identified by the id provided',
-      },
-    },
-  },
-  {
-    entity: 'Links',
-    sap: '/api/links',
-    services: {
-      get: [
-        {
-          endpoint: '/',
-          description: 'Returns all links records',
-          examples: [`${API_PATH}/links`],
-        },
-        {
-          endpoint: '/{id}',
-          description: 'Returns the specific link record identified by the id provided',
-          examples: [`${API_PATH}/links/1`],
-        },
-      ],
-      post: {
-        endpoint: '/',
-        description: 'Insert a new link record',
-      },
-      put: {
-        endpoint: '/{id}',
-        description: 'Update the specific link record identified by the id provided',
-      },
-      delete: {
-        endpoint: '/{id}',
-        description: 'Delete the specific link record identified by the id provided',
       },
     },
   },
@@ -881,7 +850,6 @@ router.use('/favourites', favouritesRouter);
 router.use('/groups', groupsRouter);
 router.use('/groupmembers', groupmembersRouter);
 router.use('/likes', likesRouter);
-router.use('/links', linksRouter);
 router.use('/logs', logsRouter);
 router.use('/modulemembers', modulemembersRouter);
 router.use('/modules', modulesRouter);
