@@ -3,14 +3,20 @@ import { parseRequestQuery, constructPreparedStatement } from '#root/model/utils
 const model = {
   table: 'Proposals',
   idField: 'ProposalID',
-  mutableFields: ['ProposerID', 'ProposeeID', 'ProposalAssessmentID', 'ProposalConfirmationID', 'ProposalConfirmationAcknowledgement'],
+  mutableFields: [
+    'ProposerID',
+    'ProposeeID',
+    'ProposalAssessmentID',
+    'ProposalConfirmationID',
+    'ProposalConfirmationAcknowledgement',
+  ],
 
   buildReadQuery: (req, variant) => {
     // Initialisations ------------------------
     // Resolve foreign keys -------------------
     let table = `((((Proposals 
       INNER JOIN Users AS Proposers ON ProposerID=Proposers.UserID) 
-      INNER JOIN Users AS Proposees ON ProposeeID=Proposees.UserID) 
+      LEFT JOIN Users AS Proposees ON ProposeeID=Proposees.UserID) 
       INNER JOIN Assessments ON ProposalAssessmentID=AssessmentID) 
       LEFT JOIN Confirmations ON ProposalConfirmationID=ConfirmationID )`;
     let fields = [
@@ -29,7 +35,7 @@ const model = {
       'ProposalProposeeName',
       'ProposalAssesmentName',
       'ProposalConfirmationName',
-      'ProposalConfirmationAcknowledgement'
+      'ProposalConfirmationAcknowledgement',
     ];
     const [filter, orderby] = parseRequestQuery(req, allowedQueryFields);
 
