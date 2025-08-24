@@ -6869,7 +6869,7 @@ CREATE TABLE `Proposals` (
 --
 
 INSERT INTO `Proposals` (`ProposalID`, `ProposerID`, `ProposeeID`, `ProposalAssessmentID`, `ProposalConfirmationID`, `ProposalConfirmationAcknowledgement`) VALUES
-(1, 447, 533, 13, NULL, 0),
+(1, 447, 537, 13, NULL, 0),
 (2, 311, NULL, 13, NULL, 0),
 (3, 283, 533, 13, NULL, 0),
 (4, 283, 382, 13, NULL, 0),
